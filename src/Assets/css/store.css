@@ -1,0 +1,41 @@
+/*
+|--------------------------------------------------------------------------
+| Store
+|--------------------------------------------------------------------------
+*/
+
+.store-form {
+    border: none;
+    width: 45px;
+}
+
+.icon-stack {
+  position: relative;
+  display: inline-block;
+  width: 2em;
+}
+.icon-stack-1x,
+.icon-stack-2x,
+.icon-stack-3x {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.icon-stack-1x {
+  line-height: inherit;
+}
+.icon-stack-2x {
+  font-size: 1.5em;
+}
+.icon-stack-3x {
+  font-size: 2em;
+}
+
+.alert {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  z-index: 7000;
+}
