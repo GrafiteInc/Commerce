@@ -99,7 +99,9 @@ class ProductController extends Controller
             'details' => $request->get('details'),
             'variants' => $request->get('variants'),
             'subscription' => $request->get('subscription'),
+            'download' => $request->get('download'),
             'related' => $request->get('related'),
+            'discount' => $request->get('discount'),
         ];
 
         if (empty($request->all())) {
