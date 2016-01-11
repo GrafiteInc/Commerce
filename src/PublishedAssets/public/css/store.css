@@ -5,8 +5,13 @@
 */
 
 .store-form {
-    border: none;
+    border: 1px solid #BBB;
     width: 45px;
+    height: 28px;
+}
+
+.store-input-group {
+    width: 90px;
 }
 
 .icon-stack {

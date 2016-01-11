@@ -18,7 +18,15 @@
                     </td>
                     <td>{!! $product->code !!}</td>
                     <td>{!! $product->price() !!}</td>
-                    <td><input class="store-form product-count" data-product="{!! $product->cart_id !!}" value="{!! $product->quantity !!}"></td>
+                    <td>
+                        <div class="form-group">
+                            <div class="input-group store-input-group pull-left">
+                                <div class="input-group-addon cart-subtract"><span class="fa fa-minus"></span></div>
+                                <input class="store-form product-count text-center" data-product="{!! $product->cart_id !!}" value="{!! $product->quantity !!}">
+                                <div class="input-group-addon cart-add"><span class="fa fa-plus"></span></div>
+                            </div>
+                        </div>
+                    </td>
                     <td>{!! StoreHelper::removeFromCartBtn($product->cart_id, $product->entity_type, 'Remove From Cart <span class="fa fa-shopping-cart"></span>') !!}</td>
                 </tr>
             @endforeach

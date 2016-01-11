@@ -90,7 +90,27 @@ $(document).ready(function(){
         store.changeItemQuantity(_product, _count);
     });
 
-   $('.details').popover({ html : true });
+    $('.details').popover({ html : true });
 
+    $('.cart-subtract').bind('click', function(){
+        var _productCount = $(this).siblings('.product-count');
+        var _product = _productCount.data('product');
+        var _count = _productCount.val();
+        _count--;
+        if (_count < 0) {
+            _count = 0;
+        };
+        _productCount.val(_count);
+        store.changeItemQuantity(_product, _count);
+    });
+
+    $('.cart-add').bind('click', function(){
+        var _productCount = $(this).siblings('.product-count');
+        var _product = _productCount.data('product');
+        var _count = _productCount.val();
+        _count++;
+        _productCount.val(_count);
+        store.changeItemQuantity(_product, _count);
+    });
 
 });
