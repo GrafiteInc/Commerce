@@ -51,7 +51,7 @@ class CartSessionRepository
             'id' => rand(1111, 9999),
             'entity_id' => $id,
             'entity_type' => $type,
-            'product_variables' => $variableArray,
+            'product_variants' => $variableArray,
             'quantity' => $quantity,
         ]);
 

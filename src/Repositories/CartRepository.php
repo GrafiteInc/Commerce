@@ -24,7 +24,7 @@ class CartRepository
         if ($cartContents) {
             foreach ($cartContents as $item) {
                 $item = json_decode($item);
-                $this->addToCart($item->product_id, $item->quantity, $item->product_variants);
+                $this->addToCart($item->entity_id, $item->entity_type, $item->quantity, $item->product_variants);
             }
         }
 
