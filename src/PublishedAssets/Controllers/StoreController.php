@@ -10,9 +10,9 @@ class StoreController extends Controller
 
     protected $productsRepository;
 
-    function __construct(ProductRepository $productsRepository)
+    function __construct(ProductRepository $productRepository)
     {
-        $this->repository = $productsRepository;
+        $this->repository = $productRepository;
     }
 
     /**

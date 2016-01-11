@@ -12,10 +12,10 @@ use Mlantz\Hadron\Repositories\CartSessionRepository;
 class CartService
 {
 
-    public function __construct()
+    public function __construct(ProductRepository $productRepository)
     {
+        $this->productRepo = $productRepository;
         $this->cartRepo = new CartRepository;
-        $this->productRepo = new ProductRepository;
 
         if (is_null(Auth::user())) {
             $this->cartRepo = new CartSessionRepository;
@@ -175,7 +175,7 @@ class CartService
 
     public function getCartTax()
     {
-        $taxRate = (LogisticService::getTaxPercent() / 100);
+        $taxRate = (LogisticService::getTaxPercent(Auth::user()) / 100);
         $subtotal = $this->getCartSubTotal();
         return round($subtotal * $taxRate, 2);
     }
@@ -197,7 +197,7 @@ class CartService
 
     public function getCartTotal()
     {
-        $taxRate = (LogisticService::getTaxPercent() / 100);
+        $taxRate = (LogisticService::getTaxPercent(Auth::user()) / 100);
         $subtotal = $this->getCartSubTotal();
         return round($subtotal + LogisticService::shipping(Auth::user()) + ($subtotal * $taxRate), 2);
     }

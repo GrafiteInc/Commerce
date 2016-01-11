@@ -2,9 +2,12 @@
 
 namespace Mlantz\Hadron\Repositories;
 
-use Illuminate\Support\Facades\Schema;
+use Request;
+use FileService;
 use Mlantz\Hadron\Models\Variant;
-use Mlantz\Hadron\Models\Product;
+use Mlantz\Hadron\Models\Products;
+use Illuminate\Support\Facades\Schema;
+use Mlantz\Hadron\Services\QuarxService;
 
 class ProductVariantRepository
 {
@@ -25,18 +28,13 @@ class ProductVariantRepository
      *
      * @return Products
      */
-    public function addVariant($product, $input)
+    public function addVariants($product, $input)
     {
         $input['product_id'] = $product->id;
 
         return Variant::create($input);
     }
 
-    /**
-     * Save the variant
-     * @param  [type] $input [description]
-     * @return [type]        [description]
-     */
     public function saveVariant($input)
     {
         $variable = Variant::find($input['id']);

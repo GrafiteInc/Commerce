@@ -2,16 +2,15 @@
 
 namespace Mlantz\Hadron\Repositories;
 
-use Quarx;
-use Request;
-use FileService;
 use Mlantz\Hadron\Models\Product;
-use Mlantz\Hadron\Models\Variant;
-use Mlantz\Hadron\Models\Iterations;
 use Illuminate\Support\Facades\Schema;
 
 class ProductRepository
 {
+    public function __construct(Product $product)
+    {
+        $this->model = $product;
+    }
 
     /**
      * Returns all Products
@@ -20,50 +19,97 @@ class ProductRepository
      */
     public function all()
     {
-        return Product::all();
+        return $this->model->orderBy('created_at', 'desc')->get();
     }
 
-    public function paginated()
+    /**
+     * Returns all paginated $MODEL_NAME_PLURAL$
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function paginated($paginate)
     {
-        return Product::orderBy('created_at', 'desc')->paginate(25);
+        return $this->model->orderBy('created_at', 'desc')->paginate($paginate);
     }
 
-    public function search($input)
+    /**
+     * Search Product
+     *
+     * @param string $input
+     *
+     * @return Product
+     */
+    public function search($input, $paginate)
     {
-        $query = Product::orderBy('created_at', 'desc');
+        $query = $this->model->orderBy('created_at', 'desc');
 
         $columns = Schema::getColumnListing('products');
 
         foreach ($columns as $attribute) {
-            $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
+            $query->orWhere($attribute, 'LIKE', '%'.$input.'%');
         };
 
-        return [$query, $input['term'], $query->paginate(25)->render()];
+        return $query->paginate($paginate);
     }
 
-
     /**
-     * Stores Products into database
+     * Stores Product into database
      *
      * @param array $input
      *
-     * @return Products
+     * @return Product
      */
-    public function store($input)
+    public function create($input)
     {
-        $input['url'] = Quarx::convertToURL($input['url']);
-
-        if (isset($input['file'])) {
-            $downloadFile = FileService::saveFile($input['file'], 'downloads');
-            $input['file'] = $downloadFile['name'];
-        }
-        if (isset($input['hero_image'])) {
-            $heroFile = FileService::saveFile($input['hero_image'], 'heroes');
-            $input['hero_image'] = $heroFile['name'];
-        }
-
-        return Product::create($input);
+        return $this->model->create($input);
     }
+
+    /**
+     * Find Product by given id
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Support\Collection|null|static|Product
+     */
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
+
+    /**
+     * Destroy Product
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Support\Collection|null|static|Product
+     */
+    public function destroy($id)
+    {
+        return $this->model->find($id)->delete();
+    }
+
+    /**
+     * Updates Product in the database
+     *
+     * @param int $id
+     * @param array $inputs
+     *
+     * @return Product
+     */
+    public function update($id, $inputs)
+    {
+        $product = $this->model->find($id);
+        $product->fill($inputs);
+        $product->save();
+
+        return $product;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Store End
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Find Products by given id
@@ -78,18 +124,6 @@ class ProductRepository
     }
 
     /**
-     * Find Products by URL
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Support\Collection|null|static|Products
-     */
-    public function findProductByURL($url)
-    {
-        return Product::where('url', $url)->where('is_available', 1)->where('is_published', 1)->first();
-    }
-
-    /**
      * Get all published products
      * @return
      */
@@ -99,18 +133,14 @@ class ProductRepository
     }
 
     /**
-     * Updates Products into database
+     * Find Products by URL
      *
-     * @param Products $products
-     * @param array $input
+     * @param int $id
      *
-     * @return Products
+     * @return \Illuminate\Support\Collection|null|static|Products
      */
-    public function update($product, $input)
+    public function findProductByURL($url)
     {
-        $product->fill($input);
-        $product->save();
-
-        return $product;
+        return Product::where('url', $url)->where('is_available', 1)->where('is_published', 1)->first();
     }
 }

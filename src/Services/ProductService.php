@@ -2,16 +2,109 @@
 
 namespace Mlantz\Hadron\Services;
 
+use Quarx;
+use Config;
+use FileService;
+use CryptoService;
 use Illuminate\Support\Facades\Auth;
 use Mlantz\Hadron\Repositories\ProductRepository;
 use Mlantz\Hadron\Repositories\ProductVariantRepository;
 
 class ProductService
 {
-    public function __construct()
+    public function __construct(ProductRepository $productRepository)
     {
-        $this->user = Auth::user();
+        $this->repo = $productRepository;
     }
+
+    public function all()
+    {
+        return $this->repo->all();
+    }
+
+    public function paginated()
+    {
+        return $this->repo->paginated(Config::get('quarx.pagination', 25));
+    }
+
+    public function search($input)
+    {
+        return $this->repo->search($input, Config::get('quarx.pagination', 25));
+    }
+
+    public function create($input)
+    {
+        $input['url'] = Quarx::convertToURL($input['url']);
+
+        if (isset($input['file'])) {
+            $downloadFile = FileService::saveFile($input['file'], 'downloads');
+            $input['file'] = $downloadFile['name'];
+        } else {
+            $input['file'] = '';
+        }
+
+        if (isset($input['hero_image'])) {
+            $heroFile = FileService::saveFile($input['hero_image'], 'heroes');
+            $input['hero_image'] = $heroFile['name'];
+        } else {
+            $input['hero_image'] = '';
+        }
+
+        $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
+        $input['is_available'] = (isset($input['is_available'])) ? (bool) $input['is_available'] : 0;
+        $input['is_download'] = (isset($input['is_download'])) ? (bool) $input['is_download'] : 0;
+        $input['is_featured'] = (isset($input['is_featured'])) ? (bool) $input['is_featured'] : 0;
+        $input['is_subscription'] = (isset($input['is_subscription'])) ? (bool) $input['is_subscription'] : 0;
+        $input['has_iterations'] = (isset($input['has_iterations'])) ? (bool) $input['has_iterations'] : 0;
+
+        return $this->repo->create($input);
+    }
+
+    public function find($id)
+    {
+        return $this->repo->find($id);
+    }
+
+    public function update($id, $input)
+    {
+        $product = $this->repo->find($id);
+
+        $input['url'] = Quarx::convertToURL($input['url']);
+
+        if (isset($input['file'])) {
+            $savedFile = FileService::saveFile($input['file'], 'downloads');
+            $input['file'] = $savedFile['name'];
+        } else {
+            $input['file'] = $product->file;
+        }
+
+        if (isset($input['hero_image'])) {
+            $heroFile = FileService::saveFile($input['hero_image'], 'heroes');
+            $input['hero_image'] = $heroFile['name'];
+        } else {
+            $input['hero_image'] = $product->hero_image;
+        }
+
+        $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
+        $input['is_available'] = (isset($input['is_available'])) ? (bool) $input['is_available'] : 0;
+        $input['is_download'] = (isset($input['is_download'])) ? (bool) $input['is_download'] : 0;
+        $input['is_featured'] = (isset($input['is_featured'])) ? (bool) $input['is_featured'] : 0;
+        $input['is_subscription'] = (isset($input['is_subscription'])) ? (bool) $input['is_subscription'] : 0;
+        $input['has_iterations'] = (isset($input['has_iterations'])) ? (bool) $input['has_iterations'] : 0;
+
+        return $this->repo->update($id, $input);
+    }
+
+    public function destroy($id)
+    {
+        return $this->repo->destroy($id);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Store End
+    |--------------------------------------------------------------------------
+    */
 
     public static function productDetails($product)
     {

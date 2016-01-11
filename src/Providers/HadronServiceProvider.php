@@ -2,12 +2,15 @@
 
 namespace Mlantz\Hadron\Providers;
 
+use Mlantz\Hadron\Models\Product;
 use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Mlantz\Hadron\Services\CartService;
+use Mlantz\Hadron\Services\HadronService;
 use Mlantz\Hadron\Services\ProductService;
 use Mlantz\Hadron\Services\LogisticService;
+use Mlantz\Hadron\Repositories\ProductRepository;
 
 class HadronServiceProvider extends ServiceProvider
 {
@@ -20,6 +23,7 @@ class HadronServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
 
+        $loader->alias("Hadron", \Mlantz\Hadron\Facades\HadronFacade::class);
         $loader->alias("StoreHelper", \Mlantz\Hadron\Helpers\StoreHelper::class);
         $loader->alias("CartService", \Mlantz\Hadron\Facades\CartServiceFacade::class);
         $loader->alias("ProductService", \Mlantz\Hadron\Facades\ProductServiceFacade::class);
@@ -34,15 +38,26 @@ class HadronServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('ProductService', function($app) {
-            return new ProductService();
+            $product = new Product();
+            $repo = new ProductRepository($product);
+            return new ProductService($repo);
         });
 
         $this->app->bind('CartService', function($app) {
-            return new CartService();
+            $product = new Product();
+            $repo = new ProductRepository($product);
+            return new CartService($repo);
         });
 
         $this->app->bind('LogisticService', function($app) {
-            return new LogisticService();
+            $product = new Product();
+            $repo = new ProductRepository($product);
+            $cart = new CartService($repo);
+            return new LogisticService($cart);
+        });
+
+        $this->app->bind('HadronService', function($app) {
+            return new HadronService();
         });
     }
 }

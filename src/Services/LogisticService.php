@@ -2,16 +2,15 @@
 
 namespace Mlantz\Hadron\Services;
 
+use App\Services\StoreLogistics;
 use Mlantz\Hadron\Repositories\CartRepository;
-use Mlantz\Hadron\Repositories\ProductRepository;
 use Mlantz\Hadron\Interfaces\LogisticServiceInterface;
 
-class LogisticService implements LogisticServiceInterface
+class LogisticService extends StoreLogistics implements LogisticServiceInterface
 {
-    public function __construct()
+    public function __construct(CartService $cart)
     {
-        $this->cartService = new CartService;
-        $this->productRepo = new ProductRepository;
+        $this->cartService = $cart;
     }
 
     public function cartWeight()
@@ -26,33 +25,9 @@ class LogisticService implements LogisticServiceInterface
         return $weight;
     }
 
-    public function shipping($user)
+    public function purchase()
     {
-        $weight = $this->cartWeight();
-
-        // Shipment logic goes here
-
-        return 0;
-    }
-
-    public function getTaxPercent()
-    {
-        return 0;
-    }
-
-    public function shipProduct()
-    {
-
-    }
-
-    public function generateLabel()
-    {
-
-    }
-
-    public function updateWithTracking()
-    {
-
+        # code...
     }
 
 }

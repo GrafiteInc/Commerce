@@ -2,11 +2,10 @@
 
 namespace Mlantz\Hadron\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Eloquent;
 
-class Product extends Model
+class Product extends Eloquent
 {
-
     public $table = "products";
 
     public $primaryKey = "id";

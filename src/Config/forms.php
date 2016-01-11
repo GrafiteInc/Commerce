@@ -2,73 +2,11 @@
 
 /*
 |--------------------------------------------------------------------------
-| Module Config
+| Hadron Config
 |--------------------------------------------------------------------------
 */
 
 return [
-
-    'blog' => [
-        'title'       => [
-            'type' => 'string',
-        ],
-        'url'       => [
-            'type' => 'string',
-        ],
-        'tags'       => [
-            'type' => 'string',
-            'class' => 'tags'
-        ],
-        'entry'       => [
-            'type' => 'text',
-            'class' => 'redactor',
-            'alt_name' => 'Content',
-        ],
-        'is_published' => [
-            'type' => 'checkbox',
-            'alt_name' => 'Published'
-        ],
-    ],
-
-    'images' => [
-        'location'       => [
-            'type' => 'file',
-            'alt_name' => 'File'
-        ],
-        'name'       => [
-            'type' => 'string',
-        ],
-        'alt_tag'       => [
-            'type' => 'string',
-            'alt_name' => 'Alt Tag',
-        ],
-        'title_tag'       => [
-            'type' => 'string',
-            'alt_name' => 'Title Tag',
-        ],
-        'is_published' => [
-            'type' => 'checkbox',
-            'alt_name' => 'Published'
-        ],
-    ],
-
-    'page' => [
-        'title'       => [
-            'type' => 'string',
-        ],
-        'url'       => [
-            'type' => 'string',
-        ],
-        'entry'       => [
-            'type' => 'text',
-            'class' => 'redactor',
-            'alt_name' => 'Content',
-        ],
-        'is_published' => [
-            'type' => 'checkbox',
-            'alt_name' => 'Published'
-        ],
-    ],
 
     'product' => [
         'name' => [
@@ -87,6 +25,7 @@ return [
         ],
         'code'       => [
             'type' => 'string',
+            'alt_name' => 'SKU',
         ],
         'price'       => [
             'type' => 'number',
@@ -117,6 +56,12 @@ return [
                 'Percentage (%)' => 'percentage',
                 'Cents (&cent;)' => 'cents',
             ]
+        ],
+        'discount_start_date' => [
+            'type' => 'date'
+        ],
+        'discount_end_date' => [
+            'type' => 'date'
         ],
         'hero_image' => [
             'type' => 'file',
@@ -153,108 +98,6 @@ return [
         'file' => [
             'type' => 'file',
             'alt_name' => 'Product File'
-        ],
-    ],
-
-    'widget' => [
-        'name'       => [
-            'type' => 'string',
-        ],
-        'uuid'       => [
-            'type' => 'string',
-        ],
-        'content'       => [
-            'type' => 'text',
-            'class' => 'redactor',
-        ],
-    ],
-
-    'faqs' => [
-        'question'       => [
-            'type' => 'string',
-        ],
-        'answer'       => [
-            'type' => 'text',
-            'class' => 'redactor',
-        ],
-        'is_published' => [
-            'type' => 'checkbox',
-            'alt_name' => 'Published'
-        ],
-    ],
-
-    'link' => [
-        'name'       => [
-            'type' => 'string',
-        ],
-        'external'       => [
-            'type' => 'checkbox',
-            'custom' => 'value="1"'
-        ],
-        'external_url' => [
-            'type' => 'string',
-            'alt_name' => 'Url'
-        ],
-        'page_id' => [
-            'type' => 'select',
-            'alt_name' => 'Page',
-            'options' => PageService::getPagesAsOptions()
-        ],
-        'menu_id' => [
-            'type' => 'hidden',
-        ],
-    ],
-
-    'subscription' => [
-        'name'       => [
-            'type' => 'string',
-        ],
-        'url'       => [
-            'type' => 'string',
-        ],
-        'price'       => [
-            'type' => 'number',
-        ],
-        'provider_id'       => [
-            'type' => 'string',
-            'alt_name' => 'Provider ID',
-        ],
-        'interval'       => [
-            'type' => 'select',
-            'options' => [
-                'Monthly' => 'monthly',
-                'Weekly' => 'weekly',
-                'Yearly' => 'yearly',
-                'Semi-Annual' => 'semi-annual',
-                'Quarterly' => 'quarterly',
-            ]
-        ],
-        'trial'       => [
-            'type' => 'number',
-            'alt_name' => 'Trial (In Days)'
-        ],
-        'statement_desc'       => [
-            'type' => 'string',
-            'alt_name' => 'Statement Description'
-        ],
-        'description'       => [
-            'type' => 'text',
-            'alt_name' => 'Details',
-            'class' => 'redactor'
-        ],
-        'hero_image' => [
-            'type' => 'file',
-            'alt_name' => 'Hero Image'
-        ],
-        'is_published' => [
-            'type' => 'checkbox',
-            'alt_name' => 'Published',
-            'custom' => 'value="1"'
-        ],
-        'is_featured' => [
-            'type' => 'checkbox',
-            'alt_name' => 'Featured',
-            'custom' => 'value="1"'
         ],
     ],
 

@@ -1,24 +1,36 @@
-# Quarx - A CMS powered by Gondolyn on Laravel
+# Hadron - An e-commerce package for Laravel
+
+Hadron is a e-commerce package for Quarx
 
 ## Installation
 
 Run the following command:
 
-```
-composer require mlantz/quarx
+```bash
+composer require mlantz/hadron
 ```
 
 Add the following to your Providers:
 
-Then run the publish
+```php
 
-## Quarx
+```
 
-Quarx is a full scope CMS tooling that can be added to any site/application using Laravel and Gondolyn. Take control of your content in the easiest way possible.
+Then publish the vendor assets:
+
+```php
+
+```
+
+### Kernal
+
+```php
+'isAjax' => \Mlantz\Hadron\Middleware\isAjax::class,
+```
+
+## Customizing
+
+### LogisticService
 
 
 
-
-Would need Quarx:
-> middleware
-> policy

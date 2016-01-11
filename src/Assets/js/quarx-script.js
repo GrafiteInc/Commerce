@@ -14,7 +14,7 @@ var _redactorConfig = {
     pastePlaintext: true,
     deniedTags: ['script'],
     imageManagerJson: _url+'/quarx/api/images/list',
-    // fileManagerJson: _url+'/quarx/images/api/list',
+    stockImageManagerJson: 'http://freepixelstock.com/api/1.0/stock',
     fileCategoriesManagerJson: _url+'files/api/all_categories',
     plugins: ['table','video','imagemanager','specialchar'],
     buttons: ['html', 'formatting', 'bold', 'italic', 'underline', 'deleted', 'unorderedlist', 'orderedlist',

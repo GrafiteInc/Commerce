@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
+use Mlantz\Quarx\Services\QuarxService as Quarx;
 
 class HadronProvider extends ServiceProvider
 {
@@ -20,6 +21,7 @@ class HadronProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/PublishedAssets/views'         => base_path('resources/views/hadron'),
             __DIR__.'/PublishedAssets/Controllers'   => app_path('Http/Controllers/Hadron'),
+            __DIR__.'/PublishedAssets/Services'      => app_path('Services'),
             __DIR__.'/PublishedAssets/public/js'     => base_path('public/js'),
             __DIR__.'/PublishedAssets/public/css'    => base_path('public/css'),
             __DIR__.'/PublishedAssets/Routes'        => app_path('Http'),
@@ -37,12 +39,10 @@ class HadronProvider extends ServiceProvider
         $this->app->register(\Mlantz\Hadron\Providers\HadronServiceProvider::class);
         $this->app->register(\Mlantz\Hadron\Providers\HadronRouteProvider::class);
 
-        $loader = AliasLoader::getInstance();
-
-        $loader->alias('StoreHelper', \Mlantz\Hadron\Helpers\StoreHelper::class);
-
         View::addNamespace('hadron', __DIR__.'/Views');
         View::addNamespace('hadron-frontend', base_path('resources/views/hadron'));
+
+        Quarx::addToPackages(__DIR__.'/QuarxViews');
 
         /*
         |--------------------------------------------------------------------------
