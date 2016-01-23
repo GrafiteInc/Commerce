@@ -12,16 +12,16 @@ class CreateSubscriptionsTable extends Migration
      */
     public function up()
     {
-        if (! Schema::hasTable('subscriptions')) {
-            Schema::create('subscriptions', function(Blueprint $table)
-            {
-                $table->increments('id');
-                $table->integer('user_id');
-                $table->integer('available_shipments')->default(0);
-                $table->integer('status');
-                $table->timestamps();
-            });
-        }
+        Schema::create('subscriptions', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('transaction_id');
+            $table->integer('available_shipments')->default(0);
+            $table->integer('status');
+            $table->text('details');
+            $table->timestamps();
+        });
     }
 
     /**

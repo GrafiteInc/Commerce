@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Mlantz\Quarx\Services\QuarxService as Quarx;
+use Mlantz\Quarx\Services\QuarxService;
 
 class HadronProvider extends ServiceProvider
 {
@@ -23,6 +23,7 @@ class HadronProvider extends ServiceProvider
             __DIR__.'/PublishedAssets/Controllers'   => app_path('Http/Controllers/Hadron'),
             __DIR__.'/PublishedAssets/Services'      => app_path('Services'),
             __DIR__.'/PublishedAssets/public/js'     => base_path('public/js'),
+            __DIR__.'/Migrations'                    => base_path('database/migrations'),
             __DIR__.'/PublishedAssets/public/css'    => base_path('public/css'),
             __DIR__.'/PublishedAssets/Routes'        => app_path('Http'),
             __DIR__.'/PublishedAssets/Config'        => base_path('config'),
@@ -36,13 +37,15 @@ class HadronProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register(\Mlantz\Hadron\Providers\HadronEventServiceProvider::class);
         $this->app->register(\Mlantz\Hadron\Providers\HadronServiceProvider::class);
         $this->app->register(\Mlantz\Hadron\Providers\HadronRouteProvider::class);
 
         View::addNamespace('hadron', __DIR__.'/Views');
         View::addNamespace('hadron-frontend', base_path('resources/views/hadron'));
 
-        Quarx::addToPackages(__DIR__.'/QuarxViews');
+        $quarx = new QuarxService();
+        $quarx->addToPackages(__DIR__.'/QuarxViews');
 
         /*
         |--------------------------------------------------------------------------
@@ -51,7 +54,7 @@ class HadronProvider extends ServiceProvider
         */
 
         $this->commands([
-            \Mlantz\Hadron\Console\Migrate::class,
+
         ]);
     }
 }

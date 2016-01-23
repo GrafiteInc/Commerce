@@ -12,16 +12,14 @@ class CreateSubscriptionHistoryTable extends Migration
      */
     public function up()
     {
-        if (! Schema::hasTable('subscription_history')) {
-            Schema::create('subscription_history', function(Blueprint $table)
-            {
-                $table->increments('id');
-                $table->integer('subscription_id');
-                $table->string('activity');
-                $table->integer('user_id');
-                $table->timestamps();
-            });
-        }
+        Schema::create('subscription_history', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->integer('subscription_id');
+            $table->string('activity');
+            $table->integer('user_id');
+            $table->timestamps();
+        });
     }
 
     /**

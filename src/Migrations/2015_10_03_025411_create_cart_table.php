@@ -13,19 +13,17 @@ class CreateCartTable extends Migration
      */
     public function up()
     {
-        if (! Schema::hasTable('cart')) {
-            Schema::create('cart', function(Blueprint $table)
-            {
-                $table->increments('id');
-                $table->integer('user_id');
-                $table->integer('entity_id');
-                $table->integer('entity_type');
-                $table->text('product_variants')->nullable();
-                $table->text('address')->nullable();
-                $table->integer('quantity');
-                $table->timestamps();
-            });
-        }
+        Schema::create('cart', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('entity_id');
+            $table->integer('entity_type');
+            $table->text('product_variants')->nullable();
+            $table->text('address')->nullable();
+            $table->integer('quantity');
+            $table->timestamps();
+        });
     }
 
     /**

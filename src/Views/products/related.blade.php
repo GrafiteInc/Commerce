@@ -2,6 +2,7 @@ Required Products
 UpSells
 CrossSells
 
+make this a simple search + drag and drop
 
 {!! Form::model($product, ['url' => 'quarx/products/subscription/'.CryptoService::encrypt($product->id), 'method' => 'post']) !!}
 

@@ -10,7 +10,7 @@
 
         {!! Form::open(['route' => 'quarx.products.store', 'files' => true]) !!}
 
-            {!! FormMaker::fromTable('products', Hadron::config('forms.product')) !!}
+            {!! FormMaker::fromTable('products', config('hadron.details')) !!}
 
             <div class="form-group text-right">
                 <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>
