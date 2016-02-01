@@ -18,9 +18,6 @@ class StoreLogistics implements LogisticServiceInterface
     {
         $address = Customer::shippingAddress();
         $weight = $this->cartWeight();
-        if ($address->country == 'Canada') {
-            return 10.00;
-        }
 
         return 0;
     }
