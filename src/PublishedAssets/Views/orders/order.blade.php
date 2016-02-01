@@ -9,17 +9,21 @@
         </tr>
         <tr>
             <td>Transaction</td>
-            <td><a href="{!! url('store/account/purchases/'.$order->transaction()->id) !!}">{!! $order->transaction()->uuid !!}</a></td>
+            <td><a href="{!! url('store/account/purchases/'.$order->transaction()->id) !!}">{!! $order->transaction('uuid') !!}</a></td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td> {!! ucfirst($order->status) !!}</td>
         </tr>
 
         <tr>
             <td>Address</td>
             <td>
-                {!! json_decode($order->shipping_address)->street !!}
-                {!! json_decode($order->shipping_address)->postal !!}
-                {!! json_decode($order->shipping_address)->city !!}
-                {!! json_decode($order->shipping_address)->state !!}
-                {!! json_decode($order->shipping_address)->country !!}
+                {!! $order->shippingAddress('street') !!}
+                {!! $order->shippingAddress('postal') !!}
+                {!! $order->shippingAddress('city') !!}
+                {!! $order->shippingAddress('state') !!}
+                {!! $order->shippingAddress('country') !!}
             </td>
         </tr>
 

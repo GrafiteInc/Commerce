@@ -27,10 +27,26 @@ class Orders extends Model
 
     ];
 
-    public function transaction()
+    public function transaction($key = null)
     {
         $transaction = Transactions::find($this->transaction_id);
+
+        if (! is_null($key)) {
+            return $transaction->$key;
+        }
+
         return $transaction;
+    }
+
+    public function shippingAddress($key = null)
+    {
+        $address = json_decode($this->shipping_address);
+
+        if (isset($address->$key)) {
+            return $address->$key;
+        }
+
+        return $address;
     }
 
 }
