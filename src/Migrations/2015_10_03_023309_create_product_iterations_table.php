@@ -3,8 +3,9 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubscriptionsTable extends Migration
+class CreateProductIterationsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -12,15 +13,12 @@ class CreateSubscriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions', function(Blueprint $table)
+        Schema::create('product_iterations', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('transaction_id');
-            $table->string('uuid');
-            $table->integer('available_shipments')->default(0);
-            $table->string('status');
-            $table->integer('price');
+            $table->integer('product_id')->default(0);
+            $table->date('start_date');
+            $table->date('end_date');
             $table->text('details');
             $table->timestamps();
         });
@@ -33,6 +31,7 @@ class CreateSubscriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('subscriptions');
+        Schema::drop('product_iterations');
     }
+
 }

@@ -15,9 +15,9 @@ class CreateSubscriptionHistoryTable extends Migration
         Schema::create('subscription_history', function(Blueprint $table)
         {
             $table->increments('id');
+            $table->integer('user_id');
             $table->integer('subscription_id');
             $table->string('activity');
-            $table->integer('user_id');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateSubscriptionHistoryTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('subscription_history');
     }
 }

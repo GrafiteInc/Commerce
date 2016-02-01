@@ -1,13 +1,13 @@
 <?php
 
-namespace Quarx\Modules\Products\Requests;
+namespace Yab\Hadron\Requests;
 
-use Auth;
 use App\Http\Requests\Request;
-use Quarx\Modules\Products\Models\Product;
+use Yab\Hadron\Models\Product;
 
 class ProductRequest extends Request
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -15,11 +15,7 @@ class ProductRequest extends Request
      */
     public function authorize()
     {
-        if (Auth::user()) {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     /**
@@ -31,4 +27,5 @@ class ProductRequest extends Request
     {
         return Product::$rules;
     }
+
 }

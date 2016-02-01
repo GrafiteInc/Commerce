@@ -71,13 +71,6 @@ class ProductService
 
         $input['url'] = Quarx::convertToURL($input['url']);
 
-        if (isset($input['file'])) {
-            $savedFile = FileService::saveFile($input['file'], 'downloads');
-            $input['file'] = $savedFile['name'];
-        } else {
-            $input['file'] = $product->file;
-        }
-
         if (isset($input['hero_image'])) {
             $heroFile = FileService::saveFile($input['hero_image'], 'heroes');
             $input['hero_image'] = $heroFile['name'];
@@ -91,6 +84,20 @@ class ProductService
         $input['is_featured'] = (isset($input['is_featured'])) ? (bool) $input['is_featured'] : 0;
         $input['is_subscription'] = (isset($input['is_subscription'])) ? (bool) $input['is_subscription'] : 0;
         $input['has_iterations'] = (isset($input['has_iterations'])) ? (bool) $input['has_iterations'] : 0;
+
+        return $this->repo->update($id, $input);
+    }
+
+    public function updateAlternativeData($id, $input)
+    {
+        $product = $this->repo->find($id);
+
+        if (isset($input['file'])) {
+            $savedFile = FileService::saveFile($input['file'], 'downloads');
+            $input['file'] = $savedFile['name'];
+        } else {
+            $input['file'] = $product->file;
+        }
 
         return $this->repo->update($id, $input);
     }

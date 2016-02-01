@@ -1,21 +1,34 @@
-
-{!! Form::model($product, ['url' => 'quarx/products/subscription/'.CryptoService::encrypt($product->id), 'method' => 'post']) !!}
+{!! Form::model($product, ['url' => 'quarx/products/discounts/'.CryptoService::encrypt($product->id), 'method' => 'post']) !!}
 
 <div class="row">
     <div class="col-lg-6">
         <div class="form-group">
             <label class="control-label" for="Frequency">Frequency</label>
-            <select name="frequency" class="form-control">
-                <option value="Weekly">Weekly</option>
-                <option value="Monthly">Monthly</option>
-                <option value="Yearly">Yearly</option>
+            <select name="subscription_frequency" class="form-control">
+                @foreach (['Weekly', 'Monthly', 'Yearly'] as $frequency)
+                    <option  @if($product->subscription_frequency == $frequency) selected @endif value="{!! $frequency !!}">{!! $frequency !!}</option>
+                @endforeach
             </select>
         </div>
     </div>
     <div class="col-lg-6">
         <div class="form-group">
-            <label class="control-label" for="Value">Value</label>
-            <input id="Value" class="form-control" type="text" name="value" placeholder="Value - separated by | (+price) [+weight]">
+            <label class="control-label" for="SignUp">Sign up Fee</label>
+            <input id="SignUp" class="form-control" type="text" name="subscription_signup_fee" placeholder="SignUp Fee (&cent;)" value="{!! $product->subscription_signup_fee !!}">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="control-label" for="Trial">Free Trial (Days)</label>
+            <input id="Trial" class="form-control" type="text" name="subscription_free_trial" placeholder="Free Trial (Days)" value="{!! $product->subscription_free_trial !!}">
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="control-label" for="Limit">Limit Per Customer</label>
+            <input id="Limit" class="form-control" type="text" name="subscription_per_customer" placeholder="Limit Per Customer" value="{!! $product->subscription_per_customer !!}">
         </div>
     </div>
 </div>
@@ -24,25 +37,3 @@
 </div>
 
 {!! Form::close() !!}
-
-<div class="row">
-    <table class="table table-striped">
-        <thead>
-            <th>Key</th>
-            <th>Value</th>
-            <th class="text-right">Actions</th>
-        </thead>
-        <tbody>
-        @foreach ($productVariants as $variant)
-            <tr data-variant="{!! $variant->id !!}" class="variant-row">
-                <td><input class="key form-control" value="{!! $variant->key !!}"></td>
-                <td><input class="value form-control" value="{!! $variant->value !!}"></td>
-                <td class="text-right">
-                    <button class="save-variant btn btn-primary"><span class="fa fa-save"></span></button>
-                    <button class="delete-variant btn btn-danger"><span class="fa fa-remove"></span></button>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-</div>

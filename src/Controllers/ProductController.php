@@ -5,7 +5,7 @@ namespace Yab\Hadron\Controllers;
 use CryptoService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Requests\CreateProductRequest;
+use Yab\Hadron\Requests\ProductRequest;
 use Yab\Hadron\Services\ProductService;
 use Yab\Hadron\Repositories\ProductVariantRepository;
 
@@ -57,10 +57,10 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\CreateProductRequest  $request
+     * @param  \Illuminate\Http\ProductRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateProductRequest $request)
+    public function store(ProductRequest $request)
     {
         $result = $this->service->create($request->except('_token'));
 
@@ -120,13 +120,31 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\CreateProductRequest  $request
+     * @param  \Illuminate\Http\ProductRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateProductRequest $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         $result = $this->service->update(CryptoService::decrypt($id), $request->except(['_token', '_method']));
+
+        if ($result) {
+            return back()->with('message', 'Successfully updated');
+        }
+
+        return back()->with('message', 'Failed to update');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\ProductRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateAlternativeData(Request $request, $id)
+    {
+        $result = $this->service->updateAlternativeData(CryptoService::decrypt($id), $request->except(['_token', '_method']));
 
         if ($result) {
             return back()->with('message', 'Successfully updated');

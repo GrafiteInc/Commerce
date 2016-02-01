@@ -1,21 +1,13 @@
-
-{!! Form::model($product, ['url' => 'quarx/products/subscription/'.CryptoService::encrypt($product->id), 'method' => 'post']) !!}
+{!! Form::model($product, ['url' => 'quarx/products/download/'.CryptoService::encrypt($product->id), 'method' => 'post', 'files' => true]) !!}
 
 <div class="row">
     <div class="col-lg-6">
-        <div class="form-group">
-            <label class="control-label" for="Frequency">Frequency</label>
-            <select name="frequency" class="form-control">
-                <option value="Weekly">Weekly</option>
-                <option value="Monthly">Monthly</option>
-                <option value="Yearly">Yearly</option>
-            </select>
-        </div>
+        <a class="btn btn-default raw-margin-top-24" href="{!! url(FileService::fileAsDownload($product->file, $product->file)) !!}">Download File</a>
     </div>
     <div class="col-lg-6">
         <div class="form-group">
-            <label class="control-label" for="Value">Value</label>
-            <input id="Value" class="form-control" type="text" name="value" placeholder="Value - separated by | (+price) [+weight]">
+            <label class="control-label" for="productFile">File</label>
+            <input id="productFile" class="form-control" type="file" name="file" placeholder="Product File">
         </div>
     </div>
 </div>
@@ -24,25 +16,3 @@
 </div>
 
 {!! Form::close() !!}
-
-<div class="row">
-    <table class="table table-striped">
-        <thead>
-            <th>Key</th>
-            <th>Value</th>
-            <th class="text-right">Actions</th>
-        </thead>
-        <tbody>
-        @foreach ($productVariants as $variant)
-            <tr data-variant="{!! $variant->id !!}" class="variant-row">
-                <td><input class="key form-control" value="{!! $variant->key !!}"></td>
-                <td><input class="value form-control" value="{!! $variant->value !!}"></td>
-                <td class="text-right">
-                    <button class="save-variant btn btn-primary"><span class="fa fa-save"></span></button>
-                    <button class="delete-variant btn btn-danger"><span class="fa fa-remove"></span></button>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-</div>

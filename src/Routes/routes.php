@@ -16,6 +16,9 @@
         Route::resource('products', 'ProductController');
         Route::post('products/search', 'ProductController@search');
         Route::post('products/variants/{id}', 'ProductVariantController@variants');
+        Route::post('products/subscription/{id}', 'ProductController@updateAlternativeData');
+        Route::post('products/download/{id}', 'ProductController@updateAlternativeData');
+        Route::post('products/discounts/{id}', 'ProductController@updateAlternativeData');
         Route::group(['middleware' => 'isAjax'], function() {
             Route::post('products/variant/save', 'ProductVariantController@saveVariant');
             Route::post('products/variant/delete', 'ProductVariantController@deleteVariant');

@@ -32,6 +32,10 @@ class Product extends Eloquent
         "is_featured",
         "is_subscription",
         "has_iterations",
+        'subscription_signup_fee',
+        'subscription_frequency',
+        'subscription_free_trial',
+        'subscription_per_customer',
         "file",
         "seo_description",
         "seo_keywords"
