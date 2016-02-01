@@ -20,6 +20,10 @@
             <td>{!! $purchase->tax !!}</td>
         </tr>
         <tr>
+            <td>Shipping</td>
+            <td>{!! $purchase->shipping !!}</td>
+        </tr>
+        <tr>
             <td>Total</td>
             <td>{!! $purchase->total !!}</td>
         </tr>

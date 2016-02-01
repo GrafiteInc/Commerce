@@ -5,10 +5,7 @@ namespace Yab\Hadron\Services;
 use DB;
 use App;
 use Auth;
-use Session;
-use Logistics;
-use ShoppingCart;
-use Omnipay\Omnipay;
+use Customer;
 use Yab\Hadron\Models\Orders;
 use Yab\Hadron\Models\Transactions;
 use Yab\Hadron\Services\LogisticService;
@@ -74,11 +71,11 @@ class PaymentService
                 'transaction_id' => $transaction->id,
                 'details' => json_encode($cart->contents()),
                 'shipping_address' => json_encode([
-                    'street' => $request->input('address')['street'],
-                    'postal' => $request->input('address')['postal'],
-                    'city' => $request->input('address')['city'],
-                    'state' => $request->input('address')['state'],
-                    'country' => $request->input('address')['country'],
+                    'street' => Customer::shippingAddress('street'),
+                    'postal' => Customer::shippingAddress('postal'),
+                    'city' => Customer::shippingAddress('city'),
+                    'state' => Customer::shippingAddress('state'),
+                    'country' => Customer::shippingAddress('country'),
                  ])
             ]);
         }

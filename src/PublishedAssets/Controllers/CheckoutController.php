@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Hadron;
 
+use Auth;
 use Quarx;
 use Redirect;
 use Illuminate\Http\Request;
@@ -9,15 +10,16 @@ use App\Http\Controllers\Controller;
 use Yab\Hadron\Services\CartService;
 use Yab\Hadron\Services\PaymentService;
 use Yab\Hadron\Services\QuarxResponseService;
+use Yab\Hadron\Services\CustomerProfileService;
 
 class CheckoutController extends Controller
 {
-    private $cartService;
 
-    function __construct(CartService $cartService, PaymentService $paymentService)
+    function __construct(CartService $cartService, PaymentService $paymentService, CustomerProfileService $customer)
     {
         $this->cart = $cartService;
         $this->payment = $paymentService;
+        $this->customer = $customer;
     }
 
     public function confirm()
@@ -63,6 +65,14 @@ class CheckoutController extends Controller
     public function failed()
     {
         return view('hadron-frontend::checkout.failed');
+    }
+
+    public function reCalculateShipping(Request $request)
+    {
+        $request->replace(['address' => array_merge($request->address, [ 'shipping' => true ]) ]);
+        $profile = $this->customer->findByUserId(Auth::id());
+        $this->customer->updateProfileAddress($profile->id, $request->except('_token')['address']);
+        return back()->with('message', 'Successfully updated');
     }
 
 }

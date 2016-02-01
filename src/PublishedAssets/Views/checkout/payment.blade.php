@@ -42,13 +42,6 @@
                     </div>
                 </div>
 
-                <h2>Shipping Info</h2>
-                <input class="form-control" required name="address[street]" placeholder="Street" value="{!! Customer::shippingAddress('street') !!}">
-                <input class="form-control" required name="address[postal]" placeholder="Postal" value="{!! Customer::shippingAddress('postal') !!}">
-                <input class="form-control" required name="address[city]" placeholder="City" value="{!! Customer::shippingAddress('city') !!}">
-                <input class="form-control" required name="address[state]" placeholder="State" value="{!! Customer::shippingAddress('state') !!}">
-                <input class="form-control" required name="address[country]" placeholder="Country" value="{!! Customer::shippingAddress('country') !!}">
-
                 <div class="form-group">
                     <input id="update" type="submit" class="btn btn-primary pull-right" value="Pay">
                 </div>

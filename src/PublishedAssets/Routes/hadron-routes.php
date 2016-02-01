@@ -32,6 +32,7 @@
                     Route::get('subscriptions', 'SubscriptionController@allSubscriptions');
                     Route::get('subscriptions/{id}', 'SubscriptionController@getSubscription');
                 });
+                Route::post('calculate/shipping', 'CheckoutController@reCalculateShipping');
                 Route::get('checkout', 'CheckoutController@confirm');
                 Route::get('payment', 'CheckoutController@payment');
                 Route::post('process', 'CheckoutController@process');
