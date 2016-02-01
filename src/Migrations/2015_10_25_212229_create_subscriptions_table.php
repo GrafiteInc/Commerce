@@ -17,6 +17,7 @@ class CreateSubscriptionsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('transaction_id');
+            $table->string('uuid');
             $table->integer('available_shipments')->default(0);
             $table->integer('status');
             $table->text('details');

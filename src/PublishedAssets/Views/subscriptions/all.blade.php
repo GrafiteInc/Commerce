@@ -9,17 +9,17 @@
             <td>Action</td>
         </thead>
         <tbody>
-            @foreach ($purchases as $purchase)
+            @foreach ($subscriptions as $subscription)
                 <tr>
-                    <td><a href="{{ url('store/account/purchases/'.$purchase->id) }}">{!! $purchase->uuid !!}</a></td>
-                    <td>${!! $purchase->total !!}</td>
-                    <td><a href="{{ url('store/account/purchases/'.$purchase->id.'/refund-request') }}">Refund Request</a></td>
+                    <td><a href="{{ url('store/account/subscriptions/'.$subscription->id) }}">{!! $subscription->uuid !!}</a></td>
+                    <td>${!! $subscription->total !!}</td>
+                    <td><a href="{{ url('store/account/subscriptions/'.$subscription->id.'/refund-request') }}">Refund Request</a></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
-    {!! $purchases !!}
+    {!! $subscriptions !!}
 
 @endsection
 

@@ -2,43 +2,41 @@
 
 namespace App\Http\Controllers\Hadron;
 
+use Auth;
 use Quarx;
 use Request;
 use Redirect;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Services\CartService;
-use Yab\Hadron\Services\QuarxResponseService;
+use Yab\Hadron\Repositories\SubscriptionRepository;
 
-class CheckoutController extends Controller
+class SubscriptionController extends Controller
 {
-    private $cartService;
 
-    function __construct(CartService $cartService)
+    function __construct(SubscriptionRepository $subscriptionRepo)
     {
-        $this->cart = $cartService;
+        $this->subscriptions = $subscriptionRepo;
     }
 
-    public function confirm()
+    public function allSubscriptions()
     {
-        $products = $this->cart->contents();
-        return view('hadron-frontend::checkout.confirm')->with('products', $products);
+        $subscriptions = $this->subscriptions->getByCustomer(Auth::id())->orderBy('created_at', 'DESC')->paginate(env('PAGINATION'));
+        return view('hadron-frontend::subscriptions.all')->with('subscriptions', $subscriptions);
     }
 
-    public function payment()
+    public function getSubscription($id)
     {
-        $products = $this->cart->contents();
-        return view('hadron-frontend::checkout.payment')->with('products', $products);
+        $subscription = $this->subscriptions->getByCustomerAndId(Auth::id(), $id);
+        return view('hadron-frontend::subscriptions.subscription')->with('subscription', $subscription);
     }
 
-    public function process()
+    public function cancelSubscription($id)
     {
-        return redirect('store/complete');
+
     }
 
-    public function complete()
+    public function pauseSubscription($id)
     {
-        $products = $this->cart->contents();
-        return view('hadron-frontend::checkout.complete')->with('products', $products);
+
     }
 
 }
