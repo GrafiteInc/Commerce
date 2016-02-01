@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Hadron\Interfaces;
+namespace Yab\Hadron\Interfaces;
 
 interface LogisticServiceInterface
 {

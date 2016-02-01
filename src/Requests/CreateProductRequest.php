@@ -1,9 +1,9 @@
 <?php
 
-namespace Mlantz\Hadron\Requests;
+namespace Yab\Hadron\Requests;
 
 use App\Http\Requests\Request;
-use Mlantz\Hadron\Models\Product;
+use Yab\Hadron\Models\Product;
 
 class CreateProductRequest extends Request
 {

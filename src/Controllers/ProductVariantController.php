@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Hadron\Controllers;
+namespace Yab\Hadron\Controllers;
 
 use Quarx;
 use Response;
@@ -8,11 +8,11 @@ use CryptoService;
 use ValidationService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Mlantz\Hadron\Models\Products;
-use Mlantz\Quarx\Controllers\QuarxController;
-use Mlantz\Hadron\Requests\CreateProductsRequest;
-use Mlantz\Hadron\Repositories\ProductRepository;
-use Mlantz\Hadron\Repositories\ProductVariantRepository;
+use Yab\Hadron\Models\Products;
+use Yab\Quarx\Controllers\QuarxController;
+use Yab\Hadron\Requests\CreateProductsRequest;
+use Yab\Hadron\Repositories\ProductRepository;
+use Yab\Hadron\Repositories\ProductVariantRepository;
 
 class ProductVariantController extends QuarxController
 {

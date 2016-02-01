@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Hadron;
 
 use App\Http\Controllers\Controller;
-use Mlantz\Hadron\Repositories\ProductRepository;
+use Yab\Hadron\Repositories\ProductRepository;
 
 class StoreController extends Controller
 {

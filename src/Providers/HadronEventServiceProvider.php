@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Hadron\Providers;
+namespace Yab\Hadron\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,12 +13,12 @@ class HadronEventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'eloquent.saving: Mlantz\Hadron\Models\Order' => [
-            'Mlantz\Hadron\Services\OrderService@beforeSave',
+        'eloquent.saving: Yab\Hadron\Models\Order' => [
+            'Yab\Hadron\Services\OrderService@beforeSave',
         ],
 
-        'eloquent.saved: Mlantz\Hadron\Models\Order' => [
-            'Mlantz\Hadron\Services\OrderService@afterSave',
+        'eloquent.saved: Yab\Hadron\Models\Order' => [
+            'Yab\Hadron\Services\OrderService@afterSave',
         ],
     ];
 

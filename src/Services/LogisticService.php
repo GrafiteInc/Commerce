@@ -1,10 +1,10 @@
 <?php
 
-namespace Mlantz\Hadron\Services;
+namespace Yab\Hadron\Services;
 
 use App\Services\StoreLogistics;
-use Mlantz\Hadron\Repositories\CartRepository;
-use Mlantz\Hadron\Interfaces\LogisticServiceInterface;
+use Yab\Hadron\Repositories\CartRepository;
+use Yab\Hadron\Interfaces\LogisticServiceInterface;
 
 class LogisticService extends StoreLogistics implements LogisticServiceInterface
 {
@@ -23,11 +23,6 @@ class LogisticService extends StoreLogistics implements LogisticServiceInterface
         }
 
         return $weight;
-    }
-
-    public function purchase()
-    {
-        # code...
     }
 
 }

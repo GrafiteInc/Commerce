@@ -13,9 +13,9 @@ class CartTest extends TestCase
         $this->login();
         $this->migrateUp('quarx');
 
-        factory(\Mlantz\Hadron\Models\Cart::class)->create();
-        factory(\Mlantz\Hadron\Models\Products::class)->create();
-        factory(\Mlantz\Hadron\Models\SubscriptionPlans::class)->create();
+        factory(\Yab\Hadron\Models\Cart::class)->create();
+        factory(\Yab\Hadron\Models\Products::class)->create();
+        factory(\Yab\Hadron\Models\SubscriptionPlans::class)->create();
     }
 
     public function testContents()

@@ -1,13 +1,13 @@
 <?php
 
-namespace Mlantz\Hadron\Services;
+namespace Yab\Hadron\Services;
 
 use LogisticService;
-use Mlantz\Hadron\Models\Variant;
+use Yab\Hadron\Models\Variant;
 use Illuminate\Support\Facades\Auth;
-use Mlantz\Hadron\Repositories\CartRepository;
-use Mlantz\Hadron\Repositories\ProductRepository;
-use Mlantz\Hadron\Repositories\CartSessionRepository;
+use Yab\Hadron\Repositories\CartRepository;
+use Yab\Hadron\Repositories\ProductRepository;
+use Yab\Hadron\Repositories\CartSessionRepository;
 
 class CartService
 {

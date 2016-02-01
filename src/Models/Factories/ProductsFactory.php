@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Mlantz\Hadron\Models\Products::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Hadron\Models\Products::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'name' => 'dumb',

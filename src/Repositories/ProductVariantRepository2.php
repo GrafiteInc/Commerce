@@ -1,13 +1,13 @@
 <?php
 
-namespace Mlantz\Hadron\Repositories;
+namespace Yab\Hadron\Repositories;
 
 use Request;
 use FileService;
-use Mlantz\Hadron\Models\Variant;
-use Mlantz\Hadron\Models\Products;
+use Yab\Hadron\Models\Variant;
+use Yab\Hadron\Models\Products;
 use Illuminate\Support\Facades\Schema;
-use Mlantz\Hadron\Services\QuarxService;
+use Yab\Hadron\Services\QuarxService;
 
 class ProductVariantRepository
 {

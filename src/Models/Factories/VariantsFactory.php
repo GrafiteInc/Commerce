@@ -2,18 +2,17 @@
 
 /*
 |--------------------------------------------------------------------------
-| Menu Factory
+| Pages Factory
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Mlantz\Hadron\Models\Menu::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Hadron\Models\Variants::class, function (Faker\Generator $faker) {
     return [
-
         'id' => 1,
-        'name' => 'dumb menu',
-        'uuid' => 'testerUUID',
+        'product_id' => 1,
+        'key' => 'Size',
+        'value' => 'small|medium|large(+2)[+2]',
         'updated_at' => $faker->datetime(),
         'created_at' => $faker->datetime(),
-
     ];
 });

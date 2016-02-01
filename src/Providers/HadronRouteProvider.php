@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Hadron\Providers;
+namespace Yab\Hadron\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Config;
@@ -15,7 +15,7 @@ class HadronRouteProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Mlantz\Hadron\Controllers';
+    protected $namespace = 'Yab\Hadron\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

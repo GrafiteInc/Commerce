@@ -22,7 +22,20 @@
         });
         Route::get('products/{id}/delete', [
             'as' => 'quarx.products.delete',
-            'uses' => 'ProductsController@destroy',
+            'uses' => 'ProductController@destroy',
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Transactions
+        |--------------------------------------------------------------------------
+        */
+        Route::resource('transactions', 'TransactionController');
+        Route::post('transactions/search', 'TransactionController@search');
+        Route::post('transactions/refund', 'TransactionController@refund');
+        Route::get('transactions/{id}/delete', [
+            'as' => 'quarx.transactions.delete',
+            'uses' => 'TransactionController@destroy',
         ]);
     });
 

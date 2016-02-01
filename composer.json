@@ -1,11 +1,13 @@
 {
     "name": "mlantz/quarx",
-    "description": "An CMS for Laravel Apps",
+    "description": "An eCommerce platform for Laravel Apps",
     "license": "MIT",
     "require": {
-        "illuminate/support": "5.*",
+        "illuminate/support": "5.2",
         "easypost/easypost-php": "^2.1",
-        "devfactory/minify": "1.0.*"
+        "devfactory/minify": "1.0.*",
+        "omnipay/omnipay": "~2.0",
+        "stripe/stripe-php": "^3.7"
     },
     "autoload": {},
     "scripts": {

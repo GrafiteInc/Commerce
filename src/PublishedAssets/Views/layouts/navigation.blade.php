@@ -16,7 +16,9 @@
                     @if (Auth::user())
                         <li><a href="{{ URL::to('dashboard') }}"><span class="fa fa-dashboard"></span> Dashboard</a></li>
                         <li><a href="{{ URL::to('account/settings') }}"><span class="fa fa-user"></span> Account</a></li>
+                        <li><a href="{{ URL::to('store/account/profile') }}"><span class="fa fa-user"></span> Profile</a></li>
                         <li><a href="{{ URL::to('store/account/purchases') }}"><span class="fa fa-gift"></span> Purchases</a></li>
+                        <li><a href="{{ URL::to('store/account/orders') }}"><span class="fa fa-gift"></span> Orders</a></li>
                         <li><a href="{{ URL::to('store/account/subscriptions') }}"><span class="fa fa-ticket"></span> Subscriptions</a></li>
                         <li><a href="{{ URL::to('logout') }}"><span class="fa fa-sign-out"></span> Logout</a></li>
                     @else

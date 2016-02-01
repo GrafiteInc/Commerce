@@ -6,8 +6,8 @@ use Quarx;
 use Request;
 use Redirect;
 use App\Http\Controllers\Controller;
-use Mlantz\Hadron\Services\CartService;
-use Mlantz\Quarx\Services\QuarxResponseService;
+use Yab\Hadron\Services\CartService;
+use Yab\Quarx\Services\QuarxResponseService;
 
 class CartController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Hadron\Services;
+namespace Yab\Hadron\Services;
 
 use Quarx;
 use Config;

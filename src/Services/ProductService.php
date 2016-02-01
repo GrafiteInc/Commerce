@@ -1,14 +1,14 @@
 <?php
 
-namespace Mlantz\Hadron\Services;
+namespace Yab\Hadron\Services;
 
 use Quarx;
 use Config;
 use FileService;
 use CryptoService;
 use Illuminate\Support\Facades\Auth;
-use Mlantz\Hadron\Repositories\ProductRepository;
-use Mlantz\Hadron\Repositories\ProductVariantRepository;
+use Yab\Hadron\Repositories\ProductRepository;
+use Yab\Hadron\Repositories\ProductVariantRepository;
 
 class ProductService
 {

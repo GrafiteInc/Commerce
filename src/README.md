@@ -22,10 +22,26 @@ Then publish the vendor assets:
 
 ```
 
+* Then add the following code to your User Model:
+
+```php
+use Yab\Hadron\Models\CustomerProfile;
+
+/**
+ * Customer Profile
+ *
+ * @return Relationship
+ */
+public function customerProfile()
+{
+    return $this->hasOne(CustomerProfile::class);
+}
+```
+
 ### Kernal
 
 ```php
-'isAjax' => \Mlantz\Hadron\Middleware\isAjax::class,
+'isAjax' => \Yab\Hadron\Middleware\isAjax::class,
 ```
 
 ## Customizing

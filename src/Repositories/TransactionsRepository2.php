@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Store\Models;
+namespace Yab\Store\Models;
 
 use DB;
 use Schema;
@@ -8,7 +8,7 @@ use Session;
 use StoreHelper;
 use ShoppingCart;
 use Illuminate\Database\Schema\Blueprint as Blueprint;
-use Mlantz\Store\Models\ServiceModels\BaseModel;
+use Yab\Store\Models\ServiceModels\BaseModel;
 
 class Transactions extends BaseModel
 {

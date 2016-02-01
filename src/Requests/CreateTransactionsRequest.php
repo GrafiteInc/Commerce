@@ -1,9 +1,9 @@
 <?php
 
-namespace Mlantz\Hadron\Requests;
+namespace Yab\Hadron\Requests;
 
 use App\Http\Requests\Request;
-use Mlantz\Hadron\Models\Transactions;
+use Yab\Hadron\Models\Transactions;
 
 class CreateTransactionsRequest extends Request
 {

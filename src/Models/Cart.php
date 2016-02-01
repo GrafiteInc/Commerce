@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Hadron\Models;
+namespace Yab\Hadron\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Mlantz\Hadron;
+namespace Yab\Hadron;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Mlantz\Quarx\Services\QuarxService;
+use Yab\Quarx\Services\QuarxService;
 
 class HadronProvider extends ServiceProvider
 {
@@ -37,9 +37,9 @@ class HadronProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(\Mlantz\Hadron\Providers\HadronEventServiceProvider::class);
-        $this->app->register(\Mlantz\Hadron\Providers\HadronServiceProvider::class);
-        $this->app->register(\Mlantz\Hadron\Providers\HadronRouteProvider::class);
+        $this->app->register(\Yab\Hadron\Providers\HadronEventServiceProvider::class);
+        $this->app->register(\Yab\Hadron\Providers\HadronServiceProvider::class);
+        $this->app->register(\Yab\Hadron\Providers\HadronRouteProvider::class);
 
         View::addNamespace('hadron', __DIR__.'/Views');
         View::addNamespace('hadron-frontend', base_path('resources/views/hadron'));

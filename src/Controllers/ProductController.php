@@ -1,13 +1,13 @@
 <?php
 
-namespace Mlantz\Hadron\Controllers;
+namespace Yab\Hadron\Controllers;
 
 use CryptoService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Mlantz\Hadron\Requests\CreateProductRequest;
-use Mlantz\Hadron\Services\ProductService;
-use Mlantz\Hadron\Repositories\ProductVariantRepository;
+use Yab\Hadron\Requests\CreateProductRequest;
+use Yab\Hadron\Services\ProductService;
+use Yab\Hadron\Repositories\ProductVariantRepository;
 
 class ProductController extends Controller
 {

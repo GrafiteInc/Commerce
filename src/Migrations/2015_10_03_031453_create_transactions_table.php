@@ -28,6 +28,8 @@ class CreateTransactionsTable extends Migration
             $table->string('provider_date');
             $table->text('provider_dispute');
             $table->integer('customer_id');
+            $table->text('cart');
+            $table->text('response');
             $table->text('notes')->nullable();
             $table->timestamps();
         });

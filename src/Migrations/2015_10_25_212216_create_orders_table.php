@@ -18,6 +18,8 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id');
             $table->integer('transaction_id');
             $table->text('details');
+            $table->text('shipping')->nullable();
+            $table->boolean('is_shipped')->default(0);
             $table->timestamps();
         });
     }

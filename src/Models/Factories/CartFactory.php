@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Mlantz\Hadron\Models\Cart::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Hadron\Models\Cart::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'user_id' => 1,

@@ -1,8 +1,8 @@
 <?php
 
-namespace Mlantz\Hadron\Services;
+namespace Yab\Hadron\Services;
 
-use Mlantz\Hadron\Interfaces\InvoiceServiceInterface;
+use Yab\Hadron\Interfaces\InvoiceServiceInterface;
 
 class InvoicingService implements InvoiceServiceInterface
 {

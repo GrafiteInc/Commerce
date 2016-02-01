@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Store\Services\PaymentServices;
+namespace Yab\Store\Services\PaymentServices;
 
 use URL;
 use Module;
@@ -8,8 +8,8 @@ use Shipping;
 use StoreHelper;
 use ShoppingCart;
 use Omnipay\Omnipay;
-use Mlantz\Store\Models\Transactions;
-use Mlantz\Store\Interfaces\PaymentInterface;
+use Yab\Store\Models\Transactions;
+use Yab\Store\Interfaces\PaymentInterface;
 
 class PayPal implements PaymentInterface
 {
@@ -33,7 +33,7 @@ class PayPal implements PaymentInterface
         $this->cart = new ShoppingCart();
     }
 
-    public function purchase($user, $request)
+    public function purchase($user, $cart)
     {
         $shipping   = Shipping::rate($user);
         $subtotal   = $this->cart->getCartSubtotal($user);

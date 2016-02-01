@@ -6,8 +6,8 @@ use Quarx;
 use Request;
 use Redirect;
 use App\Http\Controllers\Controller;
-use Mlantz\Hadron\Services\CartService;
-use Mlantz\Hadron\Services\QuarxResponseService;
+use Yab\Hadron\Services\CartService;
+use Yab\Hadron\Services\QuarxResponseService;
 
 class CheckoutController extends Controller
 {

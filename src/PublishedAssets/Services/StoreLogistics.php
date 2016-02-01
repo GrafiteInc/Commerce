@@ -2,7 +2,8 @@
 
 namespace App\Services;
 
-use Mlantz\Hadron\Interfaces\LogisticServiceInterface;
+use Customer;
+use Yab\Hadron\Interfaces\LogisticServiceInterface;
 
 class StoreLogistics implements LogisticServiceInterface
 {
@@ -15,6 +16,7 @@ class StoreLogistics implements LogisticServiceInterface
      */
     public function shipping($user)
     {
+        $address = Customer::shippingAddress();
         $weight = $this->cartWeight();
 
         return 0;
@@ -26,7 +28,29 @@ class StoreLogistics implements LogisticServiceInterface
      */
     public function getTaxPercent($user)
     {
+        $address = Customer::billingAddress();
         return 0;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Purchases
+    |--------------------------------------------------------------------------
+    */
+
+    public function afterPurchase($user, $transaction, $cart, $result)
+    {
+        if ($result) {
+            $cart->emptyCart();
+            return redirect('store/complete');
+        } else {
+            return redirect('store/failed');
+        }
+    }
+
+    public function afterRefundPurchase($user, $transaction, $cart)
+    {
+        # code...
     }
 
     /*
@@ -35,7 +59,7 @@ class StoreLogistics implements LogisticServiceInterface
     |--------------------------------------------------------------------------
     */
 
-    public function placeOrder()
+    public function afterPlaceOrder($user, $transaction, $cart)
     {
         // places order into orders table
     }

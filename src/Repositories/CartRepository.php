@@ -1,12 +1,12 @@
 <?php
 
-namespace Mlantz\Hadron\Repositories;
+namespace Yab\Hadron\Repositories;
 
 use Auth;
 use Session;
-use Mlantz\Hadron\Models\Cart;
-use Mlantz\Hadron\Services\Quarx;
-use Mlantz\Hadron\Models\Variant;
+use Yab\Hadron\Models\Cart;
+use Yab\Hadron\Services\Quarx;
+use Yab\Hadron\Models\Variant;
 use Illuminate\Support\Facades\Schema;
 
 class CartRepository

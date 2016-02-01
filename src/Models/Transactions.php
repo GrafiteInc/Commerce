@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Hadron\Models\Store;
+namespace Yab\Hadron\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,7 +26,9 @@ class Transactions extends Model
         "provider_date",
         "provider_dispute",
         "customer_id",
-        "notes"
+        "notes",
+        "cart",
+        "response"
     ];
 
     public static $rules = [

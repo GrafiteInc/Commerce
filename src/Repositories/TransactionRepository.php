@@ -1,8 +1,8 @@
 <?php
 
-namespace Mlantz\Hadron\Repositories;
+namespace Yab\Hadron\Repositories;
 
-use Mlantz\Hadron\Models\Transactions;
+use Yab\Hadron\Models\Transactions;
 use Illuminate\Support\Facades\Schema;
 
 class TransactionRepository
@@ -60,6 +60,30 @@ class TransactionRepository
     public function findTransactionsById($id)
     {
         return Transactions::find($id);
+    }
+
+    /**
+     * Find Transactions by given id
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Support\Collection|null|static|Transactions
+     */
+    public function getByCustomer($id)
+    {
+        return Transactions::where('customer_id', '=', $id);
+    }
+
+    /**
+     * Find Transactions by given id
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Support\Collection|null|static|Transactions
+     */
+    public function getByCustomerAndId($customer, $id)
+    {
+        return Transactions::where('customer_id', $customer)->where('id', $id)->first();
     }
 
     /**

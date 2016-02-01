@@ -13,14 +13,14 @@ class CartServiceTest extends TestCase
         $this->login();
         $this->migrateUp('quarx');
 
-        factory(\Mlantz\Hadron\Models\Cart::class)->create();
-        factory(\Mlantz\Hadron\Models\Products::class)->create();
-        factory(\Mlantz\Hadron\Models\SubscriptionPlans::class)->create();
-        factory(\Mlantz\Hadron\Models\Variants::class)->create();
+        factory(\Yab\Hadron\Models\Cart::class)->create();
+        factory(\Yab\Hadron\Models\Products::class)->create();
+        factory(\Yab\Hadron\Models\SubscriptionPlans::class)->create();
+        factory(\Yab\Hadron\Models\Variants::class)->create();
 
-        $this->cartService = new \Mlantz\Hadron\Services\CartService;
-        $this->cartRepo = new \Mlantz\Hadron\Repositories\CartRepository;
-        $this->productRepo = new \Mlantz\Hadron\Repositories\ProductsRepository;
+        $this->cartService = new \Yab\Hadron\Services\CartService;
+        $this->cartRepo = new \Yab\Hadron\Repositories\CartRepository;
+        $this->productRepo = new \Yab\Hadron\Repositories\ProductsRepository;
     }
 
     public function testAddBtn()
@@ -138,7 +138,7 @@ class CartServiceTest extends TestCase
 
     public function testGetDefaultValue()
     {
-        $variable = factory(\Mlantz\Hadron\Models\Variants::class)->make([
+        $variable = factory(\Yab\Hadron\Models\Variants::class)->make([
             'id' => 4
         ]);
         $response = $this->cartService->getDefaultValue($variable);
@@ -147,7 +147,7 @@ class CartServiceTest extends TestCase
 
     public function testGetVariantId()
     {
-        $variable = factory(\Mlantz\Hadron\Models\Variants::class)->make([
+        $variable = factory(\Yab\Hadron\Models\Variants::class)->make([
             'id' => 4
         ]);
         $response = $this->cartService->getId($variable);

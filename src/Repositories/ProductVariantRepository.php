@@ -1,10 +1,10 @@
 <?php
 
-namespace Mlantz\Hadron\Repositories;
+namespace Yab\Hadron\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use Mlantz\Hadron\Models\Variant;
-use Mlantz\Hadron\Models\Product;
+use Yab\Hadron\Models\Variant;
+use Yab\Hadron\Models\Product;
 
 class ProductVariantRepository
 {

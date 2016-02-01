@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Hadron\Facades;
+namespace Yab\Hadron\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

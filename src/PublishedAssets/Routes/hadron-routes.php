@@ -22,17 +22,22 @@
             });
             Route::group(['middleware' => 'auth'], function() {
                 Route::group(['prefix' => 'account'], function() {
+                    Route::get('profile', 'ProfileController@customerProfile');
+                    Route::post('profile/update', 'ProfileController@customerProfileUpdate');
+                    Route::get('purchases', 'PurchaseController@allPurchases');
+                    Route::get('purchases/{id}', 'PurchaseController@getPurchase');
                     Route::get('orders', 'OrderController@allOrders');
                     Route::get('orders/{id}', 'OrderController@getOrder');
-                    Route::get('invoices', 'InvoiceController@allInvoices');
-                    Route::get('invoices/{id}', 'InvoiceController@getInvoice');
+                    Route::get('orders/{id}/cancel', 'OrderController@cancelOrder');
                     Route::get('subscriptions', 'SubscriptionController@allSubscriptions');
                     Route::get('subscriptions/{id}', 'SubscriptionController@getSubscription');
                 });
                 Route::get('checkout', 'CheckoutController@confirm');
                 Route::get('payment', 'CheckoutController@payment');
-                Route::get('process', 'CheckoutController@process');
+                Route::post('process', 'CheckoutController@process');
+                Route::post('process/last-card', 'CheckoutController@processWithLastCard');
                 Route::get('complete', 'CheckoutController@complete');
+                Route::get('failed', 'CheckoutController@failed');
             });
         });
 

@@ -2,43 +2,36 @@
 
 namespace App\Http\Controllers\Hadron;
 
+use Auth;
 use Quarx;
 use Request;
 use Redirect;
 use App\Http\Controllers\Controller;
-use Mlantz\Hadron\Services\CartService;
-use Mlantz\Hadron\Services\QuarxResponseService;
+use Yab\Hadron\Repositories\OrderRepository;
 
-class CheckoutController extends Controller
+class OrderController extends Controller
 {
-    private $cartService;
 
-    function __construct(CartService $cartService)
+    function __construct(OrderRepository $transactionRepo)
     {
-        $this->cart = $cartService;
+        $this->orders = $transactionRepo;
     }
 
-    public function confirm()
+    public function allOrders()
     {
-        $products = $this->cart->contents();
-        return view('hadron-frontend::checkout.confirm')->with('products', $products);
+        $orders = $this->orders->getByCustomer(Auth::id())->orderBy('created_at', 'DESC')->paginate(env('PAGINATION'));
+        return view('hadron-frontend::orders.all')->with('orders', $orders);
     }
 
-    public function payment()
+    public function getOrder($id)
     {
-        $products = $this->cart->contents();
-        return view('hadron-frontend::checkout.payment')->with('products', $products);
+        $order = $this->orders->getByCustomerAndId(Auth::id(), $id);
+        return view('hadron-frontend::orders.order')->with('order', $order);
     }
 
-    public function process()
+    public function cancelOrder($id)
     {
-        return redirect('store/complete');
-    }
 
-    public function complete()
-    {
-        $products = $this->cart->contents();
-        return view('hadron-frontend::checkout.complete')->with('products', $products);
     }
 
 }
