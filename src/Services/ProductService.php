@@ -53,7 +53,7 @@ class ProductService
             $payload['hero_image'] = '';
         }
 
-        $payload['price'] = round($heroFile['price'] * 100);
+        $payload['price'] = round($payload['price'] * 100);
         $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
         $payload['is_available'] = (isset($payload['is_available'])) ? (bool) $payload['is_available'] : 0;
         $payload['is_download'] = (isset($payload['is_download'])) ? (bool) $payload['is_download'] : 0;

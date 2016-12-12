@@ -2,7 +2,6 @@
 
 namespace app\Http\Controllers\Hadron;
 
-use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Quarx\Modules\Hadron\Services\CustomerProfileService;
@@ -33,8 +32,7 @@ class ProfileController extends Controller
      */
     public function customerProfileUpdate(Request $request)
     {
-        $profile = $this->customer->findByUserId(Auth::id());
-        $this->customer->updateProfileAddress($profile->id, $request->except('_token'));
+        $this->customer->updateProfileAddress($request->except('_token'));
 
         return back()->with('message', 'Successfully updated');
     }

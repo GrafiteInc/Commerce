@@ -40,6 +40,7 @@
                     Route::get('orders/{id}/cancel', 'OrderController@cancelOrder');
                     Route::get('subscriptions', 'SubscriptionController@allSubscriptions');
                     Route::get('subscriptions/{id}', 'SubscriptionController@getSubscription');
+                    Route::post('subscriptions/{name}/cancel', 'SubscriptionController@cancelSubscription');
                 });
                 Route::post('calculate/shipping', 'CheckoutController@reCalculateShipping');
                 Route::get('checkout', 'CheckoutController@confirm');

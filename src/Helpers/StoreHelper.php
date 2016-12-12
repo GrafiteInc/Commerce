@@ -31,6 +31,11 @@ class StoreHelper
         return '<form method="post" action="'.url('store/subscribe/'.crypto_encrypt($id)).'">'.csrf_field().'<button class="'.$class.'">Subscribe</button></form>';
     }
 
+    public static function cancelSubscriptionBtn($name, $class = 'btn btn-danger')
+    {
+        return '<form method="post" action="'.url('store/account/subscriptions/'.crypto_encrypt($name)).'/cancel">'.csrf_field().'<button class="'.$class.'">Cancel Subscription</button></form>';
+    }
+
     public static function subscriptionFrequency($interval)
     {
         switch ($interval) {

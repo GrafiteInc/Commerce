@@ -6,7 +6,7 @@ class CustomerProfileService
 {
     public function hasProfile()
     {
-        return (bool) auth()->user()->meta->shipping_address;
+        return (bool) auth()->user()->meta->card_last_four;
     }
 
     public function shippingAddress($key = null)

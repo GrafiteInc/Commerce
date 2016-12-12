@@ -1,20 +1,17 @@
 <?php
 
-namespace app\Http\Controllers\Hadron;
+namespace App\Http\Controllers\Hadron;
 
-use App\Http\Controllers\Controller;
-use Auth;
-use Quarx\Modules\Hadron\Repositories\SubscriptionRepository;
-use Quarx\Modules\Hadron\Services\PlanService;
 use Yab\Crypto\Services\Crypto;
+use App\Http\Controllers\Controller;
+use Quarx\Modules\Hadron\Services\PlanService;
 
 class SubscriptionController extends Controller
 {
     protected $service;
 
-    public function __construct(SubscriptionRepository $subscriptionRepo, PlanService $service)
+    public function __construct(PlanService $service)
     {
-        $this->subscriptions = $subscriptionRepo;
         $this->service = $service;
     }
 
@@ -39,16 +36,15 @@ class SubscriptionController extends Controller
 
     public function getSubscription($name)
     {
-        $subscription = auth()->user()->meta->subscription($name);
+        $subscription = auth()->user()->meta->subscription(Crypto::decrypt($name));
 
         return view('hadron-frontend::subscriptions.subscription')->with('subscription', $subscription);
     }
 
-    public function cancelSubscription($id)
+    public function cancelSubscription($name)
     {
-    }
+        auth()->user()->meta->subscription(Crypto::decrypt($name))->cancel();
 
-    public function pauseSubscription($id)
-    {
+        return redirect('store/account/subscriptions')->with('message', 'Your subscription was cancelled');
     }
 }

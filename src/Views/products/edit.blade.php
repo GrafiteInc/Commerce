@@ -3,6 +3,7 @@
 @section('content')
 
     <div class="row">
+        <a class="btn btn-primary pull-right" href="{!! route('quarx.products.create') !!}">Add New</a>
         <h1 class="page-header">Products</h1>
     </div>
 

@@ -13,9 +13,9 @@
         <tbody>
             @foreach ($subscriptions as $subscription)
                 <tr>
-                    <td><a href="{{ url('store/account/subscriptions/'.Crypto::encrypt($subscription->id)) }}">{!! $subscription->name !!}</a></td>
+                    <td><a href="{{ url('store/account/subscriptions/'.Crypto::encrypt($subscription->name)) }}">{!! $subscription->name !!}</a></td>
                     <td>${!! app('Quarx\Modules\Hadron\Models\Plan')->getPlansByStripeId($subscription->stripe_plan)->price !!}</td>
-                    <td><a href="{{ url('store/account/subscriptions/'.Crypto::encrypt($subscription->id).'/cancel') }}">Cancel</a></td>
+                    <td>@if (is_null($subscription->ends_at)) {!! StoreHelper::cancelSubscriptionBtn($subscription->name, 'btn btn-xs btn-danger') !!} @endif</td>
                 </tr>
             @endforeach
         </tbody>

@@ -2,7 +2,6 @@
 
 namespace app\Http\Controllers\Hadron;
 
-use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Quarx\Modules\Hadron\Services\CartService;
@@ -68,9 +67,7 @@ class CheckoutController extends Controller
 
     public function reCalculateShipping(Request $request)
     {
-        $request->replace(['address' => array_merge($request->address, ['shipping' => true])]);
-        $profile = $this->customer->findByUserId(Auth::id());
-        $this->customer->updateProfileAddress($profile->id, $request->except('_token')['address']);
+        $this->customer->updateProfileAddress(array_merge($request->address, ['shipping' => true]));
 
         return back()->with('message', 'Successfully updated');
     }

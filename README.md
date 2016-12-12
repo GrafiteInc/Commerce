@@ -13,7 +13,11 @@ composer require yab/hadron
 Add the following to your Providers:
 
 ```php
-
+'stripe' => [
+        'model' => App\Models\UserMeta::class,
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+    ],
 ```
 
 Then publish the vendor assets:
