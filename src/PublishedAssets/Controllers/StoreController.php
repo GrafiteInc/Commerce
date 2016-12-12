@@ -1,34 +1,39 @@
 <?php
 
-namespace App\Http\Controllers\Hadron;
+namespace app\Http\Controllers\Hadron;
 
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Repositories\ProductRepository;
+use Quarx\Modules\Hadron\Repositories\ProductRepository;
+use Quarx\Modules\Hadron\Services\PlanService;
 
 class StoreController extends Controller
 {
-
     protected $productsRepository;
 
-    function __construct(ProductRepository $productRepository)
+    public function __construct(ProductRepository $productRepository, PlanService $planService)
     {
-        $this->repository = $productRepository;
+        $this->products = $productRepository;
+        $this->plans = $planService;
     }
 
     /**
-     * Display the store homepage
+     * Display the store homepage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
     public function index()
     {
-        $products = $this->repository->getPublishedProducts()->paginate(25);
+        $products = $this->products->getPublishedProducts()->paginate(25);
+        $plans = $this->plans->allEnabled();
 
-        if (empty($products)) abort(404);
+        if (empty($products)) {
+            abort(404);
+        }
 
-        return view('hadron-frontend::homepage')->with('products', $products);
+        return view('hadron-frontend::homepage')
+            ->with('plans', $plans)
+            ->with('products', $products);
     }
-
 }

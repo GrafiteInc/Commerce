@@ -38,6 +38,11 @@
 
 @stop
 
+@section('pre-javascript')
+    @parent
+@stop
+
 @section('javascript')
+    @parent
     {!! Minify::javascript(asset('js/store.js')) !!}
 @stop

@@ -1,16 +1,14 @@
 <?php
 
-namespace Yab\Hadron\Models;
+namespace Quarx\Modules\Hadron\Models;
 
-use Yab\Hadron\Models\Transactions;
 use Illuminate\Database\Eloquent\Model;
 
 class Subscriptions extends Model
 {
+    public $table = 'subscriptions';
 
-    public $table = "subscriptions";
-
-    public $primaryKey = "id";
+    public $primaryKey = 'id';
 
     public $timestamps = true;
 
@@ -23,5 +21,4 @@ class Subscriptions extends Model
     public static $rules = [
 
     ];
-
 }

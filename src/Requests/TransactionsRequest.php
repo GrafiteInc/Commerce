@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Hadron\Requests;
+namespace Quarx\Modules\Hadron\Requests;
 
-use App\Http\Requests\Request;
-use Yab\Hadron\Models\Transactions;
+use Illuminate\Foundation\Http\FormRequest;
+use Quarx\Modules\Hadron\Models\Transactions;
 
-class CreateTransactionsRequest extends Request
+class CreateTransactionsRequest extends FormRequest
 {
 
     /**

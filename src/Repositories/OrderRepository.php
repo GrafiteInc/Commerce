@@ -1,15 +1,14 @@
 <?php
 
-namespace Yab\Hadron\Repositories;
+namespace Quarx\Modules\Hadron\Repositories;
 
-use Yab\Hadron\Models\Orders;
+use Quarx\Modules\Hadron\Models\Orders;
 use Illuminate\Support\Facades\Schema;
 
 class OrderRepository
 {
-
     /**
-     * Returns all Orders
+     * Returns all Orders.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -33,13 +32,13 @@ class OrderRepository
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        };
+        }
 
         return [$query, $input['term'], $query->paginate(25)->render()];
     }
 
     /**
-     * Stores Orders into database
+     * Stores Orders into database.
      *
      * @param array $input
      *
@@ -51,7 +50,7 @@ class OrderRepository
     }
 
     /**
-     * Find Orders by given id
+     * Find Orders by given id.
      *
      * @param int $id
      *
@@ -63,7 +62,7 @@ class OrderRepository
     }
 
     /**
-     * Find Orders by given id
+     * Find Orders by given id.
      *
      * @param int $id
      *
@@ -75,7 +74,7 @@ class OrderRepository
     }
 
     /**
-     * Find Orders by given id
+     * Find Orders by given id.
      *
      * @param int $id
      *
@@ -87,10 +86,10 @@ class OrderRepository
     }
 
     /**
-     * Updates Orders into database
+     * Updates Orders into database.
      *
      * @param Orders $orders
-     * @param array $input
+     * @param array  $input
      *
      * @return Orders
      */

@@ -113,4 +113,5 @@ $(document).ready(function(){
         store.changeItemQuantity(_product, _count);
     });
 
+    $('.dropdown-toggle').dropdown();
 });

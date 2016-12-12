@@ -1,13 +1,12 @@
 <?php
 
-namespace Yab\Hadron\Controllers;
+namespace Quarx\Modules\Hadron\Controllers;
 
-use CryptoService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Requests\CreateProductRequest;
-use Yab\Hadron\Services\ProductService;
-use Yab\Hadron\Repositories\ProductVariantRepository;
+use Quarx\Modules\Hadron\Services\ProductService;
+use Quarx\Modules\Hadron\Requests\CreateProductRequest;
+use Quarx\Modules\Hadron\Repositories\ProductVariantRepository;
 
 class TransactionController extends Controller
 {
@@ -25,6 +24,7 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         $products = $this->service->paginated();
+
         return view('hadron::products.index')
             ->with('pagination', $products->render())
             ->with('products', $products);
@@ -38,6 +38,7 @@ class TransactionController extends Controller
     public function search(Request $request)
     {
         $products = $this->service->search($request->search);
+
         return view('hadron::products.index')
             ->with('term', $request->search)
             ->with('pagination', $products->render())
@@ -57,7 +58,8 @@ class TransactionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\CreateProductRequest  $request
+     * @param \Illuminate\Http\CreateProductRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(CreateProductRequest $request)
@@ -65,33 +67,22 @@ class TransactionController extends Controller
         $result = $this->service->create($request->except('_token'));
 
         if ($result) {
-            return redirect('quarx/products/'.CryptoService::encrypt($result->id).'/edit')->with('message', 'Successfully created');
+            return redirect('quarx/products/'.$result->id.'/edit')->with('message', 'Successfully created');
         }
 
         return redirect('quarx/products')->with('message', 'Failed to create');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $product = $this->service->find($id);
-        return view('hadron::products.show')->with('product', $product);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id, Request $request)
     {
-        $product = $this->service->find(CryptoService::decrypt($id));
+        $product = $this->service->find($id));
 
         $productVariants = $this->productVariantRepository->getProductVariants($product->id)->get();
 
@@ -120,13 +111,14 @@ class TransactionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\CreateProductRequest  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\CreateProductRequest $request
+     * @param int                                   $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(CreateProductRequest $request, $id)
     {
-        $result = $this->service->update(CryptoService::decrypt($id), $request->except(['_token', '_method']));
+        $result = $this->service->update($id, $request->except(['_token', '_method']));
 
         if ($result) {
             return back()->with('message', 'Successfully updated');
@@ -138,12 +130,13 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $result = $this->service->destroy(CryptoService::decrypt($id));
+        $result = $this->service->destroy($id);
 
         if ($result) {
             return redirect('quarx/products')->with('message', 'Successfully deleted');

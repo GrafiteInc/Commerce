@@ -1,33 +1,30 @@
 <?php
 
-namespace Yab\Hadron\Repositories;
+namespace Quarx\Modules\Hadron\Repositories;
 
-use Auth;
 use Session;
-use Yab\Hadron\Models\Cart;
-use Yab\Hadron\Services\Quarx;
-use Illuminate\Support\Facades\Schema;
-use Yab\Hadron\Models\Variants;
+use Quarx\Modules\Hadron\Models\Cart;
+use Quarx\Modules\Hadron\Models\Variant;
 
 class CartSessionRepository
 {
+    public $cart;
+
     public function __construct()
     {
         if (is_null(Session::get('cart'))) {
             Session::put([
                 'cart' => [],
-                'synced' => false
+                'synced' => false,
             ]);
         }
-
-        $this->cart = Session::get('cart');
     }
 
     public function cartContents()
     {
         $contents = [];
 
-        foreach ($this->cart as $item) {
+        foreach (Session::get('cart') as $item) {
             array_push($contents, json_decode($item));
         }
 
@@ -36,18 +33,19 @@ class CartSessionRepository
 
     public function addToCart($id, $type, $quantity, $variables)
     {
+        $cart = Session::get('cart');
         $variableArray = null;
 
         if (json_decode($variables)) {
             foreach (json_decode($variables) as $variable) {
-                $variableFound = Variants::find($variable->variable)->first();
+                $variableFound = Variant::find($variable->variant)->first();
                 if ($variableFound && stristr(strtolower($variableFound->value), strtolower($variable->value))) {
                     $variableArray = $variables;
                 }
             }
         }
 
-        $input = json_encode([
+        $payload = json_encode([
             'id' => rand(1111, 9999),
             'entity_id' => $id,
             'entity_type' => $type,
@@ -55,45 +53,44 @@ class CartSessionRepository
             'quantity' => $quantity,
         ]);
 
-        array_push($this->cart, $input);
+        array_push($cart, $payload);
 
-        Session::put('cart', $this->cart);
+        Session::put('cart', $cart);
 
         return true;
     }
 
     public function changeItemQuantity($id, $quantity)
     {
-        foreach ($this->cart as $key => $item) {
+        foreach (Session::get('cart') as $key => $item) {
             $product = json_decode($item);
 
             if ($product->id == $id) {
                 $product->quantity = $quantity;
             }
 
-            $this->cart[$key] = json_encode($product);
+            Session::get('cart')[$key] = json_encode($product);
         }
 
-        Session::put('cart', $this->cart);
+        Session::put('cart', Session::get('cart'));
 
         return true;
     }
 
     public function removeFromCart($id)
     {
-        foreach ($this->cart as $key => $item) {
+        foreach (Session::get('cart') as $key => $item) {
             $product = json_decode($item);
             if ($product->id == $id) {
-                unset($this->cart[$key]);
+                unset(Session::get('cart')[$key]);
             }
         }
 
-        return Session::put('cart', $this->cart);
+        return Session::put('cart', Session::get('cart'));
     }
 
     public function emptyCart()
     {
         return Session::forget('cart');
     }
-
 }

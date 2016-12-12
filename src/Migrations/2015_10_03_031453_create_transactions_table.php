@@ -5,16 +5,12 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTransactionsTable extends Migration
 {
-
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
-        Schema::create('transactions', function(Blueprint $table)
-        {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('uuid');
             $table->string('provider');
@@ -23,7 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->decimal('tax');
             $table->decimal('total');
             $table->decimal('shipping');
-            $table->datetime('refund_date');
+            $table->datetime('refund_date')->nullable();
             $table->string('provider_id');
             $table->string('provider_date');
             $table->text('provider_dispute');
@@ -37,12 +33,9 @@ class CreateTransactionsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {
         Schema::drop('transactions');
     }
-
 }

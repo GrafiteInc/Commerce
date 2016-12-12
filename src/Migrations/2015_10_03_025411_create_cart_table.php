@@ -5,20 +5,16 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateCartTable extends Migration
 {
-
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
-        Schema::create('cart', function(Blueprint $table)
-        {
+        Schema::create('cart', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('entity_id');
-            $table->integer('entity_type');
+            $table->string('entity_type');
             $table->text('product_variants')->nullable();
             $table->text('address')->nullable();
             $table->integer('quantity');
@@ -28,12 +24,9 @@ class CreateCartTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {
         Schema::drop('cart');
     }
-
 }

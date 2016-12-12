@@ -1,15 +1,15 @@
 <?php
 
-namespace Yab\Hadron\Repositories;
+namespace Quarx\Modules\Hadron\Repositories;
 
-use Illuminate\Support\Facades\Schema;
-use Yab\Hadron\Models\Variant;
-use Yab\Hadron\Models\Product;
+use Quarx\Modules\Hadron\Models\Variant;
+use Quarx\Modules\Hadron\Models\Product;
 
 class ProductVariantRepository
 {
     /**
-     * Get all published products
+     * Get all published products.
+     *
      * @return
      */
     public function getProductVariants($id)
@@ -18,10 +18,10 @@ class ProductVariantRepository
     }
 
     /**
-     * Adds variables to the product
+     * Adds variables to the product.
      *
      * @param Products $products
-     * @param array $input
+     * @param array    $input
      *
      * @return Products
      */
@@ -33,9 +33,11 @@ class ProductVariantRepository
     }
 
     /**
-     * Save the variant
-     * @param  [type] $input [description]
-     * @return [type]        [description]
+     * Save the variant.
+     *
+     * @param [type] $input [description]
+     *
+     * @return [type] [description]
      */
     public function saveVariant($input)
     {
@@ -50,6 +52,7 @@ class ProductVariantRepository
     public function deleteVariant($input)
     {
         $variable = Variant::find($input['id']);
+
         return $variable->delete($input);
     }
 }

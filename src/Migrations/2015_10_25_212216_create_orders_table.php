@@ -7,19 +7,16 @@ class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
-        Schema::create('orders', function(Blueprint $table)
-        {
+        Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('transaction_id');
             $table->text('details');
             $table->string('status')->default('pending');
-            $table->text('shipping')->nullable();
+            $table->text('shipping_address')->nullable();
             $table->boolean('is_shipped')->default(0);
             $table->timestamps();
         });
@@ -27,8 +24,6 @@ class CreateOrdersTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

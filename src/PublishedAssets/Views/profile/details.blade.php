@@ -2,17 +2,19 @@
 
 @section('store-content')
 
-    <h1>Customer Profile</h1>
+    @include('hadron-frontend::profile.tabs')
 
-    <table>
-        <tr>
-            <td>Last Card Number</td>
-            <td>**** **** **** {!! Customer::lastCard('card_last_four') !!}</td>
-        </tr>
-        <tr>
-            <td>Last Card Brand</td>
-            <td>{!! Customer::lastCard('card_brand') !!}</td>
-        </tr>
+    <table class="table table-striped">
+        @if (! is_null(Customer::lastCard('card_last_four')))
+            <tr>
+                <td>Last Card Number</td>
+                <td>**** **** **** {!! Customer::lastCard('card_last_four') !!}</td>
+            </tr>
+            <tr>
+                <td>Last Card Brand</td>
+                <td>{!! Customer::lastCard('card_brand') !!}</td>
+            </tr>
+        @endif
         <tr>
             <td>Shipping Address</td>
             <td>

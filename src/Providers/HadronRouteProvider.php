@@ -1,9 +1,8 @@
 <?php
 
-namespace Yab\Hadron\Providers;
+namespace Quarx\Modules\Hadron\Providers;
 
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class HadronRouteProvider extends ServiceProvider
@@ -15,33 +14,27 @@ class HadronRouteProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Yab\Hadron\Controllers';
+    protected $namespace = 'Quarx\Modules\Hadron\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
      *
-     * @param  \Illuminate\Routing\Router  $router
-     * @return void
+     * @param \Illuminate\Routing\Router $router
      */
-    public function boot(Router $router)
+    public function boot()
     {
-        parent::boot($router);
+        parent::boot();
     }
 
     /**
      * Define the routes for the application.
      *
-     * @param  \Illuminate\Routing\Router  $router
-     * @return void
+     * @param \Illuminate\Routing\Router $router
      */
     public function map(Router $router)
     {
         $router->group(['namespace' => $this->namespace], function ($router) {
             require __DIR__.'/../Routes/routes.php';
-        });
-
-        $router->group([], function ($router) {
-            @include app_path('Http/hadron-routes.php');
         });
     }
 }

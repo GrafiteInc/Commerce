@@ -1,21 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Hadron;
+namespace app\Http\Controllers\Hadron;
 
 use Auth;
-use Quarx;
-use Redirect;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Services\CartService;
-use Yab\Hadron\Services\PaymentService;
-use Yab\Hadron\Services\QuarxResponseService;
-use Yab\Hadron\Services\CustomerProfileService;
+use Quarx\Modules\Hadron\Services\CartService;
+use Quarx\Modules\Hadron\Services\PaymentService;
+use Quarx\Modules\Hadron\Services\CustomerProfileService;
 
 class CheckoutController extends Controller
 {
-
-    function __construct(CartService $cartService, PaymentService $paymentService, CustomerProfileService $customer)
+    public function __construct(CartService $cartService, PaymentService $paymentService, CustomerProfileService $customer)
     {
         $this->cart = $cartService;
         $this->payment = $paymentService;
@@ -25,12 +21,14 @@ class CheckoutController extends Controller
     public function confirm()
     {
         $products = $this->cart->contents();
+
         return view('hadron-frontend::checkout.confirm')->with('products', $products);
     }
 
     public function payment()
     {
         $products = $this->cart->contents();
+
         return view('hadron-frontend::checkout.payment')->with('products', $products);
     }
 
@@ -59,6 +57,7 @@ class CheckoutController extends Controller
     public function complete()
     {
         $products = $this->cart->contents();
+
         return view('hadron-frontend::checkout.complete')->with('products', $products);
     }
 
@@ -69,10 +68,10 @@ class CheckoutController extends Controller
 
     public function reCalculateShipping(Request $request)
     {
-        $request->replace(['address' => array_merge($request->address, [ 'shipping' => true ]) ]);
+        $request->replace(['address' => array_merge($request->address, ['shipping' => true])]);
         $profile = $this->customer->findByUserId(Auth::id());
         $this->customer->updateProfileAddress($profile->id, $request->except('_token')['address']);
+
         return back()->with('message', 'Successfully updated');
     }
-
 }

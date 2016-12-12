@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Hadron\Repositories;
+namespace Quarx\Modules\Hadron\Repositories;
 
-use Yab\Hadron\Models\Product;
+use Quarx\Modules\Hadron\Models\Product;
 use Illuminate\Support\Facades\Schema;
 
 class ProductRepository
@@ -13,7 +13,7 @@ class ProductRepository
     }
 
     /**
-     * Returns all Products
+     * Returns all Products.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -23,7 +23,7 @@ class ProductRepository
     }
 
     /**
-     * Returns all paginated $MODEL_NAME_PLURAL$
+     * Returns all paginated $MODEL_NAME_PLURAL$.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -33,7 +33,7 @@ class ProductRepository
     }
 
     /**
-     * Search Product
+     * Search Product.
      *
      * @param string $input
      *
@@ -47,13 +47,13 @@ class ProductRepository
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$input.'%');
-        };
+        }
 
         return $query->paginate($paginate);
     }
 
     /**
-     * Stores Product into database
+     * Stores Product into database.
      *
      * @param array $input
      *
@@ -65,7 +65,7 @@ class ProductRepository
     }
 
     /**
-     * Find Product by given id
+     * Find Product by given id.
      *
      * @param int $id
      *
@@ -77,7 +77,7 @@ class ProductRepository
     }
 
     /**
-     * Destroy Product
+     * Destroy Product.
      *
      * @param int $id
      *
@@ -89,9 +89,9 @@ class ProductRepository
     }
 
     /**
-     * Updates Product in the database
+     * Updates Product in the database.
      *
-     * @param int $id
+     * @param int   $id
      * @param array $inputs
      *
      * @return Product
@@ -112,7 +112,7 @@ class ProductRepository
     */
 
     /**
-     * Find Products by given id
+     * Find Products by given id.
      *
      * @param int $id
      *
@@ -124,7 +124,8 @@ class ProductRepository
     }
 
     /**
-     * Get all published products
+     * Get all published products.
+     *
      * @return
      */
     public function getPublishedProducts()
@@ -133,7 +134,7 @@ class ProductRepository
     }
 
     /**
-     * Find Products by URL
+     * Find Products by URL.
      *
      * @param int $id
      *

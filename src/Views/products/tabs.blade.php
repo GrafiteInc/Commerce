@@ -1,38 +1,42 @@
 <div class="row raw-margin-bottom-24">
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" {!! (isset($details)) ? 'class="active"': '' !!}><a href="{!! URL::to('quarx/products/'.CryptoService::encrypt($product->id).'/edit?details') !!}" role="tab">Details</a></li>
-        <li role="presentation" {!! (isset($variants)) ? 'class="active"': '' !!}><a href="{!! URL::to('quarx/products/'.CryptoService::encrypt($product->id).'/edit?variants') !!}" role="tab">Variants</a></li>
-        @if ($product->is_subscription)
-            <li role="presentation" {!! (isset($subscription)) ? 'class="active"': '' !!}><a href="{!! URL::to('quarx/products/'.CryptoService::encrypt($product->id).'/edit?subscription') !!}" role="tab">Subscription</a></li>
-        @endif
+        <li role="presentation" {!! (! is_null(request('details')) || isset($tabs['details'])) ? 'class="active"': '' !!}>
+            <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?details') !!}" role="tab">Details</a>
+        </li>
+        <li role="presentation" {!! (! is_null(request('variants'))) ? 'class="active"': '' !!}>
+            <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?variants') !!}" role="tab">Variants</a>
+        </li>
         @if ($product->is_download)
-            <li role="presentation" {!! (isset($download)) ? 'class="active"': '' !!}><a href="{!! URL::to('quarx/products/'.CryptoService::encrypt($product->id).'/edit?download') !!}" role="tab">Download</a></li>
+            <li role="presentation" {!! (! is_null(request('download'))) ? 'class="active"': '' !!}>
+                <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?download') !!}" role="tab">Download</a>
+            </li>
+        @else
+            <li role="presentation" {!! (! is_null(request('dimensions'))) ? 'class="active"': '' !!}>
+                <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?dimensions') !!}" role="tab">Dimensions</a>
+            </li>
         @endif
-        <li role="presentation" {!! (isset($discount)) ? 'class="active"': '' !!}><a href="{!! URL::to('quarx/products/'.CryptoService::encrypt($product->id).'/edit?discount') !!}" role="tab">Discounts</a></li>
-        <li role="presentation" {!! (isset($related)) ? 'class="active"': '' !!}><a href="{!! URL::to('quarx/products/'.CryptoService::encrypt($product->id).'/edit?related') !!}" role="tab">Related Products</a></li>
+        <li role="presentation" {!! (! is_null(request('discount'))) ? 'class="active"': '' !!}>
+            <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?discount') !!}" role="tab">Discounts</a>
+        </li>
     </ul>
 </div>
 
-@if (isset($details))
-    @include('hadron::products.details')
+@if (! is_null(request('details')) || isset($tabs['details']))
+    @include('hadron::products.tabs.details')
 @endif
 
-@if (isset($variants))
-    @include('hadron::products.variants')
+@if (! is_null(request('variants')))
+    @include('hadron::products.tabs.variants')
 @endif
 
-@if (isset($subscription))
-    @include('hadron::products.subscription')
+@if (! is_null(request('discount')))
+    @include('hadron::products.tabs.discount')
 @endif
 
-@if (isset($download))
-    @include('hadron::products.download')
+@if (! is_null(request('download')))
+    @include('hadron::products.tabs.download')
 @endif
 
-@if (isset($discount))
-    @include('hadron::products.discount')
-@endif
-
-@if (isset($related))
-    @include('hadron::products.related')
+@if (! is_null(request('dimensions')))
+    @include('hadron::products.tabs.dimensions')
 @endif

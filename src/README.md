@@ -25,7 +25,7 @@ Then publish the vendor assets:
 * Then add the following code to your User Model:
 
 ```php
-use Yab\Hadron\Models\CustomerProfile;
+use Quarx\Modules\Hadron\Models\CustomerProfile;
 
 /**
  * Customer Profile
@@ -41,7 +41,7 @@ public function customerProfile()
 ### Kernal
 
 ```php
-'isAjax' => \Yab\Hadron\Middleware\isAjax::class,
+'isAjax' => \Quarx\Modules\Hadron\Middleware\isAjax::class,
 ```
 
 ## Customizing

@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Hadron\Helpers;
+namespace Quarx\Modules\Hadron\Helpers;
 
 use URL;
 use Auth;
@@ -11,15 +11,38 @@ use LogisticService;
 
 class StoreHelper
 {
-
     public static function storeUrl($url)
     {
-        return URL::to('store/'.$url);
+        return url('store/'.$url);
     }
 
     public static function productUrl($url)
     {
-        return URL::to('store/product/'.$url);
+        return url('store/product/'.$url);
+    }
+
+    public static function subscriptionUrl($id)
+    {
+        return url('store/plan/'.crypto_encrypt($id));
+    }
+
+    public static function subscribeBtn($id, $class = 'btn btn-primary')
+    {
+        return '<form method="post" action="'.url('store/subscribe/'.crypto_encrypt($id)).'">'.csrf_field().'<button class="'.$class.'">Subscribe</button></form>';
+    }
+
+    public static function subscriptionFrequency($interval)
+    {
+        switch ($interval) {
+            case 'week':
+                return 'weekly';
+            case 'month':
+                return 'monthly';
+            case 'year':
+                return 'yearly';
+            default:
+                return $interval;
+        }
     }
 
     public static function heroImage($product)

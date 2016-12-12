@@ -2,6 +2,8 @@
 
 @section('store-content')
 
+    <h1>Subscriptions</h1>
+
     <table class="table table-stripped">
         <thead>
             <td>ID</td>
@@ -11,9 +13,9 @@
         <tbody>
             @foreach ($subscriptions as $subscription)
                 <tr>
-                    <td><a href="{{ url('store/account/subscriptions/'.$subscription->id) }}">{!! $subscription->uuid !!}</a></td>
-                    <td>${!! $subscription->total !!}</td>
-                    <td><a href="{{ url('store/account/subscriptions/'.$subscription->id.'/refund-request') }}">Refund Request</a></td>
+                    <td><a href="{{ url('store/account/subscriptions/'.Crypto::encrypt($subscription->id)) }}">{!! $subscription->name !!}</a></td>
+                    <td>${!! app('Quarx\Modules\Hadron\Models\Plan')->getPlansByStripeId($subscription->stripe_plan)->price !!}</td>
+                    <td><a href="{{ url('store/account/subscriptions/'.Crypto::encrypt($subscription->id).'/cancel') }}">Cancel</a></td>
                 </tr>
             @endforeach
         </tbody>

@@ -1,12 +1,13 @@
 <?php
 
-namespace Yab\Hadron\Facades;
+namespace Quarx\Modules\Hadron\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 class CustomerProfileServiceFacade extends Facade
 {
-
-    protected static function getFacadeAccessor() { return 'CustomerProfileService'; }
-
+    protected static function getFacadeAccessor()
+    {
+        return 'CustomerProfileService';
+    }
 }

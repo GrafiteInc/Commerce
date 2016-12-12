@@ -13,7 +13,7 @@
                     {!! StoreHelper::productDetailsBtn($product) !!}
                 </td>
                 <td>{!! $product->code !!}</td>
-                <td>{!! $product->price() !!}</td>
+                <td>{!! $product->price !!}</td>
                 <td>{!! $product->quantity !!}</td>
             </tr>
         @endforeach

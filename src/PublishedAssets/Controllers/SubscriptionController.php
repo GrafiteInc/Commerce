@@ -1,42 +1,54 @@
 <?php
 
-namespace App\Http\Controllers\Hadron;
+namespace app\Http\Controllers\Hadron;
 
-use Auth;
-use Quarx;
-use Request;
-use Redirect;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Repositories\SubscriptionRepository;
+use Auth;
+use Quarx\Modules\Hadron\Repositories\SubscriptionRepository;
+use Quarx\Modules\Hadron\Services\PlanService;
+use Yab\Crypto\Services\Crypto;
 
 class SubscriptionController extends Controller
 {
+    protected $service;
 
-    function __construct(SubscriptionRepository $subscriptionRepo)
+    public function __construct(SubscriptionRepository $subscriptionRepo, PlanService $service)
     {
         $this->subscriptions = $subscriptionRepo;
+        $this->service = $service;
+    }
+
+    public function subscribe($id)
+    {
+        if (is_null(auth()->user()->meta->stripe_id)) {
+            return redirect('store/account/card');
+        }
+
+        $plan = $this->service->find(Crypto::decrypt($id));
+        auth()->user()->meta->newSubscription($plan->subscription_name, $plan->stripe_name)->create();
+
+        return view('hadron-frontend::subscriptions.success')->with('plan', $plan);
     }
 
     public function allSubscriptions()
     {
-        $subscriptions = $this->subscriptions->getByCustomer(Auth::id())->orderBy('created_at', 'DESC')->paginate(env('PAGINATION'));
+        $subscriptions = auth()->user()->meta->subscriptions()->orderBy('created_at', 'DESC')->paginate(env('PAGINATION'));
+
         return view('hadron-frontend::subscriptions.all')->with('subscriptions', $subscriptions);
     }
 
-    public function getSubscription($id)
+    public function getSubscription($name)
     {
-        $subscription = $this->subscriptions->getByCustomerAndId(Auth::id(), $id);
+        $subscription = auth()->user()->meta->subscription($name);
+
         return view('hadron-frontend::subscriptions.subscription')->with('subscription', $subscription);
     }
 
     public function cancelSubscription($id)
     {
-
     }
 
     public function pauseSubscription($id)
     {
-
     }
-
 }

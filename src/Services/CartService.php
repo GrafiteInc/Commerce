@@ -1,27 +1,32 @@
 <?php
 
-namespace Yab\Hadron\Services;
+namespace Quarx\Modules\Hadron\Services;
 
 use LogisticService;
-use Yab\Hadron\Models\Variant;
 use Illuminate\Support\Facades\Auth;
-use Yab\Hadron\Repositories\CartRepository;
-use Yab\Hadron\Repositories\ProductRepository;
-use Yab\Hadron\Repositories\CartSessionRepository;
+use Quarx\Modules\Hadron\Models\Variant;
+use Quarx\Modules\Hadron\Repositories\CartRepository;
+use Quarx\Modules\Hadron\Repositories\CartSessionRepository;
 
 class CartService
 {
-
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ProductService $service)
     {
-        $this->productRepo = $productRepository;
-        $this->cartRepo = new CartRepository;
+        $this->service = $service;
+    }
 
-        if (is_null(Auth::user())) {
-            $this->cartRepo = new CartSessionRepository;
+    public function cartRepo()
+    {
+        $repo = null;
+
+        if (is_null(auth()->user())) {
+            $repo = app(CartSessionRepository::class);
         } else {
-            $this->cartRepo->syncronize();
+            $repo = app(CartRepository::class);
+            $repo->syncronize();
         }
+
+        return $repo;
     }
 
     /*
@@ -48,7 +53,8 @@ class CartService
 
     public function itemCount()
     {
-        $contents = $this->cartRepo->cartContents();
+        $contents = $this->cartRepo()->cartContents();
+
         $total = 0;
 
         foreach ($contents as $item) {
@@ -61,10 +67,10 @@ class CartService
     public function contents()
     {
         $cartContents = [];
-        $contents = $this->cartRepo->cartContents();
+        $contents = $this->cartRepo()->cartContents();
 
         foreach ($contents as $item) {
-            $product = $this->productRepo->findProductsById($item->entity_id);
+            $product = $this->service->findProductsById($item->entity_id);
             $product->cart_id = $item->id;
             $product->quantity = $item->quantity;
             $product->entity_type = $item->entity_type;
@@ -86,13 +92,15 @@ class CartService
                 if (stristr($variant->value, '(')) {
                     preg_match_all("/\((.*?)\)/", $variant->value, $matches);
                     foreach ($matches[1] as $match) {
-                        (float) $product->price += (float) ($match * 100);
+                        $price = (float) $product->price * 100;
+                        $price += (float) ($match * 100);
+                        $product->price = $price;
                     }
                 }
             }
         }
 
-        return (float) $product->price;
+        return (float) $product->price * 100;
     }
 
     public function weightVariants($item, $product)
@@ -120,12 +128,14 @@ class CartService
     public function getDefaultValue($variant)
     {
         $matches = explode('|', $variant->value);
+
         return $matches[0];
     }
 
     public function getId($variant)
     {
         $variantObject = json_decode($variant);
+
         return $variantObject->id;
     }
 
@@ -144,27 +154,27 @@ class CartService
             foreach ($productVariants as $variant) {
                 array_push($variants, json_encode([
                     'variant' => $this->getId($variant),
-                    'value' => $this->getDefaultValue($variant)
+                    'value' => $this->getDefaultValue($variant),
                 ]));
             }
         }
 
-        return $this->cartRepo->addToCart($id, $type, $quantity, $variants);
+        return $this->cartRepo()->addToCart($id, $type, $quantity, $variants);
     }
 
     public function changeItemQuantity($id, $count)
     {
-        return $this->cartRepo->changeItemQuantity($id, $count);
+        return $this->cartRepo()->changeItemQuantity($id, $count);
     }
 
     public function removeFromCart($id, $type)
     {
-        return $this->cartRepo->removeFromCart($id, $type);
+        return $this->cartRepo()->removeFromCart($id, $type);
     }
 
     public function emptyCart()
     {
-        return $this->cartRepo->emptyCart();
+        return $this->cartRepo()->emptyCart();
     }
 
     /*
@@ -175,21 +185,22 @@ class CartService
 
     public function getCartTax()
     {
-        $taxRate = (LogisticService::getTaxPercent(Auth::user()) / 100);
+        $taxRate = (LogisticService::getTaxPercent(auth()->user()) / 100);
         $subtotal = $this->getCartSubTotal();
+
         return round($subtotal * $taxRate, 2);
     }
 
     public function getCartSubTotal()
     {
         $total = 0;
-        $contents = $this->cartRepo->cartContents();
+        $contents = $this->cartRepo()->cartContents();
 
         foreach ($contents as $item) {
-            $product = $this->productRepo->findProductsById($item->entity_id);
+            $product = $this->service->findProductsById($item->entity_id);
             $this->priceVariants($item, $product);
 
-            $total += $product->price() * $item->quantity;
+            $total += $product->price * $item->quantity;
         }
 
         return $total;
@@ -197,9 +208,9 @@ class CartService
 
     public function getCartTotal()
     {
-        $taxRate = (LogisticService::getTaxPercent(Auth::user()) / 100);
+        $taxRate = (LogisticService::getTaxPercent(auth()->user()) / 100);
         $subtotal = $this->getCartSubTotal();
-        return round($subtotal + LogisticService::shipping(Auth::user()) + ($subtotal * $taxRate), 2);
-    }
 
+        return round($subtotal + LogisticService::shipping(auth()->user()) + ($subtotal * $taxRate), 2);
+    }
 }

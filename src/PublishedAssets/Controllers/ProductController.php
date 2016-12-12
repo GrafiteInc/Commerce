@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Hadron;
 
 use Quarx;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Services\CartService;
-use Yab\Hadron\Services\QuarxResponseService;
-use Yab\Hadron\Repositories\ProductRepository;
+use Quarx\Modules\Hadron\Services\CartService;
+use Quarx\Modules\Hadron\Services\QuarxResponseService;
+use Quarx\Modules\Hadron\Repositories\ProductRepository;
 
 class ProductController extends Controller
 {

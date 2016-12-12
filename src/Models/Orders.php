@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Hadron\Models;
+namespace Quarx\Modules\Hadron\Models;
 
-use Yab\Hadron\Models\Transactions;
+use Quarx\Modules\Hadron\Models\Transactions;
 use Illuminate\Database\Eloquent\Model;
 
 class Orders extends Model

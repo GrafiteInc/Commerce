@@ -17,7 +17,7 @@ $(document).ready(function(){
                 cache: false,
                 dataType: "html",
                 success: function(data){
-                    gondolynNotify('Your variant was saved', 'alert-success')
+                    quarxNotify('Your variant was saved', 'alert-success')
                 }
             });
         });
@@ -30,7 +30,7 @@ $(document).ready(function(){
                 cache: false,
                 dataType: "html",
                 success: function(data){
-                    gondolynNotify('Your variant was deleted', 'alert-success')
+                    quarxNotify('Your variant was deleted', 'alert-success')
                     _row.remove();
                 }
             });

@@ -46,7 +46,7 @@
                     <th class="raw-m-hide">Available</th>
                     <th class="raw-m-hide">Is Published</th>
                     <th class="raw-m-hide">Is Downloaded</th>
-                    <th width="50px">Action</th>
+                    <th width="200px" class="text-right">Action</th>
                 </thead>
                 <tbody>
 
@@ -54,7 +54,7 @@
                     <tr>
                         <td>{!! $product->name !!}</td>
                         <td class="raw-m-hide">{!! $product->code !!}</td>
-                        <td class="raw-m-hide">${!! $product->price() !!}</td>
+                        <td class="raw-m-hide">${!! $product->price !!}</td>
                         <td class="raw-m-hide">{!! $product->stock !!}</td>
                         <td class="raw-m-hide">
                             @if ($product->is_available)
@@ -69,11 +69,17 @@
                         <td class="raw-m-hide">
                             @if ($product->is_download)
                             <a href="{!! URL::to(FileService::fileAsDownload($product->name, $product->file)) !!}" target="_blank"><span class="fa fa-download"></span> Download</a>
+                            @else
+                            <span class="fa fa-close"></span>
                             @endif
                         </td>
-                        <td>
-                            <a href="{!! route('quarx.products.edit', [CryptoService::encrypt($product->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
-                            <a href="#" onclick="confirmDelete('{!! route('quarx.products.delete', [CryptoService::encrypt($product->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
+                        <td class="text-right">
+                            <form method="post" action="{!! url('quarx/product/'.$product->id) !!}">
+                                {!! csrf_field() !!}
+                                {!! method_field('DELETE') !!}
+                                <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                            </form>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.products.edit', [$product->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach
@@ -87,12 +93,3 @@
     </div>
 
 @endsection
-
-<script type="text/javascript">
-
-    function confirmDelete (url) {
-        $('#deleteBtn').attr('href', url);
-        $('#deleteModal').modal('toggle');
-    }
-
-</script>

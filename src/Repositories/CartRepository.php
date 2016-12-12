@@ -1,19 +1,17 @@
 <?php
 
-namespace Yab\Hadron\Repositories;
+namespace Quarx\Modules\Hadron\Repositories;
 
 use Auth;
 use Session;
-use Yab\Hadron\Models\Cart;
-use Yab\Hadron\Services\Quarx;
-use Yab\Hadron\Models\Variant;
-use Illuminate\Support\Facades\Schema;
+use Quarx\Modules\Hadron\Models\Cart;
+use Quarx\Modules\Hadron\Models\Variant;
 
 class CartRepository
 {
     public function __construct()
     {
-        $this->session = new Session;
+        $this->session = new Session();
         $this->user = Auth::user();
     }
 
@@ -88,6 +86,7 @@ class CartRepository
     {
         $item = Cart::where('id', $id)->where('entity_type', $type)
         ->where('user_id', $this->user->id)->first();
+
         return $item->delete();
     }
 
@@ -95,5 +94,4 @@ class CartRepository
     {
         return Cart::where('user_id', $this->user->id)->delete();
     }
-
 }

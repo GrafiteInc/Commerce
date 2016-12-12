@@ -1,14 +1,11 @@
 <?php
 
-namespace Yab\Hadron\Services;
+namespace Quarx\Modules\Hadron\Services;
 
 use DB;
-use App;
-use Auth;
 use Customer;
-use Yab\Hadron\Models\Orders;
-use Yab\Hadron\Models\Transactions;
-use Yab\Hadron\Services\LogisticService;
+use Quarx\Modules\Hadron\Models\Orders;
+use Quarx\Modules\Hadron\Models\Transactions;
 
 class PaymentService
 {
@@ -16,12 +13,10 @@ class PaymentService
 
     public function __construct()
     {
-        $this->user = Auth::user();
-        $this->transaction = new Transactions;
-        $this->orders = new Orders;
-        $this->customerService = App::make('Yab\Hadron\Services\CustomerProfileService');
-        $this->stripeService = App::make('Yab\Hadron\Services\StripeService');
-        $this->logistic = App::make('Yab\Hadron\Services\LogisticService');
+        $this->user = auth()->user();
+        $this->transaction = app(Transactions::class);
+        $this->orders = app(Orders::class);
+        $this->logistic = app(LogisticService::class);
     }
 
     /*
@@ -32,57 +27,68 @@ class PaymentService
 
     public function purchase($request, $cart)
     {
-        $cardData = [
-            'number' => $request->input('number'),
-            'expiryMonth' => $request->input('exp_month'),
-            'expiryYear' => $request->input('exp_year'),
-            'cvv' => $request->input('cvv')
-        ];
+        $user = auth()->user();
 
-        $customerProfile = $this->customerService->findByUserId(Auth::id());
-
-        if (! $customerProfile->stripe_id) {
-            $customerProfile = $this->customerService->updateProfile($customerProfile->id, $cardData);
+        if (is_null($user->meta->stripe_id) && $request->input('stripeToken')) {
+            $user->meta->createAsStripeCustomer($request->input('stripeToken'));
+        } elseif ($request->input('stripeToken')) {
+            $user->meta->updateCard($request->input('stripeToken'));
         }
 
         DB::beginTransaction();
 
-        $result = $this->stripeService->charge($customerProfile, ($cart->getCartTotal() * 100), env('CURRENCY'));
+        $result = $user->meta->charge(($cart->getCartTotal() * 100), [
+            'currency' => env('CURRENCY'),
+        ]);
 
         if ($result) {
             $transaction = $this->transaction->create([
-                'uuid' => md5(time()).'-'.Auth::id(),
+                'uuid' => md5(time()).'-'.$user->id,
                 'provider' => 'stripe',
                 'state' => 'success',
                 'subtotal' => $cart->getCartSubTotal(),
                 'tax' => $cart->getCartTax(),
                 'total' => $cart->getCartTotal(),
-                'shipping' => $this->logistic->shipping(Auth::user()),
+                'shipping' => $this->logistic->shipping($user),
                 'provider_id' => $result->id,
                 'provider_date' => $result->created,
                 'provider_dispute' => '',
                 'cart' => json_encode($cart->contents()),
                 'response' => json_encode($result),
-                'customer_id' => Auth::id(),
+                'customer_id' => $user->id,
             ]);
 
-            $this->orders->create([
-                'user_id' => Auth::id(),
-                'transaction_id' => $transaction->id,
-                'details' => json_encode($cart->contents()),
-                'shipping_address' => json_encode([
-                    'street' => Customer::shippingAddress('street'),
-                    'postal' => Customer::shippingAddress('postal'),
-                    'city' => Customer::shippingAddress('city'),
-                    'state' => Customer::shippingAddress('state'),
-                    'country' => Customer::shippingAddress('country'),
-                 ])
-            ]);
+            $orderedItems = [];
+            foreach ($cart->contents() as $item) {
+                if (!$item->is_download) {
+                    $orderedItems[] = $item;
+                }
+            }
+
+            if (!empty($orderedItems)) {
+                $this->createOrder($user, $transaction, $orderedItems);
+            }
         }
 
         DB::commit();
 
-        return $this->logistic->afterPurchase(Auth::user(), $transaction, $cart, $result);
+        return $this->logistic->afterPurchase($user, $transaction, $cart, $result);
+    }
+
+    public function createOrder($user, $transaction, $items)
+    {
+        $this->orders->create([
+            'user_id' => $user->id,
+            'transaction_id' => $transaction->id,
+            'details' => json_encode($items),
+            'shipping_address' => json_encode([
+                'street' => Customer::shippingAddress('street'),
+                'postal' => Customer::shippingAddress('postal'),
+                'city' => Customer::shippingAddress('city'),
+                'state' => Customer::shippingAddress('state'),
+                'country' => Customer::shippingAddress('country'),
+             ]),
+        ]);
     }
 
     // public function success()
@@ -109,7 +115,7 @@ class PaymentService
 
     //     Logistics::refundOrder($refundData);
 
-    //     if ( ! $refundData) {
+    //     if (!$refundData) {
     //         return array('status' => 'error', 'data' => Module::lang('store.notifications.payment.refund-fail'));
     //     } else {
     //         return array('status' => 'success', 'data' => $refundData);

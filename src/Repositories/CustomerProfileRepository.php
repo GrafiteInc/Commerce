@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Hadron\Repositories;
+namespace Quarx\Modules\Hadron\Repositories;
 
-use Yab\Hadron\Models\CustomerProfile;
+use Quarx\Modules\Hadron\Models\CustomerProfile;
 
 class CustomerProfileRepository
 {

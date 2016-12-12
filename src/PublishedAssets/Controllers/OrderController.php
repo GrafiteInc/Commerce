@@ -7,7 +7,7 @@ use Quarx;
 use Request;
 use Redirect;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Repositories\OrderRepository;
+use Quarx\Modules\Hadron\Repositories\OrderRepository;
 
 class OrderController extends Controller
 {

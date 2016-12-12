@@ -40,6 +40,12 @@
                 <tr>
                     <td><a href="{{ StoreHelper::productUrl($product->url) }}">{!! $product->name !!}</a></td>
                     <td>{!! $product->code !!}</td>
+                    <td>
+                        @if (! empty($product->file))
+                            <a class="btn btn-default raw-margin-top-24" href="{!! url(FileService::fileAsDownload($product->file, $product->file)) !!}">
+                            <span class="fa fa-download"></span> Download</a>
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         </tbody>

@@ -7,29 +7,24 @@ class CreateSubscriptionsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
-        Schema::create('subscriptions', function(Blueprint $table)
-        {
+        Schema::create('subscriptions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('transaction_id');
-            $table->string('uuid');
-            $table->integer('available_shipments')->default(0);
-            $table->string('status');
-            $table->integer('price');
-            $table->text('details');
+            $table->integer('user_meta_id');
+            $table->string('name');
+            $table->string('stripe_id');
+            $table->string('stripe_plan');
+            $table->integer('quantity');
+            $table->timestamp('trial_ends_at')->nullable();
+            $table->timestamp('ends_at')->nullable();
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

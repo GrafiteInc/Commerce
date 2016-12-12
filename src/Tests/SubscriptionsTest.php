@@ -12,8 +12,8 @@ class SubscriptionsTest extends TestCase
 
         $this->login('admin');
         $this->migrateUp('quarx');
-        factory(\Yab\Hadron\Models\SubscriptionPlans::class)->create();
-        factory(\Yab\Hadron\Models\SubscriptionPlans::class)->make();
+        factory(\Quarx\Modules\Hadron\Models\SubscriptionPlans::class)->create();
+        factory(\Quarx\Modules\Hadron\Models\SubscriptionPlans::class)->make();
     }
 
     /*
@@ -50,7 +50,7 @@ class SubscriptionsTest extends TestCase
 
     public function testStore()
     {
-        $subscription = factory(\Yab\Hadron\Models\SubscriptionPlans::class)->make([ 'id' => 2 ]);
+        $subscription = factory(\Quarx\Modules\Hadron\Models\SubscriptionPlans::class)->make([ 'id' => 2 ]);
         $response = $this->call('POST', '/quarx/subscriptions', $subscription['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());

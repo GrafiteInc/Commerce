@@ -1,37 +1,21 @@
 <?php
 
-namespace Yab\Hadron\Services;
-
-use Quarx;
-use Config;
-use FileService;
-use CryptoService;
-use Illuminate\Support\Facades\Auth;
-use Yab\Hadron\Services\StripeService;
-use Yab\Hadron\Repositories\CustomerProfileRepository;
-use Yab\Hadron\Repositories\ProductVariantRepository;
+namespace Quarx\Modules\Hadron\Services;
 
 class CustomerProfileService
 {
-
-    public function __construct(CustomerProfileRepository $customerProfile, StripeService $stripeService)
-    {
-        $this->repo = $customerProfile;
-        $this->stripeService = $stripeService;
-    }
-
     public function hasProfile()
     {
-        return (bool) $this->repo->getCustomerProfile(Auth::id());
+        return (bool) auth()->user()->meta->shipping_address;
     }
 
     public function shippingAddress($key = null)
     {
-        $profile = $this->repo->getCustomerProfile(Auth::id());
+        $profile = auth()->user()->meta;
         $address = json_decode($profile->shipping_address);
         if (is_null($key)) {
             return $address;
-        } else if (isset($address->$key)) {
+        } elseif (isset($address->$key)) {
             return $address->$key;
         }
 
@@ -40,11 +24,11 @@ class CustomerProfileService
 
     public function billingAddress($key = null)
     {
-        $profile = $this->repo->getCustomerProfile(Auth::id());
+        $profile = auth()->user()->meta;
         $address = json_decode($profile->billing_address);
         if (is_null($key)) {
             return $address;
-        } else if (isset($address->$key)) {
+        } elseif (isset($address->$key)) {
             return $address->$key;
         }
 
@@ -53,32 +37,21 @@ class CustomerProfileService
 
     public function lastCard($key = null)
     {
-        $profile = $this->repo->getCustomerProfile(Auth::id());
-
-        $response = $profile->$key;
+        $profile = auth()->user()->meta;
 
         if (is_null($key)) {
             $response = [
                 'card_brand' => $profile->card_brand,
-                'card_last_four' => $profile->card_last_four
+                'card_last_four' => $profile->card_last_four,
             ];
+        } else {
+            $response = $profile->$key;
         }
 
         return $response;
     }
 
-    public function findByUserId($id)
-    {
-        return $this->repo->findByUserId($id);
-    }
-
-    public function updateProfile($profileId, $cardData)
-    {
-        $profileData = $this->stripeService->createCustomer($profileId, $cardData);
-        return $this->repo->updateProfile($profileId, $profileData);
-    }
-
-    public function updateProfileAddress($profileId, $address)
+    public function updateProfileAddress($address)
     {
         $addressInput = [
             'street' => $address['street'],
@@ -98,7 +71,6 @@ class CustomerProfileService
             $profileData['billing_address'] = json_encode($addressInput);
         }
 
-        return $this->repo->updateProfile($profileId, $profileData);
+        return auth()->user()->meta->update($profileData);
     }
-
 }

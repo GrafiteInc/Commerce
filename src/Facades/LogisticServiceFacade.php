@@ -1,12 +1,13 @@
 <?php
 
-namespace Yab\Hadron\Facades;
+namespace Quarx\Modules\Hadron\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 class LogisticServiceFacade extends Facade
 {
-
-    protected static function getFacadeAccessor() { return 'LogisticService'; }
-
+    protected static function getFacadeAccessor()
+    {
+        return 'LogisticService';
+    }
 }

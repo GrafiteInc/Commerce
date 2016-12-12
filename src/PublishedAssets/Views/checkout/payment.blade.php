@@ -43,16 +43,23 @@
                 </div>
 
                 <div class="form-group">
-                    <input id="update" type="submit" class="btn btn-primary pull-right" value="Pay">
+                    <input id="pay" type="submit" class="btn btn-primary pull-right" value="Pay">
                 </div>
             </form>
 
-            @if (Customer::hasProfile())
-                <button id="lastCardBtn" type="submit">Pay with last card used (ending with {!! Customer::lastCard('card_last_four') !!})</button>
+            @if (Customer::hasProfile() && ! is_null(Customer::lastCard('card_last_four')))
+                <form method="post" action="{{ URL::to('store/process/last-card') }}">
+                    {!! Form::token(); !!}
+                    <button id="lastCardBtn" type="submit">Pay with last card used (ending with {!! Customer::lastCard('card_last_four') !!})</button>
+                </form>
             @endif
         </div>
     </div>
+@stop
 
+@section('pre-javascript')
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script> Stripe.setPublishableKey('{{ Config::get("services.stripe.key") }}'); </script>
 @stop
 
 @section('javascript')

@@ -1,65 +1,79 @@
 <?php
 
-namespace Yab\Hadron\Services;
+namespace Quarx\Modules\Hadron\Services;
 
-use Auth;
-use GuzzleHttp;
+use Stripe\Plan;
 use Stripe\Stripe;
-use Stripe\Token;
-use Stripe\Charge;
+use Stripe\Refund;
 use Stripe\Customer;
 
 class StripeService
 {
-
-    public function __construct()
+    public function __construct(Stripe $stripe, Plan $plan, Customer $customer, Refund $refund)
     {
-        Stripe::setApiKey(config('services.stripe.secret'));
+        $this->stripe = $stripe;
+        $this->plan = $plan;
+        $this->customer = $customer;
+        $this->refund = $refund;
+        $this->stripe->setApiKey(env('STRIPE_SECRET'));
     }
 
-    public function createCustomer($profile, $card)
+    public function collectStripePlans()
     {
-        $token = $this->getToken($card);
-
-        $customer = Customer::create([
-            'email' => Auth::user()->email,
-            'card'  => $token
-        ]);
-
-        $customerData = [
-            'user_id' => Auth::id(),
-            'stripe_id' => $customer->id,
-            'card_brand' => $token->card['brand'],
-            'card_last_four' => $token->card['last4']
-        ];
-
-        return $customerData;
+        return $this->plan->all();
     }
 
-    public function charge($customer, $amount, $currency)
+    /**
+     * Create a plan.
+     *
+     * @param arr $plan
+     *
+     * @return bool
+     */
+    public function createPlan($plan)
     {
-        return Charge::create([
-            'customer' => $customer->stripe_id,
-            'amount'   => $amount,
-            'currency' => $currency
-        ]);
-    }
-
-    public function changeCard()
-    {
-        # code...
-    }
-
-    private function getToken($card)
-    {
-        return Token::create([
-            "card" => [
-                "number" => $card["number"],
-                "exp_month" => $card["expiryMonth"],
-                "exp_year" => $card["expiryYear"],
-                "cvc" => $card["cvv"]
-            ]
+        return $this->plan->create([
+            'amount' => $plan['amount'],
+            'interval' => $plan['interval'],
+            'name' => $plan['name'],
+            'currency' => $plan['currency'],
+            'statement_descriptor' => $plan['descriptor'],
+            'trial_period_days' => $plan['trial_days'],
+            'id' => $plan['stripe_id'],
         ]);
     }
 
+    /**
+     * Delete the plan.
+     *
+     * @param string $planName
+     *
+     * @return
+     */
+    public function deletePlan($planName)
+    {
+        $plan = $this->plan->retrieve($planName);
+
+        return $plan->delete();
+    }
+
+    /**
+     * Refund a purchase.
+     *
+     * @param obj $user
+     * @param obj $bill
+     *
+     * @return obj
+     */
+    public function refund($user, $bill)
+    {
+        $this->user = $user->meta;
+        $customer = $this->customer->retrieve($this->user->stripe_id);
+
+        $refund = $this->refund->create(array(
+            'charge' => json_decode($bill->transaction)->charge,
+        ));
+
+        return $refund;
+    }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Hadron\Repositories;
+namespace Quarx\Modules\Hadron\Repositories;
 
-use Yab\Hadron\Models\Transactions;
+use Quarx\Modules\Hadron\Models\Transactions;
 use Illuminate\Support\Facades\Schema;
 
 class TransactionRepository

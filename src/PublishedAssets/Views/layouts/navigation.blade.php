@@ -9,23 +9,19 @@
         <a class="navbar-brand" href="{{ URL::to('/') }}">Home</a>
     </div>
     <div class="collapse navbar-collapse navbar-right" id="mainNavbar">
-        <ul class="nav navbar-nav">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-bars"></span> Menu <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    @if (Auth::user())
-                        <li><a href="{{ URL::to('dashboard') }}"><span class="fa fa-dashboard"></span> Dashboard</a></li>
-                        <li><a href="{{ URL::to('account/settings') }}"><span class="fa fa-user"></span> Account</a></li>
-                        <li><a href="{{ URL::to('store/account/profile') }}"><span class="fa fa-user"></span> Profile</a></li>
-                        <li><a href="{{ URL::to('store/account/purchases') }}"><span class="fa fa-gift"></span> Purchases</a></li>
-                        <li><a href="{{ URL::to('store/account/orders') }}"><span class="fa fa-gift"></span> Orders</a></li>
-                        <li><a href="{{ URL::to('store/account/subscriptions') }}"><span class="fa fa-ticket"></span> Subscriptions</a></li>
-                        <li><a href="{{ URL::to('logout') }}"><span class="fa fa-sign-out"></span> Logout</a></li>
-                    @else
-                        <li><a href="{{ URL::to('login') }}"><span class="fa fa-sign-in"></span> Login</a></li>
-                    @endif
-                </ul>
-            </li>
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Menu <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+            @if (Auth::user())
+                <li><a href="{{ URL::to('user/settings') }}"><span class="fa fa-user"></span> Account</a></li>
+                <li><a href="{{ URL::to('store/account/profile') }}"><span class="fa fa-user"></span> Profile</a></li>
+                <li><a href="{{ URL::to('store/account/purchases') }}"><span class="fa fa-gift"></span> Purchases</a></li>
+                <li><a href="{{ URL::to('store/account/orders') }}"><span class="fa fa-gift"></span> Orders</a></li>
+                <li><a href="{{ URL::to('store/account/subscriptions') }}"><span class="fa fa-ticket"></span> Subscriptions</a></li>
+                <li><a href="{{ URL::to('logout') }}"><span class="fa fa-sign-out"></span> Logout</a></li>
+            @else
+                <li><a href="{{ URL::to('store/login') }}"><span class="fa fa-sign-in"></span> Login</a></li>
+            @endif
         </ul>
     </div><!--/.nav-collapse -->
 </div>

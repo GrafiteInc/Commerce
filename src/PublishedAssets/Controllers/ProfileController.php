@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Hadron;
+namespace app\Http\Controllers\Hadron;
 
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Services\CustomerProfileService;
+use Quarx\Modules\Hadron\Services\CustomerProfileService;
 
 class ProfileController extends Controller
 {
-
-    function __construct(CustomerProfileService $customer)
+    public function __construct(CustomerProfileService $customer)
     {
         $this->customer = $customer;
     }
 
     /**
-     * Display the store homepage
+     * Display the store homepage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -28,7 +27,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update Customer Profile
+     * Update Customer Profile.
      *
      * @return Response
      */
@@ -36,7 +35,7 @@ class ProfileController extends Controller
     {
         $profile = $this->customer->findByUserId(Auth::id());
         $this->customer->updateProfileAddress($profile->id, $request->except('_token'));
+
         return back()->with('message', 'Successfully updated');
     }
-
 }

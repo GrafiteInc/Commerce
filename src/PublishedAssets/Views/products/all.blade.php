@@ -16,7 +16,7 @@
                 <tr>
                     <td><a href="{{ StoreHelper::productUrl($product->url) }}">{!! $product->name !!}</a></td>
                     <td>{!! $product->code !!}</td>
-                    <td>{!! $product->price() !!}</td>
+                    <td>${!! $product->price !!}</td>
                     <td>{!! StoreHelper::addToCartBtn($product->id, 'product', 'Add To Cart <span class="fa fa-shopping-cart"></span>') !!}</td>
                 </tr>
             @endforeach

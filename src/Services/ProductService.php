@@ -1,14 +1,12 @@
 <?php
 
-namespace Yab\Hadron\Services;
+namespace Quarx\Modules\Hadron\Services;
 
 use Quarx;
 use Config;
 use FileService;
-use CryptoService;
-use Illuminate\Support\Facades\Auth;
-use Yab\Hadron\Repositories\ProductRepository;
-use Yab\Hadron\Repositories\ProductVariantRepository;
+use Quarx\Modules\Hadron\Repositories\ProductRepository;
+use Quarx\Modules\Hadron\Repositories\ProductVariantRepository;
 
 class ProductService
 {
@@ -27,37 +25,41 @@ class ProductService
         return $this->repo->paginated(Config::get('quarx.pagination', 25));
     }
 
+    public function findProductsById($id)
+    {
+        return $this->repo->findProductsById($id);
+    }
+
     public function search($input)
     {
         return $this->repo->search($input, Config::get('quarx.pagination', 25));
     }
 
-    public function create($input)
+    public function create($payload)
     {
-        $input['url'] = Quarx::convertToURL($input['url']);
+        $payload['url'] = Quarx::convertToURL($payload['url']);
 
-        if (isset($input['file'])) {
-            $downloadFile = FileService::saveFile($input['file'], 'downloads');
-            $input['file'] = $downloadFile['name'];
+        if (isset($payload['file'])) {
+            $downloadFile = FileService::saveFile($payload['file'], 'downloads');
+            $payload['file'] = $downloadFile['name'];
         } else {
-            $input['file'] = '';
+            $payload['file'] = '';
         }
 
-        if (isset($input['hero_image'])) {
-            $heroFile = FileService::saveFile($input['hero_image'], 'heroes');
-            $input['hero_image'] = $heroFile['name'];
+        if (isset($payload['hero_image'])) {
+            $heroFile = FileService::saveFile($payload['hero_image'], 'heroes');
+            $payload['hero_image'] = $heroFile['name'];
         } else {
-            $input['hero_image'] = '';
+            $payload['hero_image'] = '';
         }
 
-        $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
-        $input['is_available'] = (isset($input['is_available'])) ? (bool) $input['is_available'] : 0;
-        $input['is_download'] = (isset($input['is_download'])) ? (bool) $input['is_download'] : 0;
-        $input['is_featured'] = (isset($input['is_featured'])) ? (bool) $input['is_featured'] : 0;
-        $input['is_subscription'] = (isset($input['is_subscription'])) ? (bool) $input['is_subscription'] : 0;
-        $input['has_iterations'] = (isset($input['has_iterations'])) ? (bool) $input['has_iterations'] : 0;
+        $payload['price'] = round($heroFile['price'] * 100);
+        $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
+        $payload['is_available'] = (isset($payload['is_available'])) ? (bool) $payload['is_available'] : 0;
+        $payload['is_download'] = (isset($payload['is_download'])) ? (bool) $payload['is_download'] : 0;
+        $payload['is_featured'] = (isset($payload['is_featured'])) ? (bool) $payload['is_featured'] : 0;
 
-        return $this->repo->create($input);
+        return $this->repo->create($payload);
     }
 
     public function find($id)
@@ -65,41 +67,44 @@ class ProductService
         return $this->repo->find($id);
     }
 
-    public function update($id, $input)
+    public function update($id, $payload)
     {
         $product = $this->repo->find($id);
 
-        $input['url'] = Quarx::convertToURL($input['url']);
+        $payload['url'] = Quarx::convertToURL($payload['url']);
 
-        if (isset($input['hero_image'])) {
-            $heroFile = FileService::saveFile($input['hero_image'], 'heroes');
-            $input['hero_image'] = $heroFile['name'];
+        if (isset($payload['hero_image'])) {
+            $heroFile = FileService::saveFile($payload['hero_image'], 'heroes');
+            $payload['hero_image'] = $heroFile['name'];
         } else {
-            $input['hero_image'] = $product->hero_image;
+            $payload['hero_image'] = $product->hero_image;
         }
 
-        $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
-        $input['is_available'] = (isset($input['is_available'])) ? (bool) $input['is_available'] : 0;
-        $input['is_download'] = (isset($input['is_download'])) ? (bool) $input['is_download'] : 0;
-        $input['is_featured'] = (isset($input['is_featured'])) ? (bool) $input['is_featured'] : 0;
-        $input['is_subscription'] = (isset($input['is_subscription'])) ? (bool) $input['is_subscription'] : 0;
-        $input['has_iterations'] = (isset($input['has_iterations'])) ? (bool) $input['has_iterations'] : 0;
+        $payload['price'] = ($payload['price'] * 100);
+        $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
+        $payload['is_available'] = (isset($payload['is_available'])) ? (bool) $payload['is_available'] : 0;
+        $payload['is_download'] = (isset($payload['is_download'])) ? (bool) $payload['is_download'] : 0;
+        $payload['is_featured'] = (isset($payload['is_featured'])) ? (bool) $payload['is_featured'] : 0;
 
-        return $this->repo->update($id, $input);
+        return $this->repo->update($id, $payload);
     }
 
-    public function updateAlternativeData($id, $input)
+    public function updateAlternativeData($id, $payload)
     {
         $product = $this->repo->find($id);
 
-        if (isset($input['file'])) {
-            $savedFile = FileService::saveFile($input['file'], 'downloads');
-            $input['file'] = $savedFile['name'];
+        if (isset($payload['file'])) {
+            $savedFile = FileService::saveFile($payload['file'], 'downloads');
+            $payload['file'] = $savedFile['name'];
         } else {
-            $input['file'] = $product->file;
+            $payload['file'] = $product->file;
         }
 
-        return $this->repo->update($id, $input);
+        if (!isset($payload['stock']) || empty($payload['stock'])) {
+            $payload['stock'] = 0;
+        }
+
+        return $this->repo->update($id, $payload);
     }
 
     public function destroy($id)
@@ -120,21 +125,21 @@ class ProductService
 
     public static function productDetailsBtn($product, $class = '')
     {
-        return '<a tabindex="0" class="details '.$class.'" role="button" data-trigger="focus" data-toggle="popover" title="Product Details" data-content=\''. ProductService::productDetails($product).'\'><i class="fa fa-info"></i></a>';
+        return '<a tabindex="0" class="details '.$class.'" role="button" data-trigger="focus" data-toggle="popover" title="Product Details" data-content=\''.self::productDetails($product).'\'><i class="fa fa-info"></i></a>';
     }
 
     public static function variants($product)
     {
-        $productRepo = new ProductVariantRepository;
+        $productRepo = new ProductVariantRepository();
         $variants = $productRepo->getProductVariants($product->id)->get();
 
         $variantHtml = '';
 
         foreach ($variants as $variant) {
-            if (ProductService::isArrayVariant($variant->value)) {
-                $variantHtml .= view('hadron-frontend::products.variants.select', [ 'variant' => $variant ])->render();
+            if (self::isArrayVariant($variant->value)) {
+                $variantHtml .= view('hadron-frontend::products.variants.select', ['variant' => $variant])->render();
             } else {
-                $variantHtml .= view('hadron-frontend::products.variants.other', [ 'variant' => $variant ])->render();
+                $variantHtml .= view('hadron-frontend::products.variants.other', ['variant' => $variant])->render();
             }
         }
 
@@ -143,7 +148,7 @@ class ProductService
 
     public static function isArrayVariant($value)
     {
-        return (count(explode('|', $value)) > 0);
+        return count(explode('|', $value)) > 0;
     }
 
     public static function htmlprep($option)
@@ -152,7 +157,7 @@ class ProductService
         preg_match_all('(\(.*\))', $option, $prices);
 
         if (isset($prices[0][0])) {
-            if (! stristr($prices[0][0], '$')) {
+            if (!stristr($prices[0][0], '$')) {
                 $optionAdjusted = str_replace('+', '+ $', $prices[0][0]);
                 $optionAdjusted = str_replace('-', '- $', $optionAdjusted);
             }
@@ -175,10 +180,9 @@ class ProductService
         $optionHtml = '';
 
         foreach ($options as $option) {
-            $optionHtml .= '<option data-variant="'.$variant->id.'" value="'.$option.'">'.ProductService::htmlprep($option).'</option>';
+            $optionHtml .= '<option data-variant="'.$variant->id.'" value="'.$option.'">'.self::htmlprep($option).'</option>';
         }
 
         return $optionHtml;
     }
-
 }

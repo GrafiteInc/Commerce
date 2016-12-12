@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Hadron\Repositories;
+namespace Quarx\Modules\Hadron\Repositories;
 
-use Yab\Hadron\Models\Subscriptions;
+use Quarx\Modules\Hadron\Models\Subscriptions;
 use Illuminate\Support\Facades\Schema;
 
 class SubscriptionRepository
