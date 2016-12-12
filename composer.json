@@ -1,13 +1,13 @@
 {
-    "name": "mlantz/quarx",
-    "description": "An eCommerce platform for Laravel Apps",
+    "name": "yab/hadron",
+    "type": "laravel-library",
+    "description": "An E-Commerce platform for Laravel Apps",
     "license": "MIT",
     "require": {
-        "illuminate/support": "5.2",
+        "illuminate/support": "5.3",
         "easypost/easypost-php": "^2.1",
-        "devfactory/minify": "1.0.*",
-        "omnipay/omnipay": "~2.0",
-        "stripe/stripe-php": "^3.7"
+        "laravel/cashier": "^7.0",
+        "composer/installers": "~1.0"
     },
     "autoload": {},
     "scripts": {
@@ -16,5 +16,8 @@
         "post-create-project-cmd": []
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "extra": {
+        "installer-name": "Hadron"
+    }
 }

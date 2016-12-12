@@ -50,3 +50,12 @@ public function customerProfile()
 
 
 
+```json
+{
+    "extra": {
+        "installer-paths": {
+            "quarx/modules/{$name}/": ["yab/hadron"]
+        }
+    }
+}
+```
