@@ -1,15 +1,14 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Models;
+namespace Yab\Hadron\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
+    public $table = 'cart';
 
-    public $table = "cart";
-
-    public $primaryKey = "id";
+    public $primaryKey = 'id';
 
     public $timestamps = true;
 
@@ -25,5 +24,4 @@ class Cart extends Model
     public static $rules = [
 
     ];
-
 }

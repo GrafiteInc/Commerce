@@ -1,8 +1,8 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Repositories;
+namespace Yab\Hadron\Repositories;
 
-use Quarx\Modules\Hadron\Models\CustomerProfile;
+use Yab\Hadron\Models\CustomerProfile;
 
 class CustomerProfileRepository
 {
@@ -12,7 +12,7 @@ class CustomerProfileRepository
     }
 
     /**
-     * Stores Product into database
+     * Stores Product into database.
      *
      * @param array $input
      *
@@ -24,7 +24,7 @@ class CustomerProfileRepository
     }
 
     /**
-     * Find Product by given id
+     * Find Product by given id.
      *
      * @param int $id
      *
@@ -36,7 +36,7 @@ class CustomerProfileRepository
     }
 
     /**
-     * Find customer profile by user
+     * Find customer profile by user.
      *
      * @param int $id
      *
@@ -48,7 +48,7 @@ class CustomerProfileRepository
     }
 
     /**
-     * Find Product by given id
+     * Find Product by given id.
      *
      * @param int $id
      *
@@ -56,11 +56,11 @@ class CustomerProfileRepository
      */
     public function findByUserId($id)
     {
-        return $this->model->firstOrCreate([ 'user_id' => $id ]);
+        return $this->model->firstOrCreate(['user_id' => $id]);
     }
 
     /**
-     * Destroy Product
+     * Destroy Product.
      *
      * @param int $id
      *
@@ -72,9 +72,9 @@ class CustomerProfileRepository
     }
 
     /**
-     * Updates Product in the database
+     * Updates Product in the database.
      *
-     * @param int $id
+     * @param int   $id
      * @param array $inputs
      *
      * @return Product
@@ -83,6 +83,7 @@ class CustomerProfileRepository
     {
         $profile = $this->model->find($id);
         $profile->fill($inputs);
+
         return $profile->save();
     }
 }

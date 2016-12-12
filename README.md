@@ -7,7 +7,7 @@ Hadron is a e-commerce package for Quarx
 Run the following command:
 
 ```bash
-composer require mlantz/hadron
+composer require yab/hadron
 ```
 
 Add the following to your Providers:

@@ -1,15 +1,14 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Repositories;
+namespace Yab\Hadron\Repositories;
 
-use Quarx\Modules\Hadron\Models\Subscriptions;
+use Yab\Hadron\Models\Subscriptions;
 use Illuminate\Support\Facades\Schema;
 
 class SubscriptionRepository
 {
-
     /**
-     * Returns all Subscriptions
+     * Returns all Subscriptions.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -33,13 +32,13 @@ class SubscriptionRepository
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        };
+        }
 
         return [$query, $input['term'], $query->paginate(25)->render()];
     }
 
     /**
-     * Stores Subscriptions into database
+     * Stores Subscriptions into database.
      *
      * @param array $input
      *
@@ -51,7 +50,7 @@ class SubscriptionRepository
     }
 
     /**
-     * Find Subscriptions by given id
+     * Find Subscriptions by given id.
      *
      * @param int $id
      *
@@ -63,7 +62,7 @@ class SubscriptionRepository
     }
 
     /**
-     * Find Subscriptions by given id
+     * Find Subscriptions by given id.
      *
      * @param int $id
      *
@@ -75,7 +74,7 @@ class SubscriptionRepository
     }
 
     /**
-     * Find Subscriptions by given id
+     * Find Subscriptions by given id.
      *
      * @param int $id
      *
@@ -87,10 +86,10 @@ class SubscriptionRepository
     }
 
     /**
-     * Updates Subscriptions into database
+     * Updates Subscriptions into database.
      *
      * @param Subscriptions $orders
-     * @param array $input
+     * @param array         $input
      *
      * @return Subscriptions
      */

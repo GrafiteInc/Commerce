@@ -1,15 +1,14 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Repositories;
+namespace Yab\Hadron\Repositories;
 
-use Quarx\Modules\Hadron\Models\Transactions;
+use Yab\Hadron\Models\Transactions;
 use Illuminate\Support\Facades\Schema;
 
 class TransactionRepository
 {
-
     /**
-     * Returns all Transactions
+     * Returns all Transactions.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -33,13 +32,13 @@ class TransactionRepository
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        };
+        }
 
         return [$query, $input['term'], $query->paginate(25)->render()];
     }
 
     /**
-     * Stores Transactions into database
+     * Stores Transactions into database.
      *
      * @param array $input
      *
@@ -51,7 +50,7 @@ class TransactionRepository
     }
 
     /**
-     * Find Transactions by given id
+     * Find Transactions by given id.
      *
      * @param int $id
      *
@@ -63,7 +62,7 @@ class TransactionRepository
     }
 
     /**
-     * Find Transactions by given id
+     * Find Transactions by given id.
      *
      * @param int $id
      *
@@ -75,7 +74,7 @@ class TransactionRepository
     }
 
     /**
-     * Find Transactions by given id
+     * Find Transactions by given id.
      *
      * @param int $id
      *
@@ -87,10 +86,10 @@ class TransactionRepository
     }
 
     /**
-     * Updates Transactions into database
+     * Updates Transactions into database.
      *
      * @param Transactions $transactions
-     * @param array $input
+     * @param array        $input
      *
      * @return Transactions
      */

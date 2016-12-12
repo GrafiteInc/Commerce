@@ -1,16 +1,14 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Models;
+namespace Yab\Hadron\Models;
 
-use Quarx\Modules\Hadron\Models\Transactions;
 use Illuminate\Database\Eloquent\Model;
 
 class Orders extends Model
 {
+    public $table = 'orders';
 
-    public $table = "orders";
-
-    public $primaryKey = "id";
+    public $primaryKey = 'id';
 
     public $timestamps = true;
 
@@ -31,7 +29,7 @@ class Orders extends Model
     {
         $transaction = Transactions::find($this->transaction_id);
 
-        if (! is_null($key)) {
+        if (!is_null($key)) {
             return $transaction->$key;
         }
 
@@ -48,5 +46,4 @@ class Orders extends Model
 
         return $address;
     }
-
 }

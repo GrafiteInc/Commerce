@@ -1,17 +1,17 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Middleware;
+namespace Yab\Hadron\Middleware;
 
 use Closure;
 
 class isAjax
 {
-
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)

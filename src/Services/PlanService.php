@@ -1,10 +1,10 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Services;
+namespace Yab\Hadron\Services;
 
 use App\Services\UserService;
 use Illuminate\Support\Facades\Schema;
-use Quarx\Modules\Hadron\Models\Plan;
+use Yab\Hadron\Models\Plan;
 
 class PlanService
 {

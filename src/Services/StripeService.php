@@ -1,6 +1,6 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Services;
+namespace Yab\Hadron\Services;
 
 use Stripe\Plan;
 use Stripe\Stripe;

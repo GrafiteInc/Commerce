@@ -4,7 +4,7 @@ namespace app\Http\Controllers\Hadron;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Quarx\Modules\Hadron\Services\CustomerProfileService;
+use Yab\Hadron\Services\CustomerProfileService;
 
 class CardController extends Controller
 {

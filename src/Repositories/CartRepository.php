@@ -1,11 +1,11 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Repositories;
+namespace Yab\Hadron\Repositories;
 
 use Auth;
 use Session;
-use Quarx\Modules\Hadron\Models\Cart;
-use Quarx\Modules\Hadron\Models\Variant;
+use Yab\Hadron\Models\Cart;
+use Yab\Hadron\Models\Variant;
 
 class CartRepository
 {

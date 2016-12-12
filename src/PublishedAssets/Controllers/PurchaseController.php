@@ -4,7 +4,7 @@ namespace app\Http\Controllers\Hadron;
 
 use App\Http\Controllers\Controller;
 use Auth;
-use Quarx\Modules\Hadron\Repositories\TransactionRepository;
+use Yab\Hadron\Repositories\TransactionRepository;
 use Yab\Crypto\Services\Crypto;
 
 class PurchaseController extends Controller

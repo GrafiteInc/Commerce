@@ -13,14 +13,14 @@ class CartServiceTest extends TestCase
         $this->login();
         $this->migrateUp('quarx');
 
-        factory(\Quarx\Modules\Hadron\Models\Cart::class)->create();
-        factory(\Quarx\Modules\Hadron\Models\Products::class)->create();
-        factory(\Quarx\Modules\Hadron\Models\SubscriptionPlans::class)->create();
-        factory(\Quarx\Modules\Hadron\Models\Variants::class)->create();
+        factory(\Yab\Hadron\Models\Cart::class)->create();
+        factory(\Yab\Hadron\Models\Products::class)->create();
+        factory(\Yab\Hadron\Models\SubscriptionPlans::class)->create();
+        factory(\Yab\Hadron\Models\Variants::class)->create();
 
-        $this->cartService = new \Quarx\Modules\Hadron\Services\CartService;
-        $this->cartRepo = new \Quarx\Modules\Hadron\Repositories\CartRepository;
-        $this->productRepo = new \Quarx\Modules\Hadron\Repositories\ProductsRepository;
+        $this->cartService = new \Yab\Hadron\Services\CartService();
+        $this->cartRepo = new \Yab\Hadron\Repositories\CartRepository();
+        $this->productRepo = new \Yab\Hadron\Repositories\ProductsRepository();
     }
 
     public function testAddBtn()
@@ -63,8 +63,8 @@ class CartServiceTest extends TestCase
         $this->cartService->addToCart(1, 'product', 1, json_encode([
             [
                 'variable' => 1,
-                'value' => 'small'
-            ]
+                'value' => 'small',
+            ],
         ]));
 
         $item = $this->cartRepo->getItem(2);
@@ -80,8 +80,8 @@ class CartServiceTest extends TestCase
         $this->cartService->addToCart(1, 'product', 1, json_encode([
             [
                 'variable' => 1,
-                'value' => 'large(+2)[+2]'
-            ]
+                'value' => 'large(+2)[+2]',
+            ],
         ]));
 
         $item = $this->cartRepo->getItem(2);
@@ -98,8 +98,8 @@ class CartServiceTest extends TestCase
         $this->cartService->addToCart(1, 'product', 1, json_encode([
             [
                 'variable' => 1,
-                'value' => 'large(+2)[+2]'
-            ]
+                'value' => 'large(+2)[+2]',
+            ],
         ]));
 
         $item = $this->cartRepo->getItem(2);
@@ -113,8 +113,8 @@ class CartServiceTest extends TestCase
         $this->cartService->addToCart(1, 'product', 1, json_encode([
             [
                 'variable' => 1,
-                'value' => 'small'
-            ]
+                'value' => 'small',
+            ],
         ]));
 
         $item = $this->cartRepo->getItem(2);
@@ -128,8 +128,8 @@ class CartServiceTest extends TestCase
         $response = $this->cartService->addToCart(1, 'product', 1, json_encode([
             [
                 'variable' => 1,
-                'value' => 'small'
-            ]
+                'value' => 'small',
+            ],
         ]));
 
         $this->assertTrue(is_object($response));
@@ -138,8 +138,8 @@ class CartServiceTest extends TestCase
 
     public function testGetDefaultValue()
     {
-        $variable = factory(\Quarx\Modules\Hadron\Models\Variants::class)->make([
-            'id' => 4
+        $variable = factory(\Yab\Hadron\Models\Variants::class)->make([
+            'id' => 4,
         ]);
         $response = $this->cartService->getDefaultValue($variable);
         $this->assertEquals('small', $response);
@@ -147,8 +147,8 @@ class CartServiceTest extends TestCase
 
     public function testGetVariantId()
     {
-        $variable = factory(\Quarx\Modules\Hadron\Models\Variants::class)->make([
-            'id' => 4
+        $variable = factory(\Yab\Hadron\Models\Variants::class)->make([
+            'id' => 4,
         ]);
         $response = $this->cartService->getId($variable);
         $this->assertEquals(4, $response);
@@ -159,8 +159,8 @@ class CartServiceTest extends TestCase
         $this->cartService->addToCart(1, 'product', 1, json_encode([
             [
                 'variable' => 1,
-                'value' => 'small'
-            ]
+                'value' => 'small',
+            ],
         ]));
         $response = $this->cartService->changeItemQuantity(2, 4);
         $this->assertTrue($response);
@@ -171,12 +171,10 @@ class CartServiceTest extends TestCase
         $this->cartService->addToCart(1, 'product', 1, json_encode([
             [
                 'variable' => 1,
-                'value' => 'small'
-            ]
+                'value' => 'small',
+            ],
         ]));
         $response = $this->cartService->removeFromCart(2, 'product');
         $this->assertTrue($response);
     }
-
 }
-

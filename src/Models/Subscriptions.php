@@ -1,6 +1,6 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Models;
+namespace Yab\Hadron\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

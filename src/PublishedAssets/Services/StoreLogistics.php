@@ -3,15 +3,15 @@
 namespace App\Services;
 
 use Customer;
-use Quarx\Modules\Hadron\Interfaces\LogisticServiceInterface;
+use Yab\Hadron\Interfaces\LogisticServiceInterface;
 
 class StoreLogistics implements LogisticServiceInterface
 {
-
     /**
-     * Calculate the shipping cost
+     * Calculate the shipping cost.
      *
-     * @param  user $user
+     * @param user $user
+     *
      * @return int
      */
     public function shipping($user)
@@ -23,12 +23,14 @@ class StoreLogistics implements LogisticServiceInterface
     }
 
     /**
-     * Calculate the Tax
+     * Calculate the Tax.
+     *
      * @return int
      */
     public function getTaxPercent($user)
     {
         $address = Customer::billingAddress();
+
         return 0;
     }
 
@@ -42,6 +44,7 @@ class StoreLogistics implements LogisticServiceInterface
     {
         if ($result) {
             $cart->emptyCart();
+
             return redirect('store/complete');
         } else {
             return redirect('store/failed');
@@ -50,7 +53,7 @@ class StoreLogistics implements LogisticServiceInterface
 
     public function afterRefundPurchase($user, $transaction, $cart)
     {
-        # code...
+        // code...
     }
 
     /*
@@ -87,7 +90,7 @@ class StoreLogistics implements LogisticServiceInterface
 
     public function createDownloadLink()
     {
-        # code...
+        // code...
     }
 
     /*
@@ -98,7 +101,6 @@ class StoreLogistics implements LogisticServiceInterface
 
     public function createSubscription()
     {
-        # code...
+        // code...
     }
-
 }

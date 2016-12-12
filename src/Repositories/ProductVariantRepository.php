@@ -1,9 +1,9 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Repositories;
+namespace Yab\Hadron\Repositories;
 
-use Quarx\Modules\Hadron\Models\Variant;
-use Quarx\Modules\Hadron\Models\Product;
+use Yab\Hadron\Models\Variant;
+use Yab\Hadron\Models\Product;
 
 class ProductVariantRepository
 {

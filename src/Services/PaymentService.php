@@ -1,11 +1,11 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Services;
+namespace Yab\Hadron\Services;
 
 use DB;
 use Customer;
-use Quarx\Modules\Hadron\Models\Orders;
-use Quarx\Modules\Hadron\Models\Transactions;
+use Yab\Hadron\Models\Orders;
+use Yab\Hadron\Models\Transactions;
 
 class PaymentService
 {

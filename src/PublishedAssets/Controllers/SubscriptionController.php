@@ -4,8 +4,8 @@ namespace app\Http\Controllers\Hadron;
 
 use App\Http\Controllers\Controller;
 use Auth;
-use Quarx\Modules\Hadron\Repositories\SubscriptionRepository;
-use Quarx\Modules\Hadron\Services\PlanService;
+use Yab\Hadron\Repositories\SubscriptionRepository;
+use Yab\Hadron\Services\PlanService;
 use Yab\Crypto\Services\Crypto;
 
 class SubscriptionController extends Controller

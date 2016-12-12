@@ -1,13 +1,12 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Requests;
+namespace Yab\Hadron\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Quarx\Modules\Hadron\Models\Transactions;
+use Yab\Hadron\Models\Transactions;
 
-class CreateTransactionsRequest extends FormRequest
+class TransactionsRequest extends FormRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,5 +26,4 @@ class CreateTransactionsRequest extends FormRequest
     {
         return Transactions::$rules;
     }
-
 }
