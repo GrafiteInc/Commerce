@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Http\Controllers\Hadron;
+namespace App\Http\Controllers\Hadron;
 
 use App\Http\Controllers\Controller;
 use Quarx\Modules\Hadron\Repositories\ProductRepository;
