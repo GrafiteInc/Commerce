@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Hadron\Requests;
+namespace Quarx\Modules\Hadron\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Yab\Hadron\Models\Plan;
+use Quarx\Modules\Hadron\Models\Plan;
 
 class PlanRequest extends FormRequest
 {

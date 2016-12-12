@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Hadron\Services;
+namespace Quarx\Modules\Hadron\Services;
 
 use LogisticService;
 use Illuminate\Support\Facades\Auth;
-use Yab\Hadron\Models\Variant;
-use Yab\Hadron\Repositories\CartRepository;
-use Yab\Hadron\Repositories\CartSessionRepository;
+use Quarx\Modules\Hadron\Models\Variant;
+use Quarx\Modules\Hadron\Repositories\CartRepository;
+use Quarx\Modules\Hadron\Repositories\CartSessionRepository;
 
 class CartService
 {

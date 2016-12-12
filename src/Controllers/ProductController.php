@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Hadron\Controllers;
+namespace Quarx\Modules\Hadron\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Requests\ProductRequest;
-use Yab\Hadron\Services\ProductService;
-use Yab\Hadron\Repositories\ProductVariantRepository;
+use Quarx\Modules\Hadron\Requests\ProductRequest;
+use Quarx\Modules\Hadron\Services\ProductService;
+use Quarx\Modules\Hadron\Repositories\ProductVariantRepository;
 
 class ProductController extends Controller
 {

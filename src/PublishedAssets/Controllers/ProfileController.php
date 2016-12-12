@@ -5,7 +5,7 @@ namespace app\Http\Controllers\Hadron;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Services\CustomerProfileService;
+use Quarx\Modules\Hadron\Services\CustomerProfileService;
 
 class ProfileController extends Controller
 {

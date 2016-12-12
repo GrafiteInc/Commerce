@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Hadron;
 
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Repositories\ProductRepository;
+use Quarx\Modules\Hadron\Repositories\ProductRepository;
 
 class ProductController extends Controller
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Hadron\Requests;
+namespace Quarx\Modules\Hadron\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Yab\Hadron\Models\Product;
+use Quarx\Modules\Hadron\Models\Product;
 
 class ProductRequest extends FormRequest
 {

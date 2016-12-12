@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Hadron\Models;
+namespace Quarx\Modules\Hadron\Models;
 
 use Eloquent;
 

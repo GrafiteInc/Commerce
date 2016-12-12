@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Hadron\Services;
+namespace Quarx\Modules\Hadron\Services;
 
 use Quarx;
 use Config;
 use FileService;
-use Yab\Hadron\Repositories\ProductRepository;
-use Yab\Hadron\Repositories\ProductVariantRepository;
+use Quarx\Modules\Hadron\Repositories\ProductRepository;
+use Quarx\Modules\Hadron\Repositories\ProductVariantRepository;
 
 class ProductService
 {

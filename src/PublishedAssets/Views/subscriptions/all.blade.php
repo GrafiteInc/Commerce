@@ -14,7 +14,7 @@
             @foreach ($subscriptions as $subscription)
                 <tr>
                     <td><a href="{{ url('store/account/subscriptions/'.Crypto::encrypt($subscription->id)) }}">{!! $subscription->name !!}</a></td>
-                    <td>${!! app('Yab\Hadron\Models\Plan')->getPlansByStripeId($subscription->stripe_plan)->price !!}</td>
+                    <td>${!! app('Quarx\Modules\Hadron\Models\Plan')->getPlansByStripeId($subscription->stripe_plan)->price !!}</td>
                     <td><a href="{{ url('store/account/subscriptions/'.Crypto::encrypt($subscription->id).'/cancel') }}">Cancel</a></td>
                 </tr>
             @endforeach

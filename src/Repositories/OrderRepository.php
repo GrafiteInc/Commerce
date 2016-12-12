@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Hadron\Repositories;
+namespace Quarx\Modules\Hadron\Repositories;
 
-use Yab\Hadron\Models\Orders;
+use Quarx\Modules\Hadron\Models\Orders;
 use Illuminate\Support\Facades\Schema;
 
 class OrderRepository

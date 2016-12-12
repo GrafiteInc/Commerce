@@ -1,14 +1,14 @@
 <?php
 
-namespace Yab\Hadron\Providers;
+namespace Quarx\Modules\Hadron\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
-// use Yab\Hadron\Services\CartService;
-// use Yab\Hadron\Services\ProductService;
-// use Yab\Hadron\Services\LogisticService;
-// use Yab\Hadron\Repositories\ProductRepository;
+// use Quarx\Modules\Hadron\Services\CartService;
+// use Quarx\Modules\Hadron\Services\ProductService;
+// use Quarx\Modules\Hadron\Services\LogisticService;
+// use Quarx\Modules\Hadron\Repositories\ProductRepository;
 
 class HadronServiceProvider extends ServiceProvider
 {
@@ -19,11 +19,11 @@ class HadronServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
 
-        $loader->alias('Customer', \Yab\Hadron\Facades\CustomerProfileServiceFacade::class);
-        $loader->alias('StoreHelper', \Yab\Hadron\Helpers\StoreHelper::class);
-        $loader->alias('CartService', \Yab\Hadron\Facades\CartServiceFacade::class);
-        $loader->alias('ProductService', \Yab\Hadron\Facades\ProductServiceFacade::class);
-        $loader->alias('LogisticService', \Yab\Hadron\Facades\LogisticServiceFacade::class);
+        $loader->alias('Customer', \Quarx\Modules\Hadron\Facades\CustomerProfileServiceFacade::class);
+        $loader->alias('StoreHelper', \Quarx\Modules\Hadron\Helpers\StoreHelper::class);
+        $loader->alias('CartService', \Quarx\Modules\Hadron\Facades\CartServiceFacade::class);
+        $loader->alias('ProductService', \Quarx\Modules\Hadron\Facades\ProductServiceFacade::class);
+        $loader->alias('LogisticService', \Quarx\Modules\Hadron\Facades\LogisticServiceFacade::class);
     }
 
     /**
@@ -32,19 +32,19 @@ class HadronServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('ProductService', function ($app) {
-            return app()->make('Yab\Hadron\Services\ProductService');
+            return app()->make('Quarx\Modules\Hadron\Services\ProductService');
         });
 
         $this->app->bind('CartService', function ($app) {
-            return app()->make('Yab\Hadron\Services\CartService');
+            return app()->make('Quarx\Modules\Hadron\Services\CartService');
         });
 
         $this->app->bind('LogisticService', function ($app) {
-            return app()->make('Yab\Hadron\Services\LogisticService');
+            return app()->make('Quarx\Modules\Hadron\Services\LogisticService');
         });
 
         $this->app->bind('CustomerProfileService', function ($app) {
-            return app()->make('Yab\Hadron\Services\CustomerProfileService');
+            return app()->make('Quarx\Modules\Hadron\Services\CustomerProfileService');
         });
     }
 }

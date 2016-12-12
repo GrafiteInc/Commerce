@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Hadron\Requests;
+namespace Quarx\Modules\Hadron\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Yab\Hadron\Models\Transactions;
+use Quarx\Modules\Hadron\Models\Transactions;
 
 class TransactionsRequest extends FormRequest
 {

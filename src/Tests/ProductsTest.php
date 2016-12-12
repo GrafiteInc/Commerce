@@ -13,7 +13,7 @@ class ProductsTest extends TestCase
         $this->login('admin');
         $this->migrateUp('quarx');
 
-        factory(\Yab\Hadron\Models\Products::class)->create();
+        factory(\Quarx\Modules\Hadron\Models\Products::class)->create();
     }
 
     /*
@@ -50,7 +50,7 @@ class ProductsTest extends TestCase
 
     public function testStore()
     {
-        $products = (array) factory(\Yab\Hadron\Models\Products::class)->make(['id' => 2]);
+        $products = (array) factory(\Quarx\Modules\Hadron\Models\Products::class)->make(['id' => 2]);
         $response = $this->call('POST', 'quarx/products', $products);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -59,7 +59,7 @@ class ProductsTest extends TestCase
 
     public function testUpdate()
     {
-        $products = (array) factory(\Yab\Hadron\Models\Products::class)->make(['id' => 3, 'name' => 'dumber']);
+        $products = (array) factory(\Quarx\Modules\Hadron\Models\Products::class)->make(['id' => 3, 'name' => 'dumber']);
         $response = $this->call('PATCH', 'quarx/products/'.Crypto::encrypt(3), $products);
 
         $this->assertEquals(302, $response->getStatusCode());

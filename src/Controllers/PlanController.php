@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Hadron\Controllers;
+namespace Quarx\Modules\Hadron\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Services\PlanService;
-use Yab\Hadron\Requests\PlanRequest;
+use Quarx\Modules\Hadron\Services\PlanService;
+use Quarx\Modules\Hadron\Requests\PlanRequest;
 
 class PlanController extends Controller
 {

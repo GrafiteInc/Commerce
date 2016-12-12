@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Hadron;
 
 use Auth;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Repositories\OrderRepository;
+use Quarx\Modules\Hadron\Repositories\OrderRepository;
 
 class OrderController extends Controller
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Hadron\Services;
+namespace Quarx\Modules\Hadron\Services;
 
 use App\Services\StoreLogistics;
-use Yab\Hadron\Interfaces\LogisticServiceInterface;
+use Quarx\Modules\Hadron\Interfaces\LogisticServiceInterface;
 
 class LogisticService extends StoreLogistics implements LogisticServiceInterface
 {

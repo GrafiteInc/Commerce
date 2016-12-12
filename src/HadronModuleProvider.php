@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Hadron;
+namespace Quarx\Modules\Hadron;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
@@ -28,9 +28,9 @@ class HadronModuleProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(\Yab\Hadron\Providers\HadronEventServiceProvider::class);
-        $this->app->register(\Yab\Hadron\Providers\HadronServiceProvider::class);
-        $this->app->register(\Yab\Hadron\Providers\HadronRouteProvider::class);
+        $this->app->register(\Quarx\Modules\Hadron\Providers\HadronEventServiceProvider::class);
+        $this->app->register(\Quarx\Modules\Hadron\Providers\HadronServiceProvider::class);
+        $this->app->register(\Quarx\Modules\Hadron\Providers\HadronRouteProvider::class);
 
         View::addNamespace('hadron', __DIR__.'/Views');
         View::addNamespace('hadron-frontend', base_path('resources/hadron'));

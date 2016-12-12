@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Hadron\Helpers;
+namespace Quarx\Modules\Hadron\Helpers;
 
 use URL;
 use Auth;

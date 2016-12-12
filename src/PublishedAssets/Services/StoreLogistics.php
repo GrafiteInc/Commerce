@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use Customer;
-use Yab\Hadron\Interfaces\LogisticServiceInterface;
+use Quarx\Modules\Hadron\Interfaces\LogisticServiceInterface;
 
 class StoreLogistics implements LogisticServiceInterface
 {
