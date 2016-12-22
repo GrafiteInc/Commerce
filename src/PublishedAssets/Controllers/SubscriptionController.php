@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Hadron;
 
-use Yab\Crypto\Services\Crypto;
 use App\Http\Controllers\Controller;
+use Quarx\Modules\Hadron\Services\LogisticService;
 use Quarx\Modules\Hadron\Services\PlanService;
+use Yab\Crypto\Services\Crypto;
 
 class SubscriptionController extends Controller
 {
@@ -23,6 +24,8 @@ class SubscriptionController extends Controller
 
         $plan = $this->service->find(Crypto::decrypt($id));
         auth()->user()->meta->newSubscription($plan->subscription_name, $plan->stripe_name)->create();
+
+        app(LogisticService::class)->afterSubscription(auth()->user(), $plan);
 
         return view('hadron-frontend::subscriptions.success')->with('plan', $plan);
     }
@@ -44,6 +47,8 @@ class SubscriptionController extends Controller
     public function cancelSubscription($name)
     {
         auth()->user()->meta->subscription(Crypto::decrypt($name))->cancel();
+
+        app(LogisticService::class)->cancelSubscription(auth()->user(), Crypto::decrypt($name));
 
         return redirect('store/account/subscriptions')->with('message', 'Your subscription was cancelled');
     }
