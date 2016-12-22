@@ -89,6 +89,8 @@ class PaymentService
                 'country' => Customer::shippingAddress('country'),
              ]),
         ]);
+
+        return $this->logistic->afterPlaceOrder($user, $transaction, $items);
     }
 
     // public function success()
@@ -109,16 +111,17 @@ class PaymentService
     //     return $result;
     // }
 
-    // public function refundPurchase($transaction)
-    // {
-    //     $refundData = $this->gateway->refund($this->user, $transaction);
+    public function refundPurchase($transaction)
+    {
+        dd('here');
+        // $refundData = $this->gateway->refund($this->user, $transaction);
 
-    //     Logistics::refundOrder($refundData);
+        // Logistics::refundOrder($refundData);
 
-    //     if (!$refundData) {
-    //         return array('status' => 'error', 'data' => Module::lang('store.notifications.payment.refund-fail'));
-    //     } else {
-    //         return array('status' => 'success', 'data' => $refundData);
-    //     }
-    // }
+        // if (!$refundData) {
+        //     return array('status' => 'error', 'data' => Module::lang('store.notifications.payment.refund-fail'));
+        // } else {
+        //     return array('status' => 'success', 'data' => $refundData);
+        // }
+    }
 }

@@ -4,16 +4,15 @@ namespace Quarx\Modules\Hadron\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Quarx\Modules\Hadron\Services\ProductService;
+use Quarx\Modules\Hadron\Services\TransactionService;
 use Quarx\Modules\Hadron\Requests\CreateProductRequest;
 use Quarx\Modules\Hadron\Repositories\ProductVariantRepository;
 
 class TransactionController extends Controller
 {
-    public function __construct(ProductService $productService, ProductVariantRepository $productVariantRepository)
+    public function __construct(TransactionService $transactionService)
     {
-        $this->service = $productService;
-        $this->productVariantRepository = $productVariantRepository;
+        $this->service = $transactionService;
     }
 
     /**
@@ -23,11 +22,11 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-        $products = $this->service->paginated();
+        $transactions = $this->service->paginated();
 
-        return view('hadron::products.index')
-            ->with('pagination', $products->render())
-            ->with('products', $products);
+        return view('hadron::transactions.index')
+            ->with('pagination', $transactions->render())
+            ->with('transactions', $transactions);
     }
 
     /**
@@ -37,12 +36,12 @@ class TransactionController extends Controller
      */
     public function search(Request $request)
     {
-        $products = $this->service->search($request->search);
+        $transactions = $this->service->search($request->search);
 
-        return view('hadron::products.index')
+        return view('hadron::transactions.index')
             ->with('term', $request->search)
-            ->with('pagination', $products->render())
-            ->with('products', $products);
+            ->with('pagination', $transactions->render())
+            ->with('transactions', $transactions);
     }
 
     /**
@@ -52,7 +51,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        return view('hadron::products.create');
+        return view('hadron::transactions.create');
     }
 
     /**
@@ -67,10 +66,10 @@ class TransactionController extends Controller
         $result = $this->service->create($request->except('_token'));
 
         if ($result) {
-            return redirect('quarx/products/'.$result->id.'/edit')->with('message', 'Successfully created');
+            return redirect('quarx/transactions/'.$result->id.'/edit')->with('message', 'Successfully created');
         }
 
-        return redirect('quarx/products')->with('message', 'Failed to create');
+        return redirect('quarx/transactions')->with('message', 'Failed to create');
     }
 
     /**
@@ -82,7 +81,7 @@ class TransactionController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $product = $this->service->find($id));
+        $product = $this->service->find($id);
 
         $productVariants = $this->productVariantRepository->getProductVariants($product->id)->get();
 
@@ -105,7 +104,7 @@ class TransactionController extends Controller
             'tabs' => $tabs,
         ];
 
-        return view('hadron::products.edit', $data);
+        return view('hadron::transactions.edit', $data);
     }
 
     /**
@@ -139,9 +138,9 @@ class TransactionController extends Controller
         $result = $this->service->destroy($id);
 
         if ($result) {
-            return redirect('quarx/products')->with('message', 'Successfully deleted');
+            return redirect('quarx/transactions')->with('message', 'Successfully deleted');
         }
 
-        return redirect('quarx/products')->with('message', 'Failed to delete');
+        return redirect('quarx/transactions')->with('message', 'Failed to delete');
     }
 }

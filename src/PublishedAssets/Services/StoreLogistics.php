@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Customer;
+use Illuminate\Support\Facades\Log;
 use Quarx\Modules\Hadron\Interfaces\LogisticServiceInterface;
 
 class StoreLogistics implements LogisticServiceInterface
@@ -54,6 +55,7 @@ class StoreLogistics implements LogisticServiceInterface
     public function afterRefundPurchase($user, $transaction, $cart)
     {
         // code...
+        Log::info('After refund');
     }
 
     /*
@@ -65,21 +67,31 @@ class StoreLogistics implements LogisticServiceInterface
     public function afterPlaceOrder($user, $transaction, $cart)
     {
         // places order into orders table
+        Log::info('Order was placed');
     }
 
     public function shipOrder()
     {
         // sets order to shipped - and does any needed logic
+        Log::info('Order was shipped');
     }
 
     public function generateOrderLabel()
     {
         // creates an order shipping label
+        Log::info('Order label was made');
     }
 
     public function updateOrderWithTracking()
     {
         // updates the order with a tracking value
+        Log::info('Order was updated');
+    }
+
+    public function cancelOrder()
+    {
+        // sets order to shipped - and does any needed logic
+        Log::info('Order was cancelled');
     }
 
     /*
@@ -91,6 +103,7 @@ class StoreLogistics implements LogisticServiceInterface
     public function createDownloadLink()
     {
         // code...
+        Log::info('Download link');
     }
 
     /*
@@ -102,5 +115,6 @@ class StoreLogistics implements LogisticServiceInterface
     public function createSubscription()
     {
         // code...
+        Log::info('Subscription was created');
     }
 }

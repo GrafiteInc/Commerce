@@ -11,8 +11,8 @@
 
     @if ($product->hero_image)
         <div class="row">
-            <div class="col-lg-4 col-lg-offset-4 raw-block-300">
-                <img class="thumbnail raw100" alt="" src="{{ FileService::fileAsPublicAsset($product->hero_image) }}" />
+            <div class="col-lg-4 col-lg-offset-4 raw-block-300 text-center">
+                <img class="thumbnail" style="display: inline-block;" src="{{ FileService::fileAsPublicAsset($product->hero_image) }}" />
             </div>
         </div>
     @endif

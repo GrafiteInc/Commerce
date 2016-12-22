@@ -18,6 +18,9 @@ class Orders extends Model
         'details',
         'shipping',
         'is_shipped',
+        'tracking_number',
+        'notes',
+        'status',
         'shipping_address',
     ];
 

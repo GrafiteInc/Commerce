@@ -21,6 +21,7 @@ class Transactions extends Model
         'total',
         'shipping',
         'refund_date',
+        'refund_requested',
         'provider_id',
         'provider_date',
         'provider_dispute',

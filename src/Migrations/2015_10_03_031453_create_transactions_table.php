@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->decimal('total');
             $table->decimal('shipping');
             $table->datetime('refund_date')->nullable();
+            $table->boolean('refund_requested')->default(0);
             $table->string('provider_id');
             $table->string('provider_date');
             $table->text('provider_dispute');

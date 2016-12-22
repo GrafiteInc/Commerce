@@ -2,8 +2,9 @@
 
 namespace Quarx\Modules\Hadron\Repositories;
 
-use Quarx\Modules\Hadron\Models\Transactions;
 use Illuminate\Support\Facades\Schema;
+use Quarx\Modules\Hadron\Models\Transactions;
+use Quarx\Modules\Hadron\Services\LogisticService;
 
 class TransactionRepository
 {
@@ -89,15 +90,33 @@ class TransactionRepository
      * Updates Transactions into database.
      *
      * @param Transactions $transactions
-     * @param array        $input
+     * @param array        $payload
      *
      * @return Transactions
      */
-    public function update($transactions, $input)
+    public function update($transaction, $payload)
     {
-        $transactions->fill($input);
-        $transactions->save();
+        $transaction->fill($payload);
+        $transaction->save();
 
-        return $transactions;
+        return $transaction;
+    }
+
+    /**
+     * Request a refund.
+     *
+     * @param int $transactionId
+     *
+     * @return bool
+     */
+    public function requestRefund($transactionId)
+    {
+        $transaction = Transactions::where('id', $transactionId);
+
+        app(LogisticService::class)->afterRefundRequest($transaction);
+
+        return $transaction->update([
+            'refund_requested' => true,
+        ]);
     }
 }

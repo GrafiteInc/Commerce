@@ -9,7 +9,7 @@
         </tr>
         <tr>
             <td>Transaction</td>
-            <td><a href="{!! url('store/account/purchases/'.$order->transaction()->id) !!}">{!! $order->transaction('uuid') !!}</a></td>
+            <td><a href="{!! url('store/account/purchases/'.Crypto::encrypt($order->transaction()->id)) !!}">{!! $order->transaction('uuid') !!}</a></td>
         </tr>
         <tr>
             <td>Status</td>

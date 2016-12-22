@@ -12,10 +12,10 @@
         <tbody>
             @foreach ($orders as $order)
                 <tr>
-                    <td><a href="{{ url('store/account/orders/'.$order->id) }}">{!! $order->created_at->format('Y-m-d') !!}</a></td>
+                    <td><a href="{{ url('store/account/orders/'.Crypto::encrypt($order->id)) }}">{!! $order->created_at->format('Y-m-d') !!}</a></td>
                     <td>{!! $order->transaction('uuid') !!}</td>
                     <td>{!! ucfirst($order->status) !!}</td>
-                    <td><a href="{{ url('store/account/orders/'.$order->id.'/cancel') }}">Cancel Order</a></td>
+                    <td><a href="{{ url('store/account/orders/'.Crypto::encrypt($order->id).'/cancel') }}">Cancel Order</a></td>
                 </tr>
             @endforeach
         </tbody>

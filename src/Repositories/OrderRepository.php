@@ -2,8 +2,9 @@
 
 namespace Quarx\Modules\Hadron\Repositories;
 
-use Quarx\Modules\Hadron\Models\Orders;
 use Illuminate\Support\Facades\Schema;
+use Quarx\Modules\Hadron\Models\Orders;
+use Quarx\Modules\Hadron\Services\LogisticService;
 
 class OrderRepository
 {
@@ -88,16 +89,37 @@ class OrderRepository
     /**
      * Updates Orders into database.
      *
-     * @param Orders $orders
-     * @param array  $input
+     * @param Order $order
+     * @param array $payload
      *
      * @return Orders
      */
-    public function update($orders, $input)
+    public function update($order, $payload)
     {
-        $orders->fill($input);
-        $orders->save();
+        $order->fill($payload);
+        $order->save();
 
-        return $orders;
+        return $order;
+    }
+
+    /*
+     * --------------------------------------------------------------------------
+     * Cancel
+     * --------------------------------------------------------------------------
+    */
+
+    public function cancelOrder($id)
+    {
+        $order = Orders::find($id);
+
+        if ($order->status != 'complete') {
+            app(LogisticService::class)->cancelOrder($order);
+
+            return $this->update($order, [
+                'status' => 'cancelled',
+            ]);
+        }
+
+        return false;
     }
 }

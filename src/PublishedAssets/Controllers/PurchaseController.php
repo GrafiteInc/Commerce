@@ -32,6 +32,8 @@ class PurchaseController extends Controller
 
     public function requestRefund($id)
     {
-        //TODO make the request for a refund
+        $purchase = $this->transactions->requestRefund(auth()->id(), Crypto::decrypt($id));
+
+        return view('hadron-frontend::purchases.refund');
     }
 }
