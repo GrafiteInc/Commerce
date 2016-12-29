@@ -103,7 +103,7 @@ return [
         ],
     ],
 
-'plans' => [
+    'plans' => [
         'name' => [
             'type' => 'string',
         ],
