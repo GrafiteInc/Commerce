@@ -21,6 +21,11 @@ class TransactionService
         return $this->repo->all();
     }
 
+    public function thisYear()
+    {
+        return $this->repo->thisYear();
+    }
+
     public function paginated()
     {
         return $this->repo->paginated(Config::get('quarx.pagination', 25));

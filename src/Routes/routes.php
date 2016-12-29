@@ -30,6 +30,8 @@
             'uses' => 'ProductController@destroy',
         ]);
 
+        Route::get('commerce-analytics', 'AnalyticsController@dashboard');
+
         /*
         |--------------------------------------------------------------------------
         | Plan Routes

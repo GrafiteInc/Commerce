@@ -2,6 +2,7 @@
 
 namespace Quarx\Modules\Hadron\Repositories;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Quarx\Modules\Hadron\Models\Transactions;
 use Quarx\Modules\Hadron\Services\LogisticService;
@@ -15,7 +16,17 @@ class TransactionRepository
      */
     public function all()
     {
-        return Transactions::orderBy('created_at', 'desc')->all();
+        return Transactions::orderBy('created_at', 'desc')->get();
+    }
+
+    /**
+     * Returns all Transactions for this year.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function thisYear()
+    {
+        return Transactions::orderBy('created_at', 'desc')->where('created_at', 'LIKE', Carbon::now()->format('Y').'-%')->get();
     }
 
     public function paginated()
