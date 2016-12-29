@@ -37,12 +37,14 @@ class StoreLogistics implements LogisticServiceInterface
 
     /*
     |--------------------------------------------------------------------------
-    | Purchases
+    | Purchases & Refunds
     |--------------------------------------------------------------------------
     */
 
     public function afterPurchase($user, $transaction, $cart, $result)
     {
+        Log::info('After purchase');
+
         if ($result) {
             $cart->emptyCart();
 
@@ -52,10 +54,28 @@ class StoreLogistics implements LogisticServiceInterface
         }
     }
 
-    public function afterRefundPurchase($user, $transaction, $cart)
+    public function afterSubscription($user, $plan)
+    {
+        // code...
+        Log::info('After subscription');
+    }
+
+    public function afterRefundRequest($transaction)
+    {
+        // code...
+        Log::info('After refund request');
+    }
+
+    public function afterRefund($transaction)
     {
         // code...
         Log::info('After refund');
+    }
+
+    public function cancelSubscription($user, $plan)
+    {
+        // code...
+        Log::info('Cancel subscription');
     }
 
     /*
@@ -70,51 +90,21 @@ class StoreLogistics implements LogisticServiceInterface
         Log::info('Order was placed');
     }
 
-    public function shipOrder()
+    public function orderCreated($order)
     {
         // sets order to shipped - and does any needed logic
         Log::info('Order was shipped');
     }
 
-    public function generateOrderLabel()
+    public function shipOrder($order)
     {
-        // creates an order shipping label
-        Log::info('Order label was made');
+        // sets order to shipped - and does any needed logic
+        Log::info('Order was shipped');
     }
 
-    public function updateOrderWithTracking()
-    {
-        // updates the order with a tracking value
-        Log::info('Order was updated');
-    }
-
-    public function cancelOrder()
+    public function cancelOrder($order)
     {
         // sets order to shipped - and does any needed logic
         Log::info('Order was cancelled');
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Digital Products
-    |--------------------------------------------------------------------------
-    */
-
-    public function createDownloadLink()
-    {
-        // code...
-        Log::info('Download link');
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Subscriptions
-    |--------------------------------------------------------------------------
-    */
-
-    public function createSubscription()
-    {
-        // code...
-        Log::info('Subscription was created');
     }
 }

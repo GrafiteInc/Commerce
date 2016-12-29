@@ -15,7 +15,7 @@
                     <td>${!! $purchase->total !!}</td>
 
                     <td>
-                        @if (!$purchase->refund_requested)
+                        @if (!$purchase->refund_requested && is_null($purchase->refund_date))
                             <a href="{{ url('store/account/purchases/'.Crypto::encrypt($purchase->id).'/refund-request') }}">Refund Request</a>
                         @endif
                     </td>
