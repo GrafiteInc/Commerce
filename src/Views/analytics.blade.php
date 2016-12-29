@@ -135,15 +135,6 @@
                         "#36A2EB"
                     ]
                 }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
             }
         });
     });

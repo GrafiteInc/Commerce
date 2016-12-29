@@ -32,7 +32,7 @@ class PurchaseController extends Controller
 
     public function requestRefund($id)
     {
-        $purchase = $this->transactions->requestRefund(auth()->id(), Crypto::decrypt($id));
+        $purchase = $this->transactions->requestRefund(Crypto::decrypt($id));
 
         return view('hadron-frontend::purchases.refund');
     }

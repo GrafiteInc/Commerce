@@ -26,7 +26,7 @@ class TransactionRepository
      */
     public function thisYear()
     {
-        return Transactions::orderBy('created_at', 'desc')->where('created_at', 'LIKE', Carbon::now()->format('Y').'-%')->get();
+        return Transactions::orderBy('created_at', 'asc')->where('created_at', 'LIKE', Carbon::now()->format('Y').'-%')->get();
     }
 
     public function paginated()
