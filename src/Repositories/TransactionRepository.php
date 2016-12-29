@@ -23,19 +23,18 @@ class TransactionRepository
         return Transactions::orderBy('created_at', 'desc')->paginate(25);
     }
 
-    public function search($input)
+    public function search($payload, $paginate)
     {
         $query = Transactions::orderBy('created_at', 'desc');
+        $query->where('id', 'LIKE', '%'.$payload.'%');
 
         $columns = Schema::getColumnListing('transactions');
 
-        $query->where('id', '>', 0);
-
         foreach ($columns as $attribute) {
-            $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
+            $query->orWhere($attribute, 'LIKE', '%'.$payload.'%');
         }
 
-        return [$query, $input['term'], $query->paginate(25)->render()];
+        return [$query, $payload, $query->paginate($paginate)->render()];
     }
 
     /**
@@ -60,6 +59,18 @@ class TransactionRepository
     public function findTransactionsById($id)
     {
         return Transactions::find($id);
+    }
+
+    /**
+     * Find Transactions by given id.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Support\Collection|null|static|Transactions
+     */
+    public function findByUUID($uuid)
+    {
+        return Transactions::where('uuid', $uuid)->firstOrFail();
     }
 
     /**
@@ -96,10 +107,7 @@ class TransactionRepository
      */
     public function update($transaction, $payload)
     {
-        $transaction->fill($payload);
-        $transaction->save();
-
-        return $transaction;
+        return $transaction->update($payload);
     }
 
     /**

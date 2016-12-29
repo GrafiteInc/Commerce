@@ -30,5 +30,12 @@ class OrderController extends Controller
 
     public function cancelOrder($id)
     {
+        $id = Crypto::decrypt($id);
+
+        if ($this->orders->cancelOrder($id)) {
+            return back()->with('message', 'Order cancelled');
+        }
+
+        return back();
     }
 }

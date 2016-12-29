@@ -4,7 +4,6 @@ namespace Quarx\Modules\Hadron\Repositories;
 
 use Illuminate\Support\Facades\Schema;
 use Quarx\Modules\Hadron\Models\Orders;
-use Quarx\Modules\Hadron\Services\LogisticService;
 
 class OrderRepository
 {
@@ -23,7 +22,7 @@ class OrderRepository
         return Orders::orderBy('created_at', 'desc')->paginate(25);
     }
 
-    public function search($input)
+    public function search($payload)
     {
         $query = Orders::orderBy('created_at', 'desc');
 
@@ -32,22 +31,22 @@ class OrderRepository
         $query->where('id', '>', 0);
 
         foreach ($columns as $attribute) {
-            $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
+            $query->orWhere($attribute, 'LIKE', '%'.$payload.'%');
         }
 
-        return [$query, $input['term'], $query->paginate(25)->render()];
+        return [$query, $payload, $query->paginate(25)->render()];
     }
 
     /**
      * Stores Orders into database.
      *
-     * @param array $input
+     * @param array $payload
      *
      * @return Orders
      */
-    public function store($input)
+    public function store($payload)
     {
-        return Orders::create($input);
+        return Orders::create($payload);
     }
 
     /**
@@ -96,30 +95,12 @@ class OrderRepository
      */
     public function update($order, $payload)
     {
-        $order->fill($payload);
-        $order->save();
-
-        return $order;
-    }
-
-    /*
-     * --------------------------------------------------------------------------
-     * Cancel
-     * --------------------------------------------------------------------------
-    */
-
-    public function cancelOrder($id)
-    {
-        $order = Orders::find($id);
-
-        if ($order->status != 'complete') {
-            app(LogisticService::class)->cancelOrder($order);
-
-            return $this->update($order, [
-                'status' => 'cancelled',
-            ]);
+        if (isset($payload['is_shipped'])) {
+            $payload['is_shipped'] = true;
+        } else {
+            $payload['is_shipped'] = false;
         }
 
-        return false;
+        return $order->update($payload);
     }
 }

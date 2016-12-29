@@ -4,14 +4,14 @@ namespace Quarx\Modules\Hadron\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Quarx\Modules\Hadron\Services\TransactionService;
+use Quarx\Modules\Hadron\Services\OrderService;
 use Yab\Crypto\Services\Crypto;
 
-class TransactionController extends Controller
+class OrderController extends Controller
 {
-    public function __construct(TransactionService $transactionService)
+    public function __construct(OrderService $orderService)
     {
-        $this->service = $transactionService;
+        $this->service = $orderService;
     }
 
     /**
@@ -21,11 +21,11 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-        $transactions = $this->service->paginated();
+        $orders = $this->service->paginated();
 
-        return view('hadron::transactions.index')
-            ->with('pagination', $transactions->render())
-            ->with('transactions', $transactions);
+        return view('hadron::orders.index')
+            ->with('pagination', $orders->render())
+            ->with('orders', $orders);
     }
 
     /**
@@ -35,12 +35,12 @@ class TransactionController extends Controller
      */
     public function search(Request $request)
     {
-        $transactions = $this->service->search($request->term);
+        $orders = $this->service->search($request->term);
 
-        return view('hadron::transactions.index')
-            ->with('transactions', $transactions[0]->get())
-            ->with('pagination', $transactions[2])
-            ->with('term', $transactions[1]);
+        return view('hadron::orders.index')
+            ->with('orders', $orders[0]->get())
+            ->with('pagination', $orders[2])
+            ->with('term', $orders[1]);
     }
 
     /**
@@ -52,12 +52,9 @@ class TransactionController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $transaction = $this->service->findTransactionsById(Crypto::decrypt($id));
-        $order = $this->service->getTransactionOrder(Crypto::decrypt($id));
+        $order = $this->service->findOrdersById(Crypto::decrypt($id));
 
-        return view('hadron::transactions.edit')
-            ->with('order', $order)
-            ->with('transaction', $transaction);
+        return view('hadron::orders.edit')->with('order', $order);
     }
 
     /**
@@ -80,20 +77,20 @@ class TransactionController extends Controller
     }
 
     /**
-     * Issue a refund.
+     * Remove the specified resource from storage.
      *
-     * @param Request $request
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
-    public function refund(Request $request)
+    public function cancel(Request $request)
     {
-        $result = $this->service->refund($request->uuid);
+        $result = $this->service->cancelOrder($request->id);
 
         if ($result) {
-            return back()->with('message', 'Successfully refunded');
+            return redirect('quarx/orders')->with('message', 'Successfully cancelled');
         }
 
-        return back()->with('message', 'Failed to refund');
+        return redirect('quarx/orders')->with('message', 'Failed to cancel');
     }
 }

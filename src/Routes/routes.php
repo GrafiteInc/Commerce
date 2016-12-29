@@ -47,8 +47,13 @@
         Route::resource('transactions', 'TransactionController', ['as' => 'quarx']);
         Route::post('transactions/search', 'TransactionController@search');
         Route::post('transactions/refund', 'TransactionController@refund');
-        Route::get('transactions/{id}/delete', [
-            'as' => 'quarx.transactions.delete',
-            'uses' => 'TransactionController@destroy',
-        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Transactions
+        |--------------------------------------------------------------------------
+        */
+        Route::resource('orders', 'OrderController', ['as' => 'quarx']);
+        Route::post('orders/search', 'OrderController@search');
+        Route::post('orders/cancel', 'OrderController@cancel');
     });

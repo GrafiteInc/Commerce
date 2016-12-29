@@ -2,10 +2,10 @@
 
 namespace Quarx\Modules\Hadron\Services;
 
-use DB;
 use Customer;
-use Quarx\Modules\Hadron\Models\Orders;
+use DB;
 use Quarx\Modules\Hadron\Models\Transactions;
+use Yab\Crypto\Services\Crypto;
 
 class PaymentService
 {
@@ -15,7 +15,7 @@ class PaymentService
     {
         $this->user = auth()->user();
         $this->transaction = app(Transactions::class);
-        $this->orders = app(Orders::class);
+        $this->orderService = app(OrderService::class);
         $this->logistic = app(LogisticService::class);
     }
 
@@ -43,7 +43,7 @@ class PaymentService
 
         if ($result) {
             $transaction = $this->transaction->create([
-                'uuid' => md5(time()).'-'.$user->id,
+                'uuid' => Crypto::uuid(),
                 'provider' => 'stripe',
                 'state' => 'success',
                 'subtotal' => $cart->getCartSubTotal(),
@@ -77,8 +77,9 @@ class PaymentService
 
     public function createOrder($user, $transaction, $items)
     {
-        $this->orders->create([
-            'user_id' => $user->id,
+        $this->orderService->create([
+            'uuid' => Crypto::uuid(),
+            'customer_id' => $user->id,
             'transaction_id' => $transaction->id,
             'details' => json_encode($items),
             'shipping_address' => json_encode([
@@ -91,37 +92,5 @@ class PaymentService
         ]);
 
         return $this->logistic->afterPlaceOrder($user, $transaction, $items);
-    }
-
-    // public function success()
-    // {
-    //     Logistics::setOrder($this->cart->getShoppingCart());
-
-    //     $result = $this->gateway->success($this->user);
-
-    //     return $result;
-    // }
-
-    // public function cancelled()
-    // {
-    //     $result = $this->gateway->cancelled($this->user);
-
-    //     Logistics::cancelOrder($result);
-
-    //     return $result;
-    // }
-
-    public function refundPurchase($transaction)
-    {
-        dd('here');
-        // $refundData = $this->gateway->refund($this->user, $transaction);
-
-        // Logistics::refundOrder($refundData);
-
-        // if (!$refundData) {
-        //     return array('status' => 'error', 'data' => Module::lang('store.notifications.payment.refund-fail'));
-        // } else {
-        //     return array('status' => 'success', 'data' => $refundData);
-        // }
     }
 }

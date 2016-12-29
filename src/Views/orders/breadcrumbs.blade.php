@@ -1,6 +1,6 @@
 <div class="row">
     <ol class="breadcrumb">
-        <li><a href="{!! url('quarx/transactions') !!}">Transactions</a></li>
+        <li><a href="{!! url('quarx/orders') !!}">Orders</a></li>
 
             {!! Quarx::breadcrumbs($location) !!}
 

@@ -13,7 +13,8 @@ class Orders extends Model
     public $timestamps = true;
 
     public $fillable = [
-        'user_id',
+        'uuid',
+        'customer_id',
         'transaction_id',
         'details',
         'shipping',
@@ -24,9 +25,7 @@ class Orders extends Model
         'shipping_address',
     ];
 
-    public static $rules = [
-
-    ];
+    public static $rules = [];
 
     public function transaction($key = null)
     {

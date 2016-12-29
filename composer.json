@@ -9,7 +9,24 @@
         "laravel/cashier": "^7.0",
         "composer/installers": "~1.0"
     },
-    "autoload": {},
+    "require-dev": {
+        "mockery/mockery": "^0.9.4",
+        "orchestra/testbench": "~3.0",
+        "mikey179/vfsStream": "^1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Quarx\\Modules\\Hadron\\": "src/"
+        },
+        "files": [
+          "src/Helpers/StoreHelper.php"
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/TestCase.php"
+        ]
+    },
     "scripts": {
         "post-install-cmd": [],
         "post-update-cmd": [],

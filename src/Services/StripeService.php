@@ -61,18 +61,17 @@ class StripeService
      * Refund a purchase.
      *
      * @param obj $user
-     * @param obj $bill
+     * @param obj $transaction
      *
      * @return obj
      */
-    public function refund($user, $bill)
+    public function refund($user, $transaction)
     {
-        $this->user = $user->meta;
-        $customer = $this->customer->retrieve($this->user->stripe_id);
+        $customer = $this->customer->retrieve($user->meta->stripe_id);
 
-        $refund = $this->refund->create(array(
-            'charge' => json_decode($bill->transaction)->charge,
-        ));
+        $refund = $this->refund->create([
+            'charge' => $transaction,
+        ]);
 
         return $refund;
     }
