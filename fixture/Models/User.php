@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Models\Role;
-
+use App\Models\Team;
 use App\Models\UserMeta;
 use App\Notifications\ResetPassword;
 use Illuminate\Notifications\Notifiable;
@@ -95,12 +95,7 @@ class User extends Authenticatable
     public function isTeamAdmin($id)
     {
         $team = $this->teams->find($id);
-
-        if ($team) {
-            return (int) $team->user_id === (int) $this->id;
-        }
-
-        return false;
+        return (int) $team->user_id === (int) $this->id;
     }
 
     /**

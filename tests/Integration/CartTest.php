@@ -1,7 +1,7 @@
 <?php
 
-require __DIR__.'/../../fixture/User.php';
-require __DIR__.'/../../fixture/Role.php';
+require __DIR__.'/../../fixture/Models/User.php';
+require __DIR__.'/../../fixture/Models/Role.php';
 
 class CartTest extends TestCase
 {

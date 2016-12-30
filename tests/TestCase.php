@@ -46,17 +46,6 @@ class TestCase extends Orchestra\Testbench\TestCase
         ];
     }
 
-    protected function getPackageAliases($app)
-    {
-        return [
-            // 'Form' => \Collective\Html\FormFacade::class,
-            // 'HTML' => \Collective\Html\HtmlFacade::class,
-            // 'FormMaker' => \Yab\Laracogs\Facades\FormMaker::class,
-            // 'InputMaker' => \Yab\Laracogs\Facades\InputMaker::class,
-            // 'Crypto' => \Yab\Laracogs\Utilities\Crypto::class,
-        ];
-    }
-
     /**
      * Setup the test environment.
      */
@@ -112,8 +101,8 @@ class TestCase extends Orchestra\Testbench\TestCase
 
     public function testAnalytics()
     {
-        // $this->withoutMiddleware();
-        // $response = $this->call('GET', '/quarx/commerce-analytics');
-        // $this->assertEquals(200, $response->getStatusCode());
+        $this->withoutMiddleware();
+        $response = $this->call('GET', '/quarx/commerce-analytics');
+        $this->assertEquals(200, $response->getStatusCode());
     }
 }

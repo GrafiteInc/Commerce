@@ -26,6 +26,8 @@
     "autoload-dev": {
         "classmap": [
             "fixture/Controllers",
+            "fixture/Models",
+            "fixture/Services",
             "src/Publishes",
             "tests/TestCase.php"
         ]
