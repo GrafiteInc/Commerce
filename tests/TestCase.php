@@ -92,17 +92,4 @@ class TestCase extends Orchestra\Testbench\TestCase
         $this->withoutMiddleware();
         $this->withoutEvents();
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | Landing
-    |--------------------------------------------------------------------------
-    */
-
-    public function testAnalytics()
-    {
-        $this->withoutMiddleware();
-        $response = $this->call('GET', '/quarx/commerce-analytics');
-        $this->assertEquals(200, $response->getStatusCode());
-    }
 }

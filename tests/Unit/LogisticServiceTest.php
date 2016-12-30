@@ -30,29 +30,128 @@ class LogisticServiceTest extends TestCase
         $this->service = app(LogisticService::class);
     }
 
-    public function test()
+    public function testCartWeight()
+    {
+        $result = $this->service->cartWeight();
+        $this->assertEquals(0, $result);
+    }
+
+    public function testShipping()
     {
         $user = Mockery::mock('StdClass');
         $user->id = 1;
-        $transaction = Mockery::mock('StdClass');
-        $cart = Mockery::mock('StdClass');
-        $result = Mockery::mock('StdClass');
-        $order = Mockery::mock('StdClass');
-        $plan = 'default';
 
         Auth::shouldReceive('user')->andReturn($user);
 
-        $this->service->cartWeight();
-        $this->service->shipping($user);
-        $this->service->getTaxPercent($user);
-        $this->service->afterPurchase($user, $transaction, $cart, $result);
-        $this->service->afterSubscription($user, $plan);
-        $this->service->afterRefundRequest($transaction);
-        $this->service->afterRefund($transaction);
-        $this->service->cancelSubscription($user, $plan);
-        $this->service->afterPlaceOrder($user, $transaction, $cart);
-        $this->service->orderCreated($order);
-        $this->service->shipOrder($order);
-        $this->service->cancelOrder($order);
+        $result = $this->service->shipping($user);
+        $this->assertTrue($result);
+    }
+
+    public function testTaxPercent()
+    {
+        $user = Mockery::mock('StdClass');
+        $user->id = 1;
+
+        Auth::shouldReceive('user')->andReturn($user);
+
+        $result = $this->service->getTaxPercent($user);
+
+        $this->assertTrue($result);
+    }
+
+    public function testAfterPurchase()
+    {
+        $user = Mockery::mock('StdClass');
+        $user->id = 1;
+        Auth::shouldReceive('user')->andReturn($user);
+        $transaction = Mockery::mock('StdClass');
+        $cart = Mockery::mock('StdClass');
+        $result = Mockery::mock('StdClass');
+
+        $result = $this->service->afterPurchase($user, $transaction, $cart, $result);
+
+        $this->assertTrue($result);
+    }
+
+    public function testAferSubscription()
+    {
+        $user = Mockery::mock('StdClass');
+        $user->id = 1;
+        Auth::shouldReceive('user')->andReturn($user);
+        $plan = 'default';
+
+        $result = $this->service->afterSubscription($user, $plan);
+        $this->assertTrue($result);
+    }
+
+    public function testRefundRequest()
+    {
+        $user = Mockery::mock('StdClass');
+        $user->id = 1;
+        Auth::shouldReceive('user')->andReturn($user);
+        $transaction = Mockery::mock('StdClass');
+
+        $result = $this->service->afterRefundRequest($transaction);
+
+        $this->assertTrue($result);
+    }
+
+    public function testAfterRefund()
+    {
+        $user = Mockery::mock('StdClass');
+        $user->id = 1;
+        Auth::shouldReceive('user')->andReturn($user);
+        $transaction = Mockery::mock('StdClass');
+
+        $result = $this->service->afterRefund($transaction);
+        $this->assertTrue($result);
+    }
+
+    public function testCancelSubscription()
+    {
+        $user = Mockery::mock('StdClass');
+        $user->id = 1;
+        Auth::shouldReceive('user')->andReturn($user);
+        $plan = 'default';
+
+        $result = $this->service->cancelSubscription($user, $plan);
+        $this->assertTrue($result);
+    }
+
+    public function testAfterPlaceOrder()
+    {
+        $user = Mockery::mock('StdClass');
+        $user->id = 1;
+        Auth::shouldReceive('user')->andReturn($user);
+        $transaction = Mockery::mock('StdClass');
+        $cart = Mockery::mock('StdClass');
+
+        $result = $this->service->afterPlaceOrder($user, $transaction, $cart);
+        $this->assertTrue($result);
+    }
+
+    public function testOrderCreated()
+    {
+        $order = Mockery::mock('StdClass');
+
+        $result = $this->service->orderCreated($order);
+        $this->assertTrue($result);
+    }
+
+    public function testShipOrder()
+    {
+        $order = Mockery::mock('StdClass');
+
+        $result = $this->service->shipOrder($order);
+        $this->assertTrue($result);
+    }
+
+    public function testCancelOrder()
+    {
+        $order = Mockery::mock('StdClass');
+
+        $result = $this->service->cancelOrder($order);
+
+        $this->assertTrue($result);
     }
 }
