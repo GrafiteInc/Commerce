@@ -159,6 +159,7 @@ class CartServiceTest extends TestCase
         $variant = factory(\Quarx\Modules\Hadron\Models\Variant::class)->make([
             'id' => 4,
         ]);
+
         $response = $this->cartService->getId($variant);
         $this->assertEquals(4, $response);
     }
@@ -171,6 +172,7 @@ class CartServiceTest extends TestCase
                 'value' => 'small',
             ],
         ]));
+
         $response = $this->cartService->changeItemQuantity(2, 4);
         $this->assertTrue($response);
     }
@@ -183,6 +185,7 @@ class CartServiceTest extends TestCase
                 'value' => 'small',
             ],
         ]));
+
         $response = $this->cartService->removeFromCart(2, 'product');
         $this->assertTrue($response);
     }

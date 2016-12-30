@@ -12,7 +12,7 @@ class CreateCartTable extends Migration
     {
         Schema::create('cart', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('customer_id');
             $table->integer('entity_id');
             $table->string('entity_type');
             $table->text('product_variants')->nullable();

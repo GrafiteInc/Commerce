@@ -13,7 +13,7 @@ class Cart extends Model
     public $timestamps = true;
 
     public $fillable = [
-        'user_id',
+        'customer_id',
         'entity_id',
         'entity_type',
         'address',
@@ -21,7 +21,5 @@ class Cart extends Model
         'quantity',
     ];
 
-    public static $rules = [
-
-    ];
+    public static $rules = [];
 }

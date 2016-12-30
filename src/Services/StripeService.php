@@ -5,15 +5,13 @@ namespace Quarx\Modules\Hadron\Services;
 use Stripe\Plan;
 use Stripe\Stripe;
 use Stripe\Refund;
-use Stripe\Customer;
 
 class StripeService
 {
-    public function __construct(Stripe $stripe, Plan $plan, Customer $customer, Refund $refund)
+    public function __construct(Stripe $stripe, Plan $plan, Refund $refund)
     {
         $this->stripe = $stripe;
         $this->plan = $plan;
-        $this->customer = $customer;
         $this->refund = $refund;
         $this->stripe->setApiKey(env('STRIPE_SECRET'));
     }
@@ -65,14 +63,10 @@ class StripeService
      *
      * @return obj
      */
-    public function refund($user, $transaction)
+    public function refund($transaction)
     {
-        $customer = $this->customer->retrieve($user->meta->stripe_id);
-
-        $refund = $this->refund->create([
+        return $this->refund->create([
             'charge' => $transaction,
         ]);
-
-        return $refund;
     }
 }

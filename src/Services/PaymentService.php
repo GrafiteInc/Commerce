@@ -25,14 +25,14 @@ class PaymentService
     |--------------------------------------------------------------------------
     */
 
-    public function purchase($request, $cart)
+    public function purchase($stripeToken, $cart)
     {
         $user = auth()->user();
 
-        if (is_null($user->meta->stripe_id) && $request->input('stripeToken')) {
-            $user->meta->createAsStripeCustomer($request->input('stripeToken'));
-        } elseif ($request->input('stripeToken')) {
-            $user->meta->updateCard($request->input('stripeToken'));
+        if (is_null($user->meta->stripe_id) && $stripeToken) {
+            $user->meta->createAsStripeCustomer($stripeToken);
+        } elseif ($stripeToken) {
+            $user->meta->updateCard($stripeToken);
         }
 
         DB::beginTransaction();

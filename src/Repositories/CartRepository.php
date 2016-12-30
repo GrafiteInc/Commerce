@@ -30,12 +30,12 @@ class CartRepository
 
     public function cartContents()
     {
-        return Cart::where('user_id', $this->user->id)->orderBy('updated_at', 'desc')->get();
+        return Cart::where('customer_id', $this->user->id)->orderBy('updated_at', 'desc')->get();
     }
 
     public function productCount($id)
     {
-        $product = Cart::where('product_id', $id)->where('user_id', $this->user->id)->first();
+        $product = Cart::where('product_id', $id)->where('customer_id', $this->user->id)->first();
 
         if ($product) {
             return $product->quantity;
@@ -46,7 +46,7 @@ class CartRepository
 
     public function getItem($id)
     {
-        return Cart::where('id', $id)->where('user_id', $this->user->id)->first();
+        return Cart::where('id', $id)->where('customer_id', $this->user->id)->first();
     }
 
     public function addToCart($id, $type, $quantity, $variants)
@@ -63,7 +63,7 @@ class CartRepository
         }
 
         $input = [
-            'user_id' => $this->user->id,
+            'customer_id' => $this->user->id,
             'entity_id' => $id,
             'entity_type' => $type,
             'product_variants' => $variantArray,
@@ -75,7 +75,7 @@ class CartRepository
 
     public function changeItemQuantity($id, $quantity)
     {
-        $item = Cart::where('id', $id)->where('user_id', $this->user->id)->first();
+        $item = Cart::where('id', $id)->where('customer_id', $this->user->id)->first();
         $item->quantity = $quantity;
 
         return $item->save();
@@ -84,13 +84,13 @@ class CartRepository
     public function removeFromCart($id, $type)
     {
         $item = Cart::where('id', $id)->where('entity_type', $type)
-        ->where('user_id', $this->user->id)->first();
+        ->where('customer_id', $this->user->id)->first();
 
         return $item->delete();
     }
 
     public function emptyCart()
     {
-        return Cart::where('user_id', $this->user->id)->delete();
+        return Cart::where('customer_id', $this->user->id)->delete();
     }
 }

@@ -90,7 +90,7 @@
         </div>
     {!! Form::close() !!}
 
-    @if (is_null($transaction->refund_date) && empty($order))
+    @if (is_null($transaction->refund_date) && $order->count() == 0)
         {!! Form::open(['id' => 'refundForm', 'url' => 'quarx/transactions/refund', 'method' => 'post', 'class' => 'inline-form pull-left']) !!}
             @input_maker_create('uuid', ['type' => 'hidden'], $transaction)
             {!! Form::submit('Refund', ['class' => 'btn btn-warning']) !!}

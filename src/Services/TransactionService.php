@@ -2,7 +2,6 @@
 
 namespace Quarx\Modules\Hadron\Services;
 
-use App\Services\UserService;
 use Carbon\Carbon;
 use Config;
 use Quarx;
@@ -61,9 +60,8 @@ class TransactionService
     public function refund($uuid)
     {
         $transaction = $this->repo->findByUUID($uuid);
-        $user = app(UserService::class)->find($transaction->customer_id);
 
-        if (app(StripeService::class)->refund($user, $transaction->provider_id)) {
+        if (app(StripeService::class)->refund($transaction->provider_id)) {
             $transaction->update([
                 'refund_date' => Carbon::now(),
             ]);

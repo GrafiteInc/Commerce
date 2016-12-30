@@ -59,24 +59,32 @@ class StoreLogistics implements LogisticServiceInterface
     {
         // code...
         Log::info('After subscription');
+
+        return true;
     }
 
     public function afterRefundRequest($transaction)
     {
         // code...
         Log::info('After refund request');
+
+        return true;
     }
 
     public function afterRefund($transaction)
     {
         // code...
         Log::info('After refund');
+
+        return true;
     }
 
     public function cancelSubscription($user, $plan)
     {
         // code...
         Log::info('Cancel subscription');
+
+        return true;
     }
 
     /*
@@ -89,23 +97,31 @@ class StoreLogistics implements LogisticServiceInterface
     {
         // places order into orders table
         Log::info('Order was placed');
+
+        return true;
     }
 
     public function orderCreated($order)
     {
         // sets order to shipped - and does any needed logic
         Log::info('Order was shipped');
+
+        return true;
     }
 
     public function shipOrder($order)
     {
         // sets order to shipped - and does any needed logic
         Log::info('Order was shipped');
+
+        return true;
     }
 
     public function cancelOrder($order)
     {
         // sets order to shipped - and does any needed logic
         Log::info('Order was cancelled');
+
+        return true;
     }
 }

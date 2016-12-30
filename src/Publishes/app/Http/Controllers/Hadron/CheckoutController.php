@@ -34,7 +34,7 @@ class CheckoutController extends Controller
     public function process(Request $request)
     {
         try {
-            $response = $this->payment->purchase($request, $this->cart);
+            $response = $this->payment->purchase($request->input('stripeToken'), $this->cart);
         } catch (Exception $e) {
             $response = $e->getMessage();
         }
@@ -45,7 +45,7 @@ class CheckoutController extends Controller
     public function processWithLastCard(Request $request)
     {
         try {
-            $response = $this->payment->purchase($request, $this->cart);
+            $response = $this->payment->purchase($request->input('stripeToken'), $this->cart);
         } catch (Exception $e) {
             $response = $e->getMessage();
         }

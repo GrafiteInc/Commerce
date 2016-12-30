@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Cashier\Billable;
 
 class UserMeta extends Model
 {
+    use Billable;
+
     /**
      * The database table used by the model.
      *
@@ -26,10 +28,15 @@ class UserMeta extends Model
         'terms_and_cond',
         'is_active',
         'activation_token',
+        'stripe_id',
+        'card_brand',
+        'card_last_four',
+        'shipping_address',
+        'billing_address',
     ];
 
     /**
-     * User
+     * User.
      *
      * @return Relationship
      */
@@ -37,5 +44,4 @@ class UserMeta extends Model
     {
         return User::where('id', $this->user_id)->first();
     }
-
 }
