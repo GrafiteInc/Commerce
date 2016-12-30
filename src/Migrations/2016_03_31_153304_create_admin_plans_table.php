@@ -15,7 +15,6 @@ class CreateAdminPlansTable extends Migration
             $table->integer('amount');
             $table->string('interval');
             $table->string('name');
-            $table->string('title')->nullable();
             $table->string('currency');
             $table->string('descriptor')->nullable();
             $table->integer('trial_days')->default(0);

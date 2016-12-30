@@ -5,6 +5,7 @@ namespace App\Services;
 use Customer;
 use Illuminate\Support\Facades\Log;
 use Quarx\Modules\Hadron\Interfaces\LogisticServiceInterface;
+use Quarx\Modules\Hadron\Services\LogisticService;
 
 class StoreLogistics implements LogisticServiceInterface
 {
@@ -18,7 +19,7 @@ class StoreLogistics implements LogisticServiceInterface
     public function shipping($user)
     {
         $address = Customer::shippingAddress();
-        $weight = $this->cartWeight();
+        $weight = app(LogisticService::class)->cartWeight();
 
         return 0;
     }

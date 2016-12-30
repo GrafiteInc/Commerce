@@ -2,7 +2,6 @@
 
 namespace Quarx\Modules\Hadron\Repositories;
 
-use Auth;
 use Session;
 use Quarx\Modules\Hadron\Models\Cart;
 use Quarx\Modules\Hadron\Models\Variant;
@@ -12,7 +11,7 @@ class CartRepository
     public function __construct()
     {
         $this->session = new Session();
-        $this->user = Auth::user();
+        $this->user = auth()->user();
     }
 
     public function syncronize()

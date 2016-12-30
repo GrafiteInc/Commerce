@@ -70,7 +70,7 @@ class OrderRepository
      */
     public function getByCustomer($id)
     {
-        return Orders::where('user_id', '=', $id);
+        return Orders::where('customer_id', '=', $id);
     }
 
     /**
@@ -82,7 +82,7 @@ class OrderRepository
      */
     public function getByCustomerAndId($customer, $id)
     {
-        return Orders::where('user_id', $customer)->where('id', $id)->first();
+        return Orders::where('customer_id', $customer)->where('id', $id)->first();
     }
 
     /**

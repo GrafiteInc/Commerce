@@ -2,12 +2,12 @@
 
 namespace Quarx\Modules\Hadron\Controllers;
 
-use App\Http\Controllers\Controller;
+use Yab\Quarx\Controllers\QuarxController;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Quarx\Modules\Hadron\Services\TransactionService;
 
-class AnalyticsController extends Controller
+class AnalyticsController extends QuarxController
 {
     public function __construct(
         TransactionService $transactionService,

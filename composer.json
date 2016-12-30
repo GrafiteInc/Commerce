@@ -5,14 +5,15 @@
     "license": "MIT",
     "require": {
         "illuminate/support": "5.3",
-        "easypost/easypost-php": "^2.1",
         "laravel/cashier": "^7.0",
         "composer/installers": "~1.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
         "orchestra/testbench": "~3.0",
-        "mikey179/vfsStream": "^1.6"
+        "mikey179/vfsStream": "^1.6",
+        "yab/laracogs": "^2.1",
+        "yab/quarx": "^2.1"
     },
     "autoload": {
         "psr-4": {
@@ -24,6 +25,8 @@
     },
     "autoload-dev": {
         "classmap": [
+            "fixture/Controllers",
+            "src/Publishes",
             "tests/TestCase.php"
         ]
     },

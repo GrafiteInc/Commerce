@@ -14,12 +14,12 @@ class HadronModuleProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/PublishedAssets/views' => base_path('resources/hadron'),
-            __DIR__.'/PublishedAssets/Controllers' => app_path('Http/Controllers/Hadron'),
-            __DIR__.'/PublishedAssets/Services' => app_path('Services'),
-            __DIR__.'/PublishedAssets/public/js' => base_path('public/js'),
-            __DIR__.'/PublishedAssets/public/css' => base_path('public/css'),
-            __DIR__.'/PublishedAssets/Routes' => base_path('routes'),
+            __DIR__.'/Publishes/resources/hadron' => base_path('resources/hadron'),
+            __DIR__.'/Publishes/app/Http/Controllers/Hadron' => app_path('Http/Controllers/Hadron'),
+            __DIR__.'/Publishes/app/Services' => app_path('Services'),
+            __DIR__.'/Publishes/public/js' => base_path('public/js'),
+            __DIR__.'/Publishes/public/css' => base_path('public/css'),
+            __DIR__.'/Publishes/routes' => base_path('routes'),
         ]);
     }
 

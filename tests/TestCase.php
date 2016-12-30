@@ -10,6 +10,7 @@ class TestCase extends Orchestra\Testbench\TestCase
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('database.default', 'testbench');
+        $app['config']->set('app.debug', true);
         $app['config']->set('quarx.load-modules', false);
         $app['config']->set('database.connections.testbench', [
             'driver' => 'sqlite',
@@ -23,6 +24,10 @@ class TestCase extends Orchestra\Testbench\TestCase
         $app['Illuminate\Contracts\Auth\Access\Gate']->define('quarx', function ($user) {
             return true;
         });
+
+        $app['Illuminate\Routing\Router']->group(['namespace' => 'App\Http\Controllers'], function ($router) {
+            require __DIR__.'/../src/Publishes/Routes/hadron.php';
+        });
     }
 
     /**
@@ -35,21 +40,20 @@ class TestCase extends Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Yab\Quarx\QuarxProvider::class,
-            \Collective\Html\HtmlServiceProvider::class,
-            \Collective\Html\HtmlServiceProvider::class,
+            \Quarx\Modules\Hadron\HadronModuleProvider::class,
             \Yab\Laracogs\LaracogsProvider::class,
+            \Yab\Quarx\QuarxProvider::class,
         ];
     }
 
     protected function getPackageAliases($app)
     {
         return [
-            'Form' => \Collective\Html\FormFacade::class,
-            'HTML' => \Collective\Html\HtmlFacade::class,
-            'FormMaker' => \Yab\Laracogs\Facades\FormMaker::class,
-            'InputMaker' => \Yab\Laracogs\Facades\InputMaker::class,
-            'Crypto' => \Yab\Laracogs\Utilities\Crypto::class,
+            // 'Form' => \Collective\Html\FormFacade::class,
+            // 'HTML' => \Collective\Html\HtmlFacade::class,
+            // 'FormMaker' => \Yab\Laracogs\Facades\FormMaker::class,
+            // 'InputMaker' => \Yab\Laracogs\Facades\InputMaker::class,
+            // 'Crypto' => \Yab\Laracogs\Utilities\Crypto::class,
         ];
     }
 
@@ -60,17 +64,41 @@ class TestCase extends Orchestra\Testbench\TestCase
     {
         parent::setUp();
         $this->withFactories(__DIR__.'/../src/Models/Factories');
-        $this->artisan('migrate', [
-            '--database' => 'testbench',
-            '--realpath' => realpath(__DIR__.'/../src/PublishedAssets/Migrations'),
-        ]);
-        $this->artisan('migrate', [
-            '--database' => 'testbench',
-            '--realpath' => realpath(__DIR__.'/../src/Migrations'),
+        $this->artisan('vendor:publish', [
+            '--provider' => 'Yab\Laracogs\LaracogsProvider',
+            '--force' => true,
         ]);
         $this->artisan('vendor:publish', [
             '--provider' => 'Yab\Quarx\QuarxProvider',
             '--force' => true,
+        ]);
+        $this->artisan('vendor:publish', [
+            '--provider' => 'Quarx\Modules\Hadron\HadronModuleProvider',
+            '--force' => true,
+        ]);
+        $this->artisan('migrate', [
+            '--database' => 'testbench',
+            '--realpath' => realpath(__DIR__.'/../fixture/migrations'),
+        ]);
+        $this->artisan('migrate', [
+            '--database' => 'testbench',
+            '--realpath' => realpath(__DIR__.'/../vendor/yab/laracogs/src/Packages/Starter/database/migrations'),
+        ]);
+        $this->artisan('migrate', [
+            '--database' => 'testbench',
+            '--realpath' => realpath(__DIR__.'/../vendor/yab/quarx/src/PublishedAssets/Migrations'),
+        ]);
+        $this->artisan('migrate', [
+            '--database' => 'testbench',
+            '--realpath' => realpath(__DIR__.'/../vendor/yab/quarx/src/Migrations'),
+        ]);
+        $this->artisan('migrate', [
+            '--database' => 'testbench',
+            '--realpath' => realpath(__DIR__.'/../src/Publishes/Migrations'),
+        ]);
+        $this->artisan('migrate', [
+            '--database' => 'testbench',
+            '--realpath' => realpath(__DIR__.'/../src/Migrations'),
         ]);
         $this->withoutMiddleware();
         $this->withoutEvents();
@@ -82,10 +110,10 @@ class TestCase extends Orchestra\Testbench\TestCase
     |--------------------------------------------------------------------------
     */
 
-    public function testIndex()
+    public function testAnalytics()
     {
-        $this->withoutMiddleware();
-        $response = $this->call('GET', '/quarx/dashboard');
-        $this->assertEquals(200, $response->getStatusCode());
+        // $this->withoutMiddleware();
+        // $response = $this->call('GET', '/quarx/commerce-analytics');
+        // $this->assertEquals(200, $response->getStatusCode());
     }
 }

@@ -3,12 +3,12 @@
 namespace Quarx\Modules\Hadron\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Yab\Quarx\Controllers\QuarxController;
 use Quarx\Modules\Hadron\Requests\ProductRequest;
 use Quarx\Modules\Hadron\Services\ProductService;
 use Quarx\Modules\Hadron\Repositories\ProductVariantRepository;
 
-class ProductController extends Controller
+class ProductController extends QuarxController
 {
     public function __construct(ProductService $productService, ProductVariantRepository $productVariantRepository)
     {
