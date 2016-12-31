@@ -1,7 +1,7 @@
 # Hadron - An e-commerce package for Laravel
 
 Hadron is a e-commerce package for Quarx. It is an elegant solution for adding an e-commerce platform to your Quarx instance. This means it can be added to existing apps, or fresh installs and setups of the Quarx CMS.
-You can control, products, subscriptions, transaction history, orders, and some year by year analytics. Utilizing the power of Stripe, you can spin up a store, where you can offer subscriptions, ditial products for download, or even physical products for order shipments. Integrate any external services to handle shipping rates, and tracking number updates. Take control of the many things you make, and build the store you've always wanted.
+You can control, products, subscriptions, transaction history, orders, and some year by year analytics. Utilizing the power of Stripe, you can spin up a store, where you can offer subscriptions, digital products for download, or even physical products for order shipments. Integrate any external services to handle shipping rates, and tracking number updates. Take control of the many things you make, and build the store you've always wanted.
 
 ## Requirements
 1. PHP 5.6+
