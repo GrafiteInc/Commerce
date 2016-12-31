@@ -5,80 +5,93 @@ class TransactionTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        // factory(\Quarx\Modules\Hadron\Models\Product::class)->create();
+
+        $this->user = factory(App\Models\User::class)->create([
+            'id' => 1,
+        ]);
+        $this->role = factory(App\Models\Role::class)->create([
+            'name' => 'admin',
+        ]);
+
+        $this->user->roles()->attach($this->role);
+        $this->actingAs($this->user);
+
+        factory(\Quarx\Modules\Hadron\Models\Cart::class)->create();
+        factory(\Quarx\Modules\Hadron\Models\Product::class)->create([
+            'id' => 1,
+        ]);
+        factory(\Quarx\Modules\Hadron\Models\Plan::class)->create();
+        factory(\Quarx\Modules\Hadron\Models\Transactions::class)->create();
+        factory(\Quarx\Modules\Hadron\Models\Transactions::class)->create([
+            'id' => 999,
+        ]);
     }
 
-    // /*
-    // |--------------------------------------------------------------------------
-    // | Views
-    // |--------------------------------------------------------------------------
-    // */
+    /*
+    |--------------------------------------------------------------------------
+    | Views
+    |--------------------------------------------------------------------------
+    */
 
-    // public function testIndex()
-    // {
-    //     $response = $this->call('GET', 'quarx/products');
-    //     $this->assertEquals(200, $response->getStatusCode());
-    //     $this->assertViewHas('products');
-    // }
+    public function testIndex()
+    {
+        $response = $this->call('GET', 'quarx/transactions');
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertViewHas('transactions');
+        $this->see('Transactions');
+    }
 
-    // public function testCreate()
-    // {
-    //     $response = $this->call('GET', 'quarx/products/create');
-    //     $this->assertEquals(200, $response->getStatusCode());
-    //     $this->see('Title');
-    // }
+    public function testEdit()
+    {
+        factory(\Quarx\Modules\Hadron\Models\Transactions::class)->create([
+            'id' => 2,
+            'notes' => 'Le notes!',
+        ]);
+        $response = $this->call('GET', 'quarx/transactions/'.Crypto::encrypt(2).'/edit');
 
-    // public function testEdit()
-    // {
-    //     factory(\Quarx\Modules\Hadron\Models\Product::class)->create(['id' => 4]);
-    //     $response = $this->call('GET', 'quarx/products/4/edit');
-    //     $this->assertEquals(200, $response->getStatusCode());
-    //     $this->assertViewHas('product');
-    //     $this->see('Title');
-    // }
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertViewHas('transaction');
+        $this->see('#');
+    }
 
-    // /*
-    // |--------------------------------------------------------------------------
-    // | Actions
-    // |--------------------------------------------------------------------------
-    // */
+    /*
+    |--------------------------------------------------------------------------
+    | Actions
+    |--------------------------------------------------------------------------
+    */
 
-    // public function testStore()
-    // {
-    //     $product = ['name' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie', 'price' => 9.99];
-    //     $response = $this->call('POST', 'quarx/products', $product);
+    public function testSearch()
+    {
+        $response = $this->call('POST', 'quarx/transactions/search', ['term' => 'wtf']);
 
-    //     $this->seeInDatabase('products', ['id' => 2]);
-    //     $this->assertEquals(302, $response->getStatusCode());
-    // }
+        $this->assertViewHas('transactions');
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-    // public function testSearch()
-    // {
-    //     $response = $this->call('POST', 'quarx/products/search', ['term' => 'wtf']);
+    public function testUpdate()
+    {
+        factory(\Quarx\Modules\Hadron\Models\Transactions::class)->create([
+            'id' => 4,
+            'notes' => 'Star Wars !',
+        ]);
 
-    //     $this->assertViewHas('products');
-    //     $this->assertEquals(200, $response->getStatusCode());
-    // }
+        $response = $this->call('PATCH', 'quarx/transactions/'.Crypto::encrypt(4), [
+            'notes' => 'nada',
+        ]);
 
-    // public function testUpdate()
-    // {
-    //     $product = ['name' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie', 'price' => 19.99];
-    //     $this->call('POST', 'quarx/product', $product);
+        $this->seeInDatabase('transactions', ['notes' => 'nada']);
+        $this->assertEquals(302, $response->getStatusCode());
+    }
 
-    //     $response = $this->call('PATCH', 'quarx/products/1', [
-    //         'name' => 'dumber and dumber',
-    //         'url' => 'dumber-and-dumber',
-    //         'price' => 99.99,
-    //     ]);
+    public function testDelete()
+    {
+        $response = $this->call('DELETE', 'quarx/transactions/'.Crypto::encrypt(1));
+        $this->assertEquals(405, $response->getStatusCode());
+    }
 
-    //     $this->seeInDatabase('products', ['name' => 'dumber and dumber']);
-    //     $this->assertEquals(302, $response->getStatusCode());
-    // }
-
-    // public function testDelete()
-    // {
-    //     $response = $this->call('DELETE', 'quarx/products/1');
-    //     $this->assertEquals(302, $response->getStatusCode());
-    //     $this->assertRedirectedTo('quarx/products');
-    // }
+    public function testCreate()
+    {
+        $response = $this->call('get', 'quarx/transactions/create');
+        $this->assertEquals(405, $response->getStatusCode());
+    }
 }
