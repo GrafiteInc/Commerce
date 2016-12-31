@@ -100,7 +100,7 @@ When running updates for Hadron, in particular if you run `php artisan module:pu
 
 ## License
 
-Quarx is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Hadron is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
 
 ### Bug Reporting and Feature Requests
 
