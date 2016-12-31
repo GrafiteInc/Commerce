@@ -16,7 +16,7 @@
                     <tr>
                         <td><a href="{{ StoreHelper::customerSubscriptionUrl($subscription) }}">{!! $subscription->name !!}</a></td>
                         <td>${{ StoreHelper::subscriptionPlan($subscription)->price }}</td>
-                        <td>@if (is_null($subscription->ends_at)) {!! StoreHelper::cancelSubscriptionBtn($subscription->name, 'btn btn-xs btn-danger') !!} @endif</td>
+                        <td>@if (is_null($subscription->ends_at)) {!! StoreHelper::cancelSubscriptionBtn($subscription, 'btn btn-xs btn-danger') !!} @endif</td>
                     </tr>
                 @endif
             @endforeach
