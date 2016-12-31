@@ -10,5 +10,11 @@
         {!! StoreHelper::cancelSubscriptionBtn($subscription->name) !!}
     @endif
 
+    @if (is_null($subscription->ends_at))
+    <h2>Upcoming</h2>
+    <p>Total: {{ StoreHelper::subscriptionUpcoming($subscription)['total'] }}</p>
+    <p>Date: {{ StoreHelper::subscriptionUpcoming($subscription)['date'] }}</p>
+    @endif
+
 @endsection
 

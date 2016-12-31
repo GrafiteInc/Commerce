@@ -31,6 +31,24 @@ class StoreHelper
         return app(\Quarx\Modules\Hadron\Models\Plan::class)->getPlansByStripeId($subscription->stripe_plan);
     }
 
+    public static function subscriptionUpcoming($subscription)
+    {
+        $key = $subscription->stripe_id.'__'.auth()->id();
+
+        if (!\Cache::has($key)) {
+            $invoice = auth()->user()->meta->upcomingInvoice($subscription->name);
+            \Cache::put($key, [
+                'total' => round(($invoice->total / 100), 2),
+                'attempt_count' => $invoice->attempt_count,
+                'period_start' => $invoice->period_start,
+                'period_end' => $invoice->period_end,
+                'date' => \Carbon\Carbon::createFromTimestamp($invoice->date),
+            ], 25);
+        }
+
+        return \Cache::get($key);
+    }
+
     public static function subscriptionUrl($id)
     {
         return url('store/plan/'.crypto_encrypt($id));
