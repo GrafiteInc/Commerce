@@ -12,11 +12,13 @@
         </thead>
         <tbody>
             @foreach ($subscriptions as $subscription)
-                <tr>
-                    <td><a href="{{ url('store/account/subscriptions/'.Crypto::encrypt($subscription->name)) }}">{!! $subscription->name !!}</a></td>
-                    <td>${!! app('Quarx\Modules\Hadron\Models\Plan')->getPlansByStripeId($subscription->stripe_plan)->price !!}</td>
-                    <td>@if (is_null($subscription->ends_at)) {!! StoreHelper::cancelSubscriptionBtn($subscription->name, 'btn btn-xs btn-danger') !!} @endif</td>
-                </tr>
+                @if (StoreHelper::subscriptionPlan($subscription))
+                    <tr>
+                        <td><a href="{{ StoreHelper::customerSubscriptionUrl($subscription) }}">{!! $subscription->name !!}</a></td>
+                        <td>${{ StoreHelper::subscriptionPlan($subscription)->price }}</td>
+                        <td>@if (is_null($subscription->ends_at)) {!! StoreHelper::cancelSubscriptionBtn($subscription->name, 'btn btn-xs btn-danger') !!} @endif</td>
+                    </tr>
+                @endif
             @endforeach
         </tbody>
     </table>

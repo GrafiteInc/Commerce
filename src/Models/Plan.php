@@ -31,15 +31,13 @@ class Plan extends Eloquent
         'amount' => 'required',
         'interval' => 'required',
         'currency' => 'required',
-        'stripe_name' => 'required',
-        'subscription_name' => 'required',
         'descriptor' => 'required',
         'description' => 'required',
     ];
 
-    public function getPlansByStripeId($id)
+    public function getPlansByStripeId($name)
     {
-        return $this->where('stripe_name', $id)->first();
+        return $this->where('stripe_name', $name)->first();
     }
 
     public function getPriceAttribute()

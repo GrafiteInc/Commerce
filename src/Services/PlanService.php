@@ -2,9 +2,13 @@
 
 namespace Quarx\Modules\Hadron\Services;
 
+use App\Models\UserMeta;
 use App\Services\UserService;
+use Exception;
 use Illuminate\Support\Facades\Schema;
+use Laravel\Cashier\Subscription;
 use Quarx\Modules\Hadron\Models\Plan;
+use Yab\Quarx\Services\QuarxService;
 
 class PlanService
 {
@@ -67,13 +71,18 @@ class PlanService
         return $query->paginate(env('paginate', 25));
     }
 
-    public function create($input)
+    public function create($payload)
     {
         try {
-            $input['stripe_id'] = $input['stripe_name'];
-            $this->stripeService->createPlan($input);
+            $name = app(QuarxService::class)->convertToURL($payload['name']);
 
-            return $this->plan->create($input);
+            $payload['stripe_id'] = $name;
+            $payload['stripe_name'] = $name;
+            $payload['subscription_name'] = $name;
+
+            $this->stripeService->createPlan($payload);
+
+            return $this->plan->create($payload);
         } catch (Exception $e) {
             throw new Exception('Could not generate new plan', 1);
         }
@@ -115,17 +124,51 @@ class PlanService
         return $this->plan->find($id)->update($payload);
     }
 
+    /**
+     * Get subscribers.
+     *
+     * @param Quarx\Modules\Hadron\Models\Plan $plan
+     *
+     * @return Illuminate\Support\Collection
+     */
+    public function getSubscribers($plan)
+    {
+        $userCollection = collect();
+        $subscriptions = Subscription::where('stripe_plan', $plan->stripe_name)->get();
+
+        foreach ($subscriptions as $subscription) {
+            $userCollection->push(UserMeta::find($subscription->user_meta_id));
+        }
+
+        return $userCollection;
+    }
+
+    public function cancelSubscription($planId, $userMetaId)
+    {
+        $plan = $this->find($planId);
+        $userMeta = UserMeta::find($userMetaId);
+
+        return $userMeta->subscription($plan->subscription_name)->cancel();
+    }
+
     public function destroy($id)
     {
         try {
             $localPlan = $this->plan->find($id);
-            $planIsDeleted = $this->stripeService->deletePlan($localPlan->stripe_name);
+
+            try {
+                $planIsDeleted = $this->stripeService->deletePlan($localPlan->stripe_name);
+            } catch (\Stripe\Error\InvalidRequest $e) {
+                $localPlan->delete();
+
+                return true;
+            }
 
             // We need to unaubscribe our users
             if ($planIsDeleted) {
                 $subscriptions = Subscription::where('stripe_plan', $localPlan->stripe_name)->get();
                 foreach ($subscriptions as $subscription) {
-                    $meta = $this->userService->findByMetaID($subscription->user_meta_id);
+                    $user = UserMeta::find($subscription->user_meta_id);
                     $meta->subscription($localPlan->subscription_name)->cancel();
                 }
             }

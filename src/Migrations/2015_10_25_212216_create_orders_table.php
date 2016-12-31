@@ -16,9 +16,11 @@ class CreateOrdersTable extends Migration
             $table->integer('customer_id');
             $table->integer('transaction_id');
             $table->text('details');
-            $table->string('status')->default('pending');
             $table->text('shipping_address')->nullable();
             $table->boolean('is_shipped')->default(0);
+            $table->string('tracking_number')->nullable();
+            $table->text('notes')->nullable();
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

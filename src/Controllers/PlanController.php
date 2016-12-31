@@ -77,8 +77,11 @@ class PlanController extends Controller
     public function edit($id)
     {
         $plan = $this->service->find($id);
+        $customers = $this->service->getSubscribers($plan);
 
-        return view('hadron::plans.edit')->with('plan', $plan);
+        return view('hadron::plans.edit')
+            ->with('customers', $customers)
+            ->with('plan', $plan);
     }
 
     /**
@@ -117,6 +120,25 @@ class PlanController extends Controller
         }
 
         return back()->with('message', 'Failed to update');
+    }
+
+    /**
+     * Cancel a subscription.
+     *
+     * @param int $plan
+     * @param int $userMeta
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cancelSubscription($plan, $userMeta)
+    {
+        $result = $this->service->cancelSubscription($plan, $userMeta);
+
+        if ($result) {
+            return back()->with('message', 'Successfully cancelled');
+        }
+
+        return back()->with('message', 'Failed to cancel');
     }
 
     /**

@@ -2,8 +2,6 @@
 
 @section('content')
 
-    @include('hadron::modals')
-
     <div class="row">
         <a class="btn btn-primary pull-right" href="{!! route('quarx.plans.create') !!}">Add New</a>
         <div class="pull-right">
@@ -22,7 +20,7 @@
                 <thead>
                     <th>Name</th>
                     <th>Enabled</th>
-                    <th class="text-right" width="150px">Action</th>
+                    <th class="text-right" width="150px">Actions</th>
                 </thead>
                 <tbody>
                 @foreach($plans as $plan)
@@ -30,12 +28,7 @@
                         <td><a href="{!! route('quarx.plans.edit', [$plan->id]) !!}">{{ $plan->name }}</a></td>
                         <td>@if ($plan->enabled) <span class="fa fa-check"></span> @endif</td>
                         <td class="text-right">
-                            <form method="post" action="{!! url('admin/plans/'.$plan->id) !!}">
-                                {!! csrf_field() !!}
-                                {!! method_field('DELETE') !!}
-                                <button class="btn delete-plan-btn btn-danger btn-xs pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
-                            </form>
-                            <a class="btn btn-default btn-xs pull-right raw-margin-right-16" href="{!! route('quarx.plans.edit', [$plan->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-default btn-xs pull-right" href="{!! route('quarx.plans.edit', [$plan->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

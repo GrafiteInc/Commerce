@@ -2,10 +2,12 @@
 
 @section('stylesheets')
     @parent
-    {!! Minify::stylesheet(Quarx::moduleAsset('hadron', 'css/store.css', 'text/css')) !!}
+    <link rel="stylesheet" type="text/css" href="{{ Quarx::moduleAsset('hadron', 'css/store.css', 'text/css') }}">
 @stop
 
 @section('content')
+
+    @include('hadron::modals')
 
     <div class="row">
         <h1>Plans: Edit</h1>
@@ -19,11 +21,10 @@
                 </div>
                 <div class="panel-body text-center plan-details">
                     <h2>$ {{ $plan->amount/100 }} {{ strtoupper($plan->currency) }}/ {{ strtoupper($plan->interval) }}</h2>
-                    <p><span class="plan-slogan">{{ $plan->slogan }}</span></p>
                     <p><span class="plan-description">{{ $plan->description }}</span></p>
                 </div>
                 <div class="panel-footer">
-                    <p><span class="plan-descriptor">{{ $plan->descriptor }}</span></p>
+                    <span class="plan-descriptor">{{ $plan->descriptor }}</span>
                 </div>
             </div>
         </div>
@@ -37,9 +38,50 @@
             {!! Form::close() !!}
 
             @if ($plan->enabled)
-                <a href="{{ url('quarx/plans/'.$plan->id.'/state-change/disable') }}" class="btn btn-warning">Disable</a>
+                <a href="{{ url('quarx/plans/'.$plan->id.'/state-change/disable') }}" class="btn btn-warning pull-right raw-margin-right-16">Disable</a>
             @else
-                <a href="{{ url('quarx/plans/'.$plan->id.'/state-change/enable') }}" class="btn btn-default">Enable</a>
+                <a href="{{ url('quarx/plans/'.$plan->id.'/state-change/enable') }}" class="btn btn-default pull-right raw-margin-right-16">Enable</a>
+            @endif
+
+            <form id="deletePlanForm" method="post" action="{!! url('quarx/plans/'.$plan->id) !!}">
+                {!! csrf_field() !!}
+                {!! method_field('DELETE') !!}
+                <button class="btn delete-plan-btn btn-danger pull-left" type="submit"><i class="fa fa-trash"></i> Delete</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="raw-margin-bottom-36 text-center">Current Subscribers</h2>
+
+            @if ($customers->count() == 0)
+                <div class="well text-center">
+                    <span>You have no subscribers yet! Start selling :)</span>
+                </div>
+            @else
+                <table class="table table-striped">
+                    <tr>
+                        <th>Customer</th>
+                        <th>Active Since</th>
+                        <th>Ends on</th>
+                        <th class="text-right">Actions</th>
+                    </tr>
+                    @foreach($customers as $customer)
+                        <tr>
+                            <td><a href="{{ url('admin/users/'.$customer->user()->id.'/edit') }}">{{ $customer->user()->name }}</a></td>
+                            <td>{{ $customer->subscription($plan->stripe_name)->created_at }}</td>
+                            <td>{{ $customer->subscription($plan->stripe_name)->ends_at or 'N/A' }}</td>
+                            <td>
+                                <form method="post" action="{!! url('quarx/plans/'.$plan->id.'/cancel-subscription/'.$customer->id) !!}">
+                                    {!! csrf_field() !!}
+                                    {!! method_field('DELETE') !!}
+                                    <button class="btn btn-danger btn-xs pull-right" onclick="return confirm('Are you sure you want to cancel this subscription?')" type="submit"><i class="fa fa-close"></i> Cancel Subscription</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
             @endif
         </div>
     </div>
@@ -48,5 +90,18 @@
 
 @section('javascript')
     @parent
-    {!! Minify::javascript(Quarx::moduleAsset('hadron', 'js/store.js', 'application/javascript')) !!}
-@stop
+    <script type="text/javascript" src="{{ Quarx::moduleAsset('hadron', 'js/store.js', 'application/javascript') }}"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#deletePlanForm').submit(function(e){
+                e.preventDefault();
+                $('#deletePlanDialog').modal('show');
+            });
+
+            $('#deletePlanBtn').click(function(e){
+                $('#deletePlanForm')[0].submit();
+                $('#deletePlanDialog').modal('hide');
+            });
+        });
+    </script>
+@endsection

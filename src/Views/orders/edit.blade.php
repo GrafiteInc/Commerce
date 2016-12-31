@@ -14,7 +14,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <a id="refundBtn" type="button" class="btn btn-warning" href="#">Confirm Cancel</a>
+                    <a id="cancelBtn" type="button" class="btn btn-warning" href="#">Confirm Cancel</a>
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@
                 $('#cancelDialog').modal('show');
             });
 
-            $('#refundBtn').click(function(e){
+            $('#cancelBtn').click(function(e){
                 $('#cancelForm')[0].submit();
                 $('#cancelDialog').modal('hide');
             });

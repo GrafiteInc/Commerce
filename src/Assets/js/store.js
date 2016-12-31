@@ -1,14 +1,24 @@
 function _visualizeThePlan() {
-    $('.plan-title').text($('#Name').val());
+    if ($('#Name').val() > '') {
+        $('.plan-title').text($('#Name').val());
+    } else {
+        $('.plan-title').text('Plan Name');
+    }
+
     $('.plan-price').text(parseFloat($('#Amount').val() / 100));
     $('.plan-currency').text($('#Currency').val().toUpperCase());
     $('.plan-interval').text($('#Interval').val().toUpperCase());
-    $('.plan-slogan').text($('#Slogan').val());
-    $('.plan-descriptor').text($('#Descriptor').val());
+
+    if ($('#Descriptor').val() > '') {
+        $('.plan-descriptor').text($('#Descriptor').val());
+    } else {
+        $('.plan-descriptor').text('Credit Card Descriptor');
+    }
+
     $('.plan-description').text($('#Description').val());
 }
 
-$('input').bind('change keyup', function(){
+$('input, textarea').bind('change keyup', function(){
     _visualizeThePlan();
 });
 

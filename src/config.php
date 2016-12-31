@@ -109,6 +109,7 @@ return [
         ],
         'amount' => [
             'type' => 'number',
+            'alt_name' => 'Amount (&cent;)',
         ],
         'interval' => [
             'type' => 'select',
@@ -131,14 +132,9 @@ return [
             'type' => 'number',
             'alt_name' => 'Trial Days',
         ],
-        'stripe_name' => [
-            'type' => 'string',
-        ],
-        'subscription_name' => [
-            'type' => 'string',
-        ],
         'descriptor' => [
-            'type' => 'textarea',
+            'type' => 'string',
+            'alt_name' => 'Credit Card Descriptor',
         ],
         'description' => [
             'type' => 'textarea',

@@ -2,7 +2,7 @@
 
 @section('stylesheets')
     @parent
-    {!! Minify::stylesheet(Quarx::moduleAsset('hadron', 'css/store.css', 'text/css')) !!}
+    <link rel="stylesheet" type="text/css" href="{{ Quarx::moduleAsset('hadron', 'css/store.css', 'text/css') }}">
 @stop
 
 @section('content')
@@ -25,7 +25,7 @@
                     <p><span class="plan-description">&nbsp;</span></p>
                 </div>
                 <div class="panel-footer">
-                    <p><span class="plan-description">&nbsp;</span></p>
+                    <span class="plan-descriptor">&nbsp;</span>
                 </div>
             </div>
         </div>
@@ -43,5 +43,5 @@
 
 @section('javascript')
     @parent
-    {!! Minify::javascript(Quarx::moduleAsset('hadron', 'js/store.js', 'application/javascript')) !!}
+    <script type="text/javascript" src="{!! Quarx::moduleAsset('hadron', 'js/store.js', 'application/javascript') !!}"></script>
 @stop

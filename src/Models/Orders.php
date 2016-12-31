@@ -17,12 +17,11 @@ class Orders extends Model
         'customer_id',
         'transaction_id',
         'details',
-        'shipping',
+        'shipping_address',
         'is_shipped',
         'tracking_number',
         'notes',
         'status',
-        'shipping_address',
     ];
 
     public static $rules = [];

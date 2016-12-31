@@ -1,78 +1,116 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-
 class SubscriptionsTest extends TestCase
 {
-    // use WithoutMiddleware;
+    public function setUp()
+    {
+        parent::setUp();
 
-    // public function setUp()
-    // {
-    //     parent::setUp();
+        $this->user = factory(App\Models\User::class)->create([
+            'id' => 1,
+        ]);
+        $this->role = factory(App\Models\Role::class)->create([
+            'name' => 'admin',
+        ]);
 
-    //     $this->login('admin');
-    //     $this->migrateUp('quarx');
-    //     factory(\Quarx\Modules\Hadron\Models\SubscriptionPlans::class)->create();
-    //     factory(\Quarx\Modules\Hadron\Models\SubscriptionPlans::class)->make();
-    // }
+        $this->user->roles()->attach($this->role);
+        $this->actingAs($this->user);
 
-    // /*
-    // |--------------------------------------------------------------------------
-    // | Views
-    // |--------------------------------------------------------------------------
-    // */
+        factory(\Quarx\Modules\Hadron\Models\Cart::class)->create();
+        factory(\Quarx\Modules\Hadron\Models\Product::class)->create();
+        factory(\Quarx\Modules\Hadron\Models\Plan::class)->create();
+    }
 
-    // public function testIndex()
-    // {
-    //     $response = $this->call('GET', '/quarx/subscriptions');
-    //     $this->assertEquals(200, $response->getStatusCode());
-    //     $this->assertViewHas('subscriptions');
-    // }
+    /*
+    |--------------------------------------------------------------------------
+    | Views
+    |--------------------------------------------------------------------------
+    */
+
+    public function testIndex()
+    {
+        $response = $this->call('GET', 'quarx/plans');
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertViewHas('plans');
+        $this->see('Orders');
+    }
 
     // public function testCreate()
     // {
-    //     $response = $this->call('GET', '/quarx/subscriptions/create');
+    //     $response = $this->call('GET', 'quarx/plans/create');
     //     $this->assertEquals(200, $response->getStatusCode());
+    //     $this->see('Title');
     // }
 
-    // public function testEdit()
-    // {
-    //     $response = $this->call('GET', '/quarx/subscriptions/'.Crypto::encrypt(1).'/edit');
-    //     $this->assertEquals(200, $response->getStatusCode());
-    //     $this->assertViewHas('subscriptions');
-    // }
+    public function testEdit()
+    {
+        factory(\Quarx\Modules\Hadron\Models\Orders::class)->create([
+            'id' => 2,
+            'details' => json_encode([
+                [
+                    'price' => 10900,
+                    'quantity' => 1,
+                    'name' => 'foobar',
+                ],
+            ]),
+        ]);
+        $response = $this->call('GET', 'quarx/plans/'.Crypto::encrypt(2).'/edit');
 
-    // |--------------------------------------------------------------------------
-    // | Actions
-    // |--------------------------------------------------------------------------
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertViewHas('order');
+        $this->see('#');
+    }
 
-    // public function testStore()
-    // {
-    //     $subscription = factory(\Quarx\Modules\Hadron\Models\SubscriptionPlans::class)->make(['id' => 2]);
-    //     $response = $this->call('POST', '/quarx/subscriptions', $subscription['attributes']);
+    /*
+    |--------------------------------------------------------------------------
+    | Actions
+    |--------------------------------------------------------------------------
+    */
 
-    //     $this->assertEquals(302, $response->getStatusCode());
-    //     $this->assertRedirectedTo('/quarx/subscriptions');
-    // }
+    public function testSearch()
+    {
+        $response = $this->call('POST', 'quarx/plans/search', ['term' => 'wtf']);
 
-    // public function testUpdate()
-    // {
-    //     $response = $this->call('PATCH', '/quarx/subscriptions/'.Crypto::encrypt(1), [
-    //         'name' => 'awesome plan!',
-    //         'price' => 9.99,
-    //         'provider_id' => 'z879as87d89a',
-    //         'interval' => 'monthly',
-    //         'statement_desc' => 'something',
-    //     ]);
+        $this->assertViewHas('plans');
+        $this->assertEquals(200, $response->getStatusCode());
+    }
 
-    //     $this->assertEquals(302, $response->getStatusCode());
-    //     $this->assertRedirectedTo('/quarx/subscriptions/'.Crypto::encrypt(1).'/edit');
-    // }
+    public function testUpdate()
+    {
+        factory(\Quarx\Modules\Hadron\Models\Orders::class)->create([
+            'id' => 4,
+            'details' => json_encode([
+                [
+                    'price' => 100,
+                    'quantity' => 1,
+                    'name' => 'foobar',
+                ],
+            ]),
+        ]);
 
-    // public function testDelete()
-    // {
-    //     $response = $this->call('GET', '/quarx/subscriptions/'.Crypto::encrypt(1).'/delete');
-    //     $this->assertEquals(302, $response->getStatusCode());
-    //     $this->assertRedirectedTo('/quarx/subscriptions');
-    // }
+        $response = $this->call('PATCH', 'quarx/plans/'.Crypto::encrypt(4), [
+            'details' => json_encode([
+                [
+                    'price' => 10900,
+                    'quantity' => 1,
+                    'name' => 'foobar',
+                ],
+            ]),
+        ]);
+
+        $this->seeInDatabase('plans', ['details' => '[{"price":10900,"quantity":1,"name":"foobar"}]']);
+        $this->assertEquals(302, $response->getStatusCode());
+    }
+
+    public function testDelete()
+    {
+        $response = $this->call('DELETE', 'quarx/plans/'.Crypto::encrypt(1));
+        $this->assertEquals(405, $response->getStatusCode());
+    }
+
+    public function testCreate()
+    {
+        $response = $this->call('get', 'quarx/plans/create');
+        $this->assertEquals(405, $response->getStatusCode());
+    }
 }

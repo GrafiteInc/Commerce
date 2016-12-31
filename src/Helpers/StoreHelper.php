@@ -21,6 +21,16 @@ class StoreHelper
         return url('store/product/'.$url);
     }
 
+    public static function customerSubscriptionUrl($subscription)
+    {
+        return url('store/account/subscriptions/'.crypto_encrypt($subscription->name));
+    }
+
+    public static function subscriptionPlan($subscription)
+    {
+        return app(\Quarx\Modules\Hadron\Models\Plan::class)->getPlansByStripeId($subscription->stripe_plan);
+    }
+
     public static function subscriptionUrl($id)
     {
         return url('store/plan/'.crypto_encrypt($id));
