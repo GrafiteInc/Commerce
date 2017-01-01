@@ -6,14 +6,14 @@
 
 @section('store-header')
     <div class="store-header">
-        <h2><a href="{!! URL::to('store') !!}">Our Store</a>
-            <a href="{!! URL::to('store/cart/contents') !!}">
+        <h2><a href="{!! url('store') !!}">Our Store</a>
+            <a href="{!! url('store/cart/contents') !!}">
                 <span class="pull-right">
                     <span class="fa fa-shopping-cart"></span>
                     <span class="cart-count"></span>
                 </span>
             </a>
-            <a href="{!! URL::to('store/cart/empty') !!}">
+            <a href="{!! url('store/cart/empty') !!}">
                 <span class="pull-right icon-stack">
                     <span class="fa fa-shopping-cart icon-stack-1x"></span>
                     <span class="fa fa-remove text-danger icon-stack-2x"></span>

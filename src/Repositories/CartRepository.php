@@ -8,12 +8,18 @@ use Quarx\Modules\Hadron\Models\Variant;
 
 class CartRepository
 {
+    public $user;
+    public $session;
+
     public function __construct()
     {
         $this->session = new Session();
         $this->user = auth()->user();
     }
 
+    /**
+     * Sync with the session cart.
+     */
     public function syncronize()
     {
         $cartContents = Session::get('cart');
@@ -28,11 +34,23 @@ class CartRepository
         Session::forget('cart');
     }
 
+    /**
+     * Get the cart contents.
+     *
+     * @return array
+     */
     public function cartContents()
     {
         return Cart::where('customer_id', $this->user->id)->orderBy('updated_at', 'desc')->get();
     }
 
+    /**
+     * Get product count.
+     *
+     * @param int $id
+     *
+     * @return int
+     */
     public function productCount($id)
     {
         $product = Cart::where('product_id', $id)->where('customer_id', $this->user->id)->first();
@@ -44,11 +62,28 @@ class CartRepository
         return 0;
     }
 
+    /**
+     * Get cart item.
+     *
+     * @param int $id
+     *
+     * @return obj
+     */
     public function getItem($id)
     {
         return Cart::where('id', $id)->where('customer_id', $this->user->id)->first();
     }
 
+    /**
+     * Add item to cart.
+     *
+     * @param int    $id
+     * @param string $type
+     * @param int    $quantity
+     * @param string $variants
+     *
+     * @return bool
+     */
     public function addToCart($id, $type, $quantity, $variants)
     {
         $variantArray = null;
@@ -73,6 +108,14 @@ class CartRepository
         return Cart::create($input);
     }
 
+    /**
+     * Change the item count.
+     *
+     * @param int $id
+     * @param int $quantity
+     *
+     * @return bool
+     */
     public function changeItemQuantity($id, $quantity)
     {
         $item = Cart::where('id', $id)->where('customer_id', $this->user->id)->first();
@@ -81,6 +124,14 @@ class CartRepository
         return $item->save();
     }
 
+    /**
+     * Remove from cart.
+     *
+     * @param int    $id
+     * @param string $type
+     *
+     * @return bool
+     */
     public function removeFromCart($id, $type)
     {
         $item = Cart::where('id', $id)->where('entity_type', $type)
@@ -89,6 +140,11 @@ class CartRepository
         return $item->delete();
     }
 
+    /**
+     * Empty the cart.
+     *
+     * @return bool
+     */
     public function emptyCart()
     {
         return Cart::where('customer_id', $this->user->id)->delete();

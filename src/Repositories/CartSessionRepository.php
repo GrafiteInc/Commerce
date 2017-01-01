@@ -8,8 +8,6 @@ use Quarx\Modules\Hadron\Models\Variant;
 
 class CartSessionRepository
 {
-    public $cart;
-
     public function __construct()
     {
         if (is_null(Session::get('cart'))) {
@@ -20,6 +18,11 @@ class CartSessionRepository
         }
     }
 
+    /**
+     * Get cart contents.
+     *
+     * @return array
+     */
     public function cartContents()
     {
         $contents = [];
@@ -31,6 +34,16 @@ class CartSessionRepository
         return $contents;
     }
 
+    /**
+     * Add item to cart.
+     *
+     * @param int    $id
+     * @param string $type
+     * @param int    $quantity
+     * @param string $variants
+     *
+     * @return bool
+     */
     public function addToCart($id, $type, $quantity, $variables)
     {
         $cart = Session::get('cart');
@@ -60,6 +73,14 @@ class CartSessionRepository
         return true;
     }
 
+    /**
+     * Change the item count.
+     *
+     * @param int $id
+     * @param int $quantity
+     *
+     * @return bool
+     */
     public function changeItemQuantity($id, $quantity)
     {
         foreach (Session::get('cart') as $key => $item) {
@@ -77,6 +98,14 @@ class CartSessionRepository
         return true;
     }
 
+    /**
+     * Remove from cart.
+     *
+     * @param int    $id
+     * @param string $type
+     *
+     * @return bool
+     */
     public function removeFromCart($id)
     {
         foreach (Session::get('cart') as $key => $item) {
@@ -89,6 +118,11 @@ class CartSessionRepository
         return Session::put('cart', Session::get('cart'));
     }
 
+    /**
+     * Empty the cart.
+     *
+     * @return bool
+     */
     public function emptyCart()
     {
         return Session::forget('cart');

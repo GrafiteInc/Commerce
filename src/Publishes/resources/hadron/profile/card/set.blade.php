@@ -15,7 +15,7 @@
             </div>
 
             <div class="col-md-6 col-md-offset-3 raw-margin-top-24 well">
-                <form id="userPayment" method="post" action="{{ URL::to('store/account/card') }}">
+                <form id="userPayment" method="post" action="{{ url('store/account/card') }}">
                     {!! Form::token(); !!}
 
                     @include('hadron-frontend::profile.card.card-form')
@@ -35,7 +35,7 @@
 
 @section('pre-javascript')
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <script> Stripe.setPublishableKey('{{ Config::get("services.stripe.key") }}'); </script>
+    <script> Stripe.setPublishableKey('{{ config("services.stripe.key") }}'); </script>
 @stop
 
 @section('javascript')

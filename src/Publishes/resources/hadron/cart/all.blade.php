@@ -33,7 +33,7 @@
         </tbody>
     </table>
 
-    <a class="pull-right" href="{!! URL::to('store/checkout') !!}">Checkout</a>
+    <a class="pull-right" href="{!! url('store/checkout') !!}">Checkout</a>
 
 @endsection
 

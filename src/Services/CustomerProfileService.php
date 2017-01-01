@@ -4,11 +4,23 @@ namespace Quarx\Modules\Hadron\Services;
 
 class CustomerProfileService
 {
+    /**
+     * User has profile.
+     *
+     * @return bool
+     */
     public function hasProfile()
     {
         return (bool) auth()->user()->meta->card_last_four;
     }
 
+    /**
+     * Get user shipping address.
+     *
+     * @param string $key
+     *
+     * @return string
+     */
     public function shippingAddress($key = null)
     {
         $profile = auth()->user()->meta;
@@ -22,6 +34,13 @@ class CustomerProfileService
         return '';
     }
 
+    /**
+     * Get user billing address.
+     *
+     * @param string $key
+     *
+     * @return string
+     */
     public function billingAddress($key = null)
     {
         $profile = auth()->user()->meta;
@@ -35,6 +54,13 @@ class CustomerProfileService
         return '';
     }
 
+    /**
+     * Get the last card.
+     *
+     * @param string $key
+     *
+     * @return string
+     */
     public function lastCard($key = null)
     {
         $profile = auth()->user()->meta;
@@ -51,6 +77,13 @@ class CustomerProfileService
         return $response;
     }
 
+    /**
+     * Update the user profile.
+     *
+     * @param string $address
+     *
+     * @return bool
+     */
     public function updateProfileAddress($address)
     {
         $addressInput = [

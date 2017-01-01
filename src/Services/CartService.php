@@ -14,6 +14,11 @@ class CartService
         $this->service = $service;
     }
 
+    /**
+     * Set the cart repo.
+     *
+     * @return mixed
+     */
     public function cartRepo()
     {
         $repo = null;
@@ -34,11 +39,31 @@ class CartService
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * Add to cart button.
+     *
+     * @param int    $id
+     * @param string $type
+     * @param string $content
+     * @param string $class
+     *
+     * @return string
+     */
     public function addToCartBtn($id, $type, $content, $class = '')
     {
         return '<button class="'.$class.'" onclick="store.addToCart('.$id.', 1, \''.$type.'\')">'.$content.'</button>';
     }
 
+    /**
+     * Remove from cart button.
+     *
+     * @param int    $id
+     * @param string $type
+     * @param string $content
+     * @param string $class
+     *
+     * @return string
+     */
     public function removeFromCartBtn($id, $type, $content, $class = '')
     {
         return '<button class="'.$class.'" onclick="store.removeFromCart('.$id.', \''.$type.'\')">'.$content.'</button>';
@@ -50,6 +75,11 @@ class CartService
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * Get the cart item count.
+     *
+     * @return int
+     */
     public function itemCount()
     {
         $contents = $this->cartRepo()->cartContents();
@@ -63,6 +93,11 @@ class CartService
         return $total;
     }
 
+    /**
+     * Get the cart contents.
+     *
+     * @return array
+     */
     public function contents()
     {
         $cartContents = [];
@@ -82,6 +117,14 @@ class CartService
         return $cartContents;
     }
 
+    /**
+     * Get the price variants.
+     *
+     * @param obj     $item
+     * @param Product $product
+     *
+     * @return float
+     */
     public function priceVariants($item, $product)
     {
         $variants = json_decode($item->product_variants);
@@ -102,6 +145,14 @@ class CartService
         return (float) $product->price * 100;
     }
 
+    /**
+     * Get the weight variants.
+     *
+     * @param obj     $item
+     * @param Product $product
+     *
+     * @return float
+     */
     public function weightVariants($item, $product)
     {
         $variants = json_decode($item->product_variants);
@@ -124,6 +175,13 @@ class CartService
         return 0;
     }
 
+    /**
+     * Get the default value.
+     *
+     * @param Variant $variant
+     *
+     * @return string
+     */
     public function getDefaultValue($variant)
     {
         $matches = explode('|', $variant->value);
@@ -131,6 +189,13 @@ class CartService
         return $matches[0];
     }
 
+    /**
+     * Get a variant ID.
+     *
+     * @param Variant $variant
+     *
+     * @return int
+     */
     public function getId($variant)
     {
         $variantObject = json_decode($variant);
@@ -138,11 +203,28 @@ class CartService
         return $variantObject->id;
     }
 
+    /**
+     * Check if product has variants.
+     *
+     * @param int $id
+     *
+     * @return bool
+     */
     public function productHasVariants($id)
     {
         return (bool) Variant::where('product_id', $id)->get();
     }
 
+    /**
+     * Add item to cart.
+     *
+     * @param int    $id
+     * @param string $type
+     * @param int    $quantity
+     * @param string $variants
+     *
+     * @return bool
+     */
     public function addToCart($id, $type, $quantity, $variants)
     {
         if (empty(json_decode($variants)) && $this->productHasVariants($id)) {
@@ -161,16 +243,37 @@ class CartService
         return $this->cartRepo()->addToCart($id, $type, $quantity, $variants);
     }
 
+    /**
+     * Change the item quantity.
+     *
+     * @param int $id
+     * @param int $count
+     *
+     * @return bool
+     */
     public function changeItemQuantity($id, $count)
     {
         return $this->cartRepo()->changeItemQuantity($id, $count);
     }
 
+    /**
+     * Remove from cart.
+     *
+     * @param int    $id
+     * @param string $type
+     *
+     * @return bool
+     */
     public function removeFromCart($id, $type)
     {
         return $this->cartRepo()->removeFromCart($id, $type);
     }
 
+    /**
+     * Empty the cart.
+     *
+     * @return bool
+     */
     public function emptyCart()
     {
         return $this->cartRepo()->emptyCart();
@@ -182,6 +285,11 @@ class CartService
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * Get the cart tax.
+     *
+     * @return float
+     */
     public function getCartTax()
     {
         $taxRate = (app(LogisticService::class)->getTaxPercent(auth()->user()) / 100);
@@ -190,6 +298,11 @@ class CartService
         return round($subtotal * $taxRate, 2);
     }
 
+    /**
+     * Get cart subtotal.
+     *
+     * @return float
+     */
     public function getCartSubTotal()
     {
         $total = 0;
@@ -205,6 +318,11 @@ class CartService
         return $total;
     }
 
+    /**
+     * Get the cart total.
+     *
+     * @return float
+     */
     public function getCartTotal()
     {
         $taxRate = (app(LogisticService::class)->getTaxPercent(auth()->user()) / 100);
