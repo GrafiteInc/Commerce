@@ -3,6 +3,7 @@
 namespace Quarx\Modules\Hadron\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 use Quarx\Modules\Hadron\Models\Plan;
 
 class PlanRequest extends FormRequest
@@ -14,7 +15,7 @@ class PlanRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Gate::allows('quarx', auth()->user());
     }
 
     /**

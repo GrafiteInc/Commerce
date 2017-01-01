@@ -5,6 +5,17 @@ class ProductTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+
+        $this->user = factory(App\Models\User::class)->create([
+            'id' => 1,
+        ]);
+        $this->role = factory(App\Models\Role::class)->create([
+            'name' => 'admin',
+        ]);
+
+        $this->user->roles()->attach($this->role);
+        $this->actingAs($this->user);
+
         factory(\Quarx\Modules\Hadron\Models\Product::class)->create();
     }
 

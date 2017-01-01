@@ -2,7 +2,6 @@
 
 namespace Quarx\Modules\Hadron\Services;
 
-use LogisticService;
 use Illuminate\Support\Facades\Auth;
 use Quarx\Modules\Hadron\Models\Variant;
 use Quarx\Modules\Hadron\Repositories\CartRepository;
@@ -185,7 +184,7 @@ class CartService
 
     public function getCartTax()
     {
-        $taxRate = (LogisticService::getTaxPercent(auth()->user()) / 100);
+        $taxRate = (app(LogisticService::class)->getTaxPercent(auth()->user()) / 100);
         $subtotal = $this->getCartSubTotal();
 
         return round($subtotal * $taxRate, 2);
@@ -208,9 +207,9 @@ class CartService
 
     public function getCartTotal()
     {
-        $taxRate = (LogisticService::getTaxPercent(auth()->user()) / 100);
+        $taxRate = (app(LogisticService::class)->getTaxPercent(auth()->user()) / 100);
         $subtotal = $this->getCartSubTotal();
 
-        return round($subtotal + LogisticService::shipping(auth()->user()) + ($subtotal * $taxRate), 2);
+        return round($subtotal + app(LogisticService::class)->shipping(auth()->user()) + ($subtotal * $taxRate), 2);
     }
 }

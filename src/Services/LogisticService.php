@@ -7,8 +7,10 @@ use Quarx\Modules\Hadron\Interfaces\LogisticServiceInterface;
 
 class LogisticService implements LogisticServiceInterface
 {
-    public function __construct(CartService $cart, StoreLogistics $storeLogistics)
-    {
+    public function __construct(
+        CartService $cart,
+        StoreLogistics $storeLogistics
+    ) {
         $this->cartService = $cart;
         $this->storeLogistics = $storeLogistics;
     }

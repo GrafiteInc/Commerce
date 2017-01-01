@@ -36,7 +36,7 @@ class HadronRouteProvider extends ServiceProvider
         $router->group([
             'namespace' => $this->namespace,
         ], function ($router) {
-            require __DIR__.'/../Routes/routes.php';
+            require __DIR__.'/../Routes/web.php';
         });
     }
 }

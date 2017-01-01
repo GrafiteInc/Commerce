@@ -2,9 +2,9 @@
 
 namespace Quarx\Modules\Hadron\Services;
 
-use Quarx;
-use Config;
-use FileService;
+use Yab\Quarx\Facades\QuarxServiceFacade as Quarx;
+use Illuminate\Support\Facades\Config;
+use Yab\Quarx\Services\FileService;
 use Quarx\Modules\Hadron\Repositories\ProductRepository;
 use Quarx\Modules\Hadron\Repositories\ProductVariantRepository;
 

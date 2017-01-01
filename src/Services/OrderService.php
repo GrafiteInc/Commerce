@@ -2,15 +2,17 @@
 
 namespace Quarx\Modules\Hadron\Services;
 
-use Config;
-use Quarx;
+use Illuminate\Support\Facades\Config;
 use Quarx\Modules\Hadron\Repositories\OrderRepository;
 
 class OrderService
 {
-    public function __construct(OrderRepository $orderRepository)
-    {
+    public function __construct(
+        OrderRepository $orderRepository,
+        LogisticService $logisticService
+    ) {
         $this->repo = $orderRepository;
+        $this->logistics = $logisticService;
     }
 
     public function all()
@@ -37,7 +39,7 @@ class OrderService
     {
         $order = $this->repo->store($payload);
 
-        app(LogisticService::class)->orderCreated($order);
+        $this->logistics->orderCreated($order);
 
         return $order;
     }
@@ -52,7 +54,7 @@ class OrderService
         $order = $this->find($id);
 
         if (isset($payload['is_shipped'])) {
-            app(LogisticService::class)->shipOrder($order);
+            $this->logistics->shipOrder($order);
         }
 
         return $this->repo->update($order, $payload);
@@ -63,7 +65,7 @@ class OrderService
         $order = $this->repo->findOrdersById($id);
 
         if ($order->status != 'complete') {
-            app(LogisticService::class)->cancelOrder($order);
+            $this->logistics->cancelOrder($order);
             app(TransactionService::class)->refund($order->transaction('uuid'));
 
             return $this->update($order->id, [

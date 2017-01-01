@@ -20,7 +20,7 @@
                 <li><a href="{{ URL::to('store/account/subscriptions') }}"><span class="fa fa-ticket"></span> Subscriptions</a></li>
                 <li><a href="{{ URL::to('logout') }}"><span class="fa fa-sign-out"></span> Logout</a></li>
             @else
-                <li><a href="{{ URL::to('store/login') }}"><span class="fa fa-sign-in"></span> Login</a></li>
+                <li><a href="{{ URL::to('login') }}"><span class="fa fa-sign-in"></span> Login</a></li>
             @endif
         </ul>
     </div><!--/.nav-collapse -->

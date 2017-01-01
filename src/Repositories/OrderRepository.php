@@ -7,7 +7,7 @@ use Quarx\Modules\Hadron\Models\Orders;
 
 class OrderRepository
 {
-    public function __construct(Order $model)
+    public function __construct(Orders $model)
     {
         $this->model = $model;
     }

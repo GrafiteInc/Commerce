@@ -2,8 +2,7 @@
 
 namespace Quarx\Modules\Hadron\Services;
 
-use Customer;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Quarx\Modules\Hadron\Models\Transactions;
 use Yab\Crypto\Services\Crypto;
 
@@ -11,12 +10,17 @@ class PaymentService
 {
     protected $user;
 
-    public function __construct()
-    {
+    public function __construct(
+        Transactions $transactions,
+        OrderService $orderService,
+        LogisticService $logisticService,
+        CustomerProfileService $customerService
+    ) {
         $this->user = auth()->user();
-        $this->transaction = app(Transactions::class);
-        $this->orderService = app(OrderService::class);
-        $this->logistic = app(LogisticService::class);
+        $this->transaction = $transactions;
+        $this->orderService = $orderService;
+        $this->logistic = $logisticService;
+        $this->customerService = $customerService;
     }
 
     /*
@@ -83,11 +87,11 @@ class PaymentService
             'transaction_id' => $transaction->id,
             'details' => json_encode($items),
             'shipping_address' => json_encode([
-                'street' => Customer::shippingAddress('street'),
-                'postal' => Customer::shippingAddress('postal'),
-                'city' => Customer::shippingAddress('city'),
-                'state' => Customer::shippingAddress('state'),
-                'country' => Customer::shippingAddress('country'),
+                'street' => $this->customerService->shippingAddress('street'),
+                'postal' => $this->customerService->shippingAddress('postal'),
+                'city' => $this->customerService->shippingAddress('city'),
+                'state' => $this->customerService->shippingAddress('state'),
+                'country' => $this->customerService->shippingAddress('country'),
              ]),
         ]);
 

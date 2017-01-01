@@ -3,8 +3,7 @@
 namespace Quarx\Modules\Hadron\Services;
 
 use Carbon\Carbon;
-use Config;
-use Quarx;
+use Illuminate\Support\Facades\Config;
 use Quarx\Modules\Hadron\Models\Orders;
 use Quarx\Modules\Hadron\Repositories\TransactionRepository;
 

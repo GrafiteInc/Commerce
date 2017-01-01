@@ -16,6 +16,11 @@ class StripeService
         $this->stripe->setApiKey(env('STRIPE_SECRET'));
     }
 
+    /**
+     * Collect the stripe plans.
+     *
+     * @return array
+     */
     public function collectStripePlans()
     {
         return $this->plan->all();

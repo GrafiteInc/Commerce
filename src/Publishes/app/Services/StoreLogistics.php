@@ -2,13 +2,21 @@
 
 namespace App\Services;
 
-use Customer;
 use Illuminate\Support\Facades\Log;
 use Quarx\Modules\Hadron\Interfaces\LogisticServiceInterface;
+use Quarx\Modules\Hadron\Services\CustomerProfileService;
 use Quarx\Modules\Hadron\Services\LogisticService;
 
 class StoreLogistics implements LogisticServiceInterface
 {
+    public function __construct(
+        CustomerProfileService $customerService,
+        LogisticService $logistics
+    ) {
+        $this->customer = $customerService;
+        $this->logistics = $logistics;
+    }
+
     /**
      * Calculate the shipping cost.
      *
@@ -18,8 +26,8 @@ class StoreLogistics implements LogisticServiceInterface
      */
     public function shipping($user)
     {
-        $address = Customer::shippingAddress();
-        $weight = app(LogisticService::class)->cartWeight();
+        $address = $this->customer->shippingAddress();
+        $weight = $this->logistics->cartWeight();
 
         return 0;
     }
@@ -31,7 +39,7 @@ class StoreLogistics implements LogisticServiceInterface
      */
     public function getTaxPercent($user)
     {
-        $address = Customer::billingAddress();
+        $address = $this->customer->billingAddress();
 
         return 0;
     }

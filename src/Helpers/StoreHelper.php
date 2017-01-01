@@ -4,10 +4,8 @@ namespace Quarx\Modules\Hadron\Helpers;
 
 use URL;
 use Auth;
-use CartService;
 use FileService;
 use ProductService;
-use LogisticService;
 
 class StoreHelper
 {
@@ -108,31 +106,31 @@ class StoreHelper
 
     public static function addToCartBtn($id, $type, $content, $class = '')
     {
-        return CartService::addToCartBtn($id, $type, $content, $class = '');
+        return app(\Quarx\Modules\Hadron\Services\CartService::class)->addToCartBtn($id, $type, $content, $class = '');
     }
 
     public static function removeFromCartBtn($id, $type, $content, $class = '')
     {
-        return CartService::removeFromCartBtn($id, $type, $content, $class = '');
+        return app(\Quarx\Modules\Hadron\Services\CartService::class)->removeFromCartBtn($id, $type, $content, $class = '');
     }
 
     public static function checkoutTax()
     {
-        return CartService::getCartTax();
+        return app(\Quarx\Modules\Hadron\Services\CartService::class)->getCartTax();
     }
 
     public static function checkoutTotal()
     {
-        return CartService::getCartTotal();
+        return app(\Quarx\Modules\Hadron\Services\CartService::class)->getCartTotal();
     }
 
     public static function checkoutSubtotal()
     {
-        return CartService::getCartSubtotal();
+        return app(\Quarx\Modules\Hadron\Services\CartService::class)->getCartSubtotal();
     }
 
     public static function checkoutShipping()
     {
-        return LogisticService::shipping(Auth::user());
+        return app(\Quarx\Modules\Hadron\Services\LogisticService::class)->shipping(Auth::user());
     }
 }

@@ -43,8 +43,6 @@ class HadronModuleProvider extends ServiceProvider
         |--------------------------------------------------------------------------
         */
 
-        $this->commands([
-
-        ]);
+        $this->commands([]);
     }
 }
