@@ -12,11 +12,13 @@ use Quarx\Modules\Hadron\Repositories\ProductVariantRepository;
 
 class ProductVariantController extends QuarxController
 {
-    /** @var ProductsRepository */
-    private $productVariantRepository;
+    public $productRepository;
+    public $productVariantRepository;
 
-    public function __construct(ProductVariantRepository $productVariantRepository, ProductRepository $productRepository)
-    {
+    public function __construct(
+        ProductVariantRepository $productVariantRepository,
+        ProductRepository $productRepository
+    ) {
         $this->productRepository = $productRepository;
         $this->productVariantRepository = $productVariantRepository;
     }
