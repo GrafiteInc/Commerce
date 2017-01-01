@@ -27,6 +27,14 @@ class PaymentService
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * Make a purchase.
+     *
+     * @param string $stripeToken
+     * @param Cart   $cart
+     *
+     * @return mixed
+     */
     public function purchase($stripeToken, $cart)
     {
         $user = auth()->user();
@@ -77,6 +85,15 @@ class PaymentService
         return $this->logistic->afterPurchase($user, $transaction, $cart, $result);
     }
 
+    /**
+     * Create an order.
+     *
+     * @param User        $user
+     * @param Transaction $transaction
+     * @param array       $items
+     *
+     * @return mixed
+     */
     public function createOrder($user, $transaction, $items)
     {
         $customerService = app(CustomerProfileService::class);

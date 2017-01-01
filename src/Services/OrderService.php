@@ -15,26 +15,57 @@ class OrderService
         $this->logistics = $logisticService;
     }
 
+    /**
+     * Get all Orders.
+     *
+     * @return Collection
+     */
     public function all()
     {
         return $this->repo->all();
     }
 
+    /**
+     * Get all Orders.
+     *
+     * @return Illuminate\Pagination\LengthAwarePaginator
+     */
     public function paginated()
     {
-        return $this->repo->paginated(Config::get('quarx.pagination', 25));
+        return $this->repo->paginated(config('quarx.pagination', 25));
     }
 
+    /**
+     * Find the Order by ID.
+     *
+     * @param int $id
+     *
+     * @return Orders
+     */
     public function findOrdersById($id)
     {
         return $this->repo->findOrdersById($id);
     }
 
+    /**
+     * Search the orders.
+     *
+     * @param array $payload
+     *
+     * @return Collection
+     */
     public function search($payload)
     {
-        return $this->repo->search($payload, Config::get('quarx.pagination', 25));
+        return $this->repo->search($payload, config('quarx.pagination', 25));
     }
 
+    /**
+     * Create an order.
+     *
+     * @param array $payload
+     *
+     * @return Orders
+     */
     public function create($payload)
     {
         $order = $this->repo->store($payload);
@@ -44,11 +75,26 @@ class OrderService
         return $order;
     }
 
+    /**
+     * Find an order.
+     *
+     * @param int $id
+     *
+     * @return Orders
+     */
     public function find($id)
     {
         return $this->repo->findOrdersById($id);
     }
 
+    /**
+     * Update an order.
+     *
+     * @param int   $id
+     * @param array $payload
+     *
+     * @return Orders
+     */
     public function update($id, $payload)
     {
         $order = $this->find($id);
@@ -60,6 +106,13 @@ class OrderService
         return $this->repo->update($order, $payload);
     }
 
+    /**
+     * Cancel an order.
+     *
+     * @param int $id
+     *
+     * @return Orders
+     */
     public function cancelOrder($id)
     {
         $order = $this->repo->findOrdersById($id);

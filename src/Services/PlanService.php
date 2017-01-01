@@ -22,16 +22,29 @@ class PlanService
         $this->userService = $userService;
     }
 
+    /**
+     * Get all Plans.
+     *
+     * @return Collection
+     */
     public function all()
     {
         return $this->model->all();
     }
 
+    /**
+     * Get all enabled plans.
+     *
+     * @return Collection
+     */
     public function allEnabled()
     {
         return $this->model->where('enabled', true)->get();
     }
 
+    /**
+     * Collect the new plans.
+     */
     public function collectNewPlans()
     {
         $stripePlans = $this->stripeService->collectStripePlans()->data;
@@ -53,24 +66,43 @@ class PlanService
         }
     }
 
+    /**
+     * Get paginated plans.
+     *
+     * @return Collection
+     */
     public function paginated()
     {
-        return $this->model->paginate(env('paginate', 25));
+        return $this->model->paginate(config('quarx.pagination', 25));
     }
 
-    public function search($input)
+    /**
+     * Search all the plans.
+     *
+     * @param array $payload
+     *
+     * @return Collection
+     */
+    public function search($payload)
     {
         $query = $this->model->orderBy('created_at', 'desc');
 
         $columns = Schema::getColumnListing('plans');
 
         foreach ($columns as $attribute) {
-            $query->orWhere($attribute, 'LIKE', '%'.$input.'%');
+            $query->orWhere($attribute, 'LIKE', '%'.$payload.'%');
         }
 
-        return $query->paginate(env('paginate', 25));
+        return $query->paginate(config('quarx.pagination', 25));
     }
 
+    /**
+     * Create a plan.
+     *
+     * @param array $payload
+     *
+     * @return Plan
+     */
     public function create($payload)
     {
         try {
@@ -90,16 +122,38 @@ class PlanService
         return false;
     }
 
+    /**
+     * Find a plan.
+     *
+     * @param int $id
+     *
+     * @return Plan
+     */
     public function find($id)
     {
         return $this->model->find($id);
     }
 
+    /**
+     * Get plans by stripe ID.
+     *
+     * @param int $id
+     *
+     * @return Plan
+     */
     public function getPlansByStripeId($id)
     {
         return $this->model->getPlansByStripeId($id);
     }
 
+    /**
+     * Update a plan.
+     *
+     * @param int   $id
+     * @param array $payload
+     *
+     * @return mixed
+     */
     public function update($id, $payload)
     {
         try {
@@ -111,6 +165,14 @@ class PlanService
         return false;
     }
 
+    /**
+     * Change the state of a plan.
+     *
+     * @param int  $id
+     * @param bool $state
+     *
+     * @return bool
+     */
     public function stateChange($id, $state)
     {
         $payload = [
@@ -143,6 +205,14 @@ class PlanService
         return $userCollection;
     }
 
+    /**
+     * Cancel a subscription.
+     *
+     * @param int $planId
+     * @param int $userMetaId
+     *
+     * @return bool
+     */
     public function cancelSubscription($planId, $userMetaId)
     {
         $plan = $this->find($planId);
@@ -151,6 +221,13 @@ class PlanService
         return $userMeta->subscription($plan->subscription_name)->cancel();
     }
 
+    /**
+     * Destroy a plan.
+     *
+     * @param int $id
+     *
+     * @return bool
+     */
     public function destroy($id)
     {
         try {
