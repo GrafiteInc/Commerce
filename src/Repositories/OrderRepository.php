@@ -7,6 +7,11 @@ use Quarx\Modules\Hadron\Models\Orders;
 
 class OrderRepository
 {
+    public function __construct(Order $model)
+    {
+        $this->model = $model;
+    }
+
     /**
      * Returns all Orders.
      *
@@ -14,17 +19,27 @@ class OrderRepository
      */
     public function all()
     {
-        return Orders::orderBy('created_at', 'desc')->all();
+        return $this->model->orderBy('created_at', 'desc')->all();
     }
 
+    /**
+     * Returns all paginated Orders.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function paginated()
     {
-        return Orders::orderBy('created_at', 'desc')->paginate(25);
+        return $this->model->orderBy('created_at', 'desc')->paginate(25);
     }
 
+    /**
+     * Searches the orders.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function search($payload)
     {
-        $query = Orders::orderBy('created_at', 'desc');
+        $query = $this->model->orderBy('created_at', 'desc');
 
         $columns = Schema::getColumnListing('orders');
 
@@ -46,7 +61,7 @@ class OrderRepository
      */
     public function store($payload)
     {
-        return Orders::create($payload);
+        return $this->model->create($payload);
     }
 
     /**
@@ -58,7 +73,7 @@ class OrderRepository
      */
     public function findOrdersById($id)
     {
-        return Orders::find($id);
+        return $this->model->find($id);
     }
 
     /**
@@ -70,7 +85,7 @@ class OrderRepository
      */
     public function getByCustomer($id)
     {
-        return Orders::where('customer_id', '=', $id);
+        return $this->model->where('customer_id', '=', $id);
     }
 
     /**
@@ -82,7 +97,7 @@ class OrderRepository
      */
     public function getByCustomerAndId($customer, $id)
     {
-        return Orders::where('customer_id', $customer)->where('id', $id)->first();
+        return $this->model->where('customer_id', $customer)->where('id', $id)->first();
     }
 
     /**

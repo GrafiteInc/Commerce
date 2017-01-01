@@ -130,7 +130,7 @@ class ProductService
 
     public static function variants($product)
     {
-        $productRepo = new ProductVariantRepository();
+        $productRepo = app(ProductVariantRepository::class);
         $variants = $productRepo->getProductVariants($product->id)->get();
 
         $variantHtml = '';

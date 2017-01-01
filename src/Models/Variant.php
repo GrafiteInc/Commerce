@@ -18,6 +18,5 @@ class Variant extends Model
         'value',
     ];
 
-    public static $rules = [
-    ];
+    public static $rules = [];
 }

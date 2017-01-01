@@ -7,52 +7,64 @@ use Quarx\Modules\Hadron\Models\Product;
 
 class ProductVariantRepository
 {
-    /**
-     * Get all published products.
-     *
-     * @return
-     */
-    public function getProductVariants($id)
+    public function __construct(Variant $model)
     {
-        return Variant::where('product_id', $id);
+        $this->model = $model;
     }
 
     /**
-     * Adds variables to the product.
+     * Get all published products.
      *
-     * @param Products $products
-     * @param array    $input
-     *
-     * @return Products
+     * @return Quarx\Modules\Hadron\Models\Variant
      */
-    public function addVariant($product, $input)
+    public function getProductVariants($id)
     {
-        $input['product_id'] = $product->id;
+        return $this->model->where('product_id', $id);
+    }
 
-        return Variant::create($input);
+    /**
+     * Adds variants to the product.
+     *
+     * @param Quarx\Modules\Hadron\Models\Product $products
+     * @param array                               $payload
+     *
+     * @return Quarx\Modules\Hadron\Models\Variant
+     */
+    public function addVariant($product, $payload)
+    {
+        $payload['product_id'] = $product->id;
+
+        return $this->model->create($payload);
     }
 
     /**
      * Save the variant.
      *
-     * @param [type] $input [description]
+     * @param array $payload
      *
-     * @return [type] [description]
+     * @return Quarx\Modules\Hadron\Models\Variant
      */
-    public function saveVariant($input)
+    public function saveVariant($payload)
     {
-        $variable = Variant::find($input['id']);
+        $variant = $this->model->find($payload['id']);
 
-        $variable->key = $input['key'];
-        $variable->value = $input['value'];
+        $variant->key = $payload['key'];
+        $variant->value = $payload['value'];
 
-        return $variable->save();
+        return $variant->save();
     }
 
-    public function deleteVariant($input)
+    /**
+     * Delete a variant.
+     *
+     * @param array $payload
+     *
+     * @return bool
+     */
+    public function deleteVariant($payload)
     {
-        $variable = Variant::find($input['id']);
+        $variant = $this->model->find($payload['id']);
 
-        return $variable->delete($input);
+        return $variant->delete($payload);
     }
 }

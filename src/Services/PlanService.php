@@ -17,29 +17,29 @@ class PlanService
         StripeService $stripeService,
         UserService $userService
     ) {
-        $this->plan = $plan;
+        $this->model = $plan;
         $this->stripeService = $stripeService;
         $this->userService = $userService;
     }
 
     public function all()
     {
-        return $this->plan->all();
+        return $this->model->all();
     }
 
     public function allEnabled()
     {
-        return $this->plan->where('enabled', true)->get();
+        return $this->model->where('enabled', true)->get();
     }
 
     public function collectNewPlans()
     {
         $stripePlans = $this->stripeService->collectStripePlans()->data;
         foreach ($stripePlans as $plan) {
-            $localPlan = $this->plan->getPlansByStripeId($plan->id);
+            $localPlan = $this->model->getPlansByStripeId($plan->id);
 
             if (!$localPlan) {
-                $this->plan->create([
+                $this->model->create([
                     'name' => $plan->id,
                     'amount' => $plan->amount,
                     'interval' => $plan->interval,
@@ -55,12 +55,12 @@ class PlanService
 
     public function paginated()
     {
-        return $this->plan->paginate(env('paginate', 25));
+        return $this->model->paginate(env('paginate', 25));
     }
 
     public function search($input)
     {
-        $query = $this->plan->orderBy('created_at', 'desc');
+        $query = $this->model->orderBy('created_at', 'desc');
 
         $columns = Schema::getColumnListing('plans');
 
@@ -82,7 +82,7 @@ class PlanService
 
             $this->stripeService->createPlan($payload);
 
-            return $this->plan->create($payload);
+            return $this->model->create($payload);
         } catch (Exception $e) {
             throw new Exception('Could not generate new plan', 1);
         }
@@ -92,18 +92,18 @@ class PlanService
 
     public function find($id)
     {
-        return $this->plan->find($id);
+        return $this->model->find($id);
     }
 
     public function getPlansByStripeId($id)
     {
-        return $this->plan->getPlansByStripeId($id);
+        return $this->model->getPlansByStripeId($id);
     }
 
     public function update($id, $payload)
     {
         try {
-            return $this->plan->find($id)->update($payload);
+            return $this->model->find($id)->update($payload);
         } catch (Exception $e) {
             throw new Exception('Could not update your plan', 1);
         }
@@ -121,7 +121,7 @@ class PlanService
             $payload['enabled'] = false;
         }
 
-        return $this->plan->find($id)->update($payload);
+        return $this->model->find($id)->update($payload);
     }
 
     /**
@@ -154,7 +154,7 @@ class PlanService
     public function destroy($id)
     {
         try {
-            $localPlan = $this->plan->find($id);
+            $localPlan = $this->model->find($id);
 
             try {
                 $planIsDeleted = $this->stripeService->deletePlan($localPlan->stripe_name);
@@ -173,7 +173,7 @@ class PlanService
                 }
             }
 
-            return $this->plan->destroy($id);
+            return $this->model->destroy($id);
         } catch (Exception $e) {
             throw new Exception('Could not delete your plan', 1);
         }

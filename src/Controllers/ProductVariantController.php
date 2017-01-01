@@ -12,7 +12,18 @@ use Quarx\Modules\Hadron\Repositories\ProductVariantRepository;
 
 class ProductVariantController extends QuarxController
 {
+    /**
+     * Product Repository.
+     *
+     * @var Quarx\Modules\Hadron\Repositories\ProductRepository
+     */
     public $productRepository;
+
+    /**
+     * Product Variant Repository.
+     *
+     * @var Quarx\Modules\Hadron\Repositories\ProductVariantRepository
+     */
     public $productVariantRepository;
 
     public function __construct(
@@ -23,6 +34,14 @@ class ProductVariantController extends QuarxController
         $this->productVariantRepository = $productVariantRepository;
     }
 
+    /**
+     * Get a product's variants.
+     *
+     * @param int                     $id
+     * @param Illuminate\Http\Request $request
+     *
+     * @return Illuminate\Http\Response
+     */
     public function variants($id, Request $request)
     {
         $product = $this->productRepository->find($id);
@@ -39,6 +58,13 @@ class ProductVariantController extends QuarxController
         return redirect(route('quarx.products.edit', $id).'?variants');
     }
 
+    /**
+     * Save a variant.
+     *
+     * @param Illuminate\Http\Request $request
+     *
+     * @return Illuminate\Http\Response
+     */
     public function saveVariant(Request $request)
     {
         $this->productVariantRepository->saveVariant($request->all());
@@ -46,6 +72,13 @@ class ProductVariantController extends QuarxController
         return Response::json(['success']);
     }
 
+    /**
+     * Delete a variant.
+     *
+     * @param Illuminate\Http\Request $request
+     *
+     * @return Illuminate\Http\Response
+     */
     public function deleteVariant(Request $request)
     {
         $this->productVariantRepository->deleteVariant($request->all());

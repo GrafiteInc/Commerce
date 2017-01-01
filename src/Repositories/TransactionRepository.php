@@ -9,6 +9,11 @@ use Quarx\Modules\Hadron\Services\LogisticService;
 
 class TransactionRepository
 {
+    public function __construct(Transactions $model)
+    {
+        $this->model = $model;
+    }
+
     /**
      * Returns all Transactions.
      *
@@ -16,7 +21,7 @@ class TransactionRepository
      */
     public function all()
     {
-        return Transactions::orderBy('created_at', 'desc')->get();
+        return $this->model->orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -26,17 +31,30 @@ class TransactionRepository
      */
     public function thisYear()
     {
-        return Transactions::orderBy('created_at', 'asc')->where('created_at', 'LIKE', Carbon::now()->format('Y').'-%')->get();
+        return $this->model->orderBy('created_at', 'asc')->where('created_at', 'LIKE', Carbon::now()->format('Y').'-%')->get();
     }
 
+    /**
+     * Returns paginated Transactions.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function paginated()
     {
-        return Transactions::orderBy('created_at', 'desc')->paginate(25);
+        return $this->model->orderBy('created_at', 'desc')->paginate(25);
     }
 
+    /**
+     * Search the Transactions.
+     *
+     * @param array $payload
+     * @param int   $paginate
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function search($payload, $paginate)
     {
-        $query = Transactions::orderBy('created_at', 'desc');
+        $query = $this->model->orderBy('created_at', 'desc');
         $query->where('id', 'LIKE', '%'.$payload.'%');
 
         $columns = Schema::getColumnListing('transactions');
@@ -57,7 +75,7 @@ class TransactionRepository
      */
     public function store($input)
     {
-        return Transactions::create($input);
+        return $this->model->create($input);
     }
 
     /**
@@ -69,7 +87,7 @@ class TransactionRepository
      */
     public function findTransactionsById($id)
     {
-        return Transactions::find($id);
+        return $this->model->find($id);
     }
 
     /**
@@ -81,7 +99,7 @@ class TransactionRepository
      */
     public function findByUUID($uuid)
     {
-        return Transactions::where('uuid', $uuid)->firstOrFail();
+        return $this->model->where('uuid', $uuid)->firstOrFail();
     }
 
     /**
@@ -93,7 +111,7 @@ class TransactionRepository
      */
     public function getByCustomer($id)
     {
-        return Transactions::where('customer_id', '=', $id);
+        return $this->model->where('customer_id', '=', $id);
     }
 
     /**
@@ -105,7 +123,7 @@ class TransactionRepository
      */
     public function getByCustomerAndId($customer, $id)
     {
-        return Transactions::where('customer_id', $customer)->where('id', $id)->first();
+        return $this->model->where('customer_id', $customer)->where('id', $id)->first();
     }
 
     /**
@@ -130,7 +148,7 @@ class TransactionRepository
      */
     public function requestRefund($transactionId)
     {
-        $transaction = Transactions::where('id', $transactionId);
+        $transaction = $this->model->where('id', $transactionId);
 
         app(LogisticService::class)->afterRefundRequest($transaction);
 

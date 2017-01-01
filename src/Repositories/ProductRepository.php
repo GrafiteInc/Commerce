@@ -23,7 +23,7 @@ class ProductRepository
     }
 
     /**
-     * Returns all paginated $MODEL_NAME_PLURAL$.
+     * Returns all paginated Product.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -120,7 +120,7 @@ class ProductRepository
      */
     public function findProductsById($id)
     {
-        return Product::find($id);
+        return $this->model->find($id);
     }
 
     /**
@@ -130,7 +130,7 @@ class ProductRepository
      */
     public function getPublishedProducts()
     {
-        return Product::where('is_published', 1);
+        return $this->model->where('is_published', 1);
     }
 
     /**
@@ -142,6 +142,6 @@ class ProductRepository
      */
     public function findProductByURL($url)
     {
-        return Product::where('url', $url)->where('is_available', 1)->where('is_published', 1)->first();
+        return $this->model->where('url', $url)->where('is_available', 1)->where('is_published', 1)->first();
     }
 }

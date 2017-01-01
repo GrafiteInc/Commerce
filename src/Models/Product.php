@@ -37,8 +37,12 @@ class Product extends Eloquent
     ];
 
     public static $rules = [
-        'name' => ['required'],
-        'price' => ['required'],
+        'name' => [
+            'required',
+        ],
+        'price' => [
+            'required',
+        ],
     ];
 
     public function getPriceAttribute($value)

@@ -2,7 +2,7 @@
 
 namespace Quarx\Modules\Hadron\Repositories;
 
-use Session;
+use Illuminate\Support\Facades\Session;
 use Quarx\Modules\Hadron\Models\Cart;
 use Quarx\Modules\Hadron\Models\Variant;
 
@@ -84,7 +84,7 @@ class CartRepository
     public function removeFromCart($id, $type)
     {
         $item = Cart::where('id', $id)->where('entity_type', $type)
-        ->where('customer_id', $this->user->id)->first();
+            ->where('customer_id', $this->user->id)->first();
 
         return $item->delete();
     }

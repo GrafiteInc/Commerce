@@ -4,11 +4,15 @@ namespace Quarx\Modules\Hadron\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-
-// use Quarx\Modules\Hadron\Services\CartService;
-// use Quarx\Modules\Hadron\Services\ProductService;
-// use Quarx\Modules\Hadron\Services\LogisticService;
-// use Quarx\Modules\Hadron\Repositories\ProductRepository;
+use Quarx\Modules\Hadron\Facades\CartServiceFacade;
+use Quarx\Modules\Hadron\Facades\CustomerProfileServiceFacade;
+use Quarx\Modules\Hadron\Facades\LogisticServiceFacade;
+use Quarx\Modules\Hadron\Facades\ProductServiceFacade;
+use Quarx\Modules\Hadron\Helpers\StoreHelper;
+use Quarx\Modules\Hadron\Services\CartService;
+use Quarx\Modules\Hadron\Services\CustomerProfileService;
+use Quarx\Modules\Hadron\Services\LogisticService;
+use Quarx\Modules\Hadron\Services\ProductService;
 
 class HadronServiceProvider extends ServiceProvider
 {
@@ -19,11 +23,11 @@ class HadronServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
 
-        $loader->alias('Customer', \Quarx\Modules\Hadron\Facades\CustomerProfileServiceFacade::class);
-        $loader->alias('StoreHelper', \Quarx\Modules\Hadron\Helpers\StoreHelper::class);
-        $loader->alias('CartService', \Quarx\Modules\Hadron\Facades\CartServiceFacade::class);
-        $loader->alias('ProductService', \Quarx\Modules\Hadron\Facades\ProductServiceFacade::class);
-        $loader->alias('LogisticService', \Quarx\Modules\Hadron\Facades\LogisticServiceFacade::class);
+        $loader->alias('Customer', CustomerProfileServiceFacade::class);
+        $loader->alias('StoreHelper', StoreHelper::class);
+        $loader->alias('CartService', CartServiceFacade::class);
+        $loader->alias('ProductService', ProductServiceFacade::class);
+        $loader->alias('LogisticService', LogisticServiceFacade::class);
     }
 
     /**
@@ -31,20 +35,20 @@ class HadronServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('ProductService', function ($app) {
-            return app()->make('Quarx\Modules\Hadron\Services\ProductService');
+        $this->app->bind(ProductService::class, function ($app) {
+            return app()->make(ProductService::class);
         });
 
-        $this->app->bind('CartService', function ($app) {
-            return app()->make('Quarx\Modules\Hadron\Services\CartService');
+        $this->app->bind(CartService::class, function ($app) {
+            return app()->make(CartService::class);
         });
 
-        $this->app->bind('LogisticService', function ($app) {
-            return app()->make('Quarx\Modules\Hadron\Services\LogisticService');
+        $this->app->bind(LogisticService::class, function ($app) {
+            return app()->make(LogisticService::class);
         });
 
-        $this->app->bind('CustomerProfileService', function ($app) {
-            return app()->make('Quarx\Modules\Hadron\Services\CustomerProfileService');
+        $this->app->bind(CustomerProfileService::class, function ($app) {
+            return app()->make(CustomerProfileService::class);
         });
     }
 }

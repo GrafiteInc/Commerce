@@ -2,7 +2,7 @@
 
 namespace Quarx\Modules\Hadron\Repositories;
 
-use Session;
+use Illuminate\Support\Facades\Session;
 use Quarx\Modules\Hadron\Models\Cart;
 use Quarx\Modules\Hadron\Models\Variant;
 

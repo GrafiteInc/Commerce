@@ -31,7 +31,5 @@ class Transactions extends Model
         'response',
     ];
 
-    public static $rules = [
-
-    ];
+    public static $rules = [];
 }
