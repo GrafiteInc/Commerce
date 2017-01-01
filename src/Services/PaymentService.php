@@ -8,19 +8,17 @@ use Yab\Crypto\Services\Crypto;
 
 class PaymentService
 {
-    protected $user;
+    public $user;
 
     public function __construct(
         Transactions $transactions,
         OrderService $orderService,
-        LogisticService $logisticService,
-        CustomerProfileService $customerService
-    ) {
+        LogisticService $logisticService
+) {
         $this->user = auth()->user();
         $this->transaction = $transactions;
         $this->orderService = $orderService;
         $this->logistic = $logisticService;
-        $this->customerService = $customerService;
     }
 
     /*
@@ -81,17 +79,19 @@ class PaymentService
 
     public function createOrder($user, $transaction, $items)
     {
+        $customerService = app(CustomerProfileService::class);
+
         $this->orderService->create([
             'uuid' => Crypto::uuid(),
             'customer_id' => $user->id,
             'transaction_id' => $transaction->id,
             'details' => json_encode($items),
             'shipping_address' => json_encode([
-                'street' => $this->customerService->shippingAddress('street'),
-                'postal' => $this->customerService->shippingAddress('postal'),
-                'city' => $this->customerService->shippingAddress('city'),
-                'state' => $this->customerService->shippingAddress('state'),
-                'country' => $this->customerService->shippingAddress('country'),
+                'street' => $customerService->shippingAddress('street'),
+                'postal' => $customerService->shippingAddress('postal'),
+                'city' => $customerService->shippingAddress('city'),
+                'state' => $customerService->shippingAddress('state'),
+                'country' => $customerService->shippingAddress('country'),
              ]),
         ]);
 

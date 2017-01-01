@@ -2,10 +2,7 @@
 
 namespace Quarx\Modules\Hadron\Helpers;
 
-use URL;
-use Auth;
-use FileService;
-use ProductService;
+use Yab\Quarx\Services\FileService;
 
 class StoreHelper
 {
@@ -17,6 +14,11 @@ class StoreHelper
     public static function productUrl($url)
     {
         return url('store/product/'.$url);
+    }
+
+    public static function customer()
+    {
+        return app(\Quarx\Modules\Hadron\Services\CustomerProfileService::class);
     }
 
     public static function customerSubscriptionUrl($subscription)
@@ -86,22 +88,22 @@ class StoreHelper
 
     public static function productVariants($product)
     {
-        return ProductService::variants($product);
+        return app(\Quarx\Modules\Hadron\Services\ProductService::class)->variants($product);
     }
 
     public static function variantOptions($variant)
     {
-        return ProductService::variantOptions($variant);
+        return app(\Quarx\Modules\Hadron\Services\ProductService::class)->variantOptions($variant);
     }
 
     public static function productDetails($product)
     {
-        return ProductService::productDetails($product);
+        return app(\Quarx\Modules\Hadron\Services\ProductService::class)->productDetails($product);
     }
 
     public static function productDetailsBtn($product, $class = '')
     {
-        return ProductService::productDetailsBtn($product, $class);
+        return app(\Quarx\Modules\Hadron\Services\ProductService::class)->productDetailsBtn($product, $class);
     }
 
     public static function addToCartBtn($id, $type, $content, $class = '')
@@ -131,6 +133,6 @@ class StoreHelper
 
     public static function checkoutShipping()
     {
-        return app(\Quarx\Modules\Hadron\Services\LogisticService::class)->shipping(Auth::user());
+        return app(\Quarx\Modules\Hadron\Services\LogisticService::class)->shipping(auth()->user());
     }
 }

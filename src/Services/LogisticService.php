@@ -7,12 +7,9 @@ use Quarx\Modules\Hadron\Interfaces\LogisticServiceInterface;
 
 class LogisticService implements LogisticServiceInterface
 {
-    public function __construct(
-        CartService $cart,
-        StoreLogistics $storeLogistics
-    ) {
+    public function __construct(CartService $cart)
+    {
         $this->cartService = $cart;
-        $this->storeLogistics = $storeLogistics;
     }
 
     public function cartWeight()
@@ -29,7 +26,7 @@ class LogisticService implements LogisticServiceInterface
 
     public function shipping($user)
     {
-        return $this->storeLogistics->shipping($user);
+        return app(StoreLogistics::class)->shipping($user);
     }
 
     /**
@@ -39,7 +36,7 @@ class LogisticService implements LogisticServiceInterface
      */
     public function getTaxPercent($user)
     {
-        return $this->storeLogistics->getTaxPercent($user);
+        return app(StoreLogistics::class)->getTaxPercent($user);
     }
 
     /*
@@ -50,46 +47,46 @@ class LogisticService implements LogisticServiceInterface
 
     public function afterPurchase($user, $transaction, $cart, $result)
     {
-        return $this->storeLogistics->afterPurchase($user, $transaction, $cart, $result);
+        return app(StoreLogistics::class)->afterPurchase($user, $transaction, $cart, $result);
     }
 
     public function afterSubscription($user, $plan)
     {
-        return $this->storeLogistics->afterSubscription($user, $plan);
+        return app(StoreLogistics::class)->afterSubscription($user, $plan);
     }
 
     public function afterRefundRequest($transaction)
     {
-        return $this->storeLogistics->afterRefundRequest($transaction);
+        return app(StoreLogistics::class)->afterRefundRequest($transaction);
     }
 
     public function afterRefund($transaction)
     {
-        return $this->storeLogistics->afterRefund($transaction);
+        return app(StoreLogistics::class)->afterRefund($transaction);
     }
 
     public function cancelSubscription($user, $plan)
     {
-        return $this->storeLogistics->cancelSubscription($user, $plan);
+        return app(StoreLogistics::class)->cancelSubscription($user, $plan);
     }
 
     public function afterPlaceOrder($user, $transaction, $cart)
     {
-        return $this->storeLogistics->afterPlaceOrder($user, $transaction, $cart);
+        return app(StoreLogistics::class)->afterPlaceOrder($user, $transaction, $cart);
     }
 
     public function orderCreated($order)
     {
-        return $this->storeLogistics->orderCreated($order);
+        return app(StoreLogistics::class)->orderCreated($order);
     }
 
     public function shipOrder($order)
     {
-        return $this->storeLogistics->shipOrder($order);
+        return app(StoreLogistics::class)->shipOrder($order);
     }
 
     public function cancelOrder($order)
     {
-        return $this->storeLogistics->cancelOrder($order);
+        return app(StoreLogistics::class)->cancelOrder($order);
     }
 }

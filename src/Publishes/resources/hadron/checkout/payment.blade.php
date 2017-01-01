@@ -15,7 +15,7 @@
     <div class="col-md-6">
         <div class="card-wrapper"></div>
 
-            <form id="userPayment" method="post" action="{{ URL::to('store/process') }}">
+            <form id="userPayment" method="post" action="{{ url('store/process') }}">
                 {!! Form::token(); !!}
                 <input id="exp_month" type="hidden" name="exp_month" data-stripe="exp-month" />
                 <input id="exp_year" type="hidden" name="exp_year" data-stripe="exp-year"/>
@@ -47,10 +47,10 @@
                 </div>
             </form>
 
-            @if (Customer::hasProfile() && ! is_null(Customer::lastCard('card_last_four')))
-                <form method="post" action="{{ URL::to('store/process/last-card') }}">
+            @if (StoreHelper::customer()->hasProfile() && ! is_null(StoreHelper::customer()->lastCard('card_last_four')))
+                <form method="post" action="{{ url('store/process/last-card') }}">
                     {!! Form::token(); !!}
-                    <button id="lastCardBtn" type="submit">Pay with last card used (ending with {!! Customer::lastCard('card_last_four') !!})</button>
+                    <button id="lastCardBtn" type="submit">Pay with last card used (ending with {!! StoreHelper::customer()->lastCard('card_last_four') !!})</button>
                 </form>
             @endif
         </div>
