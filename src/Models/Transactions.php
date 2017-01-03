@@ -2,9 +2,9 @@
 
 namespace Quarx\Modules\Hadron\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Yab\Quarx\Models\QuarxModel;
 
-class Transactions extends Model
+class Transactions extends QuarxModel
 {
     public $table = 'transactions';
 

@@ -10,7 +10,7 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create(config('quarx.db-prefix', '').'transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('uuid');
             $table->integer('customer_id');
@@ -37,6 +37,6 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('transactions');
+        Schema::drop(config('quarx.db-prefix', '').'transactions');
     }
 }

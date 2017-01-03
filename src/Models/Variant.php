@@ -2,9 +2,9 @@
 
 namespace Quarx\Modules\Hadron\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Yab\Quarx\Models\QuarxModel;
 
-class Variant extends Model
+class Variant extends QuarxModel
 {
     public $table = 'product_variants';
 

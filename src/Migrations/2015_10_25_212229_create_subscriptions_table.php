@@ -10,7 +10,7 @@ class CreateSubscriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create(config('quarx.db-prefix', '').'subscriptions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_meta_id');
             $table->string('name');
@@ -28,6 +28,6 @@ class CreateSubscriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('subscriptions');
+        Schema::drop(config('quarx.db-prefix', '').'subscriptions');
     }
 }

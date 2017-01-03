@@ -10,7 +10,7 @@ class CreateCartTable extends Migration
      */
     public function up()
     {
-        Schema::create('cart', function (Blueprint $table) {
+        Schema::create(config('quarx.db-prefix', '').'cart', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('customer_id');
             $table->integer('entity_id');
@@ -27,6 +27,6 @@ class CreateCartTable extends Migration
      */
     public function down()
     {
-        Schema::drop('cart');
+        Schema::drop(config('quarx.db-prefix', '').'cart');
     }
 }

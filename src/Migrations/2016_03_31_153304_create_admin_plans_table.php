@@ -10,7 +10,7 @@ class CreateAdminPlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('plans', function (Blueprint $table) {
+        Schema::create(config('quarx.db-prefix', '').'plans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('amount');
             $table->string('interval');
@@ -31,6 +31,6 @@ class CreateAdminPlansTable extends Migration
      */
     public function down()
     {
-        Schema::drop('plans');
+        Schema::drop(config('quarx.db-prefix', '').'plans');
     }
 }

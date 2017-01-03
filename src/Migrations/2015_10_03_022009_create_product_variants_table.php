@@ -10,7 +10,7 @@ class CreateProductVariantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_variants', function (Blueprint $table) {
+        Schema::create(config('quarx.db-prefix', '').'product_variants', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->default(0);
             $table->string('key');
@@ -24,6 +24,6 @@ class CreateProductVariantsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('product_variants');
+        Schema::drop(config('quarx.db-prefix', '').'product_variants');
     }
 }

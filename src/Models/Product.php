@@ -2,9 +2,9 @@
 
 namespace Quarx\Modules\Hadron\Models;
 
-use Eloquent;
+use Yab\Quarx\Models\QuarxModel;
 
-class Product extends Eloquent
+class Product extends QuarxModel
 {
     public $table = 'products';
 

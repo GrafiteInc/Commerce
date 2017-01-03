@@ -2,9 +2,9 @@
 
 namespace Quarx\Modules\Hadron\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Yab\Quarx\Models\QuarxModel;
 
-class Cart extends Model
+class Cart extends QuarxModel
 {
     public $table = 'cart';
 
