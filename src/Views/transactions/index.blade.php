@@ -35,7 +35,7 @@
 
                 @foreach($transactions as $transaction)
                     <tr>
-                        <td>{!! $transaction->uuid !!}</td>
+                        <td><a href="{!! route('quarx.transactions.edit', [$transaction->id]) !!}">{!! $transaction->uuid !!}</a></td>
                         <td class="raw-m-hide">{!! $transaction->state !!}</td>
                         <td class="raw-m-hide">{!! $transaction->subtotal !!}</td>
                         <td class="raw-m-hide">{!! $transaction->tax !!}</td>
@@ -57,7 +57,7 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            <a class="btn btn-xs btn-default pull-right" href="{!! route('quarx.transactions.edit', [Crypto::encrypt($transaction->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right" href="{!! route('quarx.transactions.edit', [$transaction->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

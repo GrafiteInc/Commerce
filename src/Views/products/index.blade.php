@@ -2,23 +2,7 @@
 
 @section('content')
 
-    <div class="modal fade" id="deleteModal" tabindex="-3" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="deleteModalLabel">Delete Products</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure want to delete this product?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <a id="deleteBtn" type="button" class="btn btn-warning" href="#">Confirm Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('hadron::modals')
 
     <div class="row">
         <a class="btn btn-primary pull-right" href="{!! route('quarx.products.create') !!}">Add New</a>
@@ -52,7 +36,7 @@
 
                 @foreach($products as $product)
                     <tr>
-                        <td>{!! $product->name !!}</td>
+                        <td><a href="{!! route('quarx.products.edit', [$product->id]) !!}">{!! $product->name !!}</a></td>
                         <td class="raw-m-hide">{!! $product->code !!}</td>
                         <td class="raw-m-hide">${!! $product->price !!}</td>
                         <td class="raw-m-hide">{!! $product->stock !!}</td>
@@ -91,5 +75,12 @@
     <div class="text-center">
         {!! $pagination !!}
     </div>
+
+@endsection
+
+@section('javascript')
+
+    @parent
+    {!! Minify::javascript(Quarx::moduleAsset('hadron', 'js/products.js', 'application/javascript')) !!}
 
 @endsection

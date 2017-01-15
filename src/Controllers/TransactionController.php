@@ -5,7 +5,6 @@ namespace Yab\Hadron\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yab\Hadron\Services\TransactionService;
-use Yab\Crypto\Services\Crypto;
 
 class TransactionController extends Controller
 {
@@ -52,8 +51,8 @@ class TransactionController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $transaction = $this->service->find(Crypto::decrypt($id));
-        $order = $this->service->getTransactionOrder(Crypto::decrypt($id));
+        $transaction = $this->service->find($id);
+        $order = $this->service->getTransactionOrder($id);
 
         return view('hadron::transactions.edit')
             ->with('order', $order)
@@ -70,7 +69,7 @@ class TransactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $result = $this->service->update(Crypto::decrypt($id), $request->except(['_token', '_method']));
+        $result = $this->service->update($id, $request->except(['_token', '_method']));
 
         if ($result) {
             return back()->with('message', 'Successfully updated');

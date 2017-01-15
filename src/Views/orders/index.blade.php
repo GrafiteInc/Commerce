@@ -32,8 +32,8 @@
 
                 @foreach($orders as $order)
                     <tr>
-                        <td>{!! $order->uuid !!}</td>
-                        <td class="raw-m-hide">{!! $order->transaction('uuid') !!}</td>
+                        <td><a href="{!! route('quarx.orders.edit', [$order->id]) !!}">{!! $order->uuid !!}</a></td>
+                        <td class="raw-m-hide"><a href="{!! route('quarx.transactions.edit', [$order->transaction('id')]) !!}">{!! $order->transaction('uuid') !!}</a></td>
                         <td class="raw-m-hide">{!! auth()->user()->find($order->customer_id)->name !!}</td>
                         <td class="raw-m-hide">{!! ucfirst($order->status) !!}</td>
                         <td class="raw-m-hide text-center">

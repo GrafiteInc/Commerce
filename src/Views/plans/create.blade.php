@@ -43,5 +43,8 @@
 
 @section('javascript')
     @parent
-    <script type="text/javascript" src="{!! Quarx::moduleAsset('hadron', 'js/store.js', 'application/javascript') !!}"></script>
+    <script type="text/javascript" src="{!! Quarx::moduleAsset('hadron', 'js/plans.js', 'application/javascript') !!}"></script>
+    <script type="text/javascript">
+        _visualizeThePlan();
+    </script>
 @stop

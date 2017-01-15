@@ -6,7 +6,7 @@
     |--------------------------------------------------------------------------
     */
 
-    Route::group(['namespace' => 'Hadron', 'middleware' => ['web']], function () {
+    Route::group(['namespace' => 'Hadron', 'middleware' => ['web', 'quarx-analytics']], function () {
         Route::group(['prefix' => 'store'], function () {
             Route::get('', 'StoreController@index');
             Route::get('products', 'ProductController@all');

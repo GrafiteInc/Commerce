@@ -73,11 +73,13 @@
                             <td>{{ $customer->subscription($plan->stripe_name)->created_at }}</td>
                             <td>{{ $customer->subscription($plan->stripe_name)->ends_at or 'N/A' }}</td>
                             <td>
-                                <form method="post" action="{!! url('quarx/plans/'.$plan->id.'/cancel-subscription/'.$customer->id) !!}">
-                                    {!! csrf_field() !!}
-                                    {!! method_field('DELETE') !!}
-                                    <button class="btn btn-danger btn-xs pull-right" onclick="return confirm('Are you sure you want to cancel this subscription?')" type="submit"><i class="fa fa-close"></i> Cancel Subscription</button>
-                                </form>
+                                @if (is_null($customer->subscription($plan->stripe_name)->ends_at))
+                                    <form class="cancel-form" method="post" action="{!! url('quarx/plans/'.$plan->id.'/cancel-subscription/'.$customer->id) !!}">
+                                        {!! csrf_field() !!}
+                                        {!! method_field('DELETE') !!}
+                                        <button class="btn btn-danger btn-xs pull-right" type="submit"><i class="fa fa-close"></i> Cancel Subscription</button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -90,18 +92,8 @@
 
 @section('javascript')
     @parent
-    <script type="text/javascript" src="{{ Quarx::moduleAsset('hadron', 'js/store.js', 'application/javascript') }}"></script>
+    <script type="text/javascript" src="{{ Quarx::moduleAsset('hadron', 'js/plans.js', 'application/javascript') }}"></script>
     <script type="text/javascript">
-        $(function(){
-            $('#deletePlanForm').submit(function(e){
-                e.preventDefault();
-                $('#deletePlanDialog').modal('show');
-            });
-
-            $('#deletePlanBtn').click(function(e){
-                $('#deletePlanForm')[0].submit();
-                $('#deletePlanDialog').modal('hide');
-            });
-        });
+        _visualizeThePlan();
     </script>
 @endsection
