@@ -40,7 +40,7 @@ class TestCase extends Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Quarx\Modules\Hadron\HadronModuleProvider::class,
+            \Yab\Hadron\HadronModuleProvider::class,
             \Yab\Laracogs\LaracogsProvider::class,
             \Yab\Quarx\QuarxProvider::class,
         ];
@@ -62,7 +62,7 @@ class TestCase extends Orchestra\Testbench\TestCase
             '--force' => true,
         ]);
         $this->artisan('vendor:publish', [
-            '--provider' => 'Quarx\Modules\Hadron\HadronModuleProvider',
+            '--provider' => 'Yab\Hadron\HadronModuleProvider',
             '--force' => true,
         ]);
         $this->artisan('migrate', [

@@ -11,14 +11,14 @@ class CartServiceTest extends TestCase
 
         Auth::shouldReceive('user')->andReturn($user);
 
-        factory(\Quarx\Modules\Hadron\Models\Cart::class)->create();
-        factory(\Quarx\Modules\Hadron\Models\Product::class)->create();
-        factory(\Quarx\Modules\Hadron\Models\Plan::class)->create();
-        factory(\Quarx\Modules\Hadron\Models\Variant::class)->create();
+        factory(\Yab\Hadron\Models\Cart::class)->create();
+        factory(\Yab\Hadron\Models\Product::class)->create();
+        factory(\Yab\Hadron\Models\Plan::class)->create();
+        factory(\Yab\Hadron\Models\Variant::class)->create();
 
-        $this->cartService = app(\Quarx\Modules\Hadron\Services\CartService::class);
-        $this->cartRepo = app(\Quarx\Modules\Hadron\Repositories\CartRepository::class);
-        $this->productRepo = app(\Quarx\Modules\Hadron\Repositories\ProductRepository::class);
+        $this->cartService = app(\Yab\Hadron\Services\CartService::class);
+        $this->cartRepo = app(\Yab\Hadron\Repositories\CartRepository::class);
+        $this->productRepo = app(\Yab\Hadron\Repositories\ProductRepository::class);
     }
 
     public function testAddBtn()
@@ -77,7 +77,7 @@ class CartServiceTest extends TestCase
         ]));
 
         $item = $this->cartRepo->getItem(2);
-        $product = $this->productRepo->findProductsById(1);
+        $product = $this->productRepo->find(1);
 
         $response = $this->cartService->priceVariants($item, $product);
 
@@ -95,7 +95,7 @@ class CartServiceTest extends TestCase
 
         $item = $this->cartRepo->getItem(2);
 
-        $product = $this->productRepo->findProductsById(1);
+        $product = $this->productRepo->find(1);
 
         $response = $this->cartService->priceVariants($item, $product);
 
@@ -112,7 +112,7 @@ class CartServiceTest extends TestCase
         ]));
 
         $item = $this->cartRepo->getItem(2);
-        $product = $this->productRepo->findProductsById(1);
+        $product = $this->productRepo->find(1);
         $response = $this->cartService->weightVariants($item, $product);
         $this->assertEquals(2.0, $response);
     }
@@ -127,7 +127,7 @@ class CartServiceTest extends TestCase
         ]));
 
         $item = $this->cartRepo->getItem(2);
-        $product = $this->productRepo->findProductsById(1);
+        $product = $this->productRepo->find(1);
         $response = $this->cartService->weightVariants($item, $product);
         $this->assertEquals(0, $response);
     }
@@ -147,7 +147,7 @@ class CartServiceTest extends TestCase
 
     public function testGetDefaultValue()
     {
-        $variant = factory(\Quarx\Modules\Hadron\Models\Variant::class)->make([
+        $variant = factory(\Yab\Hadron\Models\Variant::class)->make([
             'id' => 4,
         ]);
         $response = $this->cartService->getDefaultValue($variant);
@@ -156,7 +156,7 @@ class CartServiceTest extends TestCase
 
     public function testGetVariantId()
     {
-        $variant = factory(\Quarx\Modules\Hadron\Models\Variant::class)->make([
+        $variant = factory(\Yab\Hadron\Models\Variant::class)->make([
             'id' => 4,
         ]);
 

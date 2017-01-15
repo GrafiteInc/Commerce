@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Hadron;
 
 use App\Http\Controllers\Controller;
 use Auth;
-use Quarx\Modules\Hadron\Repositories\TransactionRepository;
+use Yab\Hadron\Repositories\TransactionRepository;
 use Yab\Crypto\Services\Crypto;
 
 class PurchaseController extends Controller
@@ -16,7 +16,7 @@ class PurchaseController extends Controller
 
     public function allPurchases()
     {
-        $purchases = $this->transactions->getByCustomer(auth()->id())->orderBy('created_at', 'DESC')->paginate(env('PAGINATION'));
+        $purchases = $this->transactions->getByCustomer(auth()->id())->orderBy('created_at', 'DESC')->paginate(config('quarx.pagination'));
 
         return view('hadron-frontend::purchases.all')
             ->with('purchases', $purchases);

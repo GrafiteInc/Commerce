@@ -1,6 +1,6 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Services;
+namespace Yab\Hadron\Services;
 
 use Stripe\Plan;
 use Stripe\Stripe;
@@ -13,7 +13,7 @@ class StripeService
         $this->stripe = $stripe;
         $this->plan = $plan;
         $this->refund = $refund;
-        $this->stripe->setApiKey(env('STRIPE_SECRET'));
+        $this->stripe->setApiKey(config('services.stripe.secret'));
     }
 
     /**

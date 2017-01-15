@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Hadron;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Quarx\Modules\Hadron\Services\CartService;
-use Quarx\Modules\Hadron\Services\PaymentService;
-use Quarx\Modules\Hadron\Services\CustomerProfileService;
+use Yab\Hadron\Services\CartService;
+use Yab\Hadron\Services\PaymentService;
+use Yab\Hadron\Services\CustomerProfileService;
 
 class CheckoutController extends Controller
 {

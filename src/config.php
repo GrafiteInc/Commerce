@@ -8,6 +8,8 @@
 
 return [
 
+    'currency' => env('CURRENCY', 'usd'),
+
     'download' => [
         'file' => [
             'type' => 'file',

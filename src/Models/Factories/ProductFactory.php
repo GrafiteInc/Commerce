@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Quarx\Modules\Hadron\Models\Product::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Hadron\Models\Product::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'name' => 'dumb',

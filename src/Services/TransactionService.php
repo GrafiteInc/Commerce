@@ -1,11 +1,11 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Services;
+namespace Yab\Hadron\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
-use Quarx\Modules\Hadron\Models\Orders;
-use Quarx\Modules\Hadron\Repositories\TransactionRepository;
+use Yab\Hadron\Models\Orders;
+use Yab\Hadron\Repositories\TransactionRepository;
 
 class TransactionService
 {
@@ -45,18 +45,6 @@ class TransactionService
     }
 
     /**
-     * Find the transaction by ID.
-     *
-     * @param int $id
-     *
-     * @return Orders
-     */
-    public function findTransactionsById($id)
-    {
-        return $this->repo->findTransactionsById($id);
-    }
-
-    /**
      * Search the transactions.
      *
      * @param array $payload
@@ -77,7 +65,7 @@ class TransactionService
      */
     public function find($id)
     {
-        return $this->repo->findTransactionsById($id);
+        return $this->repo->find($id);
     }
 
     /**

@@ -16,11 +16,11 @@ class OrderTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actingAs($this->user);
 
-        factory(\Quarx\Modules\Hadron\Models\Cart::class)->create();
-        factory(\Quarx\Modules\Hadron\Models\Product::class)->create();
-        factory(\Quarx\Modules\Hadron\Models\Plan::class)->create();
-        factory(\Quarx\Modules\Hadron\Models\Orders::class)->create();
-        factory(\Quarx\Modules\Hadron\Models\Transactions::class)->create([
+        factory(\Yab\Hadron\Models\Cart::class)->create();
+        factory(\Yab\Hadron\Models\Product::class)->create();
+        factory(\Yab\Hadron\Models\Plan::class)->create();
+        factory(\Yab\Hadron\Models\Orders::class)->create();
+        factory(\Yab\Hadron\Models\Transactions::class)->create([
                 'id' => 999,
             ]);
     }
@@ -48,7 +48,7 @@ class OrderTest extends TestCase
 
     public function testEdit()
     {
-        factory(\Quarx\Modules\Hadron\Models\Orders::class)->create([
+        factory(\Yab\Hadron\Models\Orders::class)->create([
             'id' => 2,
             'details' => json_encode([
                 [
@@ -81,7 +81,7 @@ class OrderTest extends TestCase
 
     public function testUpdate()
     {
-        factory(\Quarx\Modules\Hadron\Models\Orders::class)->create([
+        factory(\Yab\Hadron\Models\Orders::class)->create([
             'id' => 4,
             'details' => json_encode([
                 [

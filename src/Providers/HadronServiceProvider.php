@@ -1,14 +1,14 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Providers;
+namespace Yab\Hadron\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Quarx\Modules\Hadron\Helpers\StoreHelper;
-use Quarx\Modules\Hadron\Services\CartService;
-use Quarx\Modules\Hadron\Services\CustomerProfileService;
-use Quarx\Modules\Hadron\Services\LogisticService;
-use Quarx\Modules\Hadron\Services\ProductService;
+use Yab\Hadron\Helpers\StoreHelper;
+use Yab\Hadron\Services\CartService;
+use Yab\Hadron\Services\CustomerProfileService;
+use Yab\Hadron\Services\LogisticService;
+use Yab\Hadron\Services\ProductService;
 
 class HadronServiceProvider extends ServiceProvider
 {

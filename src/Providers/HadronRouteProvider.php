@@ -1,6 +1,6 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Providers;
+namespace Yab\Hadron\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -14,7 +14,7 @@ class HadronRouteProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Quarx\Modules\Hadron\Controllers';
+    protected $namespace = 'Yab\Hadron\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

@@ -1,10 +1,10 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Controllers;
+namespace Yab\Hadron\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Quarx\Modules\Hadron\Services\TransactionService;
+use Yab\Hadron\Services\TransactionService;
 use Yab\Crypto\Services\Crypto;
 
 class TransactionController extends Controller
@@ -52,7 +52,7 @@ class TransactionController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $transaction = $this->service->findTransactionsById(Crypto::decrypt($id));
+        $transaction = $this->service->find(Crypto::decrypt($id));
         $order = $this->service->getTransactionOrder(Crypto::decrypt($id));
 
         return view('hadron::transactions.edit')

@@ -1,11 +1,11 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Services;
+namespace Yab\Hadron\Services;
 
 use Illuminate\Support\Facades\Auth;
-use Quarx\Modules\Hadron\Models\Variant;
-use Quarx\Modules\Hadron\Repositories\CartRepository;
-use Quarx\Modules\Hadron\Repositories\CartSessionRepository;
+use Yab\Hadron\Models\Variant;
+use Yab\Hadron\Repositories\CartRepository;
+use Yab\Hadron\Repositories\CartSessionRepository;
 
 class CartService
 {
@@ -104,7 +104,7 @@ class CartService
         $contents = $this->cartRepo()->cartContents();
 
         foreach ($contents as $item) {
-            $product = $this->service->findProductsById($item->entity_id);
+            $product = $this->service->find($item->entity_id);
             $product->cart_id = $item->id;
             $product->quantity = $item->quantity;
             $product->entity_type = $item->entity_type;
@@ -309,7 +309,7 @@ class CartService
         $contents = $this->cartRepo()->cartContents();
 
         foreach ($contents as $item) {
-            $product = $this->service->findProductsById($item->entity_id);
+            $product = $this->service->find($item->entity_id);
             $this->priceVariants($item, $product);
 
             $total += $product->price * $item->quantity;

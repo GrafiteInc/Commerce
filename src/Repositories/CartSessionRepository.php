@@ -1,10 +1,10 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Repositories;
+namespace Yab\Hadron\Repositories;
 
 use Illuminate\Support\Facades\Session;
-use Quarx\Modules\Hadron\Models\Cart;
-use Quarx\Modules\Hadron\Models\Variant;
+use Yab\Hadron\Models\Cart;
+use Yab\Hadron\Models\Variant;
 
 class CartSessionRepository
 {
@@ -59,7 +59,7 @@ class CartSessionRepository
         }
 
         $payload = json_encode([
-            'id' => rand(1111, 9999),
+            'id' => rand(111111, 999999),
             'entity_id' => $id,
             'entity_type' => $type,
             'product_variants' => $variableArray,
@@ -83,17 +83,18 @@ class CartSessionRepository
      */
     public function changeItemQuantity($id, $quantity)
     {
-        foreach (Session::get('cart') as $key => $item) {
+        $cart = Session::get('cart');
+        foreach ($cart as $key => $item) {
             $product = json_decode($item);
 
             if ($product->id == $id) {
                 $product->quantity = $quantity;
             }
 
-            Session::get('cart')[$key] = json_encode($product);
+            $cart[$key] = json_encode($product);
         }
 
-        Session::put('cart', Session::get('cart'));
+        Session::put('cart', $cart);
 
         return true;
     }

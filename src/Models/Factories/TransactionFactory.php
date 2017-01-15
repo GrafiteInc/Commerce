@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Quarx\Modules\Hadron\Models\Transactions::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Hadron\Models\Transactions::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'uuid' => 'foo-bar-foo-bar',

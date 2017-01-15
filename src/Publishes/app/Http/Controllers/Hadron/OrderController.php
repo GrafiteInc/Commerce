@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Hadron;
 
 use App\Http\Controllers\Controller;
-use Quarx\Modules\Hadron\Repositories\OrderRepository;
+use Yab\Hadron\Repositories\OrderRepository;
 use Yab\Crypto\Services\Crypto;
 
 class OrderController extends Controller
@@ -15,7 +15,7 @@ class OrderController extends Controller
 
     public function allOrders()
     {
-        $orders = $this->orders->getByCustomer(auth()->id())->orderBy('created_at', 'DESC')->paginate(env('PAGINATION'));
+        $orders = $this->orders->getByCustomer(auth()->id())->orderBy('created_at', 'DESC')->paginate(config('quarx.pagination'));
 
         return view('hadron-frontend::orders.all')->with('orders', $orders);
     }

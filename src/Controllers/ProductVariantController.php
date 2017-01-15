@@ -1,28 +1,28 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Controllers;
+namespace Yab\Hadron\Controllers;
 
 use Quarx;
 use Response;
 use Illuminate\Http\Request;
-use Quarx\Modules\Hadron\Models\Products;
+use Yab\Hadron\Models\Products;
 use Yab\Quarx\Controllers\QuarxController;
-use Quarx\Modules\Hadron\Repositories\ProductRepository;
-use Quarx\Modules\Hadron\Repositories\ProductVariantRepository;
+use Yab\Hadron\Repositories\ProductRepository;
+use Yab\Hadron\Repositories\ProductVariantRepository;
 
 class ProductVariantController extends QuarxController
 {
     /**
      * Product Repository.
      *
-     * @var Quarx\Modules\Hadron\Repositories\ProductRepository
+     * @var Yab\Hadron\Repositories\ProductRepository
      */
     public $productRepository;
 
     /**
      * Product Variant Repository.
      *
-     * @var Quarx\Modules\Hadron\Repositories\ProductVariantRepository
+     * @var Yab\Hadron\Repositories\ProductVariantRepository
      */
     public $productVariantRepository;
 

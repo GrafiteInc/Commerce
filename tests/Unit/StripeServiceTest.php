@@ -1,6 +1,6 @@
 <?php
 
-use Quarx\Modules\Hadron\Services\StripeService;
+use Yab\Hadron\Services\StripeService;
 
 class StripeServiceTest extends TestCase
 {

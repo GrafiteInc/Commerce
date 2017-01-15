@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Hadron;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Quarx\Modules\Hadron\Services\LogisticService;
-use Quarx\Modules\Hadron\Services\PlanService;
+use Yab\Hadron\Services\LogisticService;
+use Yab\Hadron\Services\PlanService;
 use Yab\Crypto\Services\Crypto;
 
 class SubscriptionController extends Controller
@@ -33,7 +33,7 @@ class SubscriptionController extends Controller
 
     public function allSubscriptions()
     {
-        $subscriptions = auth()->user()->meta->subscriptions()->orderBy('created_at', 'DESC')->paginate(env('PAGINATION'));
+        $subscriptions = auth()->user()->meta->subscriptions()->orderBy('created_at', 'DESC')->paginate(config('quarx.pagination'));
 
         return view('hadron-frontend::subscriptions.all')->with('subscriptions', $subscriptions);
     }

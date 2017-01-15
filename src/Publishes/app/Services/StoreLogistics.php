@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Log;
-use Quarx\Modules\Hadron\Interfaces\LogisticServiceInterface;
-use Quarx\Modules\Hadron\Services\CustomerProfileService;
-use Quarx\Modules\Hadron\Services\LogisticService;
+use Yab\Hadron\Interfaces\LogisticServiceInterface;
+use Yab\Hadron\Services\CustomerProfileService;
+use Yab\Hadron\Services\LogisticService;
 
 class StoreLogistics implements LogisticServiceInterface
 {

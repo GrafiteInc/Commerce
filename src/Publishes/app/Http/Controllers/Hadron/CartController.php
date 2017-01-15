@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Hadron;
 use Request;
 use Redirect;
 use App\Http\Controllers\Controller;
-use Quarx\Modules\Hadron\Services\CartService;
+use Yab\Hadron\Services\CartService;
 use Yab\Quarx\Services\QuarxResponseService;
 
 class CartController extends Controller

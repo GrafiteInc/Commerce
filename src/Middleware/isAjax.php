@@ -1,6 +1,6 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Middleware;
+namespace Yab\Hadron\Middleware;
 
 use Closure;
 

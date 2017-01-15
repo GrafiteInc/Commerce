@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Hadron;
 
 use App\Http\Controllers\Controller;
-use Quarx\Modules\Hadron\Services\PlanService;
+use Yab\Hadron\Services\PlanService;
 use Yab\Crypto\Services\Crypto;
 
 class PlanController extends Controller

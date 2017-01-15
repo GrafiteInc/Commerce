@@ -1,10 +1,10 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Requests;
+namespace Yab\Hadron\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Quarx\Modules\Hadron\Models\Transactions;
+use Yab\Hadron\Models\Transactions;
 
 class TransactionsRequest extends FormRequest
 {

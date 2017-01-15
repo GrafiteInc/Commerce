@@ -1,11 +1,11 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Controllers;
+namespace Yab\Hadron\Controllers;
 
 use Yab\Quarx\Controllers\QuarxController;
 use App\Services\UserService;
 use Illuminate\Http\Request;
-use Quarx\Modules\Hadron\Services\TransactionService;
+use Yab\Hadron\Services\TransactionService;
 
 class AnalyticsController extends QuarxController
 {

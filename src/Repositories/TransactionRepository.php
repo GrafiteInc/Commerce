@@ -1,11 +1,11 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Repositories;
+namespace Yab\Hadron\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
-use Quarx\Modules\Hadron\Models\Transactions;
-use Quarx\Modules\Hadron\Services\LogisticService;
+use Yab\Hadron\Models\Transactions;
+use Yab\Hadron\Services\LogisticService;
 
 class TransactionRepository
 {
@@ -79,13 +79,13 @@ class TransactionRepository
     }
 
     /**
-     * Find Transactions by given id.
+     * Find Transactions by ID.
      *
      * @param int $id
      *
-     * @return \Illuminate\Support\Collection|null|static|Transactions
+     * @return Transactions
      */
-    public function findTransactionsById($id)
+    public function find($id)
     {
         return $this->model->find($id);
     }

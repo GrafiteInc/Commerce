@@ -22,6 +22,7 @@ composer require yab/hadron
 composer require laravel/cashier
 ```
 
+Don't worry about the laravel cashier installation, the only points of interest are specified below:
 Add this to your Quarx app's `composer.json`
 
 ```json
@@ -61,8 +62,13 @@ php artisan migrate
 Add the following to the Http Kernel
 
 ```php
-'isAjax' => \Quarx\Modules\Hadron\Middleware\isAjax::class,
+'isAjax' => \Yab\Hadron\Middleware\isAjax::class,
 ```
+
+## Config
+
+#### CURRENCY
+You can set the currency in the module `config.php` file. It is set to use an the env: CURRENCY but pending on your deployment this may not work correctly, and may need to be set manually.
 
 ## Customizing
 

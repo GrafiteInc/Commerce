@@ -1,13 +1,13 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Services;
+namespace Yab\Hadron\Services;
 
 use App\Models\UserMeta;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Cashier\Subscription;
-use Quarx\Modules\Hadron\Models\Plan;
+use Yab\Hadron\Models\Plan;
 use Yab\Quarx\Services\QuarxService;
 
 class PlanService
@@ -189,7 +189,7 @@ class PlanService
     /**
      * Get subscribers.
      *
-     * @param Quarx\Modules\Hadron\Models\Plan $plan
+     * @param Yab\Hadron\Models\Plan $plan
      *
      * @return Illuminate\Support\Collection
      */

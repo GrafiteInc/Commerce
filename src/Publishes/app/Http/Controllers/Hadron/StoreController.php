@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Hadron;
 
 use App\Http\Controllers\Controller;
-use Quarx\Modules\Hadron\Repositories\ProductRepository;
-use Quarx\Modules\Hadron\Services\PlanService;
+use Yab\Hadron\Repositories\ProductRepository;
+use Yab\Hadron\Services\PlanService;
 
 class StoreController extends Controller
 {

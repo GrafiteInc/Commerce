@@ -1,12 +1,12 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Services;
+namespace Yab\Hadron\Services;
 
 use Yab\Quarx\Facades\QuarxServiceFacade as Quarx;
 use Illuminate\Support\Facades\Config;
 use Yab\Quarx\Services\FileService;
-use Quarx\Modules\Hadron\Repositories\ProductRepository;
-use Quarx\Modules\Hadron\Repositories\ProductVariantRepository;
+use Yab\Hadron\Repositories\ProductRepository;
+use Yab\Hadron\Repositories\ProductVariantRepository;
 
 class ProductService
 {
@@ -33,18 +33,6 @@ class ProductService
     public function paginated()
     {
         return $this->repo->paginated(config('quarx.pagination', 25));
-    }
-
-    /**
-     * Find products by ID.
-     *
-     * @param int $id
-     *
-     * @return Product
-     */
-    public function findProductsById($id)
-    {
-        return $this->repo->findProductsById($id);
     }
 
     /**

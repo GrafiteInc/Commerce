@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Quarx\Modules\Hadron\Models\Plan::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Hadron\Models\Plan::class, function (Faker\Generator $faker) {
     return [
 
         'id' => 1,

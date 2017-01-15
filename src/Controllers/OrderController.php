@@ -1,10 +1,10 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Controllers;
+namespace Yab\Hadron\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Quarx\Modules\Hadron\Services\OrderService;
+use Yab\Hadron\Services\OrderService;
 use Yab\Crypto\Services\Crypto;
 
 class OrderController extends Controller

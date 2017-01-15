@@ -1,6 +1,6 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Facades;
+namespace Yab\Hadron\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

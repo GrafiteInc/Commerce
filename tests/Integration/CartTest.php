@@ -19,9 +19,9 @@ class CartTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actor = $this->actingAs($this->user);
 
-        factory(\Quarx\Modules\Hadron\Models\Cart::class)->create();
-        factory(\Quarx\Modules\Hadron\Models\Product::class)->create();
-        factory(\Quarx\Modules\Hadron\Models\Plan::class)->create();
+        factory(\Yab\Hadron\Models\Cart::class)->create();
+        factory(\Yab\Hadron\Models\Product::class)->create();
+        factory(\Yab\Hadron\Models\Plan::class)->create();
     }
 
     public function testContents()

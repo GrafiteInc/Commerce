@@ -1,8 +1,8 @@
 <?php
 
-namespace Quarx\Modules\Hadron\Repositories;
+namespace Yab\Hadron\Repositories;
 
-use Quarx\Modules\Hadron\Models\Product;
+use Yab\Hadron\Models\Product;
 use Illuminate\Support\Facades\Schema;
 
 class ProductRepository
@@ -110,18 +110,6 @@ class ProductRepository
     | Store End
     |--------------------------------------------------------------------------
     */
-
-    /**
-     * Find Products by given id.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Support\Collection|null|static|Products
-     */
-    public function findProductsById($id)
-    {
-        return $this->model->find($id);
-    }
 
     /**
      * Get all published products.
