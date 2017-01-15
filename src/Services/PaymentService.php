@@ -2,7 +2,6 @@
 
 namespace Yab\Hadron\Services;
 
-use Quarx;
 use Illuminate\Support\Facades\DB;
 use Yab\Hadron\Models\Transactions;
 use Yab\Crypto\Services\Crypto;
@@ -49,7 +48,7 @@ class PaymentService
         DB::beginTransaction();
 
         $result = $user->meta->charge(($cart->getCartTotal() * 100), [
-            'currency' => Quarx::moduleConfig('hadron', 'currency'),
+            'currency' => config('hadron.currency', 'usd'),
         ]);
 
         if ($result) {

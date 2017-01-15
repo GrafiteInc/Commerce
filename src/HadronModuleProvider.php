@@ -19,6 +19,7 @@ class HadronModuleProvider extends ServiceProvider
             __DIR__.'/Publishes/app/Services' => app_path('Services'),
             __DIR__.'/Publishes/public/js' => base_path('public/js'),
             __DIR__.'/Publishes/public/css' => base_path('public/css'),
+            __DIR__.'/Publishes/config' => base_path('config'),
             __DIR__.'/Publishes/routes' => base_path('routes'),
         ]);
     }
