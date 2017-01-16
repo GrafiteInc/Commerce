@@ -47,7 +47,7 @@ class TransactionTest extends TestCase
             'id' => 2,
             'notes' => 'Le notes!',
         ]);
-        $response = $this->call('GET', 'quarx/transactions/'.Crypto::encrypt(2).'/edit');
+        $response = $this->call('GET', 'quarx/transactions/2/edit');
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('transaction');
@@ -75,7 +75,7 @@ class TransactionTest extends TestCase
             'notes' => 'Star Wars !',
         ]);
 
-        $response = $this->call('PATCH', 'quarx/transactions/'.Crypto::encrypt(4), [
+        $response = $this->call('PATCH', 'quarx/transactions/4', [
             'notes' => 'nada',
         ]);
 
@@ -85,7 +85,7 @@ class TransactionTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'quarx/transactions/'.Crypto::encrypt(1));
+        $response = $this->call('DELETE', 'quarx/transactions/1');
         $this->assertEquals(405, $response->getStatusCode());
     }
 
