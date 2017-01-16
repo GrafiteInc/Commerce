@@ -2,28 +2,28 @@
 
 @section('store-content')
 
-    <table>
+    <table class="table table-stripped">
         <tr>
             <td>Date</td>
-            <td>{!! $order->created_at->format('Y-m-d') !!}</td>
+            <td class="text-right">{!! $order->created_at->format('Y-m-d') !!}</td>
         </tr>
         <tr>
             <td>Transaction</td>
-            <td><a href="{!! url('store/account/purchases/'.Crypto::encrypt($order->transaction()->id)) !!}">{!! $order->transaction('uuid') !!}</a></td>
+            <td class="text-right"><a href="{!! url('store/account/purchases/'.Crypto::encrypt($order->transaction()->id)) !!}">{!! $order->transaction('uuid') !!}</a></td>
         </tr>
         <tr>
             <td>Status</td>
-            <td> {!! ucfirst($order->status) !!}</td>
+            <td class="text-right"> {!! ucfirst($order->status) !!}</td>
         </tr>
 
         <tr>
             <td>Address</td>
-            <td>
-                {!! $order->shippingAddress('street') !!}
-                {!! $order->shippingAddress('postal') !!}
-                {!! $order->shippingAddress('city') !!}
-                {!! $order->shippingAddress('state') !!}
-                {!! $order->shippingAddress('country') !!}
+            <td class="text-right">
+                {!! $order->shippingAddress('street') !!}<br>
+                {!! $order->shippingAddress('postal') !!}<br>
+                {!! $order->shippingAddress('city') !!}<br>
+                {!! $order->shippingAddress('state') !!}<br>
+                {!! $order->shippingAddress('country') !!}<br>
             </td>
         </tr>
 

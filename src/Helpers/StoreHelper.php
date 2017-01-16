@@ -108,12 +108,12 @@ class StoreHelper
 
     public static function addToCartBtn($id, $type, $content, $class = '')
     {
-        return app(\Yab\Hadron\Services\CartService::class)->addToCartBtn($id, $type, $content, $class = '');
+        return app(\Yab\Hadron\Services\CartService::class)->addToCartBtn($id, $type, $content, $class);
     }
 
     public static function removeFromCartBtn($id, $type, $content, $class = '')
     {
-        return app(\Yab\Hadron\Services\CartService::class)->removeFromCartBtn($id, $type, $content, $class = '');
+        return app(\Yab\Hadron\Services\CartService::class)->removeFromCartBtn($id, $type, $content, $class);
     }
 
     public static function checkoutTax()

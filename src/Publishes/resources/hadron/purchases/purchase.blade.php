@@ -2,30 +2,30 @@
 
 @section('store-content')
 
-    <table>
+    <table class="table table-stripped">
         <tr>
             <td>ID</td>
-            <td>{!! $purchase->uuid !!}</td>
+            <td class="text-right">{!! $purchase->uuid !!}</td>
         </tr>
         <tr>
             <td>Date</td>
-            <td>{!! $purchase->created_at->format('Y-m-d') !!}</td>
+            <td class="text-right">{!! $purchase->created_at->format('Y-m-d') !!}</td>
         </tr>
         <tr>
             <td>Subtotal</td>
-            <td>{!! $purchase->subtotal !!}</td>
+            <td class="text-right">{!! $purchase->subtotal !!}</td>
         </tr>
         <tr>
             <td>Tax</td>
-            <td>{!! $purchase->tax !!}</td>
+            <td class="text-right">{!! $purchase->tax !!}</td>
         </tr>
         <tr>
             <td>Shipping</td>
-            <td>{!! $purchase->shipping !!}</td>
+            <td class="text-right">{!! $purchase->shipping !!}</td>
         </tr>
         <tr>
             <td>Total</td>
-            <td>{!! $purchase->total !!}</td>
+            <td class="text-right">{!! $purchase->total !!}</td>
         </tr>
 
     </table>
@@ -34,13 +34,14 @@
         <thead>
             <td>Name</td>
             <td>Code</td>
+            <td class="text-right">Details</td>
         </thead>
         <tbody>
             @foreach (json_decode($purchase->cart) as $product)
                 <tr>
                     <td><a href="{{ StoreHelper::productUrl($product->url) }}">{!! $product->name !!}</a></td>
                     <td>{!! $product->code !!}</td>
-                    <td>
+                    <td class="text-right">
                         @if (! empty($product->file))
                             <a class="btn btn-default raw-margin-top-24" href="{!! url(FileService::fileAsDownload($product->file, $product->file)) !!}">
                             <span class="fa fa-download"></span> Download</a>

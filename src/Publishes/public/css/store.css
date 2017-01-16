@@ -4,6 +4,40 @@
 |--------------------------------------------------------------------------
 */
 
+.dropdown-menu {
+    top: 126px !important;
+    left: auto !important;
+}
+
+.store-header {
+    margin-bottom: 24px;
+    height: 48px;
+}
+
+.store-header h2 {
+    float: left;
+    margin-top: 0px;
+    padding-top: 12px;
+}
+
+.store-menu a {
+    float: right;
+    margin-left: 16px;
+    line-height: 56px;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.store-menu a:hover {
+    text-decoration: none;
+}
+
+.store-account {
+    float: right;
+    margin-left: 16px;
+    line-height: 56px;
+}
+
 .store-form {
     border: 1px solid #BBB;
     width: 45px;
@@ -15,24 +49,44 @@
 }
 
 .icon-stack {
-  position: relative;
-  display: inline-block;
-  width: 2em;
+    position: relative;
+    display: inline-block;
+    width: 2em;
 }
 .icon-stack-1x,
 .icon-stack-2x,
 .icon-stack-3x {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  text-align: center;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
 }
 .icon-stack-1x {
-  line-height: inherit;
+    line-height: inherit;
 }
 .icon-stack-2x {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }
 .icon-stack-3x {
-  font-size: 2em;
+    font-size: 2em;
+}
+
+/*
+ * --------------------------------------------------------------------------
+ * Customer
+ * --------------------------------------------------------------------------
+*/
+
+.customer-tabs {
+    margin: 24px 0;
+}
+
+/*
+ * --------------------------------------------------------------------------
+ * Homepage
+ * --------------------------------------------------------------------------
+*/
+
+.homepage-banner-img {
+    width: 100%;
 }

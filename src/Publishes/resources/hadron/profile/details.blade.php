@@ -5,34 +5,34 @@
     @include('hadron-frontend::profile.tabs')
 
     <table class="table table-striped">
-        @if (! is_null(Customer::lastCard('card_last_four')))
+        @if (! is_null(StoreHelper::customer()->lastCard('card_last_four')))
             <tr>
                 <td>Last Card Number</td>
-                <td>**** **** **** {!! Customer::lastCard('card_last_four') !!}</td>
+                <td>**** **** **** {!! StoreHelper::customer()->lastCard('card_last_four') !!}</td>
             </tr>
             <tr>
                 <td>Last Card Brand</td>
-                <td>{!! Customer::lastCard('card_brand') !!}</td>
+                <td>{!! StoreHelper::customer()->lastCard('card_brand') !!}</td>
             </tr>
         @endif
         <tr>
             <td>Shipping Address</td>
             <td>
-                {!! Customer::shippingAddress('street') !!}
-                {!! Customer::shippingAddress('postal') !!}
-                {!! Customer::shippingAddress('city') !!}
-                {!! Customer::shippingAddress('state') !!}
-                {!! Customer::shippingAddress('country') !!}
+                {!! StoreHelper::customer()->shippingAddress('street') !!}
+                {!! StoreHelper::customer()->shippingAddress('postal') !!}
+                {!! StoreHelper::customer()->shippingAddress('city') !!}
+                {!! StoreHelper::customer()->shippingAddress('state') !!}
+                {!! StoreHelper::customer()->shippingAddress('country') !!}
             </td>
         </tr>
         <tr>
             <td>Billing Address</td>
             <td>
-                {!! Customer::billingAddress('street') !!}
-                {!! Customer::billingAddress('postal') !!}
-                {!! Customer::billingAddress('city') !!}
-                {!! Customer::billingAddress('state') !!}
-                {!! Customer::billingAddress('country') !!}
+                {!! StoreHelper::customer()->billingAddress('street') !!}
+                {!! StoreHelper::customer()->billingAddress('postal') !!}
+                {!! StoreHelper::customer()->billingAddress('city') !!}
+                {!! StoreHelper::customer()->billingAddress('state') !!}
+                {!! StoreHelper::customer()->billingAddress('country') !!}
             </td>
         </tr>
     </table>

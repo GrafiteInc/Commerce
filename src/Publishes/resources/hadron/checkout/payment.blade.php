@@ -59,7 +59,7 @@
 
 @section('pre-javascript')
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <script> Stripe.setPublishableKey('{{ config("services.stripe.key") }}'); </script>
+    <script> Stripe.setPublishableKey('{{ Config::get("services.stripe.key") }}'); </script>
 @stop
 
 @section('javascript')

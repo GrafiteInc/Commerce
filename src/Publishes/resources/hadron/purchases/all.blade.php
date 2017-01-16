@@ -6,7 +6,7 @@
         <thead>
             <td>ID</td>
             <td>Total</td>
-            <td>Actions</td>
+            <td class="text-right">Actions</td>
         </thead>
         <tbody>
             @foreach ($purchases as $purchase)
@@ -14,9 +14,9 @@
                     <td><a href="{{ url('store/account/purchases/'.Crypto::encrypt($purchase->id)) }}">{!! $purchase->uuid !!}</a></td>
                     <td>${!! $purchase->total !!}</td>
 
-                    <td>
+                    <td class="text-right">
                         @if (!$purchase->refund_requested && is_null($purchase->refund_date))
-                            <a href="{{ url('store/account/purchases/'.Crypto::encrypt($purchase->id).'/refund-request') }}">Refund Request</a>
+                            <a href="{{ url('store/account/purchases/'.Crypto::encrypt($purchase->id).'/refund-request') }}">Request a Refund</a>
                         @endif
                     </td>
                 </tr>

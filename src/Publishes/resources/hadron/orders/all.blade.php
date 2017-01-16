@@ -7,7 +7,7 @@
             <td>Date</td>
             <td>Transaction</td>
             <td>Status</td>
-            <td>Action</td>
+            <td class="text-right">Action</td>
         </thead>
         <tbody>
             @foreach ($orders as $order)
@@ -15,7 +15,7 @@
                     <td><a href="{{ url('store/account/orders/'.Crypto::encrypt($order->id)) }}">{!! $order->created_at->format('Y-m-d') !!}</a></td>
                     <td>{!! $order->transaction('uuid') !!}</td>
                     <td>{!! ucfirst($order->status) !!}</td>
-                    <td><a href="{{ url('store/account/orders/'.Crypto::encrypt($order->id).'/cancel') }}">Cancel Order</a></td>
+                    <td class="text-right"><a href="{{ url('store/account/orders/'.Crypto::encrypt($order->id).'/cancel') }}">Cancel Order</a></td>
                 </tr>
             @endforeach
         </tbody>

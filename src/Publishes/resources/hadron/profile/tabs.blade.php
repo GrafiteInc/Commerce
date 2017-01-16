@@ -1,6 +1,4 @@
-<div class="row">
-    <h1>Customer Profile</h1>
-
+<div class="row customer-tabs">
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="tabs-title {{ Request::is('store/account/profile') ? 'active' : '' }}">
             <a href="{{ url('store/account/profile') }}">Profile</a>

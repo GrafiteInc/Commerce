@@ -2,6 +2,8 @@
 
 @section('store-content')
 
+    @include('hadron-frontend::homepage.banner')
+
     @include('hadron-frontend::products.featured')
 
     <h1>Products</h1>
