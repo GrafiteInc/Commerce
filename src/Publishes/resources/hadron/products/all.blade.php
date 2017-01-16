@@ -23,6 +23,4 @@
         </tbody>
     </table>
 
-    {!! QuarxService::widget('test') !!}
-
 @endsection
