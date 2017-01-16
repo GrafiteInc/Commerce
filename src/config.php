@@ -124,12 +124,15 @@ return [
         ],
         'currency' => [
             'type' => 'select',
-            'options' => [
+            'options' => config('hadron.currencies', [
+                'AUD' => 'aud',
                 'CAD' => 'cad',
                 'USD' => 'usd',
-                'EUR' => 'eur',
                 'GBP' => 'gbp',
-            ],
+                'DKK' => 'dkk',
+                'NOK' => 'nok',
+                'SEK' => 'sek',
+            ]),
         ],
         'trial_days' => [
             'type' => 'number',

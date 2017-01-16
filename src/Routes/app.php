@@ -1,26 +1,19 @@
 <?php
 
-    /*
-    |--------------------------------------------------------------------------
-    | Hadron Routes
-    |--------------------------------------------------------------------------
-    */
+    Route::group(['prefix' => 'store', 'namespace' => 'App', 'middleware' => ['web']], function () {
+        Route::get('cart/contents', 'CartController@getContents');
+        Route::get('cart/empty', 'CartController@emptyCart');
+        Route::get('cart/count', 'CartController@cartCount');
+        Route::get('cart/change-count', 'CartController@changeCartCount');
+        Route::get('cart/add', 'CartController@addToCart');
+        Route::get('cart/remove', 'CartController@removeFromCart');
 
-    Route::group(['namespace' => 'Hadron', 'middleware' => ['web', 'quarx-analytics']], function () {
-        Route::group(['prefix' => 'store'], function () {
+        Route::group(['middleware' => ['quarx-analytics']], function () {
             Route::get('', 'StoreController@index');
             Route::get('products', 'ProductController@all');
             Route::get('product/{url}', 'ProductController@show');
             Route::get('plan/{id}', 'PlanController@show');
             Route::post('subscribe/{id}', 'SubscriptionController@subscribe');
-            Route::get('cart/contents', 'CartController@getContents');
-            Route::get('cart/empty', 'CartController@emptyCart');
-            Route::group(['middleware' => []], function () {
-                Route::get('cart/count', 'CartController@cartCount');
-                Route::get('cart/change-count', 'CartController@changeCartCount');
-                Route::get('cart/add', 'CartController@addToCart');
-                Route::get('cart/remove', 'CartController@removeFromCart');
-            });
             Route::group(['middleware' => 'auth'], function () {
                 Route::group(['prefix' => 'account'], function () {
                     Route::get('settings', 'ProfileController@customerSettings');

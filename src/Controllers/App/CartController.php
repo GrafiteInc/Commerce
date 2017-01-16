@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Hadron;
+namespace Yab\Hadron\Controllers\App;
 
 use Request;
 use Redirect;
@@ -10,7 +10,7 @@ use Yab\Quarx\Services\QuarxResponseService;
 
 class CartController extends Controller
 {
-    private $cartService;
+    protected $cartService;
 
     public function __construct(CartService $cartService)
     {

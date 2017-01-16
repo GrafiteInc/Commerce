@@ -15,7 +15,7 @@
                 <li><a href="{{ url('store/account/subscriptions') }}"><span class="fa fa-ticket"></span> Subscriptions</a></li>
                 <li><a href="{{ url('logout') }}"><span class="fa fa-sign-out"></span> Logout</a></li>
             @else
-                <li><a href="{{ url('store/login') }}"><span class="fa fa-sign-in"></span> Login</a></li>
+                <li><a href="{{ url('login') }}"><span class="fa fa-sign-in"></span> Login</a></li>
             @endif
         </ul>
     </div>

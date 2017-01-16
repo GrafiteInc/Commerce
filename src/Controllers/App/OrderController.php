@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Hadron;
+namespace Yab\Hadron\Controllers\App;
 
 use App\Http\Controllers\Controller;
 use Yab\Hadron\Repositories\OrderRepository;
