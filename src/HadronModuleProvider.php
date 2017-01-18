@@ -37,11 +37,6 @@ class HadronModuleProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/Migrations');
 
-        // Load Routes
-        $this->app->router->group(['middleware' => ['web']], function ($router) {
-            require __DIR__.'/Routes/quarx.php';
-        });
-
         // Configs
         $this->app->config->set('quarx.modules.hadron', include(__DIR__.'/config.php'));
 

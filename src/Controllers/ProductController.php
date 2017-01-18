@@ -37,10 +37,10 @@ class ProductController extends QuarxController
      */
     public function search(Request $request)
     {
-        $products = $this->service->search($request->search);
+        $products = $this->service->search($request->term);
 
         return view('hadron::products.index')
-            ->with('term', $request->search)
+            ->with('term', $request->term)
             ->with('pagination', $products->render())
             ->with('products', $products);
     }

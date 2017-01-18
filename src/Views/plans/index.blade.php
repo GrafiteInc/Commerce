@@ -13,6 +13,9 @@
     </div>
 
     <div class="row">
+        @if (isset($term))
+        <div class="well text-center">Searched for "{!! $term !!}".</div>
+        @endif
         @if ($plans->isEmpty())
             <div class="well text-center">No plans found.</div>
         @else

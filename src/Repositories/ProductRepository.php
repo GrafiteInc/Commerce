@@ -39,14 +39,15 @@ class ProductRepository
      *
      * @return Product
      */
-    public function search($input, $paginate)
+    public function search($payload, $paginate)
     {
         $query = $this->model->orderBy('created_at', 'desc');
 
         $columns = Schema::getColumnListing('products');
+        $query->where('id', 'LIKE', '%'.$payload.'%');
 
         foreach ($columns as $attribute) {
-            $query->orWhere($attribute, 'LIKE', '%'.$input.'%');
+            $query->orWhere($attribute, 'LIKE', '%'.$payload.'%');
         }
 
         return $query->paginate($paginate);

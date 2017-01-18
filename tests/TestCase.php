@@ -25,8 +25,8 @@ class TestCase extends Orchestra\Testbench\TestCase
             return true;
         });
 
-        $app['Illuminate\Routing\Router']->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            require __DIR__.'/../src/Publishes/Routes/hadron.php';
+        $app['Illuminate\Routing\Router']->group(['namespace' => 'Yab\Hadron\Controllers\App'], function ($router) {
+            require __DIR__.'/../src/Routes/app.php';
         });
     }
 

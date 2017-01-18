@@ -36,7 +36,9 @@ class PlanController extends Controller
     {
         $plans = $this->service->search($request->term);
 
-        return view('hadron::plans.index')->with('plans', $plans);
+        return view('hadron::plans.index')
+            ->with('term', $request->term)
+            ->with('plans', $plans);
     }
 
     /**

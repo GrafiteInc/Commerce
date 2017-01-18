@@ -42,8 +42,8 @@ class OrderRepository
         $query = $this->model->orderBy('created_at', 'desc');
 
         $columns = Schema::getColumnListing('orders');
-
         $query->where('id', '>', 0);
+        $query->where('id', 'LIKE', '%'.$payload.'%');
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$payload.'%');
