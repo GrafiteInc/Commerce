@@ -109,14 +109,16 @@ class CartSessionRepository
      */
     public function removeFromCart($id)
     {
-        foreach (Session::get('cart') as $key => $item) {
+        $cart = Session::get('cart');
+
+        foreach ($cart as $key => $item) {
             $product = json_decode($item);
             if ($product->id == $id) {
-                unset(Session::get('cart')[$key]);
+                unset($cart[$key]);
             }
         }
 
-        return Session::put('cart', Session::get('cart'));
+        return Session::put('cart', $cart);
     }
 
     /**

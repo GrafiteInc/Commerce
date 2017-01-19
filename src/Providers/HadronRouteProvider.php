@@ -2,8 +2,9 @@
 
 namespace Yab\Hadron\Providers;
 
-use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Routing\Router;
+use Yab\Hadron\Middleware\isAjax;
 
 class HadronRouteProvider extends ServiceProvider
 {
@@ -36,6 +37,8 @@ class HadronRouteProvider extends ServiceProvider
         $router->group([
             'namespace' => $this->namespace,
         ], function ($router) {
+            $router->middleware('isAjax', isAjax::class);
+
             require __DIR__.'/../Routes/app.php';
             require __DIR__.'/../Routes/quarx.php';
         });

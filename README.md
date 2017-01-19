@@ -23,19 +23,8 @@ composer require laravel/cashier
 ```
 
 Don't worry about the laravel cashier installation, the only points of interest are specified below:
-Add this to your Quarx app's `composer.json`
 
-```json
-{
-    "extra": {
-        "installer-paths": {
-            "quarx/modules/{$name}/": ["yab/hadron"]
-        }
-    }
-}
-```
-
-Add the following to your Providers:
+Add the following to your `config/services.php`:
 
 ```php
 'stripe' => [
@@ -59,13 +48,10 @@ php artisan module:publish Hadron
 php artisan migrate
 ```
 
-Add the following to the Http Kernel
-
-```php
-'isAjax' => \Yab\Hadron\Middleware\isAjax::class,
-```
-
 ## Config
+
+## Quarx & Laracogs
+Hadron is intented to be used with Quarx so use outside of that context is to be done at your own risk. Similarly, though Quarx is able to be added to any existing Laravel 5.3+ application, the documentation above is in relation to using the `php artisan quarx:setup` command, which is heavily integrated with [Laracogs](https://laracogs.com).
 
 #### CURRENCY
 You can set the currency in the module `config.php` file. It is set to use an the env: CURRENCY but pending on your deployment this may not work correctly, and may need to be set manually.
@@ -98,11 +84,7 @@ There are a few controllers added to your app in the Hadron directory. These are
 
 ### Views
 
-There are Hadron view files that are published your app which you can modify, however, if you wish to edit the package views then you will need to update them in the `quarx/modules/Hadron/Views` directory.
-
-## Updates
-
-When running updates for Hadron, in particular if you run `php artisan module:publish Hadron` after the update, please make a special note. The way the package is provided it should be commited in full to your `repository`. So when you run the update it may overwrite your customizations. This means you should ensure that all your commits are set prior to running the updater. Then once you run it, if you do run the `module:publish` command double check your code base to ensure that nothing is broken or lost.
+There are Hadron view files that are published your app which you can modify, however, if you wish to edit the package views then you will need to update them in the `resources/hadron` directory.
 
 ## License
 
