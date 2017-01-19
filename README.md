@@ -7,7 +7,8 @@ You can control, products, subscriptions, transaction history, orders, and some 
 1. PHP 5.6+
 2. MySQL 5.6+
 3. OpenSSL
-4. Laravel 5.3
+4. Laravel 5.3+
+4. Quarx 2.3+
 
 ## Recommended
 1. PHP 7+
