@@ -15,6 +15,7 @@ class Plan extends QuarxModel
     public $fillable = [
         'name',
         'title',
+        'uuid',
         'amount',
         'interval',
         'currency',
@@ -40,8 +41,32 @@ class Plan extends QuarxModel
         return $this->where('stripe_name', $name)->first();
     }
 
+    public function getFrequencyAttribute()
+    {
+        switch ($this->interval) {
+            case 'week':
+                return 'weekly';
+            case 'month':
+                return 'monthly';
+            case 'year':
+                return 'yearly';
+            default:
+                return $this->interval;
+        }
+    }
+
     public function getPriceAttribute()
     {
         return round($this->amount / 100, 2);
+    }
+
+    public function getHrefAttribute()
+    {
+        return url('store/plan/'.crypto_encrypt($this->id));
+    }
+
+    public function subscribeBtn($content = '', $class = '')
+    {
+        return '<form method="post" action="'.url('store/subscribe/'.crypto_encrypt($this->id)).'">'.csrf_field().'<button class="'.$class.'">'.$content.'</button></form>';
     }
 }

@@ -2,9 +2,9 @@
 
     @foreach ($products as $product)
         @if ($product->is_featured)
-            <a href="{{ StoreHelper::productUrl($product->url) }}">
+            <a href="{{ $product->href }}">
                 <div class="col-lg-4">
-                    <img class="thumbnail img-responsive" alt="" src="{{ StoreHelper::heroImage($product) }}" />
+                    <img class="thumbnail img-responsive" alt="" src="{{ $product->hero_image_url }}" />
                 </div>
             </a>
         @endif

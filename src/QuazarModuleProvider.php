@@ -33,7 +33,12 @@ class QuazarModuleProvider extends ServiceProvider
 
         // View namespace
         $this->app->view->addNamespace('quazar', __DIR__.'/Views');
-        $this->app->view->addNamespace('quazar-frontend', base_path('resources/quazar'));
+
+        if (is_dir(base_path('resources/quazar'))) {
+            $this->app->view->addNamespace('quazar-frontend', base_path('resources/quazar'));
+        } else {
+            $this->app->view->addNamespace('quazar-frontend', __DIR__.'/Publishes/resources/quazar');
+        }
 
         $this->loadMigrationsFrom(__DIR__.'/Migrations');
 

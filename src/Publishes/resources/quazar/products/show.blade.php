@@ -3,7 +3,7 @@
 @section('store-content')
 
     <div class="row">
-        <img class="thumbnail img-responsive" alt="" src="{{ StoreHelper::heroImage($product) }}" />
+        <img class="thumbnail img-responsive" alt="" src="{{ $product->hero_image_url }}" />
 
         <table class="table table-stripped">
             <tr>
@@ -12,7 +12,7 @@
             </tr>
             <tr>
                 <td>Options</td>
-                <td class="text-right">{!! StoreHelper::productVariants($product) !!}</td>
+                <td class="text-right">{!! $product->variants !!}</td>
             </tr>
             <tr>
                 <td>Price</td>
@@ -25,7 +25,7 @@
             </tr>
             <tr>
                 <td colspan="2" class="text-right">
-                    {!! StoreHelper::addToCartBtn($product->id, 'product', 'Add To Cart <span class="fa fa-shopping-cart"></span>', 'btn btn-primary') !!}
+                    {!! $product->addToCartBtn('Add To Cart <span class="fa fa-shopping-cart"></span>', 'btn btn-primary') !!}
                 </td>
             </tr>
         </table>

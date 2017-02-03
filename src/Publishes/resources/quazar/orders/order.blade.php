@@ -9,7 +9,7 @@
         </tr>
         <tr>
             <td>Transaction</td>
-            <td class="text-right"><a href="{!! url('store/account/purchases/'.Crypto::encrypt($order->transaction()->id)) !!}">{!! $order->transaction('uuid') !!}</a></td>
+            <td class="text-right"><a href="{!! url('store/account/purchases/'.crypto_encrypt($order->transaction()->id)) !!}">{!! $order->transaction('uuid') !!}</a></td>
         </tr>
         <tr>
             <td>Status</td>
@@ -37,7 +37,7 @@
         <tbody>
             @foreach (json_decode($order->details) as $product)
                 <tr>
-                    <td><a href="{{ StoreHelper::productUrl($product->url) }}">{!! $product->name !!}</a></td>
+                    <td><a href="{{ $product->href }}">{!! $product->name !!}</a></td>
                     <td>{!! $product->code !!}</td>
                 </tr>
             @endforeach

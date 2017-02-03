@@ -3,6 +3,7 @@
 namespace Yab\Quazar\Models;
 
 use Yab\Quarx\Models\QuarxModel;
+use Yab\Quazar\Services\ProductService;
 
 class Variant extends QuarxModel
 {
@@ -19,4 +20,9 @@ class Variant extends QuarxModel
     ];
 
     public static $rules = [];
+
+    public function getOptionsAttribute()
+    {
+        return app(ProductService::class)->variantOptions($this);
+    }
 }

@@ -2,6 +2,16 @@
 
 @section('store-content')
 
+    @if ($purchase->refund_requested && is_null($purchase->refund_date))
+        <div class="alert alert-warning">
+            You have requested a refund for this purchase
+        </div>
+    @elseif (($purchase->refund_requested && !is_null($purchase->refund_date)) || !is_null($purchase->refund_date))
+        <div class="alert alert-info">
+            You were refunded for this purchase
+        </div>
+    @endif
+
     <table class="table table-stripped">
         <tr>
             <td>ID</td>
@@ -39,12 +49,14 @@
         <tbody>
             @foreach (json_decode($purchase->cart) as $product)
                 <tr>
-                    <td><a href="{{ StoreHelper::productUrl($product->url) }}">{!! $product->name !!}</a></td>
+                    <td><a href="{{ $product->href }}">{!! $product->name !!}</a></td>
                     <td>{!! $product->code !!}</td>
                     <td class="text-right">
                         @if (! empty($product->file))
-                            <a class="btn btn-default raw-margin-top-24" href="{!! url(FileService::fileAsDownload($product->file, $product->file)) !!}">
+                            <a class="btn btn-default raw-margin-top-24" href="{!! $product->file_download_href !!}">
                             <span class="fa fa-download"></span> Download</a>
+                        @else
+                        <td class="text-right">{!! $product->details !!}</td>
                         @endif
                     </td>
                 </tr>

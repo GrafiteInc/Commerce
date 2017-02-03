@@ -26,7 +26,7 @@
 
     @include('quazar::orders.breadcrumbs', ['location' => ['edit']])
 
-    {!! Form::model($order, ['route' => ['quarx.orders.update', Crypto::encrypt($order->id)], 'method' => 'patch']) !!}
+    {!! Form::model($order, ['route' => ['quarx.orders.update', $order->id], 'method' => 'patch']) !!}
 
         <div class="row">
             <div class="col-md-12 raw-margin-bottom-24">

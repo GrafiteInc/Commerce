@@ -5,7 +5,6 @@ namespace Yab\Quazar\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Yab\Quazar\Services\OrderService;
-use Yab\Crypto\Services\Crypto;
 
 class OrderController extends Controller
 {
@@ -52,7 +51,7 @@ class OrderController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $order = $this->service->findOrdersById(Crypto::decrypt($id));
+        $order = $this->service->findOrdersById($id);
 
         return view('quazar::orders.edit')->with('order', $order);
     }
@@ -67,7 +66,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $result = $this->service->update(Crypto::decrypt($id), $request->except(['_token', '_method']));
+        $result = $this->service->update($id, $request->except(['_token', '_method']));
 
         if ($result) {
             return back()->with('message', 'Successfully updated');

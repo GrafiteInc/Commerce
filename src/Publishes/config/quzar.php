@@ -8,6 +8,7 @@
 
 return [
 
+    'name' => 'Quazar',
     'currency' => env('CURRENCY', 'usd'),
     'currencies' => [
         'AUD' => 'aud',

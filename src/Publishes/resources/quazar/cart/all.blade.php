@@ -15,7 +15,7 @@
                 @foreach ($products as $product)
                     <tr data-cart-row="{!! $product->cart_id !!}">
                         <td>
-                            <a href="{{ StoreHelper::productUrl($product->url) }}">{!! $product->name !!}</a>
+                            <a href="{{ $product->href }}">{!! $product->name !!}</a>
                         </td>
                         <td>{!! $product->code !!}</td>
                         <td>${!! $product->price !!}</td>
@@ -28,24 +28,22 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="text-right">{!! StoreHelper::removeFromCartBtn($product->cart_id, $product->entity_type, 'Remove From Cart <span class="fa fa-shopping-cart"></span>', 'btn btn-link btn-warning') !!}</td>
+                        <td class="text-right">{!! $product->removeFromCartBtn($product->cart_id, 'Remove From Cart <span class="fa fa-shopping-cart"></span>', 'btn btn-link btn-warning') !!}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-        <a href="{!! URL::to('store/cart/empty') !!}">
+        <a href="{!! url('store/cart/empty') !!}">
             <span class="pull-left">
                 <span class="fa fa-shopping-cart"></span>
                 Empty Cart
             </span>
         </a>
-        <a class="pull-right" href="{!! URL::to('store/checkout') !!}">Checkout</a>
+        <a class="pull-right" href="{!! url('store/checkout') !!}">Checkout</a>
     @else
         <div class="well text-center">
             Hmm, nothing to see here.
         </div>
     @endif
 
-
 @endsection
-

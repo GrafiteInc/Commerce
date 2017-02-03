@@ -9,8 +9,8 @@
         @foreach ($products as $product)
             <tr data-cart-row="{!! $product->cart_id !!}">
                 <td>
-                    <a href="{{ StoreHelper::productUrl($product->url) }}">{!! $product->name !!}</a>
-                    {!! StoreHelper::productDetailsBtn($product) !!}
+                    <a href="{{ $product->href }}">{!! $product->name !!}</a>
+                    {!! $product->detailsBtn() !!}
                 </td>
                 <td>{!! $product->code !!}</td>
                 <td>{!! $product->price !!}</td>

@@ -43,30 +43,28 @@ class CartService
      * Add to cart button.
      *
      * @param int    $id
-     * @param string $type
      * @param string $content
      * @param string $class
      *
      * @return string
      */
-    public function addToCartBtn($id, $type, $content, $class = '')
+    public function addToCartBtn($product, $content, $class = '')
     {
-        return '<button class="'.$class.'" onclick="store.addToCart('.$id.', 1, \''.$type.'\')">'.$content.'</button>';
+        return '<button class="'.$class.'" onclick="store.addToCart('.$product->id.', 1, \'product\')">'.$content.'</button>';
     }
 
     /**
      * Remove from cart button.
      *
      * @param int    $id
-     * @param string $type
      * @param string $content
      * @param string $class
      *
      * @return string
      */
-    public function removeFromCartBtn($id, $type, $content, $class = '')
+    public function removeFromCartBtn($cartId, $content, $class = '')
     {
-        return '<button class="'.$class.'" onclick="store.removeFromCart('.$id.', \''.$type.'\')">'.$content.'</button>';
+        return '<button class="'.$class.'" onclick="store.removeFromCart('.$cartId.', \'product\')">'.$content.'</button>';
     }
 
     /*

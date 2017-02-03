@@ -1,5 +1,10 @@
 @extends('quarx::layouts.dashboard')
 
+@section('stylesheets')
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ Quarx::moduleAsset('quazar', 'css/store.css', 'text/css') }}">
+@stop
+
 @section('content')
 
     <div class="row">
@@ -11,8 +16,8 @@
 
     @if ($product->hero_image)
         <div class="row">
-            <div class="col-lg-4 col-lg-offset-4 raw-block-300 text-center">
-                <img class="thumbnail" style="display: inline-block;" src="{{ FileService::fileAsPublicAsset($product->hero_image) }}" />
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <img class="thumbnail" style="display: inline-block;" src="{{ $product->hero_image_url }}" />
             </div>
         </div>
     @endif

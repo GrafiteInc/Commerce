@@ -16,7 +16,7 @@
         <div class="card-wrapper"></div>
 
             <form id="userPayment" method="post" action="{{ url('store/process') }}">
-                {!! Form::token(); !!}
+                {!! csrf_field() !!}
                 <input id="exp_month" type="hidden" name="exp_month" data-stripe="exp-month" />
                 <input id="exp_year" type="hidden" name="exp_year" data-stripe="exp-year"/>
                 <div class="row">
@@ -59,7 +59,7 @@
 
 @section('pre-javascript')
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <script> Stripe.setPublishableKey('{{ Config::get("services.stripe.key") }}'); </script>
+    <script> Stripe.setPublishableKey('{{ config("services.stripe.key") }}'); </script>
 @stop
 
 @section('javascript')

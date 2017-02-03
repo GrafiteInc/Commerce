@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('quarx::frontend.store.products.featured')
+    @include('quazar-frontend::products.featured')
 
     <table class="table table-stripped">
         <thead>
@@ -14,10 +14,10 @@
         <tbody>
             @foreach ($products as $product)
                 <tr>
-                    <td><a href="{{ StoreHelper::productUrl($product->url) }}">{!! $product->name !!}</a></td>
+                    <td><a href="{{ $product->href }}">{!! $product->name !!}</a></td>
                     <td>{!! $product->code !!}</td>
                     <td>${!! $product->price !!}</td>
-                    <td>{!! StoreHelper::addToCartBtn($product->id, 'product', 'Add To Cart <span class="fa fa-shopping-cart"></span>') !!}</td>
+                    <td>{!! $product->addToCartBtn('Add To Cart <span class="fa fa-shopping-cart"></span>', 'btn btn-primary') !!}</td>
                 </tr>
             @endforeach
         </tbody>
