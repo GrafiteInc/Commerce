@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Hadron\Middleware;
+namespace Yab\Quazar\Middleware;
 
 use Closure;
 

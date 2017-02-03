@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Hadron\Controllers;
+namespace Yab\Quazar\Controllers;
 
 use Yab\Quarx\Controllers\QuarxController;
 use App\Services\UserService;
 use Illuminate\Http\Request;
-use Yab\Hadron\Services\TransactionService;
+use Yab\Quazar\Services\TransactionService;
 
 class AnalyticsController extends QuarxController
 {
@@ -50,7 +50,7 @@ class AnalyticsController extends QuarxController
             }
         }
 
-        return view('hadron::analytics')
+        return view('quazar::analytics')
             ->with('transactions', $transactions)
             ->with('balanceValues', [round($balanceValues['refunds'], 2), round($balanceValues['income'], 2)])
             ->with('transactionDays', $transactionDays)

@@ -7,7 +7,7 @@
         <h1 class="page-header">Products</h1>
     </div>
 
-    @include('hadron::products.breadcrumbs', ['location' => ['edit']])
+    @include('quazar::products.breadcrumbs', ['location' => ['edit']])
 
     @if ($product->hero_image)
         <div class="row">
@@ -17,13 +17,13 @@
         </div>
     @endif
 
-    @include('hadron::products.tabs', $tabs)
+    @include('quazar::products.tabs', $tabs)
 
 @endsection
 
 @section('javascript')
 
     @parent
-    {!! Minify::javascript(Quarx::moduleAsset('hadron', 'js/products.js', 'application/javascript')) !!}
+    {!! Minify::javascript(Quarx::moduleAsset('quazar', 'js/products.js', 'application/javascript')) !!}
 
 @endsection

@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Hadron\Providers;
+namespace Yab\Quazar\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
-use Yab\Hadron\Middleware\isAjax;
+use Yab\Quazar\Middleware\isAjax;
 
-class HadronRouteProvider extends ServiceProvider
+class QuazarRouteProvider extends ServiceProvider
 {
     /**
      * This namespace is applied to the controller routes in your routes file.
@@ -15,7 +15,7 @@ class HadronRouteProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Yab\Hadron\Controllers';
+    protected $namespace = 'Yab\Quazar\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

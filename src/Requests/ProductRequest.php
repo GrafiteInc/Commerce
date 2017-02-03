@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Hadron\Requests;
+namespace Yab\Quazar\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Yab\Hadron\Models\Product;
+use Yab\Quazar\Models\Product;
 
 class ProductRequest extends FormRequest
 {

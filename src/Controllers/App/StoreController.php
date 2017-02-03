@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Hadron\Controllers\App;
+namespace Yab\Quazar\Controllers\App;
 
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Repositories\ProductRepository;
-use Yab\Hadron\Services\PlanService;
+use Yab\Quazar\Repositories\ProductRepository;
+use Yab\Quazar\Services\PlanService;
 
 class StoreController extends Controller
 {
@@ -32,7 +32,7 @@ class StoreController extends Controller
             abort(404);
         }
 
-        return view('hadron-frontend::homepage')
+        return view('quazar-frontend::homepage')
             ->with('plans', $plans)
             ->with('products', $products);
     }

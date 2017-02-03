@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Hadron\Controllers\App;
+namespace Yab\Quazar\Controllers\App;
 
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Services\PlanService;
+use Yab\Quazar\Services\PlanService;
 use Yab\Crypto\Services\Crypto;
 
 class PlanController extends Controller
@@ -30,7 +30,7 @@ class PlanController extends Controller
             abort(404);
         }
 
-        return view('hadron-frontend::products.all')->with('products', $products);
+        return view('quazar-frontend::products.all')->with('products', $products);
     }
 
     /**
@@ -48,6 +48,6 @@ class PlanController extends Controller
             abort(404);
         }
 
-        return view('hadron-frontend::plans.show')->with('plan', $plan);
+        return view('quazar-frontend::plans.show')->with('plan', $plan);
     }
 }

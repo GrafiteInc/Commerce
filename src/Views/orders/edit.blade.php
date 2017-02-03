@@ -24,7 +24,7 @@
         <h1 class="page-header">Orders: Edit</h1>
     </div>
 
-    @include('hadron::orders.breadcrumbs', ['location' => ['edit']])
+    @include('quazar::orders.breadcrumbs', ['location' => ['edit']])
 
     {!! Form::model($order, ['route' => ['quarx.orders.update', Crypto::encrypt($order->id)], 'method' => 'patch']) !!}
 

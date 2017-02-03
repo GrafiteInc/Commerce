@@ -1,6 +1,6 @@
 <?php
 
-use Yab\Hadron\Services\StripeService;
+use Yab\Quazar\Services\StripeService;
 
 class SubscriptionsTest extends TestCase
 {
@@ -18,12 +18,12 @@ class SubscriptionsTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actingAs($this->user);
 
-        factory(\Yab\Hadron\Models\Cart::class)->create();
-        factory(\Yab\Hadron\Models\Product::class)->create();
-        factory(\Yab\Hadron\Models\Plan::class)->create(['id' => 1]);
-        factory(\Yab\Hadron\Models\Plan::class)->create(['id' => 2]);
-        factory(\Yab\Hadron\Models\Plan::class)->create(['id' => 3]);
-        factory(\Yab\Hadron\Models\Plan::class)->create(['id' => 4]);
+        factory(\Yab\Quazar\Models\Cart::class)->create();
+        factory(\Yab\Quazar\Models\Product::class)->create();
+        factory(\Yab\Quazar\Models\Plan::class)->create(['id' => 1]);
+        factory(\Yab\Quazar\Models\Plan::class)->create(['id' => 2]);
+        factory(\Yab\Quazar\Models\Plan::class)->create(['id' => 3]);
+        factory(\Yab\Quazar\Models\Plan::class)->create(['id' => 4]);
 
         $stripe = Mockery::mock(\Stripe\Stripe::class);
         $plan = Mockery::mock(\Stripe\Plan::class);

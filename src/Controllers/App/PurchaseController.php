@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Hadron\Controllers\App;
+namespace Yab\Quazar\Controllers\App;
 
 use App\Http\Controllers\Controller;
 use Auth;
-use Yab\Hadron\Repositories\TransactionRepository;
+use Yab\Quazar\Repositories\TransactionRepository;
 use Yab\Crypto\Services\Crypto;
 
 class PurchaseController extends Controller
@@ -18,7 +18,7 @@ class PurchaseController extends Controller
     {
         $purchases = $this->transactions->getByCustomer(auth()->id())->orderBy('created_at', 'DESC')->paginate(config('quarx.pagination'));
 
-        return view('hadron-frontend::purchases.all')
+        return view('quazar-frontend::purchases.all')
             ->with('purchases', $purchases);
     }
 
@@ -26,7 +26,7 @@ class PurchaseController extends Controller
     {
         $purchase = $this->transactions->getByCustomerAndId(auth()->id(), Crypto::decrypt($id));
 
-        return view('hadron-frontend::purchases.purchase')
+        return view('quazar-frontend::purchases.purchase')
             ->with('purchase', $purchase);
     }
 
@@ -34,6 +34,6 @@ class PurchaseController extends Controller
     {
         $purchase = $this->transactions->requestRefund(Crypto::decrypt($id));
 
-        return view('hadron-frontend::purchases.refund');
+        return view('quazar-frontend::purchases.refund');
     }
 }

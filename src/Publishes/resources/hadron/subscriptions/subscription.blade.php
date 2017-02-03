@@ -1,4 +1,4 @@
-@extends('hadron-frontend::layouts.store')
+@extends('quazar-frontend::layouts.store')
 
 @section('store-content')
 

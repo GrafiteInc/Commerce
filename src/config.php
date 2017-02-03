@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Hadron Config
+| Quazar Config
 |--------------------------------------------------------------------------
 */
 
@@ -124,7 +124,7 @@ return [
         ],
         'currency' => [
             'type' => 'select',
-            'options' => config('hadron.currencies', [
+            'options' => config('quazar.currencies', [
                 'AUD' => 'aud',
                 'CAD' => 'cad',
                 'USD' => 'usd',

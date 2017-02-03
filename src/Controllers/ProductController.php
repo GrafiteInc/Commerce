@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Hadron\Controllers;
+namespace Yab\Quazar\Controllers;
 
 use Illuminate\Http\Request;
 use Yab\Quarx\Controllers\QuarxController;
-use Yab\Hadron\Requests\ProductRequest;
-use Yab\Hadron\Services\ProductService;
-use Yab\Hadron\Repositories\ProductVariantRepository;
+use Yab\Quazar\Requests\ProductRequest;
+use Yab\Quazar\Services\ProductService;
+use Yab\Quazar\Repositories\ProductVariantRepository;
 
 class ProductController extends QuarxController
 {
@@ -25,7 +25,7 @@ class ProductController extends QuarxController
     {
         $products = $this->service->paginated();
 
-        return view('hadron::products.index')
+        return view('quazar::products.index')
             ->with('pagination', $products->render())
             ->with('products', $products);
     }
@@ -39,7 +39,7 @@ class ProductController extends QuarxController
     {
         $products = $this->service->search($request->term);
 
-        return view('hadron::products.index')
+        return view('quazar::products.index')
             ->with('term', $request->term)
             ->with('pagination', $products->render())
             ->with('products', $products);
@@ -52,7 +52,7 @@ class ProductController extends QuarxController
      */
     public function create()
     {
-        return view('hadron::products.create');
+        return view('quazar::products.create');
     }
 
     /**
@@ -97,7 +97,7 @@ class ProductController extends QuarxController
             'tabs' => $tabs,
         ];
 
-        return view('hadron::products.edit', $data);
+        return view('quazar::products.edit', $data);
     }
 
     /**

@@ -2,12 +2,12 @@
 
 @section('stylesheets')
     @parent
-    <link rel="stylesheet" type="text/css" href="{{ Quarx::moduleAsset('hadron', 'css/store.css', 'text/css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ Quarx::moduleAsset('quazar', 'css/store.css', 'text/css') }}">
 @stop
 
 @section('content')
 
-    @include('hadron::modals')
+    @include('quazar::modals')
 
     <div class="row">
         <h1>Plans: Edit</h1>
@@ -31,7 +31,7 @@
         <div class="col-md-6">
             {!! Form::model($plan, ['route' => ['quarx.plans.update', $plan->id], 'method' => 'patch']) !!}
 
-            {!! FormMaker::fromObject($plan, Quarx::moduleConfig('hadron', 'plans-edit')) !!}
+            {!! FormMaker::fromObject($plan, Quarx::moduleConfig('quazar', 'plans-edit')) !!}
 
             {!! Form::submit('Update', ['class' => 'btn btn-primary pull-right']) !!}
 
@@ -92,7 +92,7 @@
 
 @section('javascript')
     @parent
-    <script type="text/javascript" src="{{ Quarx::moduleAsset('hadron', 'js/plans.js', 'application/javascript') }}"></script>
+    <script type="text/javascript" src="{{ Quarx::moduleAsset('quazar', 'js/plans.js', 'application/javascript') }}"></script>
     <script type="text/javascript">
         _visualizeThePlan();
     </script>

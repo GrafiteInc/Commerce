@@ -1,4 +1,4 @@
-@extends('hadron-frontend::layouts.store')
+@extends('quazar-frontend::layouts.store')
 
 @section('stylesheets')
     @parent
@@ -18,7 +18,7 @@
                 <form id="userPayment" method="post" action="{{ URL::to('store/account/card') }}">
                     {!! Form::token(); !!}
 
-                    @include('hadron-frontend::profile.card.card-form')
+                    @include('quazar-frontend::profile.card.card-form')
 
                     <div class="row text-right">
                         <div class="col-md-12">

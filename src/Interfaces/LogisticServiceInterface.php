@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Hadron\Interfaces;
+namespace Yab\Quazar\Interfaces;
 
 interface LogisticServiceInterface
 {

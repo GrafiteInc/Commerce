@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Hadron\Controllers\App;
+namespace Yab\Quazar\Controllers\App;
 
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Repositories\ProductRepository;
+use Yab\Quazar\Repositories\ProductRepository;
 
 class ProductController extends Controller
 {
@@ -29,7 +29,7 @@ class ProductController extends Controller
             abort(404);
         }
 
-        return view('hadron-frontend::products.all')->with('products', $products);
+        return view('quazar-frontend::products.all')->with('products', $products);
     }
 
     /**
@@ -47,6 +47,6 @@ class ProductController extends Controller
             abort(404);
         }
 
-        return view('hadron-frontend::products.show')->with('product', $product);
+        return view('quazar-frontend::products.show')->with('product', $product);
     }
 }

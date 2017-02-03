@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Log;
-use Yab\Hadron\Interfaces\LogisticServiceInterface;
-use Yab\Hadron\Services\CustomerProfileService;
-use Yab\Hadron\Services\LogisticService;
+use Yab\Quazar\Interfaces\LogisticServiceInterface;
+use Yab\Quazar\Services\CustomerProfileService;
+use Yab\Quazar\Services\LogisticService;
 
 class StoreLogistics implements LogisticServiceInterface
 {

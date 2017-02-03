@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Hadron\Controllers;
+namespace Yab\Quazar\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Services\PlanService;
-use Yab\Hadron\Requests\PlanRequest;
+use Yab\Quazar\Services\PlanService;
+use Yab\Quazar\Requests\PlanRequest;
 
 class PlanController extends Controller
 {
@@ -24,7 +24,7 @@ class PlanController extends Controller
         $this->service->collectNewPlans();
         $plans = $this->service->paginated();
 
-        return view('hadron::plans.index')->with('plans', $plans);
+        return view('quazar::plans.index')->with('plans', $plans);
     }
 
     /**
@@ -36,7 +36,7 @@ class PlanController extends Controller
     {
         $plans = $this->service->search($request->term);
 
-        return view('hadron::plans.index')
+        return view('quazar::plans.index')
             ->with('term', $request->term)
             ->with('plans', $plans);
     }
@@ -48,7 +48,7 @@ class PlanController extends Controller
      */
     public function create()
     {
-        return view('hadron::plans.create');
+        return view('quazar::plans.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class PlanController extends Controller
             return redirect('quarx/plans/'.$result->id.'/edit')->with('message', 'Successfully created');
         }
 
-        return redirect('hadron::plans')->with('message', 'Failed to create');
+        return redirect('quazar::plans')->with('message', 'Failed to create');
     }
 
     /**
@@ -81,7 +81,7 @@ class PlanController extends Controller
         $plan = $this->service->find($id);
         $customers = $this->service->getSubscribers($plan);
 
-        return view('hadron::plans.edit')
+        return view('quazar::plans.edit')
             ->with('customers', $customers)
             ->with('plan', $plan);
     }

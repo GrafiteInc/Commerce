@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Hadron\Services;
+namespace Yab\Quazar\Services;
 
 class CustomerProfileService
 {

@@ -16,7 +16,7 @@ class ProductTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actingAs($this->user);
 
-        factory(\Yab\Hadron\Models\Product::class)->create();
+        factory(\Yab\Quazar\Models\Product::class)->create();
     }
 
     /*
@@ -41,7 +41,7 @@ class ProductTest extends TestCase
 
     public function testEdit()
     {
-        factory(\Yab\Hadron\Models\Product::class)->create(['id' => 4]);
+        factory(\Yab\Quazar\Models\Product::class)->create(['id' => 4]);
         $response = $this->call('GET', 'quarx/products/4/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('product');

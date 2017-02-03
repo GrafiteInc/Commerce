@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Hadron\Repositories;
+namespace Yab\Quazar\Repositories;
 
 use Illuminate\Support\Facades\Session;
-use Yab\Hadron\Models\Cart;
-use Yab\Hadron\Models\Variant;
+use Yab\Quazar\Models\Cart;
+use Yab\Quazar\Models\Variant;
 
 class CartSessionRepository
 {

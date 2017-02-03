@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Hadron\Controllers\App;
+namespace Yab\Quazar\Controllers\App;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Yab\Hadron\Services\LogisticService;
-use Yab\Hadron\Services\PlanService;
+use Yab\Quazar\Services\LogisticService;
+use Yab\Quazar\Services\PlanService;
 use Yab\Crypto\Services\Crypto;
 
 class SubscriptionController extends Controller
@@ -28,21 +28,21 @@ class SubscriptionController extends Controller
 
         app(LogisticService::class)->afterSubscription(auth()->user(), $plan);
 
-        return view('hadron-frontend::subscriptions.success')->with('plan', $plan);
+        return view('quazar-frontend::subscriptions.success')->with('plan', $plan);
     }
 
     public function allSubscriptions()
     {
         $subscriptions = auth()->user()->meta->subscriptions()->orderBy('created_at', 'DESC')->paginate(config('quarx.pagination'));
 
-        return view('hadron-frontend::subscriptions.all')->with('subscriptions', $subscriptions);
+        return view('quazar-frontend::subscriptions.all')->with('subscriptions', $subscriptions);
     }
 
     public function getSubscription($name)
     {
         $subscription = auth()->user()->meta->subscription(Crypto::decrypt($name));
 
-        return view('hadron-frontend::subscriptions.subscription')->with('subscription', $subscription);
+        return view('quazar-frontend::subscriptions.subscription')->with('subscription', $subscription);
     }
 
     public function cancelSubscription(Request $request, $name)

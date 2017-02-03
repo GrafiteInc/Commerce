@@ -5,11 +5,11 @@
         <h1 class="page-header">Products</h1>
     </div>
 
-    @include('hadron::products.breadcrumbs', ['location' => ['create']])
+    @include('quazar::products.breadcrumbs', ['location' => ['create']])
 
     {!! Form::open(['route' => 'quarx.products.store', 'files' => true]) !!}
 
-        {!! FormMaker::fromTable('products', Quarx::moduleConfig('hadron', 'details')) !!}
+        {!! FormMaker::fromTable('products', Quarx::moduleConfig('quazar', 'details')) !!}
 
         <div class="form-group text-right">
             <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>

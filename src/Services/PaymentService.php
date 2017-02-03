@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Hadron\Services;
+namespace Yab\Quazar\Services;
 
 use Illuminate\Support\Facades\DB;
-use Yab\Hadron\Models\Transactions;
+use Yab\Quazar\Models\Transactions;
 use Yab\Crypto\Services\Crypto;
 
 class PaymentService
@@ -48,7 +48,7 @@ class PaymentService
         DB::beginTransaction();
 
         $result = $user->meta->charge(($cart->getCartTotal() * 100), [
-            'currency' => config('hadron.currency', 'usd'),
+            'currency' => config('quazar.currency', 'usd'),
         ]);
 
         if ($result) {

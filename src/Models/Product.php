@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Hadron\Models;
+namespace Yab\Quazar\Models;
 
 use Yab\Quarx\Models\QuarxModel;
 

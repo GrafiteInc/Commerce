@@ -22,21 +22,21 @@
 </div>
 
 @if (! is_null(request('details')) || isset($tabs['details']))
-    @include('hadron::products.tabs.details')
+    @include('quazar::products.tabs.details')
 @endif
 
 @if (! is_null(request('variants')))
-    @include('hadron::products.tabs.variants')
+    @include('quazar::products.tabs.variants')
 @endif
 
 @if (! is_null(request('discount')))
-    @include('hadron::products.tabs.discount')
+    @include('quazar::products.tabs.discount')
 @endif
 
 @if (! is_null(request('download')))
-    @include('hadron::products.tabs.download')
+    @include('quazar::products.tabs.download')
 @endif
 
 @if (! is_null(request('dimensions')))
-    @include('hadron::products.tabs.dimensions')
+    @include('quazar::products.tabs.dimensions')
 @endif

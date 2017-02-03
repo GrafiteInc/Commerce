@@ -25,7 +25,7 @@ class TestCase extends Orchestra\Testbench\TestCase
             return true;
         });
 
-        $app['Illuminate\Routing\Router']->group(['namespace' => 'Yab\Hadron\Controllers\App'], function ($router) {
+        $app['Illuminate\Routing\Router']->group(['namespace' => 'Yab\Quazar\Controllers\App'], function ($router) {
             require __DIR__.'/../src/Routes/app.php';
         });
     }
@@ -40,7 +40,7 @@ class TestCase extends Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Yab\Hadron\HadronModuleProvider::class,
+            \Yab\Quazar\QuazarModuleProvider::class,
             \Yab\Laracogs\LaracogsProvider::class,
             \Yab\Quarx\QuarxProvider::class,
         ];
@@ -62,7 +62,7 @@ class TestCase extends Orchestra\Testbench\TestCase
             '--force' => true,
         ]);
         $this->artisan('vendor:publish', [
-            '--provider' => 'Yab\Hadron\HadronModuleProvider',
+            '--provider' => 'Yab\Quazar\QuazarModuleProvider',
             '--force' => true,
         ]);
         $this->artisan('migrate', [

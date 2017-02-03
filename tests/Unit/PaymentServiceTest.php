@@ -1,6 +1,6 @@
 <?php
 
-use Yab\Hadron\Services\PaymentService;
+use Yab\Quazar\Services\PaymentService;
 
 class PaymentServiceTest extends TestCase
 {
@@ -25,15 +25,15 @@ class PaymentServiceTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actingAs($this->user);
 
-        factory(\Yab\Hadron\Models\Cart::class)->create();
-        factory(\Yab\Hadron\Models\Product::class)->create();
-        factory(\Yab\Hadron\Models\Plan::class)->create();
-        factory(\Yab\Hadron\Models\Cart::class)->create([
+        factory(\Yab\Quazar\Models\Cart::class)->create();
+        factory(\Yab\Quazar\Models\Product::class)->create();
+        factory(\Yab\Quazar\Models\Plan::class)->create();
+        factory(\Yab\Quazar\Models\Cart::class)->create([
             'id' => 3,
             'customer_id' => 1,
         ]);
 
-        $this->cart = app(\Yab\Hadron\Services\CartService::class);
+        $this->cart = app(\Yab\Quazar\Services\CartService::class);
         $this->cart->addToCart(1, 'product', 1, '{}');
 
         $this->user->meta = Mockery::mock(App\Models\UserMeta::class);

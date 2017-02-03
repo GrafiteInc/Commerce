@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Hadron\Controllers\App;
+namespace Yab\Quazar\Controllers\App;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Services\CustomerProfileService;
+use Yab\Quazar\Services\CustomerProfileService;
 
 class CardController extends Controller
 {
@@ -23,10 +23,10 @@ class CardController extends Controller
     public function getCard()
     {
         if (is_null(auth()->user()->meta->stripe_id)) {
-            return view('hadron-frontend::profile.card.set');
+            return view('quazar-frontend::profile.card.set');
         }
 
-        return view('hadron-frontend::profile.card.get');
+        return view('quazar-frontend::profile.card.get');
     }
 
     /**
@@ -36,7 +36,7 @@ class CardController extends Controller
      */
     public function changeCard()
     {
-        return view('hadron-frontend::profile.card.change');
+        return view('quazar-frontend::profile.card.change');
     }
 
     /**

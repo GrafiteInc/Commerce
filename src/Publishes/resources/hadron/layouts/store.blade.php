@@ -5,7 +5,7 @@
 @stop
 
 @section('store-header')
-    @include('hadron-frontend::layouts.store_header')
+    @include('quazar-frontend::layouts.store_header')
 @stop
 
 @section('content')

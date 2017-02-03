@@ -1,4 +1,4 @@
-@extends('hadron-frontend::layouts.store')
+@extends('quazar-frontend::layouts.store')
 
 @section('store-content')
 
@@ -17,7 +17,7 @@
         <input type="submit" value="Re-calculate Shipping">
     </form>
 
-    @include('hadron-frontend::checkout.products')
+    @include('quazar-frontend::checkout.products')
 
     <a class="pull-right" href="{!! url('store/payment') !!}">Purchase</a>
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Hadron\Repositories;
+namespace Yab\Quazar\Repositories;
 
-use Yab\Hadron\Models\Variant;
-use Yab\Hadron\Models\Product;
+use Yab\Quazar\Models\Variant;
+use Yab\Quazar\Models\Product;
 
 class ProductVariantRepository
 {
@@ -15,7 +15,7 @@ class ProductVariantRepository
     /**
      * Get all published products.
      *
-     * @return Yab\Hadron\Models\Variant
+     * @return Yab\Quazar\Models\Variant
      */
     public function getProductVariants($id)
     {
@@ -25,10 +25,10 @@ class ProductVariantRepository
     /**
      * Adds variants to the product.
      *
-     * @param Yab\Hadron\Models\Product $products
+     * @param Yab\Quazar\Models\Product $products
      * @param array                     $payload
      *
-     * @return Yab\Hadron\Models\Variant
+     * @return Yab\Quazar\Models\Variant
      */
     public function addVariant($product, $payload)
     {
@@ -42,7 +42,7 @@ class ProductVariantRepository
      *
      * @param array $payload
      *
-     * @return Yab\Hadron\Models\Variant
+     * @return Yab\Quazar\Models\Variant
      */
     public function saveVariant($payload)
     {

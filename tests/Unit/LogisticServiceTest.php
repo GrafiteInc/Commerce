@@ -1,6 +1,6 @@
 <?php
 
-use Yab\Hadron\Services\LogisticService;
+use Yab\Quazar\Services\LogisticService;
 
 class LogisticServiceTest extends TestCase
 {

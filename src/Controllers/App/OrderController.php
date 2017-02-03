@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Hadron\Controllers\App;
+namespace Yab\Quazar\Controllers\App;
 
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Repositories\OrderRepository;
+use Yab\Quazar\Repositories\OrderRepository;
 use Yab\Crypto\Services\Crypto;
 
 class OrderController extends Controller
@@ -17,7 +17,7 @@ class OrderController extends Controller
     {
         $orders = $this->orders->getByCustomer(auth()->id())->orderBy('created_at', 'DESC')->paginate(config('quarx.pagination'));
 
-        return view('hadron-frontend::orders.all')->with('orders', $orders);
+        return view('quazar-frontend::orders.all')->with('orders', $orders);
     }
 
     public function getOrder($id)
@@ -25,7 +25,7 @@ class OrderController extends Controller
         $id = Crypto::decrypt($id);
         $order = $this->orders->getByCustomerAndId(auth()->id(), $id);
 
-        return view('hadron-frontend::orders.order')->with('order', $order);
+        return view('quazar-frontend::orders.order')->with('order', $order);
     }
 
     public function cancelOrder($id)

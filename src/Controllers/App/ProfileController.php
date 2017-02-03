@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Hadron\Controllers\App;
+namespace Yab\Quazar\Controllers\App;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Services\CustomerProfileService;
+use Yab\Quazar\Services\CustomerProfileService;
 
 class ProfileController extends Controller
 {
@@ -22,7 +22,7 @@ class ProfileController extends Controller
      */
     public function customerProfile()
     {
-        return view('hadron-frontend::profile.details');
+        return view('quazar-frontend::profile.details');
     }
 
     /**

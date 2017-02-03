@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Hadron\Services;
+namespace Yab\Quazar\Services;
 
 use Stripe\Plan;
 use Stripe\Stripe;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Hadron\Controllers;
+namespace Yab\Quazar\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Yab\Hadron\Services\TransactionService;
+use Yab\Quazar\Services\TransactionService;
 
 class TransactionController extends Controller
 {
@@ -22,7 +22,7 @@ class TransactionController extends Controller
     {
         $transactions = $this->service->paginated();
 
-        return view('hadron::transactions.index')
+        return view('quazar::transactions.index')
             ->with('pagination', $transactions->render())
             ->with('transactions', $transactions);
     }
@@ -36,7 +36,7 @@ class TransactionController extends Controller
     {
         $transactions = $this->service->search($request->term);
 
-        return view('hadron::transactions.index')
+        return view('quazar::transactions.index')
             ->with('transactions', $transactions[0]->get())
             ->with('pagination', $transactions[2])
             ->with('term', $transactions[1]);
@@ -54,7 +54,7 @@ class TransactionController extends Controller
         $transaction = $this->service->find($id);
         $order = $this->service->getTransactionOrder($id);
 
-        return view('hadron::transactions.edit')
+        return view('quazar::transactions.edit')
             ->with('order', $order)
             ->with('transaction', $transaction);
     }

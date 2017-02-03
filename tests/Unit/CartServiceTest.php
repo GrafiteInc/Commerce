@@ -11,14 +11,14 @@ class CartServiceTest extends TestCase
 
         Auth::shouldReceive('user')->andReturn($user);
 
-        factory(\Yab\Hadron\Models\Cart::class)->create();
-        factory(\Yab\Hadron\Models\Product::class)->create();
-        factory(\Yab\Hadron\Models\Plan::class)->create();
-        factory(\Yab\Hadron\Models\Variant::class)->create();
+        factory(\Yab\Quazar\Models\Cart::class)->create();
+        factory(\Yab\Quazar\Models\Product::class)->create();
+        factory(\Yab\Quazar\Models\Plan::class)->create();
+        factory(\Yab\Quazar\Models\Variant::class)->create();
 
-        $this->cartService = app(\Yab\Hadron\Services\CartService::class);
-        $this->cartRepo = app(\Yab\Hadron\Repositories\CartRepository::class);
-        $this->productRepo = app(\Yab\Hadron\Repositories\ProductRepository::class);
+        $this->cartService = app(\Yab\Quazar\Services\CartService::class);
+        $this->cartRepo = app(\Yab\Quazar\Repositories\CartRepository::class);
+        $this->productRepo = app(\Yab\Quazar\Repositories\ProductRepository::class);
     }
 
     public function testAddBtn()
@@ -147,7 +147,7 @@ class CartServiceTest extends TestCase
 
     public function testGetDefaultValue()
     {
-        $variant = factory(\Yab\Hadron\Models\Variant::class)->make([
+        $variant = factory(\Yab\Quazar\Models\Variant::class)->make([
             'id' => 4,
         ]);
         $response = $this->cartService->getDefaultValue($variant);
@@ -156,7 +156,7 @@ class CartServiceTest extends TestCase
 
     public function testGetVariantId()
     {
-        $variant = factory(\Yab\Hadron\Models\Variant::class)->make([
+        $variant = factory(\Yab\Quazar\Models\Variant::class)->make([
             'id' => 4,
         ]);
 

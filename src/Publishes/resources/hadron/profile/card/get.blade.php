@@ -1,8 +1,8 @@
-@extends('hadron-frontend::layouts.store')
+@extends('quazar-frontend::layouts.store')
 
 @section('store-content')
 
-    @include('hadron-frontend::profile.tabs')
+    @include('quazar-frontend::profile.tabs')
 
     <div class="tabs-content">
         <div role="tabpanel" class="tab-pane tab-active">

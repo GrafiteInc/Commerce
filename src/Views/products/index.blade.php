@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @include('hadron::modals')
+    @include('quazar::modals')
 
     <div class="row">
         <a class="btn btn-primary pull-right" href="{!! route('quarx.products.create') !!}">Add New</a>
@@ -81,6 +81,6 @@
 @section('javascript')
 
     @parent
-    {!! Minify::javascript(Quarx::moduleAsset('hadron', 'js/products.js', 'application/javascript')) !!}
+    {!! Minify::javascript(Quarx::moduleAsset('quazar', 'js/products.js', 'application/javascript')) !!}
 
 @endsection

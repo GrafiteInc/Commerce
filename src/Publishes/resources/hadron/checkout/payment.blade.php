@@ -1,4 +1,4 @@
-@extends('hadron-frontend::layouts.store')
+@extends('quazar-frontend::layouts.store')
 
 @section('stylesheets')
     @parent
@@ -10,7 +10,7 @@
     <h1>Checkout Payment</h1>
 
     <div class="col-md-6">
-        @include('hadron-frontend::checkout.products')
+        @include('quazar-frontend::checkout.products')
     </div>
     <div class="col-md-6">
         <div class="card-wrapper"></div>

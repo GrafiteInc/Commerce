@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Hadron\Providers;
+namespace Yab\Quazar\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
-class HadronEventServiceProvider extends ServiceProvider
+class QuazarEventServiceProvider extends ServiceProvider
 {
     /**
      * The event listener mappings for the application.
@@ -12,12 +12,12 @@ class HadronEventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'eloquent.saving: Yab\Hadron\Models\Order' => [
-            'Yab\Hadron\Services\OrderService@beforeSave',
+        'eloquent.saving: Yab\Quazar\Models\Order' => [
+            'Yab\Quazar\Services\OrderService@beforeSave',
         ],
 
-        'eloquent.saved: Yab\Hadron\Models\Order' => [
-            'Yab\Hadron\Services\OrderService@afterSave',
+        'eloquent.saved: Yab\Quazar\Models\Order' => [
+            'Yab\Quazar\Services\OrderService@afterSave',
         ],
     ];
 

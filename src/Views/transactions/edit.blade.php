@@ -24,7 +24,7 @@
         <h1 class="page-header">Transactions: Edit</h1>
     </div>
 
-    @include('hadron::transactions.breadcrumbs', ['location' => ['edit']])
+    @include('quazar::transactions.breadcrumbs', ['location' => ['edit']])
 
     {!! Form::model($transaction, ['route' => ['quarx.transactions.update', Crypto::encrypt($transaction->id)], 'method' => 'patch']) !!}
 

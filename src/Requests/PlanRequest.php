@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Hadron\Requests;
+namespace Yab\Quazar\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Yab\Hadron\Models\Plan;
+use Yab\Quazar\Models\Plan;
 
 class PlanRequest extends FormRequest
 {

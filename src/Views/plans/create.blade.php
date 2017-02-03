@@ -2,7 +2,7 @@
 
 @section('stylesheets')
     @parent
-    <link rel="stylesheet" type="text/css" href="{{ Quarx::moduleAsset('hadron', 'css/store.css', 'text/css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ Quarx::moduleAsset('quazar', 'css/store.css', 'text/css') }}">
 @stop
 
 @section('content')
@@ -32,7 +32,7 @@
         <div class="col-md-6">
             {!! Form::open(['route' => 'quarx.plans.store']) !!}
 
-            {!! FormMaker::fromTable("plans", Quarx::moduleConfig('hadron', 'plans')) !!}
+            {!! FormMaker::fromTable("plans", Quarx::moduleConfig('quazar', 'plans')) !!}
 
             {!! Form::submit('Save', ['class' => 'btn btn-primary pull-right']) !!}
 
@@ -43,7 +43,7 @@
 
 @section('javascript')
     @parent
-    <script type="text/javascript" src="{!! Quarx::moduleAsset('hadron', 'js/plans.js', 'application/javascript') !!}"></script>
+    <script type="text/javascript" src="{!! Quarx::moduleAsset('quazar', 'js/plans.js', 'application/javascript') !!}"></script>
     <script type="text/javascript">
         _visualizeThePlan();
     </script>

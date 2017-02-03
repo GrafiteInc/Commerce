@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Hadron\Repositories;
+namespace Yab\Quazar\Repositories;
 
-use Yab\Hadron\Models\Product;
+use Yab\Quazar\Models\Product;
 use Illuminate\Support\Facades\Schema;
 
 class ProductRepository

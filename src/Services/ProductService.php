@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Hadron\Services;
+namespace Yab\Quazar\Services;
 
 use Yab\Quarx\Facades\QuarxServiceFacade as Quarx;
 use Illuminate\Support\Facades\Config;
 use Yab\Quarx\Services\FileService;
-use Yab\Hadron\Repositories\ProductRepository;
-use Yab\Hadron\Repositories\ProductVariantRepository;
+use Yab\Quazar\Repositories\ProductRepository;
+use Yab\Quazar\Repositories\ProductVariantRepository;
 
 class ProductService
 {
@@ -176,7 +176,7 @@ class ProductService
      */
     public static function productDetails($product)
     {
-        return view('hadron-frontend::products.details', ['product' => $product])->render();
+        return view('quazar-frontend::products.details', ['product' => $product])->render();
     }
 
     /**
@@ -208,9 +208,9 @@ class ProductService
 
         foreach ($variants as $variant) {
             if (self::isArrayVariant($variant->value)) {
-                $variantHtml .= view('hadron-frontend::products.variants.select', ['variant' => $variant])->render();
+                $variantHtml .= view('quazar-frontend::products.variants.select', ['variant' => $variant])->render();
             } else {
-                $variantHtml .= view('hadron-frontend::products.variants.other', ['variant' => $variant])->render();
+                $variantHtml .= view('quazar-frontend::products.variants.other', ['variant' => $variant])->render();
             }
         }
 

@@ -1,12 +1,10 @@
 {
-    "name": "yab/hadron",
-    "type": "laravel-library",
+    "name": "yab/quazar",
     "description": "An E-Commerce platform for Laravel Apps",
     "license": "MIT",
     "require": {
         "illuminate/support": "5.3",
-        "laravel/cashier": "^7.0",
-        "composer/installers": "~1.0"
+        "laravel/cashier": "^7.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
@@ -17,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Yab\\Hadron\\": "src/"
+            "Yab\\Quazar\\": "src/"
         },
         "files": [
           "src/Helpers/StoreHelper.php"
@@ -38,8 +36,5 @@
         "post-create-project-cmd": []
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "extra": {
-        "installer-name": "Hadron"
-    }
+    "prefer-stable": true
 }

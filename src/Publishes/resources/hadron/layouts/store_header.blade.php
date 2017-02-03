@@ -1,6 +1,6 @@
 <div class="store-header">
     <h2>
-        <a href="{!! url('store') !!}">{{ config('hadron.name', 'My Store') }}</a>
+        <a href="{!! url('store') !!}">{{ config('quazar.name', 'My Store') }}</a>
     </h2>
 
     <div class="store-account" id="storeNavbar">

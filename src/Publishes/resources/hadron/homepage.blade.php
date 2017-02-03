@@ -1,10 +1,10 @@
-@extends('hadron-frontend::layouts.store')
+@extends('quazar-frontend::layouts.store')
 
 @section('store-content')
 
-    @include('hadron-frontend::homepage.banner')
+    @include('quazar-frontend::homepage.banner')
 
-    @include('hadron-frontend::products.featured')
+    @include('quazar-frontend::products.featured')
 
     <div class="row">
         @foreach ($products as $product)

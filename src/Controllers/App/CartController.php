@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Hadron\Controllers\App;
+namespace Yab\Quazar\Controllers\App;
 
 use Request;
 use Redirect;
 use App\Http\Controllers\Controller;
-use Yab\Hadron\Services\CartService;
+use Yab\Quazar\Services\CartService;
 use Yab\Quarx\Services\QuarxResponseService;
 
 class CartController extends Controller
@@ -21,7 +21,7 @@ class CartController extends Controller
     {
         $products = $this->cart->contents();
 
-        return view('hadron-frontend::cart.all')->with('products', $products);
+        return view('quazar-frontend::cart.all')->with('products', $products);
     }
 
     /*

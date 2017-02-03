@@ -1,16 +1,16 @@
 <?php
 
-namespace Yab\Hadron\Providers;
+namespace Yab\Quazar\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Yab\Hadron\Helpers\StoreHelper;
-use Yab\Hadron\Services\CartService;
-use Yab\Hadron\Services\CustomerProfileService;
-use Yab\Hadron\Services\LogisticService;
-use Yab\Hadron\Services\ProductService;
+use Yab\Quazar\Helpers\StoreHelper;
+use Yab\Quazar\Services\CartService;
+use Yab\Quazar\Services\CustomerProfileService;
+use Yab\Quazar\Services\LogisticService;
+use Yab\Quazar\Services\ProductService;
 
-class HadronServiceProvider extends ServiceProvider
+class QuazarServiceProvider extends ServiceProvider
 {
     /**
      * Alias the services in the boot.

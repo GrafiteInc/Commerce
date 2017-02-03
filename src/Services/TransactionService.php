@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Hadron\Services;
+namespace Yab\Quazar\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
-use Yab\Hadron\Models\Orders;
-use Yab\Hadron\Repositories\TransactionRepository;
+use Yab\Quazar\Models\Orders;
+use Yab\Quazar\Repositories\TransactionRepository;
 
 class TransactionService
 {

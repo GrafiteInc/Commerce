@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Hadron\Services;
+namespace Yab\Quazar\Services;
 
 use Illuminate\Support\Facades\Auth;
-use Yab\Hadron\Models\Variant;
-use Yab\Hadron\Repositories\CartRepository;
-use Yab\Hadron\Repositories\CartSessionRepository;
+use Yab\Quazar\Models\Variant;
+use Yab\Quazar\Repositories\CartRepository;
+use Yab\Quazar\Repositories\CartSessionRepository;
 
 class CartService
 {

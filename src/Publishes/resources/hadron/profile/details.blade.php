@@ -1,8 +1,8 @@
-@extends('hadron-frontend::layouts.store')
+@extends('quazar-frontend::layouts.store')
 
 @section('store-content')
 
-    @include('hadron-frontend::profile.tabs')
+    @include('quazar-frontend::profile.tabs')
 
     <table class="table table-striped">
         @if (! is_null(StoreHelper::customer()->lastCard('card_last_four')))

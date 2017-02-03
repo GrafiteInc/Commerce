@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Hadron\Controllers;
+namespace Yab\Quazar\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Yab\Hadron\Services\OrderService;
+use Yab\Quazar\Services\OrderService;
 use Yab\Crypto\Services\Crypto;
 
 class OrderController extends Controller
@@ -23,7 +23,7 @@ class OrderController extends Controller
     {
         $orders = $this->service->paginated();
 
-        return view('hadron::orders.index')
+        return view('quazar::orders.index')
             ->with('pagination', $orders->render())
             ->with('orders', $orders);
     }
@@ -37,7 +37,7 @@ class OrderController extends Controller
     {
         $orders = $this->service->search($request->term);
 
-        return view('hadron::orders.index')
+        return view('quazar::orders.index')
             ->with('orders', $orders[0]->get())
             ->with('pagination', $orders[2])
             ->with('term', $orders[1]);
@@ -54,7 +54,7 @@ class OrderController extends Controller
     {
         $order = $this->service->findOrdersById(Crypto::decrypt($id));
 
-        return view('hadron::orders.edit')->with('order', $order);
+        return view('quazar::orders.edit')->with('order', $order);
     }
 
     /**

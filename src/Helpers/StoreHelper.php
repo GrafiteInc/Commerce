@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Hadron\Helpers;
+namespace Yab\Quazar\Helpers;
 
 use Yab\Quarx\Services\FileService;
 
@@ -18,7 +18,7 @@ class StoreHelper
 
     public static function customer()
     {
-        return app(\Yab\Hadron\Services\CustomerProfileService::class);
+        return app(\Yab\Quazar\Services\CustomerProfileService::class);
     }
 
     public static function customerSubscriptionUrl($subscription)
@@ -28,7 +28,7 @@ class StoreHelper
 
     public static function subscriptionPlan($subscription)
     {
-        return app(\Yab\Hadron\Models\Plan::class)->getPlansByStripeId($subscription->stripe_plan);
+        return app(\Yab\Quazar\Models\Plan::class)->getPlansByStripeId($subscription->stripe_plan);
     }
 
     public static function subscriptionUpcoming($subscription)
@@ -88,51 +88,51 @@ class StoreHelper
 
     public static function productVariants($product)
     {
-        return app(\Yab\Hadron\Services\ProductService::class)->variants($product);
+        return app(\Yab\Quazar\Services\ProductService::class)->variants($product);
     }
 
     public static function variantOptions($variant)
     {
-        return app(\Yab\Hadron\Services\ProductService::class)->variantOptions($variant);
+        return app(\Yab\Quazar\Services\ProductService::class)->variantOptions($variant);
     }
 
     public static function productDetails($product)
     {
-        return app(\Yab\Hadron\Services\ProductService::class)->productDetails($product);
+        return app(\Yab\Quazar\Services\ProductService::class)->productDetails($product);
     }
 
     public static function productDetailsBtn($product, $class = '')
     {
-        return app(\Yab\Hadron\Services\ProductService::class)->productDetailsBtn($product, $class);
+        return app(\Yab\Quazar\Services\ProductService::class)->productDetailsBtn($product, $class);
     }
 
     public static function addToCartBtn($id, $type, $content, $class = '')
     {
-        return app(\Yab\Hadron\Services\CartService::class)->addToCartBtn($id, $type, $content, $class);
+        return app(\Yab\Quazar\Services\CartService::class)->addToCartBtn($id, $type, $content, $class);
     }
 
     public static function removeFromCartBtn($id, $type, $content, $class = '')
     {
-        return app(\Yab\Hadron\Services\CartService::class)->removeFromCartBtn($id, $type, $content, $class);
+        return app(\Yab\Quazar\Services\CartService::class)->removeFromCartBtn($id, $type, $content, $class);
     }
 
     public static function checkoutTax()
     {
-        return app(\Yab\Hadron\Services\CartService::class)->getCartTax();
+        return app(\Yab\Quazar\Services\CartService::class)->getCartTax();
     }
 
     public static function checkoutTotal()
     {
-        return app(\Yab\Hadron\Services\CartService::class)->getCartTotal();
+        return app(\Yab\Quazar\Services\CartService::class)->getCartTotal();
     }
 
     public static function checkoutSubtotal()
     {
-        return app(\Yab\Hadron\Services\CartService::class)->getCartSubtotal();
+        return app(\Yab\Quazar\Services\CartService::class)->getCartSubtotal();
     }
 
     public static function checkoutShipping()
     {
-        return app(\Yab\Hadron\Services\LogisticService::class)->shipping(auth()->user());
+        return app(\Yab\Quazar\Services\LogisticService::class)->shipping(auth()->user());
     }
 }
