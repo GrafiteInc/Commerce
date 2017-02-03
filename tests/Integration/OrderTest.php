@@ -58,7 +58,7 @@ class OrderTest extends TestCase
                 ],
             ]),
         ]);
-        $response = $this->call('GET', 'quarx/orders/'.Crypto::encrypt(2).'/edit');
+        $response = $this->call('GET', 'quarx/orders/2/edit');
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('order');
@@ -92,7 +92,7 @@ class OrderTest extends TestCase
             ]),
         ]);
 
-        $response = $this->call('PATCH', 'quarx/orders/'.Crypto::encrypt(4), [
+        $response = $this->call('PATCH', 'quarx/orders/4', [
             'details' => json_encode([
                 [
                     'price' => 10900,
@@ -108,7 +108,7 @@ class OrderTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'quarx/orders/'.Crypto::encrypt(1));
+        $response = $this->call('DELETE', 'quarx/orders/1');
         $this->assertEquals(405, $response->getStatusCode());
     }
 

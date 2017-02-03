@@ -2,18 +2,21 @@
 
 namespace Yab\Quazar\Controllers;
 
-use Yab\Quarx\Controllers\QuarxController;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Yab\Quarx\Controllers\QuarxController;
+use Yab\Quazar\Services\AnalyticsService;
 use Yab\Quazar\Services\TransactionService;
 
 class AnalyticsController extends QuarxController
 {
     public function __construct(
         TransactionService $transactionService,
+        AnalyticsService $analyticsService,
         UserService $userService
     ) {
         $this->transactions = $transactionService;
+        $this->analyticsService = $analyticsService;
         $this->users = $userService;
     }
 
@@ -25,35 +28,15 @@ class AnalyticsController extends QuarxController
     public function dashboard(Request $request)
     {
         $transactions = $this->transactions->thisYear();
-
-        $collected = $transactions->groupBy(function ($item) {
-            return $item->created_at->format('d-M-y');
-        });
-
-        $transactionDays = collect();
-        $transactionsByDay = collect();
-        $balanceValues = [
-            'refunds' => 0,
-            'income' => 0,
-        ];
-
-        foreach ($collected as $key => $value) {
-            $transactionDays->push($key);
-            $transactionsByDay->push((string) round(collect($value)->sum('total'), 2));
-
-            foreach ($value as $transaction) {
-                if (!is_null($transaction->refund_date)) {
-                    $balanceValues['refunds'] += $transaction->total;
-                } else {
-                    $balanceValues['income'] += $transaction->total;
-                }
-            }
-        }
+        $balanceValues = $this->analyticsService->balanceValues($transactions);
+        $transactionDays = $this->analyticsService->getTransactionsByDays($transactions);
+        $subscriptions = $this->analyticsService->getSubscriptions();
 
         return view('quazar::analytics')
             ->with('transactions', $transactions)
             ->with('balanceValues', [round($balanceValues['refunds'], 2), round($balanceValues['income'], 2)])
-            ->with('transactionDays', $transactionDays)
-            ->with('transactionsByDay', $transactionsByDay);
+            ->with('transactionDays', $transactionDays['days'])
+            ->with('transactionsByDay', $transactionDays['transactions'])
+            ->with('subscriptions', $subscriptions);
     }
 }

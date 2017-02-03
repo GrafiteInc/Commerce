@@ -23,14 +23,15 @@ class CartServiceTest extends TestCase
 
     public function testAddBtn()
     {
-        $response = $this->cartService->addToCartBtn(1, 'product', 'cool');
-        $this->assertEquals('<button class="" onclick="store.addToCart(1, 1, \'product\')">cool</button>', $response);
+        $object = (object) ['id' => 1];
+        $response = $this->cartService->addToCartBtn($object, 'product', 'cool');
+        $this->assertEquals('<button class="cool" onclick="store.addToCart(1, 1, \'product\')">product</button>', $response);
     }
 
     public function testRemoveBtn()
     {
         $response = $this->cartService->removeFromCartBtn(1, 'product', 'cool');
-        $this->assertEquals('<button class="" onclick="store.removeFromCart(1, \'product\')">cool</button>', $response);
+        $this->assertEquals('<button class="cool" onclick="store.removeFromCart(1, \'product\')">product</button>', $response);
     }
 
     public function testItemCount()
