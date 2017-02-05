@@ -14,7 +14,8 @@
             Route::get('', 'StoreController@index');
             Route::get('products', 'ProductController@all');
             Route::get('product/{url}', 'ProductController@show');
-            Route::get('plan/{id}', 'PlanController@show');
+            Route::get('plans', 'PlanController@all');
+            Route::get('plan/{name}', 'PlanController@show');
             Route::post('subscribe/{id}', 'SubscriptionController@subscribe');
             Route::group(['middleware' => 'auth'], function () {
                 Route::group(['prefix' => 'account'], function () {

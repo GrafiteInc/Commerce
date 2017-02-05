@@ -1,10 +1,11 @@
 <div class="store-header">
-    <h2>
-        <a href="{!! url('store') !!}">{{ config('quazar.name', 'My Store') }}</a>
-    </h2>
+    <h2><a href="{!! url('store') !!}">{{ config('quazar.name', 'My Store') }}</a></h2>
 
     <div class="store-account" id="storeNavbar">
-        <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Account <span class="caret"></span>
+        <a class="btn btn-link" href="{{ url('store/products') }}">Products</a>
+        <a class="btn btn-link" href="{{ url('store/plans') }}">Plans</a>
+        <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Account <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
             @if (auth()->user())

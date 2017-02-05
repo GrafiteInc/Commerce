@@ -6,6 +6,8 @@
 
     @include('quazar-frontend::products.featured')
 
+    @include('quazar-frontend::plans.featured')
+
     <div class="row">
         @foreach ($products as $product)
             <div class="col-md-3">

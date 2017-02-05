@@ -158,6 +158,10 @@ return [
         'description' => [
             'type' => 'textarea',
         ],
+        'is_featured' => [
+            'type' => 'checkbox',
+            'alt_name' => 'Is Featured',
+        ],
     ],
 
 ];

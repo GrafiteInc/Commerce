@@ -4,7 +4,6 @@ namespace Yab\Quazar\Controllers\App;
 
 use App\Http\Controllers\Controller;
 use Yab\Quazar\Services\PlanService;
-use Yab\Crypto\Services\Crypto;
 
 class PlanController extends Controller
 {
@@ -24,13 +23,13 @@ class PlanController extends Controller
      */
     public function all()
     {
-        $products = $this->repository->getPublishedProducts()->paginate(25);
+        $plans = $this->service->allEnabled();
 
-        if (empty($products)) {
+        if (empty($plans)) {
             abort(404);
         }
 
-        return view('quazar-frontend::products.all')->with('products', $products);
+        return view('quazar-frontend::plans.all')->with('plans', $plans);
     }
 
     /**
@@ -42,7 +41,7 @@ class PlanController extends Controller
      */
     public function show($id)
     {
-        $plan = $this->service->find(Crypto::decrypt($id));
+        $plan = $this->service->findByUuid($id);
 
         if (empty($plan)) {
             abort(404);

@@ -15,6 +15,7 @@ class CreateAdminPlansTable extends Migration
             $table->integer('amount');
             $table->string('interval');
             $table->string('name');
+            $table->string('uuid');
             $table->string('currency');
             $table->string('descriptor')->nullable();
             $table->integer('trial_days')->default(0);
@@ -22,6 +23,7 @@ class CreateAdminPlansTable extends Migration
             $table->string('subscription_name')->nullable();
             $table->text('description')->nullable();
             $table->boolean('enabled')->default(false);
+            $table->boolean('is_featured')->default(false);
             $table->timestamps();
         });
     }

@@ -25,6 +25,7 @@ class Plan extends QuarxModel
         'subscription_name',
         'descriptor',
         'description',
+        'is_featured',
     ];
 
     public static $rules = [
@@ -62,7 +63,7 @@ class Plan extends QuarxModel
 
     public function getHrefAttribute()
     {
-        return url('store/plan/'.crypto_encrypt($this->id));
+        return url('store/plan/'.$this->uuid);
     }
 
     public function subscribeBtn($content = '', $class = '')

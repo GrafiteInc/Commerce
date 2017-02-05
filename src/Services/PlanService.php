@@ -135,6 +135,18 @@ class PlanService
     }
 
     /**
+     * Find a plan by uuid.
+     *
+     * @param string $uuid
+     *
+     * @return Plan
+     */
+    public function findByUuid($uuid)
+    {
+        return $this->model->where('uuid', $uuid)->first();
+    }
+
+    /**
      * Get plans by stripe ID.
      *
      * @param int $id
@@ -157,6 +169,12 @@ class PlanService
     public function update($id, $payload)
     {
         try {
+            if (!isset($payload['is_featured'])) {
+                $payload['is_featured'] = false;
+            } else {
+                $payload['is_featured'] = true;
+            }
+
             return $this->model->find($id)->update($payload);
         } catch (Exception $e) {
             throw new Exception('Could not update your plan', 1);
