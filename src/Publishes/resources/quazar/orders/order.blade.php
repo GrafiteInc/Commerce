@@ -2,6 +2,8 @@
 
 @section('store-content')
 
+    <h1>Order</h1>
+
     <table class="table table-stripped">
         <tr>
             <td>Date</td>

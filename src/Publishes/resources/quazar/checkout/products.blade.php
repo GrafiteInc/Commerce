@@ -3,7 +3,7 @@
         <td>Name</td>
         <td>Code</td>
         <td>Price</td>
-        <td>Quantity</td>
+        <td class="text-right">Quantity</td>
     </thead>
     <tbody>
         @foreach ($products as $product)
@@ -14,7 +14,7 @@
                 </td>
                 <td>{!! $product->code !!}</td>
                 <td>{!! $product->price !!}</td>
-                <td>{!! $product->quantity !!}</td>
+                <td class="text-right">{!! $product->quantity !!}</td>
             </tr>
         @endforeach
     </tbody>

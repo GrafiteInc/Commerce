@@ -12,11 +12,11 @@
     <div class="tabs-content">
         <div role="tabpanel" class="tab-pane tab-active">
 
-            <div class="raw-margin-top-24">
+            <div class="form-group">
                 <div class='card-wrapper'></div>
             </div>
 
-            <div class="col-md-6 col-md-offset-3 raw-margin-top-24 well">
+            <div class="col-md-6 col-md-offset-3 well">
                 <form id="userPayment" method="post" action="{{ URL::to('store/account/card-change') }}">
                     {!! Form::token(); !!}
 

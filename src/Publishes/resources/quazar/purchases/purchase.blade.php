@@ -2,6 +2,8 @@
 
 @section('store-content')
 
+    <h1>Purchase</h1>
+
     @if ($purchase->refund_requested && is_null($purchase->refund_date))
         <div class="alert alert-warning">
             You have requested a refund for this purchase

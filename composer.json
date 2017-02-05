@@ -1,17 +1,17 @@
 {
     "name": "yab/quazar",
-    "description": "An E-Commerce platform for Laravel Apps",
+    "description": "An E-Commerce platform for Laravel Apps using Quarx",
     "license": "MIT",
     "require": {
-        "illuminate/support": "5.3",
+        "illuminate/support": "5.4",
         "laravel/cashier": "^7.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
         "orchestra/testbench": "~3.0",
         "mikey179/vfsStream": "^1.6",
-        "yab/laracogs": "^2.1",
-        "yab/quarx": "^2.1"
+        "yab/laracogs": "^2.2",
+        "yab/quarx": "^2.3"
     },
     "autoload": {
         "psr-4": {

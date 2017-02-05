@@ -2,6 +2,8 @@
 
 @section('store-content')
 
+    <h1>Shopping Cart</h1>
+
     @if (count($products) > 0)
         <table class="table table-stripped">
             <thead>

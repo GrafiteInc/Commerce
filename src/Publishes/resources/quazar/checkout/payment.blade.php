@@ -7,13 +7,15 @@
 
 @section('store-content')
 
-    <h1>Checkout Payment</h1>
+    <h1>Checkout: Payment</h1>
 
-    <div class="col-md-6">
+    <div class="col-md-8">
         @include('quazar-frontend::checkout.products')
     </div>
-    <div class="col-md-6">
-        <div class="card-wrapper"></div>
+    <div class="col-md-4">
+            <div class="form-group">
+                <div class="card-wrapper"></div>
+            </div>
 
             <form id="userPayment" method="post" action="{{ url('store/process') }}">
                 {!! csrf_field() !!}
@@ -42,15 +44,15 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div>
                     <input id="pay" type="submit" class="btn btn-primary pull-right" value="Pay">
                 </div>
             </form>
 
             @if (StoreHelper::customer()->hasProfile() && ! is_null(StoreHelper::customer()->lastCard('card_last_four')))
                 <form method="post" action="{{ url('store/process/last-card') }}">
-                    {!! Form::token(); !!}
-                    <button id="lastCardBtn" type="submit">Pay with last card used (ending with {!! StoreHelper::customer()->lastCard('card_last_four') !!})</button>
+                    {!! csrf_field() !!}
+                    <button class="btn btn-default" id="lastCardBtn" type="submit">Pay with last card used (ending with {!! StoreHelper::customer()->lastCard('card_last_four') !!})</button>
                 </form>
             @endif
         </div>

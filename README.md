@@ -1,4 +1,4 @@
-# Quazar - An e-commerce package for Quarx and Laravel
+# Quazar - An e-commerce package for Laravel apps using Quarx
 
 [![Build Status](https://travis-ci.org/YABhq/Quazar.svg?branch=master)](https://travis-ci.org/YABhq/Quazar)
 [![Packagist](https://img.shields.io/packagist/dt/yab/quazar.svg?maxAge=2592000)](https://packagist.org/packages/yab/quazar)

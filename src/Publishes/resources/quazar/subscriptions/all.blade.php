@@ -2,6 +2,8 @@
 
 @section('store-content')
 
+    <h1>Subscriptions</h1>
+
     <table class="table table-stripped">
         <thead>
             <td>ID</td>
