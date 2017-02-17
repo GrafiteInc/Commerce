@@ -7,6 +7,7 @@
 .dropdown-menu {
     top: 126px !important;
     left: auto !important;
+    margin-left: 124px;
 }
 
 .store-header {
