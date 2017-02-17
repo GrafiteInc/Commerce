@@ -11,6 +11,7 @@ $factory->define(\Yab\Quazar\Models\Plan::class, function (Faker\Generator $fake
 
         'id' => 1,
         'name' => 'cheap hosting',
+        'uuid' => str_random(20),
         'amount' => 9999,
         'interval' => 'monthly',
         'currency' => 'usd',

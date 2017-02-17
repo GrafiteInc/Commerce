@@ -53,6 +53,7 @@ class PlanService
 
             if (!$localPlan) {
                 $this->model->create([
+                    'uuid' => crypto_uuid(),
                     'name' => $plan->id,
                     'amount' => $plan->amount,
                     'interval' => $plan->interval,
@@ -109,6 +110,7 @@ class PlanService
             $name = app(QuarxService::class)->convertToURL($payload['name']);
 
             $payload['stripe_id'] = $name;
+            $payload['uuid'] = crypto_uuid();
             $payload['stripe_name'] = $name;
             $payload['subscription_name'] = $name;
 

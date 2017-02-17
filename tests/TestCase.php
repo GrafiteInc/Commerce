@@ -25,7 +25,7 @@ class TestCase extends Orchestra\Testbench\TestCase
             return true;
         });
 
-        $app['Illuminate\Routing\Router']->group(['namespace' => 'Yab\Quazar\Controllers\App'], function ($router) {
+        $app['Illuminate\Routing\Router']->group(['namespace' => 'App\Http\Controllers\Quazar'], function ($router) {
             require __DIR__.'/../src/Routes/app.php';
         });
     }
