@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quazar\Controllers\App;
+namespace App\Http\Controllers\Quazar;
 
 use App\Http\Controllers\Controller;
 use Yab\Quazar\Repositories\OrderRepository;
@@ -23,6 +23,7 @@ class OrderController extends Controller
     public function getOrder($id)
     {
         $id = Crypto::decrypt($id);
+
         $order = $this->orders->getByCustomerAndId(auth()->id(), $id);
 
         return view('quazar-frontend::orders.order')->with('order', $order);

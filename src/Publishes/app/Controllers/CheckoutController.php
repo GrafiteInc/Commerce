@@ -1,7 +1,8 @@
 <?php
 
-namespace Yab\Quazar\Controllers\App;
+namespace App\Http\Controllers\Quazar;
 
+use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yab\Quazar\Services\CartService;

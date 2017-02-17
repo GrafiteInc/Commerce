@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quazar\Controllers\App;
+namespace App\Http\Controllers\Quazar;
 
-use Request;
 use Redirect;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yab\Quazar\Services\CartService;
 use Yab\Quarx\Services\QuarxResponseService;
@@ -37,16 +37,16 @@ class CartController extends Controller
         return QuarxResponseService::apiResponse('success', $count);
     }
 
-    public function changeCartCount()
+    public function changeCartCount(Request $request)
     {
-        $count = $this->cart->changeItemQuantity(Request::get('id'), Request::get('count'));
+        $count = $this->cart->changeItemQuantity($request->id, $request->count);
 
         return QuarxResponseService::apiResponse('success', $count);
     }
 
-    public function addToCart()
+    public function addToCart(Request $request)
     {
-        $result = $this->cart->addToCart(Request::get('id'), Request::get('type'), Request::get('quantity'), Request::get('variants'));
+        $result = $this->cart->addToCart($request->id, $request->type, $request->quantity, $request->variants);
 
         if ($result) {
             return QuarxResponseService::apiResponse('success', 'Added to Cart');
@@ -55,9 +55,9 @@ class CartController extends Controller
         return QuarxResponseService::apiResponse('error', 'Could not be added to Cart');
     }
 
-    public function removeFromCart()
+    public function removeFromCart(Request $request)
     {
-        $this->cart->removeFromCart(Request::get('id'), Request::get('type'));
+        $this->cart->removeFromCart($request->id, $request->type);
 
         return QuarxResponseService::apiResponse('success', 'Removed from Cart');
     }

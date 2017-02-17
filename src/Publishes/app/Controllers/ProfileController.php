@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quazar\Controllers\App;
+namespace App\Http\Controllers\Quazar;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

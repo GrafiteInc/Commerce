@@ -38,9 +38,16 @@ class QuazarRouteProvider extends ServiceProvider
             'namespace' => $this->namespace,
         ], function ($router) {
             $router->middleware('isAjax', isAjax::class);
-
-            require __DIR__.'/../Routes/app.php';
             require __DIR__.'/../Routes/quarx.php';
+        });
+
+        $this->namespace = 'App\Http\Controllers\Quazar';
+
+        $router->group([
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            $router->middleware('isAjax', isAjax::class);
+            require __DIR__.'/../Routes/app.php';
         });
     }
 }

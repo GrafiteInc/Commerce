@@ -12,11 +12,12 @@ You can control: products, subscriptions, transaction history, orders, and some 
 2. MySQL 5.6+
 3. OpenSSL
 4. Laravel 5.4+
-4. Quarx 2.3+
+5. Quarx 2.3+
+6. Stripe Account
 
 ## Recommended
 1. PHP 7+
-1. MySQL 5.7+
+2. MySQL 5.7+
 
 ## Installation
 
@@ -49,11 +50,24 @@ Then publish the vendor assets etc:
 
 ```php
 php artisan vendor:publish
-php artisan module:publish Quazar
 php artisan migrate
 ```
 
 If you wish to maintain consistency with the store accross your login, user settings etc you can set the extends to `@extends('quazar-frontend::layouts.store')`
+Views you may wish to change for optimal consistency:
+
+```
+views/
+    auth/
+        login.blade.php
+        register.blade.php
+        passwords/
+            email.blade.php
+            reset.blade.php
+    user/
+        password.blade.php
+        settings.blade.php
+```
 
 ## Config
 
@@ -61,7 +75,7 @@ If you wish to maintain consistency with the store accross your login, user sett
 Quazar is intented to be used with Quarx so use outside of that context is to be done at your own risk. Similarly, though Quarx is able to be added to any existing Laravel 5.3+ application, the documentation above is in relation to using the `php artisan quarx:setup` command, which is heavily integrated with [Laracogs](https://laracogs.com).
 
 #### CURRENCY
-You can set the currency in the module `config.php` file. It is set to use an the env: CURRENCY but pending on your deployment this may not work correctly, and may need to be set manually.
+You can set the currency in the module `config.php` file. It is set to use an env setting `CURRENCY` but pending on your deployment this may not work correctly, and may need to be set manually.
 
 ## Customizing
 
@@ -85,9 +99,9 @@ shipOrder($order)
 cancelOrder($order)
 ```
 
-### Controllers
+### Routes & Controllers
 
-There are a few controllers added to your app in the Quazar directory. These are general controllers which you may wish to customize based on your app's setup. Ideally you would leave the Services/ Repositories, but technically you can change whatever you want.
+There are a few controllers added to your app in the Quazar directory. These are general controllers which you may wish to customize based on your app's setup. This is similar to Quarx in the sense that you may wish to change certain parts. Be very mindful of how much you can impact the functionality of the Quazar store base by changing these files. Routes, however, are set in the package and the QuazarRoutesProvider handles them.
 
 ### Views
 

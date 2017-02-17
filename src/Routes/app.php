@@ -1,6 +1,6 @@
 <?php
 
-    Route::group(['prefix' => 'store', 'namespace' => 'App', 'middleware' => ['web']], function () {
+    Route::group(['prefix' => 'store', 'middleware' => ['web']], function () {
         Route::get('cart/contents', 'CartController@getContents');
         Route::get('cart/empty', 'CartController@emptyCart');
         Route::group(['middleware' => ['isAjax']], function () {
