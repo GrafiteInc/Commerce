@@ -2,6 +2,10 @@
 
 namespace Yab\Quazar\Services;
 
+use Carbon\Carbon;
+use Laravel\Cashier\Subscription;
+use Yab\Quazar\Models\Transactions;
+
 class AnalyticsService
 {
     public function balanceValues($transactions)
@@ -50,10 +54,53 @@ class AnalyticsService
 
     public function getSubscriptions()
     {
-        // for each plan, get the subscribers
-        // show a chart of subscriptions
-        // current monthly income
-        // list of subscribers
-        // pie graph of subscribed vs cancelled
+        return Subscription::all();
+    }
+
+    public function mergeTransactionsAndSubscriptions($months)
+    {
+        $daysCollection = [];
+        $transactionsCollection = [];
+        $subscriptionsCollection = [];
+        $monthsAgo = Carbon::now()->subMonths($months);
+        $now = Carbon::now();
+
+        foreach (range(1, $monthsAgo->diffInDays($now)) as $day) {
+            $date = Carbon::now()->subMonths($months)->addDays($day);
+            $daysColleciton[] = $date->format('d-M-y');
+            $transactionsCollection[$date->format('d-M-y')] = Transactions::where('created_at', 'like', $date->format('Y-m-d').'%')->pluck('total')->sum();
+            $subscriptionsSumByDay = $this->getSubscriptionSum($date);
+            $subscriptionCollection[$date->format('d-M-y')] = $subscriptionsSumByDay;
+        }
+
+        return [
+            'days' => $daysColleciton,
+            'transactions' => $transactionsCollection,
+            'subscriptions' => $subscriptionCollection,
+        ];
+    }
+
+    public function getSubscriptionSum($date)
+    {
+        $day = Carbon::parse($date)->format('Y-m-d');
+        $subscriptionSoldOnDay = Subscription::where('created_at', 'like', $day.'%')->get();
+        $subscriptionsSold = 0;
+
+        foreach ($subscriptionSoldOnDay as $subscription) {
+            $plan = app(PlanService::class)->getPlansByStripeId($subscription->stripe_plan)->first();
+            $subscriptionsSold += $plan->price;
+        }
+
+        return $subscriptionsSold;
+    }
+
+    public function getSubscriptionsOverMonths($months)
+    {
+        $monthsAgo = Carbon::now()->subMonths($months);
+        $now = Carbon::now();
+
+        $subscriptions = Subscription::where('created_at', '>=', $monthsAgo)->where('created_at', '<=', $now)->get();
+
+        return $subscriptions;
     }
 }

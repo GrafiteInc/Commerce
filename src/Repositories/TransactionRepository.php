@@ -25,13 +25,16 @@ class TransactionRepository
     }
 
     /**
-     * Returns all Transactions for this year.
+     * Returns all Transactions for the last three months.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function thisYear()
+    public function overMonths($months = 1)
     {
-        return $this->model->orderBy('created_at', 'asc')->where('created_at', 'LIKE', Carbon::now()->format('Y').'-%')->get();
+        $threeMonthsAgo = Carbon::now()->subMonths($months)->format('Y-m-d');
+        $now = Carbon::now()->format('Y-m-d');
+
+        return $this->model->orderBy('created_at', 'asc')->where('created_at', '>=', $threeMonthsAgo)->where('created_at', '<=', $now)->get();
     }
 
     /**

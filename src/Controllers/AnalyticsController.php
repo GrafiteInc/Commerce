@@ -27,16 +27,23 @@ class AnalyticsController extends QuarxController
      */
     public function dashboard(Request $request)
     {
-        $transactions = $this->transactions->thisYear();
+        $months = 1;
+
+        if ($request->months) {
+            $months = $request->months;
+        }
+
+        $transactions = $this->transactions->overMonths($months);
         $balanceValues = $this->analyticsService->balanceValues($transactions);
-        $transactionDays = $this->analyticsService->getTransactionsByDays($transactions);
         $subscriptions = $this->analyticsService->getSubscriptions();
+        $data = $this->analyticsService->mergeTransactionsAndSubscriptions($months);
 
         return view('quazar::analytics')
             ->with('transactions', $transactions)
             ->with('balanceValues', [round($balanceValues['refunds'], 2), round($balanceValues['income'], 2)])
-            ->with('transactionDays', $transactionDays['days'])
-            ->with('transactionsByDay', $transactionDays['transactions'])
+            ->with('transactionDays', $data['days'])
+            ->with('transactionsByDay', collect($data['transactions'])->values())
+            ->with('subscriptionsByDay', collect($data['subscriptions'])->values())
             ->with('subscriptions', $subscriptions);
     }
 }

@@ -29,9 +29,9 @@ class TransactionService
      *
      * @return Collection
      */
-    public function thisYear()
+    public function overMonths($months = 1)
     {
-        return $this->repo->thisYear();
+        return $this->repo->overMonths($months);
     }
 
     /**
