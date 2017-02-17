@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Quazar;
 
 use App\Http\Controllers\Controller;
 use Yab\Quazar\Repositories\OrderRepository;
-use Yab\Crypto\Services\Crypto;
+use Yab\Quazar\Services\OrderService;
 
 class OrderController extends Controller
 {
-    public function __construct(OrderRepository $transactionRepo)
+    public function __construct(OrderRepository $orderRepo)
     {
-        $this->orders = $transactionRepo;
+        $this->orders = $orderRepo;
     }
 
     public function allOrders()
@@ -22,18 +22,14 @@ class OrderController extends Controller
 
     public function getOrder($id)
     {
-        $id = Crypto::decrypt($id);
-
-        $order = $this->orders->getByCustomerAndId(auth()->id(), $id);
+        $order = $this->orders->getByCustomerAndUuid(auth()->id(), $id);
 
         return view('quazar-frontend::orders.order')->with('order', $order);
     }
 
     public function cancelOrder($id)
     {
-        $id = Crypto::decrypt($id);
-
-        if ($this->orders->cancelOrder($id)) {
+        if (app(OrderService::class)->cancelOrder(auth()->id(), $id)) {
             return back()->with('message', 'Order cancelled');
         }
 

@@ -45,7 +45,7 @@
                         </td>
                         <td class="raw-m-hide">{!! $order->tracking_number !!}</td>
                         <td class="text-right">
-                            <a class="btn btn-xs btn-default pull-right" href="{!! route('quarx.orders.edit', [Crypto::encrypt($order->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right" href="{!! route('quarx.orders.edit', [$order->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

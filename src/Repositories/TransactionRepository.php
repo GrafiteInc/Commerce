@@ -130,6 +130,18 @@ class TransactionRepository
     }
 
     /**
+     * Find Transactions by given id.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Support\Collection|null|static|Transactions
+     */
+    public function getByCustomerAndUuid($customer, $uuid)
+    {
+        return $this->model->where('customer_id', $customer)->where('uuid', $uuid)->first();
+    }
+
+    /**
      * Updates Transactions into database.
      *
      * @param Transactions $transactions
@@ -149,9 +161,9 @@ class TransactionRepository
      *
      * @return bool
      */
-    public function requestRefund($transactionId)
+    public function requestRefund($authId, $transactionId)
     {
-        $transaction = $this->model->where('id', $transactionId);
+        $transaction = $this->getByCustomerAndUuid($authId, $transactionId);
 
         app(LogisticService::class)->afterRefundRequest($transaction);
 

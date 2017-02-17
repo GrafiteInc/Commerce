@@ -84,7 +84,8 @@ class OrderController extends Controller
      */
     public function cancel(Request $request)
     {
-        $result = $this->service->cancelOrder($request->id);
+        $order = $this->service->findOrdersById($request->id);
+        $result = $this->service->cancelOrder($order->customer_id, $order->uuid);
 
         if ($result) {
             return redirect('quarx/orders')->with('message', 'Successfully cancelled');

@@ -26,14 +26,14 @@
 
     @include('quazar::transactions.breadcrumbs', ['location' => ['edit']])
 
-    {!! Form::model($transaction, ['route' => ['quarx.transactions.update', Crypto::encrypt($transaction->id)], 'method' => 'patch']) !!}
+    {!! Form::model($transaction, ['route' => ['quarx.transactions.update', $transaction->id], 'method' => 'patch']) !!}
 
         <div class="row">
             <div class="col-md-12 raw-margin-bottom-24">
                 <h2 class="text-center raw-margin-bottom-24">#{{ $transaction->uuid }}</h2>
                 @if (!empty($order))
                     @foreach($order as $shipment)
-                        <h4 class="text-center raw-margin-bottom-24"><a href="{{ url('quarx/orders/'.Crypto::encrypt($shipment->id).'/edit') }}">Order #:{{ $shipment->uuid }}</a></h4>
+                        <h4 class="text-center raw-margin-bottom-24"><a href="{{ url('quarx/orders/'.$shipment->id.'/edit') }}">Order #:{{ $shipment->uuid }}</a></h4>
                     @endforeach
                 @endif
                 @if (!is_null($transaction->refund_date))

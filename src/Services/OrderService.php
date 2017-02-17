@@ -113,9 +113,9 @@ class OrderService
      *
      * @return Orders
      */
-    public function cancelOrder($id)
+    public function cancelOrder($customerId, $uuid)
     {
-        $order = $this->repo->findOrdersById($id);
+        $order = $this->repo->getByCustomerAndUuid($customerId, $uuid);
 
         if ($order->status != 'complete') {
             $this->logistics->cancelOrder($order);

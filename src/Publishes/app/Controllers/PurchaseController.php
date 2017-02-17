@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Quazar;
 use App\Http\Controllers\Controller;
 use Auth;
 use Yab\Quazar\Repositories\TransactionRepository;
-use Yab\Crypto\Services\Crypto;
 
 class PurchaseController extends Controller
 {
@@ -24,7 +23,7 @@ class PurchaseController extends Controller
 
     public function getPurchase($id)
     {
-        $purchase = $this->transactions->getByCustomerAndId(auth()->id(), Crypto::decrypt($id));
+        $purchase = $this->transactions->getByCustomerAndUuid(auth()->id(), $id);
 
         return view('quazar-frontend::purchases.purchase')
             ->with('purchase', $purchase);
@@ -32,7 +31,7 @@ class PurchaseController extends Controller
 
     public function requestRefund($id)
     {
-        $purchase = $this->transactions->requestRefund(Crypto::decrypt($id));
+        $purchase = $this->transactions->requestRefund(auth()->id(), $id);
 
         return view('quazar-frontend::purchases.refund');
     }

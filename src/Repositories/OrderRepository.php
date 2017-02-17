@@ -101,6 +101,18 @@ class OrderRepository
     }
 
     /**
+     * Find Orders by given id.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Support\Collection|null|static|Orders
+     */
+    public function getByCustomerAndUuid($customer, $id)
+    {
+        return $this->model->where('customer_id', $customer)->where('uuid', $id)->first();
+    }
+
+    /**
      * Updates Orders into database.
      *
      * @param Order $order
