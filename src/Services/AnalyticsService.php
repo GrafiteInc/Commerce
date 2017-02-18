@@ -87,7 +87,7 @@ class AnalyticsService
         $subscriptionsSold = 0;
 
         foreach ($subscriptionSoldOnDay as $subscription) {
-            $plan = app(PlanService::class)->getPlansByStripeId($subscription->stripe_plan)->first();
+            $plan = app(PlanService::class)->getPlansByStripeId($subscription->stripe_plan);
             $subscriptionsSold += $plan->price;
         }
 
