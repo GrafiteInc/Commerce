@@ -71,6 +71,9 @@
             'is_shipped' => [
                 'type' => 'checkbox'
             ],
+            'status' => [
+                'type' => 'string'
+            ],
             'notes' => [
                 'type' => 'text'
             ],
