@@ -14,7 +14,7 @@ class CardController extends Controller
     }
 
     /**
-     * Display the store homepage.
+     * Display the get card.
      *
      * @param int $id
      *
@@ -30,7 +30,7 @@ class CardController extends Controller
     }
 
     /**
-     * Display the store homepage.
+     * Display the change card.
      *
      * @return Response
      */

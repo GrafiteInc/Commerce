@@ -10,20 +10,20 @@ $(function () {
                 label: "Transactions",
                 data: _chartData._transactions,
                 backgroundColor: [
-                    "#36A2EB"
+                    "#0074e8"
                 ],
                 hoverBackgroundColor: [
-                    "#36A2EB"
+                    "#0074e8"
                 ]
             },
             {
                 label: "Subscriptions",
                 data: _chartData._subscriptions,
                 backgroundColor: [
-                    "#333333"
+                    "#00e874"
                 ],
                 hoverBackgroundColor: [
-                    "#333333"
+                    "#00e874"
                 ]
             }]
         },
@@ -46,12 +46,12 @@ $(function () {
                 label: "Transactions",
                 data: _chartData._balanceValues,
                 backgroundColor: [
-                    "#FF6384",
-                    "#36A2EB"
+                    "#e80000",
+                    "#0074e8"
                 ],
                 hoverBackgroundColor: [
-                    "#FF6384",
-                    "#36A2EB"
+                    "#e80000",
+                    "#0074e8"
                 ]
             }]
         }

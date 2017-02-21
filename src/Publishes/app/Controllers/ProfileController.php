@@ -14,7 +14,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Display the store homepage.
+     * Display the customer profile.
      *
      * @param int $id
      *

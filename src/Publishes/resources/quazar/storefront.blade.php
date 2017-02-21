@@ -2,7 +2,7 @@
 
 @section('store-content')
 
-    @include('quazar-frontend::homepage.banner')
+    @include('quazar-frontend::storefront.banner')
 
     @include('quazar-frontend::products.featured')
 

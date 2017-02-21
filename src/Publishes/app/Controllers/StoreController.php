@@ -17,7 +17,7 @@ class StoreController extends Controller
     }
 
     /**
-     * Display the store homepage.
+     * Display the store front.
      *
      * @param int $id
      *
@@ -32,7 +32,7 @@ class StoreController extends Controller
             abort(404);
         }
 
-        return view('quazar-frontend::homepage')
+        return view('quazar-frontend::storefront')
             ->with('plans', $plans)
             ->with('products', $products);
     }
