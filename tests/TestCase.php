@@ -32,6 +32,13 @@ class TestCase extends Orchestra\Testbench\TestCase
         $app['Illuminate\Routing\Router']->group(['namespace' => 'App\Http\Controllers\Quazar'], function ($router) {
             require __DIR__.'/../src/Routes/app.php';
         });
+
+        $destinationDir = realpath(__DIR__.'/../vendor/orchestra/testbench/fixture/database/migrations');
+
+        \File::copyDirectory(realpath(__DIR__.'/../fixture/migrations'), $destinationDir);
+        \File::copyDirectory(realpath(__DIR__.'/../vendor/yab/quarx/src/PublishedAssets/Migrations'), $destinationDir);
+        \File::copyDirectory(realpath(__DIR__.'/../vendor/yab/quarx/src/Migrations'), $destinationDir);
+        \File::copyDirectory(realpath(__DIR__.'/../src/Migrations'), $destinationDir);
     }
 
     /**
@@ -59,22 +66,6 @@ class TestCase extends Orchestra\Testbench\TestCase
 
         $this->withFactories(__DIR__.'/../src/Models/Factories');
 
-        $destinationDir = realpath(__DIR__.'/../vendor/orchestra/testbench/fixture/database/migrations');
-
-        \File::copyDirectory(realpath(__DIR__.'/../fixture/migrations'), $destinationDir);
-        \File::copyDirectory(realpath(__DIR__.'/../vendor/yab/quarx/src/PublishedAssets/Migrations'), $destinationDir);
-        \File::copyDirectory(realpath(__DIR__.'/../vendor/yab/quarx/src/Migrations'), $destinationDir);
-        \File::copyDirectory(realpath(__DIR__.'/../src/Migrations'), $destinationDir);
-
-        // $this->artisan('migrate', [
-        //     '--database' => 'testing',
-        // ]);
-
-        // $this->artisan('migrate', [
-        //     '--database' => 'testing',
-        //     '--path' => realpath(__DIR__.'/../fixture/migrations'),
-        // ]);
-
         $this->artisan('vendor:publish', [
             '--provider' => 'Yab\Laracogs\LaracogsProvider',
             '--force' => true,
@@ -88,27 +79,6 @@ class TestCase extends Orchestra\Testbench\TestCase
             '--force' => true,
         ]);
 
-        $this->loadLaravelMigrations(['--database' => 'testing']);
-        // $this->artisan('migrate', [
-        //     '--database' => 'testing',
-        //     '--path' => realpath(__DIR__.'/../vendor/yab/laracogs/src/Packages/Starter/database/migrations'),
-        // ]);
-        // $this->artisan('migrate', [
-        //     '--database' => 'testing',
-        //     '--path' => realpath(__DIR__.'/../vendor/yab/quarx/src/PublishedAssets/Migrations'),
-        // ]);
-        // $this->artisan('migrate', [
-        //     '--database' => 'testing',
-        //     '--path' => realpath(__DIR__.'/../vendor/yab/quarx/src/Migrations'),
-        // ]);
-        // $this->artisan('migrate', [
-        //     '--database' => 'testing',
-        //     '--path' => realpath(__DIR__.'/../src/Publishes/Migrations'),
-        // ]);
-        // $this->artisan('migrate', [
-        //     '--database' => 'testing',
-        //     '--path' => realpath(__DIR__.'/../src/Migrations'),
-        // ]);
         $this->withoutMiddleware();
         $this->withoutEvents();
     }
