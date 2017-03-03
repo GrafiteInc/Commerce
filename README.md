@@ -107,6 +107,10 @@ There are a few controllers added to your app in the Quazar directory. These are
 
 There are Quazar view files that are published your app which you can modify, however, if you wish to edit the package views then you will need to update them in the `resources/quazar` directory.
 
+### Docs
+
+For further documentation please checkout [Quarx Docs](https://docs.quarxcms.com)
+
 ## License
 
 Quazar is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
