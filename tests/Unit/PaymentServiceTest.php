@@ -1,9 +1,12 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Yab\Quazar\Services\PaymentService;
 
 class PaymentServiceTest extends TestCase
 {
+    use DatabaseMigrations;
+
     public $service;
     public $user;
     public $role;
@@ -61,7 +64,7 @@ class PaymentServiceTest extends TestCase
         $response = $this->service->purchase('foobar', $this->cart);
 
         $this->assertEquals(get_class($response), 'Illuminate\Http\RedirectResponse');
-        $this->seeInDatabase('transactions', [
+        $this->assertDatabaseHas('transactions', [
             'customer_id' => 1007,
             'provider_id' => 666,
             'total' => '99.99',
@@ -73,7 +76,7 @@ class PaymentServiceTest extends TestCase
         $response = $this->service->purchase('foobarZoo', $this->cart);
 
         $this->assertEquals(get_class($response), 'Illuminate\Http\RedirectResponse');
-        $this->seeInDatabase('transactions', [
+        $this->assertDatabaseHas('transactions', [
             'customer_id' => 1007,
             'provider_id' => 666,
             'total' => '99.99',
@@ -86,7 +89,7 @@ class PaymentServiceTest extends TestCase
         $response = $this->service->purchase(null, $this->cart);
 
         $this->assertEquals(get_class($response), 'Illuminate\Http\RedirectResponse');
-        $this->seeInDatabase('transactions', [
+        $this->assertDatabaseHas('transactions', [
             'customer_id' => 1007,
             'provider_id' => 666,
             'total' => '99.99',
@@ -100,7 +103,7 @@ class PaymentServiceTest extends TestCase
         $response = $this->service->createOrder($this->user, $transaction, $items);
 
         $this->assertEquals($response, true);
-        $this->seeInDatabase('orders', [
+        $this->assertDatabaseHas('orders', [
             'customer_id' => 1007,
             'transaction_id' => 999,
         ]);

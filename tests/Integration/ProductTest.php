@@ -1,7 +1,11 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 class ProductTest extends TestCase
 {
+    use DatabaseMigrations;
+
     public function setUp()
     {
         parent::setUp();
@@ -29,14 +33,14 @@ class ProductTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/products');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('products');
+        $response->assertViewHas('products');
     }
 
     public function testCreate()
     {
         $response = $this->call('GET', 'quarx/products/create');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->see('Title');
+        $response->assertSee('Name');
     }
 
     public function testEdit()
@@ -44,8 +48,8 @@ class ProductTest extends TestCase
         factory(\Yab\Quazar\Models\Product::class)->create(['id' => 4]);
         $response = $this->call('GET', 'quarx/products/4/edit');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('product');
-        $this->see('Title');
+        $response->assertViewHas('product');
+        $response->assertSee('Name');
     }
 
     /*
@@ -59,7 +63,7 @@ class ProductTest extends TestCase
         $product = ['name' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie', 'price' => 9.99];
         $response = $this->call('POST', 'quarx/products', $product);
 
-        $this->seeInDatabase('products', ['id' => 2]);
+        $this->assertDatabaseHas('products', ['id' => 2]);
         $this->assertEquals(302, $response->getStatusCode());
     }
 
@@ -67,7 +71,7 @@ class ProductTest extends TestCase
     {
         $response = $this->call('POST', 'quarx/products/search', ['term' => 'wtf']);
 
-        $this->assertViewHas('products');
+        $response->assertViewHas('products');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -82,7 +86,7 @@ class ProductTest extends TestCase
             'price' => 99.99,
         ]);
 
-        $this->seeInDatabase('products', ['name' => 'dumber and dumber']);
+        $this->assertDatabaseHas('products', ['name' => 'dumber and dumber']);
         $this->assertEquals(302, $response->getStatusCode());
     }
 
@@ -90,6 +94,6 @@ class ProductTest extends TestCase
     {
         $response = $this->call('DELETE', 'quarx/products/1');
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('quarx/products');
+        $response->assertRedirect('quarx/products');
     }
 }

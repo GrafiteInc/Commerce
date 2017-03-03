@@ -1,9 +1,12 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Yab\Quazar\Services\StripeService;
 
 class SubscriptionsTest extends TestCase
 {
+    use DatabaseMigrations;
+
     public function setUp()
     {
         parent::setUp();
@@ -56,8 +59,8 @@ class SubscriptionsTest extends TestCase
         $response = $this->call('GET', 'quarx/plans');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('plans');
-        $this->see('Subscription Plans');
+        $response->assertViewHas('plans');
+        $response->assertSee('Subscription Plans');
     }
 
     public function testCreate()
@@ -65,7 +68,7 @@ class SubscriptionsTest extends TestCase
         $response = $this->call('GET', 'quarx/plans/create');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->see('Name');
+        $response->assertSee('Name');
     }
 
     public function testEdit()
@@ -73,8 +76,8 @@ class SubscriptionsTest extends TestCase
         $response = $this->call('GET', 'quarx/plans/2/edit');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('plan');
-        $this->see('#');
+        $response->assertViewHas('plan');
+        $response->assertSee('#');
     }
 
     /*
@@ -87,7 +90,7 @@ class SubscriptionsTest extends TestCase
     {
         $response = $this->call('POST', 'quarx/plans/search', ['term' => 'wtf']);
 
-        $this->assertViewHas('plans');
+        $response->assertViewHas('plans');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -97,7 +100,7 @@ class SubscriptionsTest extends TestCase
             'name' => 'Batman Plan',
         ]);
 
-        $this->seeInDatabase('plans', ['name' => 'Batman Plan']);
+        $this->assertDatabaseHas('plans', ['name' => 'Batman Plan']);
         $this->assertEquals(302, $response->getStatusCode());
     }
 

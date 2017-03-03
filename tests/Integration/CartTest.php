@@ -1,10 +1,14 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 require __DIR__.'/../../fixture/Models/User.php';
 require __DIR__.'/../../fixture/Models/Role.php';
 
 class CartTest extends TestCase
 {
+    use DatabaseMigrations;
+
     public function setUp()
     {
         parent::setUp();
@@ -29,14 +33,14 @@ class CartTest extends TestCase
         $response = $this->call('GET', '/store/cart/contents');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('products');
+        $response->assertViewHas('products');
     }
 
     public function testEmpty()
     {
         $response = $this->call('GET', '/store/cart/empty');
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/');
+        $response->assertRedirect('/');
     }
 
     public function testAddProduct()

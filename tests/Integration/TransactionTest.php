@@ -1,7 +1,11 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 class TransactionTest extends TestCase
 {
+    use DatabaseMigrations;
+
     public function setUp()
     {
         parent::setUp();
@@ -37,8 +41,8 @@ class TransactionTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/transactions');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('transactions');
-        $this->see('Transactions');
+        $response->assertViewHas('transactions');
+        $response->assertSee('Transactions');
     }
 
     public function testEdit()
@@ -50,8 +54,8 @@ class TransactionTest extends TestCase
         $response = $this->call('GET', 'quarx/transactions/2/edit');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('transaction');
-        $this->see('#');
+        $response->assertViewHas('transaction');
+        $response->assertSee('#');
     }
 
     /*
@@ -64,7 +68,7 @@ class TransactionTest extends TestCase
     {
         $response = $this->call('POST', 'quarx/transactions/search', ['term' => 'wtf']);
 
-        $this->assertViewHas('transactions');
+        $response->assertViewHas('transactions');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -79,7 +83,7 @@ class TransactionTest extends TestCase
             'notes' => 'nada',
         ]);
 
-        $this->seeInDatabase('transactions', ['notes' => 'nada']);
+        $this->assertDatabaseHas('transactions', ['notes' => 'nada']);
         $this->assertEquals(302, $response->getStatusCode());
     }
 

@@ -1,7 +1,11 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+
 class OrderTest extends TestCase
 {
+    use DatabaseMigrations;
+
     public function setUp()
     {
         parent::setUp();
@@ -35,16 +39,9 @@ class OrderTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/orders');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('orders');
-        $this->see('Orders');
+        $response->assertViewHas('orders');
+        $response->assertSee('Orders');
     }
-
-    // public function testCreate()
-    // {
-    //     $response = $this->call('GET', 'quarx/orders/create');
-    //     $this->assertEquals(200, $response->getStatusCode());
-    //     $this->see('Title');
-    // }
 
     public function testEdit()
     {
@@ -61,8 +58,8 @@ class OrderTest extends TestCase
         $response = $this->call('GET', 'quarx/orders/2/edit');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('order');
-        $this->see('#');
+        $response->assertViewHas('order');
+        $response->assertSee('#');
     }
 
     /*
@@ -75,7 +72,7 @@ class OrderTest extends TestCase
     {
         $response = $this->call('POST', 'quarx/orders/search', ['term' => 'wtf']);
 
-        $this->assertViewHas('orders');
+        $response->assertViewHas('orders');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -102,7 +99,7 @@ class OrderTest extends TestCase
             ]),
         ]);
 
-        $this->seeInDatabase('orders', ['details' => '[{"price":10900,"quantity":1,"name":"foobar"}]']);
+        $this->assertDatabaseHas('orders', ['details' => '[{"price":10900,"quantity":1,"name":"foobar"}]']);
         $this->assertEquals(302, $response->getStatusCode());
     }
 

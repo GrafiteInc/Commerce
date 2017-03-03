@@ -23,12 +23,12 @@ class CreateCustomerProfilesTable extends Migration
      */
     public function down()
     {
-        Schema::table(config('quarx.db-prefix', '').'user_meta', function ($table) {
-            $table->dropColumn('stripe_id');
-            $table->dropColumn('card_brand');
-            $table->dropColumn('card_last_four');
-            $table->dropColumn('shipping_address');
-            $table->dropColumn('billing_address');
-        });
+        // Schema::table(config('quarx.db-prefix', '').'user_meta', function ($table) {
+        //     $table->dropColumn('stripe_id');
+        //     $table->dropColumn('card_brand');
+        //     $table->dropColumn('card_last_four');
+        //     $table->dropColumn('shipping_address');
+        //     $table->dropColumn('billing_address');
+        // });
     }
 }

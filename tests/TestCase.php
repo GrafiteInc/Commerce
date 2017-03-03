@@ -1,7 +1,11 @@
 <?php
 
+use Orchestra\Testbench\Traits\WithLoadMigrationsFrom;
+
 class TestCase extends Orchestra\Testbench\TestCase
 {
+    use WithLoadMigrationsFrom;
+
     /**
      * Define environment setup.
      *
@@ -9,10 +13,10 @@ class TestCase extends Orchestra\Testbench\TestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'testbench');
+        $app['config']->set('database.default', 'testing');
         $app['config']->set('app.debug', true);
         $app['config']->set('quarx.load-modules', false);
-        $app['config']->set('database.connections.testbench', [
+        $app['config']->set('database.connections.testing', [
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => '',
@@ -52,7 +56,25 @@ class TestCase extends Orchestra\Testbench\TestCase
     public function setUp()
     {
         parent::setUp();
+
         $this->withFactories(__DIR__.'/../src/Models/Factories');
+
+        $destinationDir = realpath(__DIR__.'/../vendor/orchestra/testbench/fixture/database/migrations');
+
+        \File::copyDirectory(realpath(__DIR__.'/../fixture/migrations'), $destinationDir);
+        \File::copyDirectory(realpath(__DIR__.'/../vendor/yab/quarx/src/PublishedAssets/Migrations'), $destinationDir);
+        \File::copyDirectory(realpath(__DIR__.'/../vendor/yab/quarx/src/Migrations'), $destinationDir);
+        \File::copyDirectory(realpath(__DIR__.'/../src/Migrations'), $destinationDir);
+
+        // $this->artisan('migrate', [
+        //     '--database' => 'testing',
+        // ]);
+
+        // $this->artisan('migrate', [
+        //     '--database' => 'testing',
+        //     '--path' => realpath(__DIR__.'/../fixture/migrations'),
+        // ]);
+
         $this->artisan('vendor:publish', [
             '--provider' => 'Yab\Laracogs\LaracogsProvider',
             '--force' => true,
@@ -65,30 +87,28 @@ class TestCase extends Orchestra\Testbench\TestCase
             '--provider' => 'Yab\Quazar\QuazarModuleProvider',
             '--force' => true,
         ]);
-        $this->artisan('migrate', [
-            '--database' => 'testbench',
-            '--realpath' => realpath(__DIR__.'/../fixture/migrations'),
-        ]);
-        $this->artisan('migrate', [
-            '--database' => 'testbench',
-            '--realpath' => realpath(__DIR__.'/../vendor/yab/laracogs/src/Packages/Starter/database/migrations'),
-        ]);
-        $this->artisan('migrate', [
-            '--database' => 'testbench',
-            '--realpath' => realpath(__DIR__.'/../vendor/yab/quarx/src/PublishedAssets/Migrations'),
-        ]);
-        $this->artisan('migrate', [
-            '--database' => 'testbench',
-            '--realpath' => realpath(__DIR__.'/../vendor/yab/quarx/src/Migrations'),
-        ]);
-        $this->artisan('migrate', [
-            '--database' => 'testbench',
-            '--realpath' => realpath(__DIR__.'/../src/Publishes/Migrations'),
-        ]);
-        $this->artisan('migrate', [
-            '--database' => 'testbench',
-            '--realpath' => realpath(__DIR__.'/../src/Migrations'),
-        ]);
+
+        $this->loadLaravelMigrations(['--database' => 'testing']);
+        // $this->artisan('migrate', [
+        //     '--database' => 'testing',
+        //     '--path' => realpath(__DIR__.'/../vendor/yab/laracogs/src/Packages/Starter/database/migrations'),
+        // ]);
+        // $this->artisan('migrate', [
+        //     '--database' => 'testing',
+        //     '--path' => realpath(__DIR__.'/../vendor/yab/quarx/src/PublishedAssets/Migrations'),
+        // ]);
+        // $this->artisan('migrate', [
+        //     '--database' => 'testing',
+        //     '--path' => realpath(__DIR__.'/../vendor/yab/quarx/src/Migrations'),
+        // ]);
+        // $this->artisan('migrate', [
+        //     '--database' => 'testing',
+        //     '--path' => realpath(__DIR__.'/../src/Publishes/Migrations'),
+        // ]);
+        // $this->artisan('migrate', [
+        //     '--database' => 'testing',
+        //     '--path' => realpath(__DIR__.'/../src/Migrations'),
+        // ]);
         $this->withoutMiddleware();
         $this->withoutEvents();
     }
