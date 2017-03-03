@@ -47,6 +47,7 @@ class CardController extends Controller
     public function setCard(Request $request)
     {
         $user = auth()->user();
+
         if (is_null($user->meta->stripe_id) && $request->input('stripeToken')) {
             $user->meta->createAsStripeCustomer($request->input('stripeToken'));
         } elseif ($request->input('stripeToken')) {
