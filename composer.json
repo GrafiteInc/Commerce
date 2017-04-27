@@ -3,7 +3,7 @@
     "description": "An E-Commerce platform for Laravel Apps using Quarx",
     "license": "MIT",
     "require": {
-        "illuminate/support": "5.4",
+        "illuminate/support": "^5.4",
         "laravel/cashier": "^7.0"
     },
     "require-dev": {
