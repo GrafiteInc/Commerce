@@ -30,6 +30,13 @@ composer require laravel/cashier
 
 Don't worry about the laravel cashier installation, the only points of interest are specified below:
 
+Add these to your `config/app.php`:
+
+```
+Yab\Quazar\QuazarProvider::class,
+Laravel\Cashier\CashierServiceProvider::class,
+```
+
 Add the following to your `config/services.php`:
 
 ```php
