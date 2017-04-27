@@ -13,7 +13,7 @@ $factory->define(\Yab\Quazar\Models\Product::class, function (Faker\Generator $f
         'url' => 'dumb',
         'code' => 'a98s7d9',
         'price' => 9999,
-        'weight' => 'a98s7d9',
+        'weight' => 0,
         'width' => '9',
         'height' => '11',
         'depth' => '8',

@@ -13,7 +13,7 @@
         "yab/laracogs": "^2.2",
         "yab/quarx": "^2.3",
         "orchestra/database": "^3.3",
-        "phpunit/phpunit": "^6.0",
+        "phpunit/phpunit": "^5.7",
         "orchestra/testbench-browser-kit": "~3.1"
     },
     "autoload": {

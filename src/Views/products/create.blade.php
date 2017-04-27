@@ -9,7 +9,7 @@
 
     {!! Form::open(['route' => 'quarx.products.store', 'files' => true]) !!}
 
-        {!! FormMaker::fromTable('products', Quarx::moduleConfig('quazar', 'details')) !!}
+        {!! FormMaker::fromTable('products', config('quazar.forms.details')) !!}
 
         <div class="form-group text-right">
             <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>

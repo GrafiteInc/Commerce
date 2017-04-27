@@ -21,6 +21,10 @@ class QuazarModuleProvider extends ServiceProvider
             __DIR__.'/Publishes/config' => base_path('config'),
             __DIR__.'/Publishes/app/Controllers' => app_path('Http/Controllers/Quazar'),
         ]);
+
+        $this->publishes([
+            __DIR__.'/Views' => base_path('resources/views/vendor/quazar'),
+        ], 'backend');
     }
 
     /**
