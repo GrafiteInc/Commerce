@@ -17,7 +17,7 @@ class CreateCartTable extends Migration
             $table->string('entity_type');
             $table->text('product_variants')->nullable();
             $table->text('address')->nullable();
-            $table->integer('quantity');
+            $table->float('quantity');
             $table->timestamps();
         });
     }
