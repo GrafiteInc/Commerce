@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v0.1.1] - 2017-04-28
+
+### Fixed
+- Product tabs
+- Product forms
+- Missing docs
+
 ## [v0.1.0] - 2017-04-28
 
 ### Changed
