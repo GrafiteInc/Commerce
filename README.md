@@ -118,6 +118,16 @@ There are Quazar view files that are published your app which you can modify, ho
 
 For further documentation please checkout [Quarx Docs](https://docs.quarxcms.com)
 
+### RoadMap
+
+##### 1.1
+- [ ] Product Bundles
+
+#### 1.0
+- [ ] Coupons
+- [ ] Wish list
+- [ ] Related products
+
 ## License
 
 Quazar is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
