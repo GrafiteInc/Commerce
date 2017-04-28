@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v0.1.0] - 2017-04-28
+
+### Changed
+- Moving forward into a supported level of this package
+
 ## [v0.0.4] - 2017-04-27
 
 ### Fixed
