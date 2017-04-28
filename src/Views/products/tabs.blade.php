@@ -1,42 +1,42 @@
 <div class="row raw-margin-bottom-24">
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" {!! (! is_null(request('details')) || isset($tabs['details'])) ? 'class="active"': '' !!}>
-            <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?details') !!}" role="tab">Details</a>
+        <li role="presentation" {!! (request('tab') == 'details') || isset($tabs['details']) ? 'class="active"': '' !!}>
+            <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?tab=details') !!}" role="tab">Details</a>
         </li>
-        <li role="presentation" {!! (! is_null(request('variants'))) ? 'class="active"': '' !!}>
-            <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?variants') !!}" role="tab">Variants</a>
+        <li role="presentation" {!! (request('tab') == 'variants') ? 'class="active"': '' !!}>
+            <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?tab=variants') !!}" role="tab">Variants</a>
         </li>
         @if ($product->is_download)
-            <li role="presentation" {!! (! is_null(request('download'))) ? 'class="active"': '' !!}>
-                <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?download') !!}" role="tab">Download</a>
+            <li role="presentation" {!! (request('tab') == 'download') ? 'class="active"': '' !!}>
+                <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?tab=download') !!}" role="tab">Download</a>
             </li>
         @else
-            <li role="presentation" {!! (! is_null(request('dimensions'))) ? 'class="active"': '' !!}>
-                <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?dimensions') !!}" role="tab">Dimensions</a>
+            <li role="presentation" {!! (request('tab') == 'dimensions') ? 'class="active"': '' !!}>
+                <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?tab=dimensions') !!}" role="tab">Dimensions</a>
             </li>
         @endif
-        <li role="presentation" {!! (! is_null(request('discount'))) ? 'class="active"': '' !!}>
-            <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?discount') !!}" role="tab">Discounts</a>
+        <li role="presentation" {!! (request('tab') == 'discount') ? 'class="active"': '' !!}>
+            <a href="{!! URL::to('quarx/products/'.$product->id.'/edit?tab=discount') !!}" role="tab">Discounts</a>
         </li>
     </ul>
 </div>
 
-@if (! is_null(request('details')) || isset($tabs['details']))
+@if ((request('tab') == 'details') || isset($tabs['details']))
     @include('quazar::products.tabs.details')
 @endif
 
-@if (! is_null(request('variants')))
+@if (request('tab') == 'variants')
     @include('quazar::products.tabs.variants')
 @endif
 
-@if (! is_null(request('discount')))
+@if (request('tab') == 'discount')
     @include('quazar::products.tabs.discount')
 @endif
 
-@if (! is_null(request('download')))
+@if (request('tab') == 'download')
     @include('quazar::products.tabs.download')
 @endif
 
-@if (! is_null(request('dimensions')))
+@if (request('tab') == 'dimensions')
     @include('quazar::products.tabs.dimensions')
 @endif

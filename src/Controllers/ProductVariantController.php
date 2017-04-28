@@ -52,10 +52,13 @@ class ProductVariantController extends QuarxController
             return redirect(route('quarx.products.index'));
         }
 
-        $this->productVariantRepository->addVariant($product, $request->all());
-        Quarx::notification('Variant successfully added.', 'success');
+        if ($this->productVariantRepository->addVariant($product, $request->all())) {
+            Quarx::notification('Variant successfully added.', 'success');
+        } else {
+            Quarx::notification('Failed to add variant. Missing Key or Value.', 'warning');
+        }
 
-        return redirect(route('quarx.products.edit', $id).'?variants');
+        return redirect(route('quarx.products.edit', $id).'?tab=variants');
     }
 
     /**
