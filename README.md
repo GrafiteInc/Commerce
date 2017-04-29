@@ -38,9 +38,17 @@ Laravel\Cashier\CashierServiceProvider::class,
 ```
 
 Add the following to your `app/Http/Kernel.php` to the `routeMiddleware` array:
-
 ```
 'isAjax' => \Yab\Quazar\Middleware\isAjax::class,
+```
+
+Add the following to your `app/Models/UserMeta.php` to the `fillables` array:
+```
+'stripe_id',
+'card_brand',
+'card_last_four',
+'shipping_address',
+'billing_address',
 ```
 
 Add the following to your `config/services.php`:
@@ -54,9 +62,14 @@ Add the following to your `config/services.php`:
 ```
 
 Now you need to add the Billable trait to the `App\Models\UserMeta::class`
-
 ```php
 use \Laravel\Cashier\Billable;
+```
+
+Finally add to your `.env`:
+```
+STRIPE_SECRET={your secret key}
+STRIPE_KEY={your public key}
 ```
 
 Then publish the vendor assets etc:
