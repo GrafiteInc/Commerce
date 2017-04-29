@@ -313,7 +313,7 @@ class CartService
             $total += $product->price * $item->quantity;
         }
 
-        return $total;
+        return round($total, 2);
     }
 
     /**
