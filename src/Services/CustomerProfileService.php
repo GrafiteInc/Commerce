@@ -104,6 +104,14 @@ class CustomerProfileService
             $profileData['billing_address'] = json_encode($addressInput);
         }
 
+        if (is_null(auth()->user()->meta->shipping_address)) {
+            $profileData['shipping_address'] = json_encode($addressInput);
+        }
+
+        if (is_null(auth()->user()->meta->billing_address)) {
+            $profileData['billing_address'] = json_encode($addressInput);
+        }
+
         return auth()->user()->meta->update($profileData);
     }
 }
