@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v0.1.2] - 2017-05-04
+
+### Changed
+- Changed customer_id to user_id - for more consistency
+
 ## [v0.1.1] - 2017-04-28
 
 ### Fixed
