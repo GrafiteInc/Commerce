@@ -10,7 +10,7 @@ $factory->define(\Yab\Quazar\Models\Transactions::class, function (Faker\Generat
     return [
         'id' => 1,
         'uuid' => 'foo-bar-foo-bar',
-        'customer_id' => 1,
+        'user_id' => 1,
         'provider' => 'stripe',
         'state' => 'success',
         'subtotal' => 99.99,

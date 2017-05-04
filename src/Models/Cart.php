@@ -13,7 +13,7 @@ class Cart extends QuarxModel
     public $timestamps = true;
 
     public $fillable = [
-        'customer_id',
+        'user_id',
         'entity_id',
         'entity_type',
         'address',

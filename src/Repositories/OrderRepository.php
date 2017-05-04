@@ -85,7 +85,7 @@ class OrderRepository
      */
     public function getByCustomer($id)
     {
-        return $this->model->where('customer_id', '=', $id);
+        return $this->model->where('user_id', '=', $id);
     }
 
     /**
@@ -97,7 +97,7 @@ class OrderRepository
      */
     public function getByCustomerAndId($customer, $id)
     {
-        return $this->model->where('customer_id', $customer)->where('id', $id)->first();
+        return $this->model->where('user_id', $customer)->where('id', $id)->first();
     }
 
     /**
@@ -109,7 +109,7 @@ class OrderRepository
      */
     public function getByCustomerAndUuid($customer, $id)
     {
-        return $this->model->where('customer_id', $customer)->where('uuid', $id)->first();
+        return $this->model->where('user_id', $customer)->where('uuid', $id)->first();
     }
 
     /**

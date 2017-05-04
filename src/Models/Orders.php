@@ -14,7 +14,7 @@ class Orders extends QuarxModel
 
     public $fillable = [
         'uuid',
-        'customer_id',
+        'user_id',
         'transaction_id',
         'details',
         'shipping_address',

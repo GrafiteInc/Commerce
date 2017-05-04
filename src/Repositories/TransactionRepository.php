@@ -114,7 +114,7 @@ class TransactionRepository
      */
     public function getByCustomer($id)
     {
-        return $this->model->where('customer_id', '=', $id);
+        return $this->model->where('user_id', '=', $id);
     }
 
     /**
@@ -126,7 +126,7 @@ class TransactionRepository
      */
     public function getByCustomerAndId($customer, $id)
     {
-        return $this->model->where('customer_id', $customer)->where('id', $id)->first();
+        return $this->model->where('user_id', $customer)->where('id', $id)->first();
     }
 
     /**
@@ -138,7 +138,7 @@ class TransactionRepository
      */
     public function getByCustomerAndUuid($customer, $uuid)
     {
-        return $this->model->where('customer_id', $customer)->where('uuid', $uuid)->first();
+        return $this->model->where('user_id', $customer)->where('uuid', $uuid)->first();
     }
 
     /**

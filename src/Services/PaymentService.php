@@ -65,7 +65,7 @@ class PaymentService
                 'provider_dispute' => '',
                 'cart' => json_encode($cart->contents()),
                 'response' => json_encode($result),
-                'customer_id' => $user->id,
+                'user_id' => $user->id,
             ]);
 
             $orderedItems = [];
@@ -100,7 +100,7 @@ class PaymentService
 
         $this->orderService->create([
             'uuid' => Crypto::uuid(),
-            'customer_id' => $user->id,
+            'user_id' => $user->id,
             'transaction_id' => $transaction->id,
             'details' => json_encode($items),
             'shipping_address' => json_encode([

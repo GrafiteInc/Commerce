@@ -10,7 +10,7 @@ $factory->define(\Yab\Quazar\Models\Orders::class, function (Faker\Generator $fa
     return [
         'id' => 1,
         'uuid' => 'foo-bar-foo-bar',
-        'customer_id' => 1,
+        'user_id' => 1,
         'transaction_id' => 999,
         'details' => $faker->paragraph().' '.$faker->paragraph(),
         'shipping_address' => json_encode([

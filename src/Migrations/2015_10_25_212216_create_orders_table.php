@@ -13,7 +13,7 @@ class CreateOrdersTable extends Migration
         Schema::create(config('quarx.db-prefix', '').'orders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('uuid');
-            $table->integer('customer_id');
+            $table->integer('user_id');
             $table->integer('transaction_id');
             $table->text('details');
             $table->text('shipping_address')->nullable();

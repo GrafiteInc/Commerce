@@ -41,7 +41,7 @@
                         <td class="raw-m-hide">{!! $transaction->tax !!}</td>
                         <td class="raw-m-hide">{!! $transaction->total !!}</td>
                         <td class="raw-m-hide">{!! $transaction->shipping !!}</td>
-                        <td class="raw-m-hide">{!! auth()->user()->find($transaction->customer_id)->name !!}</td>
+                        <td class="raw-m-hide">{!! auth()->user()->find($transaction->user_id)->name !!}</td>
                         <td class="raw-m-hide text-center">
                             @if (!is_null($transaction->refund_date))
                                 {!! $transaction->refund_date !!}

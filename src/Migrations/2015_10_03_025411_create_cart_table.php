@@ -12,7 +12,7 @@ class CreateCartTable extends Migration
     {
         Schema::create(config('quarx.db-prefix', '').'cart', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('customer_id');
+            $table->integer('user_id');
             $table->integer('entity_id');
             $table->string('entity_type');
             $table->text('product_variants')->nullable();

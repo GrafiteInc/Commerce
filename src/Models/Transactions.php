@@ -25,7 +25,7 @@ class Transactions extends QuarxModel
         'provider_id',
         'provider_date',
         'provider_dispute',
-        'customer_id',
+        'user_id',
         'notes',
         'cart',
         'response',

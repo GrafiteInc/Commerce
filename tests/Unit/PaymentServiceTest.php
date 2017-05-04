@@ -33,7 +33,7 @@ class PaymentServiceTest extends TestCase
         factory(\Yab\Quazar\Models\Plan::class)->create();
         factory(\Yab\Quazar\Models\Cart::class)->create([
             'id' => 3,
-            'customer_id' => 1,
+            'user_id' => 1,
         ]);
 
         $this->cart = app(\Yab\Quazar\Services\CartService::class);
@@ -65,7 +65,7 @@ class PaymentServiceTest extends TestCase
 
         $this->assertEquals(get_class($response), 'Illuminate\Http\RedirectResponse');
         $this->assertDatabaseHas('transactions', [
-            'customer_id' => 1007,
+            'user_id' => 1007,
             'provider_id' => 666,
             'total' => '99.99',
         ]);
@@ -77,7 +77,7 @@ class PaymentServiceTest extends TestCase
 
         $this->assertEquals(get_class($response), 'Illuminate\Http\RedirectResponse');
         $this->assertDatabaseHas('transactions', [
-            'customer_id' => 1007,
+            'user_id' => 1007,
             'provider_id' => 666,
             'total' => '99.99',
         ]);
@@ -90,7 +90,7 @@ class PaymentServiceTest extends TestCase
 
         $this->assertEquals(get_class($response), 'Illuminate\Http\RedirectResponse');
         $this->assertDatabaseHas('transactions', [
-            'customer_id' => 1007,
+            'user_id' => 1007,
             'provider_id' => 666,
             'total' => '99.99',
         ]);
@@ -104,7 +104,7 @@ class PaymentServiceTest extends TestCase
 
         $this->assertEquals($response, true);
         $this->assertDatabaseHas('orders', [
-            'customer_id' => 1007,
+            'user_id' => 1007,
             'transaction_id' => 999,
         ]);
     }

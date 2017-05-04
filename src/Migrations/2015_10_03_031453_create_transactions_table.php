@@ -13,7 +13,7 @@ class CreateTransactionsTable extends Migration
         Schema::create(config('quarx.db-prefix', '').'transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('uuid');
-            $table->integer('customer_id');
+            $table->integer('user_id');
             $table->string('provider');
             $table->string('provider_id');
             $table->string('provider_date');
