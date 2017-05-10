@@ -58,7 +58,7 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            <form method="post" action="{!! url('quarx/product/'.$product->id) !!}">
+                            <form method="post" action="{!! url('quarx/products/'.$product->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
