@@ -14,6 +14,9 @@ class SubscriptionController extends Controller
 
     public function __construct(PlanService $service)
     {
+        if (!config('quazar.subscriptions')) {
+            return back()->send();
+        }
         $this->service = $service;
     }
 

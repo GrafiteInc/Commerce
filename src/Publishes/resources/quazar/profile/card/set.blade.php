@@ -7,6 +7,8 @@
 
 @section('store-content')
 
+    @include('quazar-frontend::profile.tabs')
+
     <div class="tabs-content">
         <div role="tabpanel" class="tab-pane tab-active">
 
@@ -15,7 +17,7 @@
             </div>
 
             <div class="col-md-6 col-md-offset-3 well">
-                <form id="userPayment" method="post" action="{{ URL::to('store/account/card') }}">
+                <form id="userPayment" method="post" action="{{ route('quazar.account.card') }}">
                     {!! Form::token(); !!}
 
                     @include('quazar-frontend::profile.card.card-form')

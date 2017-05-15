@@ -20,6 +20,7 @@ class QuazarModuleProvider extends ServiceProvider
             __DIR__.'/Publishes/public/css' => base_path('public/css'),
             __DIR__.'/Publishes/public/img' => base_path('public/img'),
             __DIR__.'/Publishes/config' => base_path('config'),
+            __DIR__.'/Publishes/routes' => base_path('routes'),
             __DIR__.'/Publishes/app/Controllers' => app_path('Http/Controllers/Quazar'),
         ]);
 
@@ -38,7 +39,7 @@ class QuazarModuleProvider extends ServiceProvider
         $this->app->register(\Yab\Quazar\Providers\QuazarRouteProvider::class);
 
         // View namespace
-        $this->app->view->addNamespace('quazar', __DIR__.'/Views');
+        $this->loadViewsFrom(__DIR__.'/Views', 'quazar');
 
         if (is_dir(base_path('resources/quazar'))) {
             $this->app->view->addNamespace('quazar-frontend', base_path('resources/quazar'));

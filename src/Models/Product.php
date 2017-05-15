@@ -66,7 +66,7 @@ class Product extends QuarxModel
 
     public function getHrefAttribute()
     {
-        return url('store/product/'.$this->url);
+        return route('quazar.product', [$this->url]);
     }
 
     public function getFileDownloadHrefAttribute()

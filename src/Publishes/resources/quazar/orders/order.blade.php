@@ -11,7 +11,7 @@
         </tr>
         <tr>
             <td>Transaction</td>
-            <td class="text-right"><a href="{!! url('store/account/purchases/'.$order->transaction('uuid')) !!}">{!! $order->transaction('uuid') !!}</a></td>
+            <td class="text-right"><a href="{!! url('quazar.account.purchase', [$order->transaction('uuid')]) !!}">{!! $order->transaction('uuid') !!}</a></td>
         </tr>
         <tr>
             <td>Status</td>

@@ -16,7 +16,7 @@
                     <input class="form-control" disabled type="text" name="number" value="**** **** **** {{ auth()->user()->meta->card_last_four }}">
                 </div>
                 <div class="form-group">
-                    <a href="{{ url('store/account/card-change') }}" class="btn btn-warning pull-right">Change Card</a>
+                    <a href="{{ route('quazar.account.card-change') }}" class="btn btn-warning pull-right">Change Card</a>
                 </div>
             </div>
         </div>

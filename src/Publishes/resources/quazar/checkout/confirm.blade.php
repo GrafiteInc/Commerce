@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-4">
             <h2>Shipping Info</h2>
-            <form method="post" action="{!! url('store/calculate/shipping') !!}">
+            <form method="post" action="{!! route('quazar.calculate.shipping') !!}">
                 {!! csrf_field() !!}
                 <div class="form-group">
                     <input class="form-control" required name="address[street]" placeholder="Street" value="{!! StoreHelper::customer()->shippingAddress('street') !!}">
@@ -30,7 +30,7 @@
         <div class="col-md-8">
             <h2>Shopping Cart</h2>
             @include('quazar-frontend::checkout.products')
-            <a class="pull-right" href="{!! url('store/payment') !!}">Purchase</a>
+            <a class="pull-right" href="{!! route('quazar.payment') !!}">Purchase</a>
         </div>
     </div>
 

@@ -63,11 +63,11 @@ class Plan extends QuarxModel
 
     public function getHrefAttribute()
     {
-        return url('store/plan/'.$this->uuid);
+        return route('quazar.plan', [$this->uuid]);
     }
 
     public function subscribeBtn($content = '', $class = '')
     {
-        return '<form method="post" action="'.url('store/subscribe/'.crypto_encrypt($this->id)).'">'.csrf_field().'<button class="'.$class.'">'.$content.'</button></form>';
+        return '<form method="post" action="'.route('quazar.subscribe', [crypto_encrypt($this->id)]).'">'.csrf_field().'<button class="'.$class.'">'.$content.'</button></form>';
     }
 }

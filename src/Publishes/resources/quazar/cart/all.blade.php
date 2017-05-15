@@ -35,13 +35,13 @@
                 @endforeach
             </tbody>
         </table>
-        <a href="{!! url('store/cart/empty') !!}">
+        <a href="{!! route('quazar.cart.empty') !!}">
             <span class="pull-left">
                 <span class="fa fa-shopping-cart"></span>
                 Empty Cart
             </span>
         </a>
-        <a class="pull-right" href="{!! url('store/checkout') !!}">Checkout</a>
+        <a class="pull-right" href="{!! route('quazar.checkout') !!}">Checkout</a>
     @else
         <div class="well text-center">
             Hmm, nothing to see here.

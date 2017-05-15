@@ -17,7 +17,7 @@
             </div>
 
             <div class="col-md-6 col-md-offset-3 well">
-                <form id="userPayment" method="post" action="{{ URL::to('store/account/card-change') }}">
+                <form id="userPayment" method="post" action="{{ route('quazar.account.card-change') }}">
                     {!! Form::token(); !!}
 
                     @include('quazar-frontend::profile.card.card-form')

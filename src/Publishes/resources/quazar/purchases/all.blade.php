@@ -13,12 +13,12 @@
         <tbody>
             @foreach ($purchases as $purchase)
                 <tr>
-                    <td><a href="{{ url('store/account/purchases/'.$purchase->uuid) }}">{!! $purchase->uuid !!}</a></td>
+                    <td><a href="{{ route('quazar.account.purchase', [$purchase->uuid]) }}">{!! $purchase->uuid !!}</a></td>
                     <td>${!! $purchase->total !!}</td>
 
                     <td class="text-right">
                         @if (!$purchase->refund_requested && is_null($purchase->refund_date))
-                            <a href="{{ url('store/account/purchases/'.$purchase->uuid.'/refund-request') }}">Request a Refund</a>
+                            <a href="{{ route('quazar.account.purchase.refund-request', [$purchase->uuid]) }}">Request a Refund</a>
                         @endif
                     </td>
                 </tr>

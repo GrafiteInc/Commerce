@@ -14,12 +14,12 @@
         <tbody>
             @foreach ($orders as $order)
                 <tr>
-                    <td><a href="{{ url('store/account/orders/'.$order->uuid) }}">{!! $order->created_at->format('Y-m-d') !!}</a></td>
+                    <td><a href="{{ route('quazar.account.order', [$order->uuid]) }}">{!! $order->created_at->format('Y-m-d') !!}</a></td>
                     <td>{!! $order->transaction('uuid') !!}</td>
                     <td>{!! ucfirst($order->status) !!}</td>
                     <td class="text-right">
                         @if ($order->status !== 'cancelled')
-                            <a href="{{ url('store/account/orders/'.$order->uuid.'/cancel') }}">Cancel Order</a>
+                            <a href="{{ route('quazar.account.order.cancel', [$order->uuid]) }}">Cancel Order</a>
                         @endif
                     </td>
                 </tr>

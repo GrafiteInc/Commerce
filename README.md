@@ -42,6 +42,11 @@ Add the following to your `app/Http/Kernel.php` to the `routeMiddleware` array:
 'isAjax' => \Yab\Quazar\Middleware\isAjax::class,
 ```
 
+Add the following to your `app/Providers/RouteServiceProvider.php` to the `mapWebRoutes` method inside the group method as a closure:
+```
+require base_path('routes/quazar.php');
+```
+
 Add the following to your `app/Models/UserMeta.php` to the `fillables` array:
 ```
 'stripe_id',

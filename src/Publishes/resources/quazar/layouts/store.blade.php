@@ -1,7 +1,7 @@
 @extends('quarx-frontend::layout.master')
 
 @section('stylesheets')
-    {!! Minify::stylesheet(asset('css/store.css')) !!}
+    <link rel="stylesheet" href="{!! asset('css/store.css') !!}">
 @stop
 
 @section('store-header')
@@ -27,5 +27,5 @@
 
 @section('javascript')
     @parent
-    {!! Minify::javascript(asset('js/store.js')) !!}
+    <script src="{!! asset('js/store.js') !!}"></script>
 @stop

@@ -17,7 +17,7 @@
                 <div class="card-wrapper"></div>
             </div>
 
-            <form id="userPayment" method="post" action="{{ url('store/process') }}">
+            <form id="userPayment" method="post" action="{{ route('quazar.process') }}">
                 {!! csrf_field() !!}
                 <input id="exp_month" type="hidden" name="exp_month" data-stripe="exp-month" />
                 <input id="exp_year" type="hidden" name="exp_year" data-stripe="exp-year"/>
@@ -50,7 +50,7 @@
             </form>
 
             @if (StoreHelper::customer()->hasProfile() && ! is_null(StoreHelper::customer()->lastCard('card_last_four')))
-                <form method="post" action="{{ url('store/process/last-card') }}">
+                <form method="post" action="{{ route('quazar.process.last-card') }}">
                     {!! csrf_field() !!}
                     <button class="btn btn-default" id="lastCardBtn" type="submit">Pay with last card used (ending with {!! StoreHelper::customer()->lastCard('card_last_four') !!})</button>
                 </form>
