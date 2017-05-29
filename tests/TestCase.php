@@ -29,8 +29,8 @@ class TestCase extends Orchestra\Testbench\TestCase
             return true;
         });
 
-        $app['Illuminate\Routing\Router']->group(['namespace' => 'App\Http\Controllers\Quazar'], function ($router) {
-            require __DIR__.'/../src/Routes/app.php';
+        $app['Illuminate\Routing\Router']->group(['namespace' => 'App\Http\Controllers'], function ($router) {
+            require __DIR__.'/../src/Publishes/routes/quazar.php';
         });
 
         $destinationDir = realpath(__DIR__.'/../vendor/orchestra/testbench/fixture/database/migrations');

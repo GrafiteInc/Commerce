@@ -10,6 +10,7 @@ return [
 
     'name' => 'Quazar',
     'currency' => env('CURRENCY', 'usd'),
+    'taxes_include_shipping' => false,
     'currencies' => [
         'AUD' => 'aud',
         'CAD' => 'cad',

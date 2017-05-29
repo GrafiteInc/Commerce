@@ -2,6 +2,7 @@
 
 namespace Yab\Quazar\Services;
 
+use App\Services\StoreLogistics;
 use Illuminate\Support\Facades\Auth;
 use Yab\Quazar\Models\Variant;
 use Yab\Quazar\Repositories\CartRepository;
@@ -311,6 +312,10 @@ class CartService
             $this->priceVariants($item, $product);
 
             $total += $product->price * $item->quantity;
+        }
+
+        if (config('quazar.taxes_include_shipping')) {
+            $total += app(StoreLogistics::class)->shipping($this->cartRepo()->user);
         }
 
         return round($total, 2);
