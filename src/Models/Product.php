@@ -56,7 +56,7 @@ class Product extends QuarxModel
 
     public function getPriceAttribute($value)
     {
-        return round($value, 2) * 0.01;
+        return number_format($value * 0.01, 2, '.', '');
     }
 
     public function getHeroImageUrlAttribute()
