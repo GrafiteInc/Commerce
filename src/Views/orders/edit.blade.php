@@ -26,7 +26,7 @@
 
     @include('quazar::orders.breadcrumbs', ['location' => ['edit']])
 
-    {!! Form::model($order, ['route' => ['quarx.orders.update', $order->id], 'method' => 'patch']) !!}
+    {!! Form::model($order, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.orders.update', $order->id], 'method' => 'patch']) !!}
 
         <div class="row">
             <div class="col-md-12 raw-margin-bottom-24">
@@ -85,7 +85,7 @@
     {!! Form::close() !!}
 
     @if ($order->status !== 'cancelled')
-        {!! Form::open(['id' => 'cancelForm', 'url' => 'quarx/orders/cancel', 'method' => 'post', 'class' => 'inline-form pull-left']) !!}
+        {!! Form::open(['id' => 'cancelForm', 'url' => config('quarx.backend-route-prefix', 'quarx').'/orders/cancel', 'method' => 'post', 'class' => 'inline-form pull-left']) !!}
             @input_maker_create('id', ['type' => 'hidden'], $order)
             {!! Form::submit('Cancel this Order', ['class' => 'btn btn-warning']) !!}
         {!! Form::close() !!}

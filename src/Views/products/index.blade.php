@@ -5,9 +5,9 @@
     @include('quazar::modals')
 
     <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route('quarx.products.create') !!}">Add New</a>
+        <a class="btn btn-primary pull-right" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.products.create') !!}">Add New</a>
         <div class="raw-m-hide pull-right">
-            {!! Form::open(['url' => 'quarx/products/search']) !!}
+            {!! Form::open(['url' => config('quarx.backend-route-prefix', 'quarx').'/products/search']) !!}
             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
             {!! Form::close() !!}
         </div>
@@ -36,7 +36,7 @@
 
                 @foreach($products as $product)
                     <tr>
-                        <td><a href="{!! route('quarx.products.edit', [$product->id]) !!}">{!! $product->name !!}</a></td>
+                        <td><a href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.products.edit', [$product->id]) !!}">{!! $product->name !!}</a></td>
                         <td class="raw-m-hide">{!! $product->code !!}</td>
                         <td class="raw-m-hide">${!! $product->price !!}</td>
                         <td class="raw-m-hide">{!! $product->stock !!}</td>
@@ -58,12 +58,12 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            <form method="post" action="{!! url('quarx/products/'.$product->id) !!}">
+                            <form method="post" action="{!! url(config('quarx.backend-route-prefix', 'quarx').'/products/'.$product->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                             </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.products.edit', [$product->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.products.edit', [$product->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

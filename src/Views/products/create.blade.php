@@ -7,7 +7,7 @@
 
     @include('quazar::products.breadcrumbs', ['location' => ['create']])
 
-    {!! Form::open(['route' => 'quarx.products.store', 'files' => true]) !!}
+    {!! Form::open(['route' => config('quarx.backend-route-prefix', 'quarx').'.products.store', 'files' => true]) !!}
 
         {!! FormMaker::fromTable('products', config('quazar.forms.details')) !!}
 

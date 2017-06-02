@@ -29,21 +29,21 @@
             </div>
         </div>
         <div class="col-md-6">
-            {!! Form::model($plan, ['route' => ['quarx.plans.update', $plan->id], 'method' => 'patch']) !!}
+            {!! Form::model($plan, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.plans.update', $plan->id], 'method' => 'patch']) !!}
 
-            {!! FormMaker::fromObject($plan, Quarx::moduleConfig('quazar', 'plans-edit')) !!}
+            {!! FormMaker::fromObject($plan, config('quazar.forms.plans-edit')) !!}
 
             {!! Form::submit('Update', ['class' => 'btn btn-primary pull-right']) !!}
 
             {!! Form::close() !!}
 
             @if ($plan->enabled)
-                <a href="{{ url('quarx/plans/'.$plan->id.'/state-change/disable') }}" class="btn btn-warning pull-right raw-margin-right-16">Disable</a>
+                <a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/plans/'.$plan->id.'/state-change/disable') }}" class="btn btn-warning pull-right raw-margin-right-16">Disable</a>
             @else
-                <a href="{{ url('quarx/plans/'.$plan->id.'/state-change/enable') }}" class="btn btn-default pull-right raw-margin-right-16">Enable</a>
+                <a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/plans/'.$plan->id.'/state-change/enable') }}" class="btn btn-default pull-right raw-margin-right-16">Enable</a>
             @endif
 
-            <form id="deletePlanForm" method="post" action="{!! url('quarx/plans/'.$plan->id) !!}">
+            <form id="deletePlanForm" method="post" action="{!! url(config('quarx.backend-route-prefix', 'quarx').'/plans/'.$plan->id) !!}">
                 {!! csrf_field() !!}
                 {!! method_field('DELETE') !!}
                 <button class="btn delete-plan-btn btn-danger pull-left" type="submit"><i class="fa fa-trash"></i> Delete</button>

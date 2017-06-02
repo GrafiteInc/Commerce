@@ -26,14 +26,14 @@
 
     @include('quazar::transactions.breadcrumbs', ['location' => ['edit']])
 
-    {!! Form::model($transaction, ['route' => ['quarx.transactions.update', $transaction->id], 'method' => 'patch']) !!}
+    {!! Form::model($transaction, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.transactions.update', $transaction->id], 'method' => 'patch']) !!}
 
         <div class="row">
             <div class="col-md-12 raw-margin-bottom-24">
                 <h2 class="text-center raw-margin-bottom-24">#{{ $transaction->uuid }}</h2>
                 @if (!empty($order))
                     @foreach($order as $shipment)
-                        <h4 class="text-center raw-margin-bottom-24"><a href="{{ url('quarx/orders/'.$shipment->id.'/edit') }}">Order #:{{ $shipment->uuid }}</a></h4>
+                        <h4 class="text-center raw-margin-bottom-24"><a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/orders/'.$shipment->id.'/edit') }}">Order #:{{ $shipment->uuid }}</a></h4>
                     @endforeach
                 @endif
                 @if (!is_null($transaction->refund_date))
@@ -91,7 +91,7 @@
     {!! Form::close() !!}
 
     @if (is_null($transaction->refund_date) && $order->count() == 0)
-        {!! Form::open(['id' => 'refundForm', 'url' => 'quarx/transactions/refund', 'method' => 'post', 'class' => 'inline-form pull-left']) !!}
+        {!! Form::open(['id' => 'refundForm', 'url' => config('quarx.backend-route-prefix', 'quarx').'/transactions/refund', 'method' => 'post', 'class' => 'inline-form pull-left']) !!}
             @input_maker_create('uuid', ['type' => 'hidden'], $transaction)
             {!! Form::submit('Refund', ['class' => 'btn btn-warning']) !!}
         {!! Form::close() !!}

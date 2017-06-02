@@ -1,4 +1,4 @@
-{!! Form::model($product, ['route' => ['quarx.products.update', $product->id], 'method' => 'patch', 'files' => true]) !!}
+{!! Form::model($product, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.products.update', $product->id], 'method' => 'patch', 'files' => true]) !!}
 
     {!! FormMaker::fromObject($product, config('quazar.forms.details')) !!}
 

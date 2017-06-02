@@ -58,7 +58,7 @@ class ProductVariantController extends QuarxController
             Quarx::notification('Failed to add variant. Missing Key or Value.', 'warning');
         }
 
-        return redirect(route('quarx.products.edit', $id).'?tab=variants');
+        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.products.edit', $id).'?tab=variants');
     }
 
     /**

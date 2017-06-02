@@ -88,9 +88,9 @@ class OrderController extends Controller
         $result = $this->service->cancelOrder($order->user_id, $order->uuid);
 
         if ($result) {
-            return redirect('quarx/orders')->with('message', 'Successfully cancelled');
+            return redirect(config('quarx.backend-route-prefix', 'quarx').'/orders')->with('message', 'Successfully cancelled');
         }
 
-        return redirect('quarx/orders')->with('message', 'Failed to cancel');
+        return redirect(config('quarx.backend-route-prefix', 'quarx').'/orders')->with('message', 'Failed to cancel');
     }
 }

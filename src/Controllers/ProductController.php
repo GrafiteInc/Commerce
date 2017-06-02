@@ -67,10 +67,10 @@ class ProductController extends QuarxController
         $result = $this->service->create($request->except('_token'));
 
         if ($result) {
-            return redirect('quarx/products/'.$result->id.'/edit')->with('message', 'Successfully created');
+            return redirect(config('quarx.backend-route-prefix', 'quarx').'/products/'.$result->id.'/edit')->with('message', 'Successfully created');
         }
 
-        return redirect('quarx/products')->with('message', 'Failed to create');
+        return redirect(config('quarx.backend-route-prefix', 'quarx').'/products')->with('message', 'Failed to create');
     }
 
     /**
@@ -150,9 +150,9 @@ class ProductController extends QuarxController
         $result = $this->service->destroy($id);
 
         if ($result) {
-            return redirect('quarx/products')->with('message', 'Successfully deleted');
+            return redirect(config('quarx.backend-route-prefix', 'quarx').'/products')->with('message', 'Successfully deleted');
         }
 
-        return redirect('quarx/products')->with('message', 'Failed to delete');
+        return redirect(config('quarx.backend-route-prefix', 'quarx').'/products')->with('message', 'Failed to delete');
     }
 }

@@ -1,4 +1,4 @@
-{!! Form::model($product, ['url' => 'quarx/products/dimensions/'.$product->id, 'method' => 'post']) !!}
+{!! Form::model($product, ['url' => config('quarx.backend-route-prefix', 'quarx').'/products/dimensions/'.$product->id, 'method' => 'post']) !!}
 
     {!! FormMaker::fromObject($product, config('quazar.forms.dimensions')) !!}
 

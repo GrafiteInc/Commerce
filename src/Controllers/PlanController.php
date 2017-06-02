@@ -63,7 +63,7 @@ class PlanController extends Controller
         $result = $this->service->create($request->except('_token'));
 
         if ($result) {
-            return redirect('quarx/plans/'.$result->id.'/edit')->with('message', 'Successfully created');
+            return redirect(config('quarx.backend-route-prefix', 'quarx').'/plans/'.$result->id.'/edit')->with('message', 'Successfully created');
         }
 
         return redirect('quazar::plans')->with('message', 'Failed to create');
@@ -155,9 +155,9 @@ class PlanController extends Controller
         $result = $this->service->destroy($id);
 
         if ($result) {
-            return redirect('quarx/plans')->with('message', 'Successfully deleted');
+            return redirect(config('quarx.backend-route-prefix', 'quarx').'/plans')->with('message', 'Successfully deleted');
         }
 
-        return redirect('quarx/plans')->with('message', 'Failed to delete');
+        return redirect(config('quarx.backend-route-prefix', 'quarx').'/plans')->with('message', 'Failed to delete');
     }
 }

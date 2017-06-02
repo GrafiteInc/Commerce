@@ -1,4 +1,4 @@
-{!! Form::model($product, ['url' => 'quarx/products/download/'.$product->id, 'method' => 'post', 'files' => true]) !!}
+{!! Form::model($product, ['url' => config('quarx.backend-route-prefix', 'quarx').'/products/download/'.$product->id, 'method' => 'post', 'files' => true]) !!}
 
     <div class="row">
         <div class="col-lg-6">

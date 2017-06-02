@@ -30,9 +30,9 @@
             </div>
         </div>
         <div class="col-md-6">
-            {!! Form::open(['route' => 'quarx.plans.store']) !!}
+            {!! Form::open(['route' => config('quarx.backend-route-prefix', 'quarx').'.plans.store']) !!}
 
-            {!! FormMaker::fromTable("plans", Quarx::moduleConfig('quazar', 'plans')) !!}
+            {!! FormMaker::fromTable("plans", config('quazar.forms.plans')) !!}
 
             {!! Form::submit('Save', ['class' => 'btn btn-primary pull-right']) !!}
 
