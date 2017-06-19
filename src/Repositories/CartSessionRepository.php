@@ -58,19 +58,54 @@ class CartSessionRepository
             }
         }
 
-        $payload = json_encode([
-            'id' => rand(111111, 999999),
+        $match = $this->findMatch([
             'entity_id' => $id,
             'entity_type' => $type,
             'product_variants' => $variableArray,
-            'quantity' => $quantity,
         ]);
 
-        array_push($cart, $payload);
+        if ($match) {
+            $newQuantity = $match->quantity + $quantity;
+            $this->changeItemQuantity($match->id, $newQuantity);
+        } else {
+            $payload = json_encode([
+                'id' => rand(111111, 999999),
+                'entity_id' => $id,
+                'entity_type' => $type,
+                'product_variants' => $variableArray,
+                'quantity' => $quantity,
+            ]);
 
-        Session::put('cart', $cart);
+            array_push($cart, $payload);
+
+            Session::put('cart', $cart);
+        }
 
         return true;
+    }
+
+    /**
+     * Find a matching item
+     *
+     * @param  array $params
+     *
+     * @return mixed
+     */
+    public function findMatch($params)
+    {
+        $cart = Session::get('cart');
+        foreach ($cart as $key => $item) {
+            $product = json_decode($item);
+
+            if ($product->entity_id == $params['entity_id'] &&
+                $product->entity_type == $params['entity_type'] &&
+                $product->product_variants == $params['product_variants']
+            ) {
+                return $product;
+            }
+        }
+
+        return false;
     }
 
     /**

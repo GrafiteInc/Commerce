@@ -102,9 +102,16 @@ class CartRepository
             'entity_id' => $id,
             'entity_type' => $type,
             'product_variants' => $variantArray,
-            'quantity' => $quantity,
         ];
 
+        $item = Cart::where($input)->first();
+
+        if ($item) {
+            $item->quantity = (float) $item->quantity + (float) $quantity;
+            return $item->save();
+        }
+
+        $input['quantity'] = $quantity;
         return Cart::create($input);
     }
 
