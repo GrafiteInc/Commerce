@@ -15,7 +15,7 @@ class OrderService
     ) {
         $this->repo = $orderRepository;
         $this->logistics = $logisticService;
-        $this->transactions = $transactionsService;
+        $this->transactions = $transactionService;
     }
 
     /**
