@@ -3,16 +3,19 @@
 namespace Yab\Quazar\Services;
 
 use Illuminate\Support\Facades\Config;
+use Yab\Quazar\Services\TransactionService;
 use Yab\Quazar\Repositories\OrderRepository;
 
 class OrderService
 {
     public function __construct(
         OrderRepository $orderRepository,
-        LogisticService $logisticService
+        LogisticService $logisticService,
+        TransactionService $transactionService
     ) {
         $this->repo = $orderRepository;
         $this->logistics = $logisticService;
+        $this->transactions = $transactionsService;
     }
 
     /**
@@ -119,7 +122,7 @@ class OrderService
 
         if ($order->status != 'complete') {
             $this->logistics->cancelOrder($order);
-            app(TransactionService::class)->refund($order->transaction('uuid'));
+            $this->transactions->refund($order->transaction('uuid'));
 
             return $this->update($order->id, [
                 'status' => 'cancelled',
