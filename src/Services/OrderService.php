@@ -99,7 +99,7 @@ class OrderService
     {
         $order = $this->find($id);
 
-        if (isset($payload['is_shipped'])) {
+        if (isset($payload['is_shipped']) && $payload['is_shipped'] !== false) {
             $this->logistics->shipOrder($order);
         }
 
