@@ -26,6 +26,7 @@
             <tr>
                 <td colspan="2" class="text-right">
                     {!! $product->addToCartBtn('Add To Cart <span class="fa fa-shopping-cart"></span>', 'btn btn-primary') !!}
+                    {!! $product->favoriteToggleBtn('Favorite', '<span class="fa fa-heart-o"></span>', '<span class="fa fa-heart"></span>', 'btn btn-default') !!}
                 </td>
             </tr>
         </table>

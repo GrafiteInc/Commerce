@@ -47,6 +47,15 @@ Add the following to your `app/Providers/RouteServiceProvider.php` to the `mapWe
 require base_path('routes/quazar.php');
 ```
 
+Before we dig into the Payments let's set up the favorites! You need to add the following method to the `app/Models/User.php` class.
+
+```
+public function favorites()
+{
+    return $this->hasMany(\Yab\Quazar\Models\Favorite::class);
+}
+```
+
 Add the following to your `app/Models/UserMeta.php` to the `fillables` array:
 ```
 'stripe_id',

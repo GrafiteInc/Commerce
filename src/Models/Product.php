@@ -89,6 +89,16 @@ class Product extends QuarxModel
         return app(CartService::class)->removeFromCartBtn($cartId, $content, $class);
     }
 
+    public function favoriteToggleBtn($content = '', $notFavorite = '', $isFavorite = '', $class = '')
+    {
+        return app(CartService::class)->favoriteToggleBtn($this, $content, $notFavorite, $isFavorite, $class);
+    }
+
+    public function isFavorite()
+    {
+        return (auth()->user()->favorites()->pluck('product_id')->contains($this->id));
+    }
+
     public function details()
     {
         return app(ProductService::class)->productDetails($this);

@@ -15,6 +15,8 @@ class CartServiceTest extends TestCase
 
         Auth::shouldReceive('user')->andReturn($user);
 
+        $user->shouldReceive('favorites')->andReturn(collect([]));
+
         factory(\Yab\Quazar\Models\Cart::class)->create();
         factory(\Yab\Quazar\Models\Product::class)->create();
         factory(\Yab\Quazar\Models\Plan::class)->create();
@@ -30,6 +32,13 @@ class CartServiceTest extends TestCase
         $object = (object) ['id' => 1];
         $response = $this->cartService->addToCartBtn($object, 'product', 'cool');
         $this->assertEquals('<button class="cool" onclick="store.addToCart(1, 1, \'product\')">product</button>', $response);
+    }
+
+    public function testFavoriteToggleBtn()
+    {
+        $object = (object) ['id' => 1];
+        $response = $this->cartService->favoriteToggleBtn($object, 'Favorite', 'heart-sad', 'heart-happy', 'nada');
+        $this->assertEquals('<button class="nada" onclick="store.favoriteToggle(1, this, \'Favorite\', \'heart-happy\', \'heart-sad\')" data-url="http://localhost/store/favorites/add/1">Favorite heart-sad</button>', $response);
     }
 
     public function testRemoveBtn()

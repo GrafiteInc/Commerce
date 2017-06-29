@@ -54,6 +54,12 @@
                     Route::post('process/last-card', 'CheckoutController@processWithLastCard')->name('.process.last-card');
                     Route::get('complete', 'CheckoutController@complete')->name('.purchase.complete');
                     Route::get('failed', 'CheckoutController@failed')->name('.purchase.failed');
+
+                    Route::group(['prefix' => 'favorites', 'middleware' => ['isAjax']], function () {
+                        Route::get('/', 'FavoriteController@all')->name('.favorites');
+                        Route::get('add/{productId}', 'FavoriteController@add')->name('.favorites.add');
+                        Route::get('remove/{productId}', 'FavoriteController@remove')->name('.favorites.remove');
+                    });
                 });
             });
         });

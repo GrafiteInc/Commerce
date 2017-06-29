@@ -17,6 +17,27 @@ var store = {
         });
     },
 
+    favoriteToggle: function(_id, _button, _content, _isFavorite, _isNotFavorite) {
+        $.ajax({
+            type: "GET",
+            url: $(_button).attr('data-url'),
+            cache: false,
+            dataType: "html",
+            success: function(data) {
+                var _response = JSON.parse(data);
+                if (_response.data == 1) {
+                    var _requestUrl = _url+"/store/favorites/remove/"+_id;
+                    $(_button).html(_content + ' ' + _isFavorite)
+                } else {
+                    var _requestUrl = _url+"/store/favorites/add/"+_id;
+                    $(_button).html(_content + ' ' + _isNotFavorite)
+                }
+
+                $(_button).attr('data-url', _requestUrl);
+            }
+        });
+    },
+
     addToCart: function(_id, _quantity, _type) {
         var _variants = [];
 

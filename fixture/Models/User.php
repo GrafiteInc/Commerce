@@ -119,4 +119,9 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPassword($token));
     }
+
+    public function favorites()
+    {
+        return $this->hasMany(\Yab\Quazar\Models\Favorite::class);
+    }
 }
