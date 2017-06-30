@@ -32,6 +32,20 @@ class CheckoutController extends Controller
         return view('quazar-frontend::checkout.payment')->with('products', $products);
     }
 
+    public function addCoupon(Request $request)
+    {
+        $this->cart->addCoupon($request->coupon);
+
+        return back()->with('message', 'Successfully applied coupon');
+    }
+
+    public function removeCoupon()
+    {
+        $this->cart->removeCoupon();
+
+        return back()->with('message', 'Successfully removed coupon');
+    }
+
     public function process(Request $request)
     {
         try {

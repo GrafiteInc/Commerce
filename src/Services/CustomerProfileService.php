@@ -112,6 +112,6 @@ class CustomerProfileService
             $profileData['billing_address'] = json_encode($addressInput);
         }
 
-        return auth()->user()->meta->update($profileData);
+        return auth()->user()->meta()->update($profileData);
     }
 }

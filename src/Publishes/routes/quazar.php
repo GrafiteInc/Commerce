@@ -50,6 +50,8 @@
                     Route::post('calculate/shipping', 'CheckoutController@reCalculateShipping')->name('.calculate.shipping');
                     Route::get('checkout', 'CheckoutController@confirm')->name('.checkout');
                     Route::get('payment', 'CheckoutController@payment')->name('.payment');
+                    Route::post('coupon', 'CheckoutController@addCoupon')->name('.coupon');
+                    Route::get('coupon/remove', 'CheckoutController@removeCoupon')->name('.coupon.remove');
                     Route::post('process', 'CheckoutController@process')->name('.process');
                     Route::post('process/last-card', 'CheckoutController@processWithLastCard')->name('.process.last-card');
                     Route::get('complete', 'CheckoutController@complete')->name('.purchase.complete');

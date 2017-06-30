@@ -2,19 +2,27 @@
 
 namespace Yab\Quazar\Services;
 
+use Stripe\Coupon;
 use Stripe\Plan;
-use Stripe\Stripe;
 use Stripe\Refund;
+use Stripe\Stripe;
 
 class StripeService
 {
-    public function __construct(Stripe $stripe, Plan $plan, Refund $refund)
+    public function __construct(Stripe $stripe, Plan $plan, Coupon $coupon, Refund $refund)
     {
         $this->stripe = $stripe;
         $this->plan = $plan;
+        $this->coupon = $coupon;
         $this->refund = $refund;
         $this->stripe->setApiKey(config('services.stripe.secret'));
     }
+
+    /*
+     * --------------------------------------------------------------------------
+     * Plans
+     * --------------------------------------------------------------------------
+    */
 
     /**
      * Collect the stripe plans.
@@ -59,6 +67,62 @@ class StripeService
 
         return $plan->delete();
     }
+
+    /*
+     * --------------------------------------------------------------------------
+     * Coupons
+     * --------------------------------------------------------------------------
+    */
+
+    /**
+     * Collect the stripe plans.
+     *
+     * @return array
+     */
+    public function collectStripeCoupons()
+    {
+        return $this->coupon->all();
+    }
+
+    /**
+     * Create a coupon.
+     *
+     * @param arr $coupon
+     *
+     * @return bool
+     */
+    public function createCoupon($coupon)
+    {
+        return $this->coupon->create([
+            'amount' => $coupon['amount'],
+            'interval' => $coupon['interval'],
+            'name' => $coupon['name'],
+            'currency' => $coupon['currency'],
+            'statement_descriptor' => $coupon['descriptor'],
+            'trial_period_days' => $coupon['trial_days'],
+            'id' => $coupon['stripe_id'],
+        ]);
+    }
+
+    /**
+     * Delete the plan.
+     *
+     * @param string $planName
+     *
+     * @return
+     */
+    public function deleteCoupon($couponName)
+    {
+        $coupon = $this->coupon->retrieve($couponName);
+
+        return $coupon->delete();
+    }
+
+   /*
+    * --------------------------------------------------------------------------
+    * Transactions
+    * --------------------------------------------------------------------------
+   */
 
     /**
      * Refund a purchase.

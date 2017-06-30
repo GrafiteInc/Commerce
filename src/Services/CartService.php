@@ -4,6 +4,7 @@ namespace Yab\Quazar\Services;
 
 use App\Services\StoreLogistics;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Yab\Quazar\Models\Variant;
 use Yab\Quazar\Repositories\CartRepository;
 use Yab\Quazar\Repositories\CartSessionRepository;
@@ -308,6 +309,48 @@ class CartService
         return $this->cartRepo()->emptyCart();
     }
 
+    /**
+     * Add coupon
+     *
+     * @param void
+     */
+    public function addCoupon($couponCode)
+    {
+        Session::put('coupon_code', $couponCode);
+    }
+
+    /**
+     * Remove coupon
+     *
+     * @param void
+     */
+    public function removeCoupon()
+    {
+        Session::forget('coupon_code');
+    }
+
+    /**
+     * Get the current coupon code
+     *
+     * @return integer
+     */
+    public function getCurrentCouponValue()
+    {
+        $value = 0;
+        $coupon = app(CouponService::class)->findByStripeId(Session::get('coupon_code'));
+
+        if ($coupon) {
+            if ($coupon->discount_type == 'dollar') {
+                $value = $coupon->dollars;
+            } else {
+                $percentage = $coupon->dollars / 100;
+                $value = $this->total() * $percentage;
+            }
+        }
+
+        return round($value, 2);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Totals
@@ -361,6 +404,9 @@ class CartService
         $taxRate = (app(LogisticService::class)->getTaxPercent(auth()->user()) / 100);
         $subtotal = $this->getCartSubTotal();
 
-        return round($subtotal + app(LogisticService::class)->shipping(auth()->user()) + ($subtotal * $taxRate), 2);
+        $total = $subtotal + app(LogisticService::class)->shipping(auth()->user()) + ($subtotal * $taxRate);
+        $total = $total - $this->getCurrentCouponValue();
+
+        return round($total, 2);
     }
 }

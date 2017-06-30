@@ -29,8 +29,9 @@
         </div>
         <div class="col-md-8">
             <h2>Shopping Cart</h2>
+            @include('quazar-frontend::checkout.coupon')
             @include('quazar-frontend::checkout.products')
-            <a class="pull-right" href="{!! route('quazar.payment') !!}">Purchase</a>
+            <a class="pull-right btn btn-primary" href="{!! route('quazar.payment') !!}">Purchase</a>
         </div>
     </div>
 

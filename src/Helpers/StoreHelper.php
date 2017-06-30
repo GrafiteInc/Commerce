@@ -29,7 +29,7 @@ class StoreHelper
 
     public static function customerSubscriptionUrl($subscription)
     {
-        return url('store/account/subscriptions/'.crypto_encrypt($subscription->name));
+        return url('store/account/subscription/'.crypto_encrypt($subscription->name));
     }
 
     public static function subscriptionPlan($subscription)
@@ -87,6 +87,11 @@ class StoreHelper
     public static function checkoutSubtotal()
     {
         return app(CartService::class)->getCartSubtotal();
+    }
+
+    public static function couponValue()
+    {
+        return app(CartService::class)->getCurrentCouponValue();
     }
 
     public static function checkoutShipping()

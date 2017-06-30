@@ -10,6 +10,9 @@
 <li class="@if (Request::is(config('quarx.backend-route-prefix', 'quarx').'/plans') || Request::is(config('quarx.backend-route-prefix', 'quarx').'/plans/*')) active @endif">
     <a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/plans') }}"><span class="fa fa-credit-card"></span> Subscription Plans</a>
 </li>
+<li class="@if (Request::is(config('quarx.backend-route-prefix', 'quarx').'/coupons') || Request::is(config('quarx.backend-route-prefix', 'quarx').'/coupons/*')) active @endif">
+    <a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/coupons') }}"><span class="fa fa-ticket"></span> Coupons</a>
+</li>
 <li class="@if (Request::is(config('quarx.backend-route-prefix', 'quarx').'/transactions') || Request::is(config('quarx.backend-route-prefix', 'quarx').'/transactions/*')) active @endif">
     <a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/transactions') }}"><span class="fa fa-dollar"></span> Transactions</a>
 </li>
