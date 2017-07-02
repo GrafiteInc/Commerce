@@ -48,34 +48,34 @@ class CouponService
      */
     public function collectNewCoupons()
     {
-        $stripeCoupons = $this->stripeService->collectStripeCoupons()->data;
+        // $stripeCoupons = $this->stripeService->collectStripeCoupons()->data;
 
-        foreach ($stripeCoupons as $coupon) {
-            $localCoupon = $this->model->getCouponsByStripeId($coupon->id);
+        // foreach ($stripeCoupons as $coupon) {
+        //     $localCoupon = $this->model->getCouponsByStripeId($coupon->id);
 
-            if (!$localCoupon) {
-                $endDate = null;
-                $discount_type = 'percentage';
+        //     if (!$localCoupon) {
+        //         $endDate = null;
+        //         $discount_type = 'percentage';
 
-                if (!is_null($coupon->redeem_by)) {
-                    $endDate = Carbon::parse($coupon->redeem_by);
-                }
-                if (is_null($coupon->percent_off)) {
-                    $discount_type = 'dollar';
-                }
+        //         if (!is_null($coupon->redeem_by)) {
+        //             $endDate = Carbon::parse($coupon->redeem_by);
+        //         }
+        //         if (is_null($coupon->percent_off)) {
+        //             $discount_type = 'dollar';
+        //         }
 
-                $this->model->create([
-                    'stripe_id' => $coupon->id,
-                    'start_date' => Carbon::createFromTimestamp($coupon->created),
-                    'end_date' => $endDate,
-                    'discount_type' => $discount_type,
-                    'code' => $coupon->id,
-                    'amount' => $coupon->amount_off,
-                    'limit' => $coupon->max_redemptions ?? 1,
-                    'currency' => config('quazar.currency'),
-                ]);
-            }
-        }
+        //         $this->model->create([
+        //             'stripe_id' => $coupon->id,
+        //             'start_date' => Carbon::createFromTimestamp($coupon->created),
+        //             'end_date' => $endDate,
+        //             'discount_type' => $discount_type,
+        //             'code' => $coupon->id,
+        //             'amount' => $coupon->amount_off,
+        //             'limit' => $coupon->max_redemptions ?? 1,
+        //             'currency' => config('quazar.currency'),
+        //         ]);
+        //     }
+        // }
     }
 
     /**

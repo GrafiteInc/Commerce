@@ -5,9 +5,11 @@ namespace Yab\Quazar\Services;
 use App\Services\StoreLogistics;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Yab\Quazar\Models\Coupon;
 use Yab\Quazar\Models\Variant;
 use Yab\Quazar\Repositories\CartRepository;
 use Yab\Quazar\Repositories\CartSessionRepository;
+use Yab\Quazar\Repositories\TransactionRepository;
 
 class CartService
 {
@@ -316,7 +318,13 @@ class CartService
      */
     public function addCoupon($couponCode)
     {
-        Session::put('coupon_code', $couponCode);
+        $coupon = app(Coupon::class)->where('code', $couponCode)->first();
+
+        if (app(TransactionRepository::class)->getByCustomer(auth()->id())->where('coupon->code', $couponCode)->count() < $coupon->limit) {
+            Session::put('coupon_code', $couponCode);
+        } else {
+            Session::flash('message', 'Coupon is no longer valid');
+        }
     }
 
     /**

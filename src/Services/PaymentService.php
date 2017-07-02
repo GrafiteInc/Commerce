@@ -3,8 +3,10 @@
 namespace Yab\Quazar\Services;
 
 use Illuminate\Support\Facades\DB;
-use Yab\Quazar\Models\Transactions;
+use Illuminate\Support\Facades\Session;
 use Yab\Crypto\Services\Crypto;
+use Yab\Quazar\Models\Coupon;
+use Yab\Quazar\Models\Transactions;
 
 class PaymentService
 {
@@ -47,6 +49,12 @@ class PaymentService
 
         DB::beginTransaction();
 
+        $coupon = null;
+
+        if (Session::get('coupon_code')) {
+            $coupon = json_encode(app(Coupon::class)->where('code', Session::get('coupon_code'))->first());
+        }
+
         $result = $user->meta->charge(($cart->getCartTotal() * 100), [
             'currency' => config('quazar.currency', 'usd'),
         ]);
@@ -57,6 +65,7 @@ class PaymentService
                 'provider' => 'stripe',
                 'state' => 'success',
                 'subtotal' => $cart->getCartSubTotal(),
+                'coupon' => $coupon,
                 'tax' => $cart->getCartTax(),
                 'total' => $cart->getCartTotal(),
                 'shipping' => $this->logistic->shipping($user),
@@ -67,6 +76,8 @@ class PaymentService
                 'response' => json_encode($result),
                 'user_id' => $user->id,
             ]);
+
+            Session::forget('coupon_code');
 
             $orderedItems = [];
             foreach ($cart->contents() as $item) {

@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->text('provider_dispute')->nullable();
             $table->string('state');
             $table->decimal('subtotal');
+            $table->text('coupon')->nullable();
             $table->decimal('tax');
             $table->decimal('total');
             $table->decimal('shipping');

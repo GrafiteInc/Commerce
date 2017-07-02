@@ -27,6 +27,14 @@
             <td>Subtotal</td>
             <td class="text-right">{!! $purchase->subtotal !!}</td>
         </tr>
+
+        @if ($purchase->coupon)
+        <tr>
+            <td>Coupon</td>
+            <td class="text-right">${!! app(\Yab\Quazar\Models\Coupon::class)->fill(json_decode($purchase->coupon, true))->dollars !!}</td>
+        </tr>
+        @endif
+
         <tr>
             <td>Tax</td>
             <td class="text-right">{!! $purchase->tax !!}</td>

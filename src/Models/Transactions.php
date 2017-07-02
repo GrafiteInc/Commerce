@@ -17,6 +17,7 @@ class Transactions extends QuarxModel
         'provider',
         'state',
         'subtotal',
+        'coupon',
         'tax',
         'total',
         'shipping',
