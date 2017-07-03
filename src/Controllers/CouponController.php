@@ -2,10 +2,11 @@
 
 namespace Yab\Quazar\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Quazar\Services\CouponService;
+use Illuminate\Http\Request;
+use Yab\Quazar\Requests\CouponRequest;
 use Yab\Quazar\Requests\PlanRequest;
+use Yab\Quazar\Services\CouponService;
 
 class CouponController extends Controller
 {
@@ -21,7 +22,7 @@ class CouponController extends Controller
      */
     public function index(Request $request)
     {
-        $this->service->collectNewCoupons();
+        // $this->service->collectNewCoupons();
         $coupons = $this->service->paginated();
 
         return view('quazar::coupons.index')->with('coupons', $coupons);
@@ -54,7 +55,7 @@ class CouponController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\PlanRequest $request
+     * @param \Illuminate\Http\CouponRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -63,7 +64,7 @@ class CouponController extends Controller
         $result = $this->service->create($request->except('_token'));
 
         if ($result) {
-            return redirect(config('quarx.backend-route-prefix', 'quarx').'/coupons/'.$result->id.'/edit')->with('message', 'Successfully created');
+            return redirect(config('quarx.backend-route-prefix', 'quarx').'/coupons/'.$result->id)->with('message', 'Successfully created');
         }
 
         return redirect('quazar::coupons')->with('message', 'Failed to create');
@@ -76,31 +77,12 @@ class CouponController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function show($id)
     {
         $coupon = $this->service->find($id);
 
-        return view('quazar::coupons.edit')
+        return view('quazar::coupons.show')
             ->with('coupon', $coupon);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\PlanRequest $request
-     * @param int                          $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $result = $this->service->update($id, $request->except('_token', '_method'));
-
-        if ($result) {
-            return back()->with('message', 'Successfully updated');
-        }
-
-        return back()->with('message', 'Failed to update');
     }
 
     /**
@@ -115,9 +97,9 @@ class CouponController extends Controller
         $result = $this->service->destroy($id);
 
         if ($result) {
-            return redirect(config('quarx.backend-route-prefix', 'quarx').'/plans')->with('message', 'Successfully deleted');
+            return redirect(config('quarx.backend-route-prefix', 'quarx').'/coupons')->with('message', 'Successfully deleted');
         }
 
-        return redirect(config('quarx.backend-route-prefix', 'quarx').'/plans')->with('message', 'Failed to delete');
+        return redirect(config('quarx.backend-route-prefix', 'quarx').'/coupons')->with('message', 'Failed to delete');
     }
 }

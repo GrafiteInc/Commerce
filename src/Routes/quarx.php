@@ -49,7 +49,7 @@
         | Coupon Routes
         |--------------------------------------------------------------------------
         */
-        Route::resource('coupons', 'CouponController', ['except' => ['show'], 'as' => $routePrefix]);
+        Route::resource('coupons', 'CouponController', ['except' => ['edit', 'update'], 'as' => $routePrefix]);
         Route::post('coupons/search', 'CouponController@search');
 
         /*

@@ -24,7 +24,7 @@ class CouponService
     }
 
     /**
-     * Get all Plans.
+     * Get all Coupons.
      *
      * @return Collection
      */
@@ -34,7 +34,7 @@ class CouponService
     }
 
     /**
-     * Get all enabled plans.
+     * Get all enabled coupons.
      *
      * @return Collection
      */
@@ -44,7 +44,7 @@ class CouponService
     }
 
     /**
-     * Collect the new plans.
+     * Collect the new coupons.
      */
     public function collectNewCoupons()
     {
@@ -80,7 +80,7 @@ class CouponService
     }
 
     /**
-     * Get paginated plans.
+     * Get paginated coupons.
      *
      * @return Collection
      */
@@ -90,7 +90,7 @@ class CouponService
     }
 
     /**
-     * Search all the plans.
+     * Search all the coupons.
      *
      * @param array $payload
      *
@@ -98,50 +98,54 @@ class CouponService
      */
     public function search($payload)
     {
-        // $query = $this->model->orderBy('created_at', 'desc');
+        $query = $this->model->orderBy('created_at', 'desc');
 
-        // $columns = Schema::getColumnListing('plans');
+        $columns = Schema::getColumnListing('coupons');
 
-        // foreach ($columns as $attribute) {
-        //     $query->orWhere($attribute, 'LIKE', '%'.$payload.'%');
-        // }
+        foreach ($columns as $attribute) {
+            $query->orWhere($attribute, 'LIKE', '%'.$payload.'%');
+        }
 
-        // return $query->paginate(config('quarx.pagination', 25));
+        return $query->paginate(config('quarx.pagination', 25));
     }
 
     /**
-     * Create a plan.
+     * Create a coupon.
      *
      * @param array $payload
      *
-     * @return Plan
+     * @return Coupon
      */
     public function create($payload)
     {
-        // try {
-        //     $name = app(QuarxService::class)->convertToURL($payload['name']);
+        try {
+            $payload['stripe_id'] = $payload['code'];
+            $payload['currency'] = config('quazar.currency');
 
-        //     $payload['stripe_id'] = $name;
-        //     $payload['uuid'] = crypto_uuid();
-        //     $payload['stripe_name'] = $name;
-        //     $payload['subscription_name'] = $name;
+            if (isset($payload['for_subscriptions'])) {
+                $payload['for_subscriptions'] = true;
+            } else {
+                $payload['for_subscriptions'] = false;
+            }
 
-        //     $this->stripeService->createPlan($payload);
+            if ($payload['for_subscriptions']) {
+                $this->stripeService->createCoupon($payload);
+            }
 
-        //     return $this->model->create($payload);
-        // } catch (Exception $e) {
-        //     throw new Exception('Could not generate new plan', 1);
-        // }
+            return $this->model->create($payload);
+        } catch (Exception $e) {
+            throw new Exception('Could not generate new coupon', 1);
+        }
 
-        // return false;
+        return false;
     }
 
     /**
-     * Find a plan.
+     * Find a coupon.
      *
      * @param int $id
      *
-     * @return Plan
+     * @return Coupon
      */
     public function find($id)
     {
@@ -153,7 +157,7 @@ class CouponService
      *
      * @param int $id
      *
-     * @return Plan
+     * @return Coupon
      */
     public function findByStripeId($id)
     {
@@ -161,32 +165,7 @@ class CouponService
     }
 
     /**
-     * Update a plan.
-     *
-     * @param int   $id
-     * @param array $payload
-     *
-     * @return mixed
-     */
-    public function update($id, $payload)
-    {
-        // try {
-        //     if (!isset($payload['is_featured'])) {
-        //         $payload['is_featured'] = false;
-        //     } else {
-        //         $payload['is_featured'] = true;
-        //     }
-
-        //     return $this->model->find($id)->update($payload);
-        // } catch (Exception $e) {
-        //     throw new Exception('Could not update your plan', 1);
-        // }
-
-        // return false;
-    }
-
-    /**
-     * Destroy a plan.
+     * Destroy a coupon.
      *
      * @param int $id
      *
@@ -194,31 +173,22 @@ class CouponService
      */
     public function destroy($id)
     {
-        // try {
-        //     $localPlan = $this->model->find($id);
+        try {
+            $localCoupon = $this->model->find($id);
 
-        //     try {
-        //         $planIsDeleted = $this->stripeService->deletePlan($localPlan->stripe_name);
-        //     } catch (\Stripe\Error\InvalidRequest $e) {
-        //         $localPlan->delete();
+            try {
+                $couponIsDeleted = $this->stripeService->deleteCoupon($localCoupon->stripe_id);
+            } catch (\Stripe\Error\InvalidRequest $e) {
+                $localCoupon->delete();
 
-        //         return true;
-        //     }
+                return true;
+            }
 
-        //     // We need to unaubscribe our users
-        //     if ($planIsDeleted) {
-        //         $subscriptions = Subscription::where('stripe_plan', $localPlan->stripe_name)->get();
-        //         foreach ($subscriptions as $subscription) {
-        //             $user = UserMeta::find($subscription->user_meta_id);
-        //             $meta->subscription($localPlan->subscription_name)->cancel();
-        //         }
-        //     }
+            return $this->model->destroy($id);
+        } catch (Exception $e) {
+            throw new Exception('Could not delete your coupon', 1);
+        }
 
-        //     return $this->model->destroy($id);
-        // } catch (Exception $e) {
-        //     throw new Exception('Could not delete your plan', 1);
-        // }
-
-        // return false;
+        return false;
     }
 }

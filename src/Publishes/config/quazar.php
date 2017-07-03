@@ -188,6 +188,38 @@ return [
                 'alt_name' => 'Is Featured',
             ],
         ],
+
+        'coupons' => [
+            'code' => [
+                'type' => 'string',
+                'alt_name' => 'Coupon Code',
+                'placeholder' => 'Coupon Code',
+            ],
+            'discount_type' => [
+                'type' => 'select',
+                'options' => [
+                    'Dollar' => 'dollar',
+                    'Percentage' => 'percentage',
+                ]
+            ],
+            'amount' => [
+                'type' => 'number',
+                'alt_name' => 'Amount (&cent; or %)',
+            ],
+            'limit' => [
+                'type' => 'number',
+            ],
+            'for_subscriptions' => [
+                'type' => 'checkbox',
+                'alt_name' => 'For Subscriptions',
+            ],
+            'start_date' => [
+                'type' => 'date',
+            ],
+            'end_date' => [
+                'type' => 'date',
+            ],
+        ],
     ],
 
 ];

@@ -16,7 +16,7 @@ class PaymentService
         Transactions $transactions,
         OrderService $orderService,
         LogisticService $logisticService
-) {
+    ) {
         $this->user = auth()->user();
         $this->transaction = $transactions;
         $this->orderService = $orderService;
@@ -77,7 +77,7 @@ class PaymentService
                 'user_id' => $user->id,
             ]);
 
-            Session::forget('coupon_code');
+            $cart->removeCoupon();
 
             $orderedItems = [];
             foreach ($cart->contents() as $item) {

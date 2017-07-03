@@ -2,6 +2,7 @@
 
 namespace Yab\Quazar\Services;
 
+use Carbon\Carbon;
 use Stripe\Coupon;
 use Stripe\Plan;
 use Stripe\Refund;
@@ -93,21 +94,29 @@ class StripeService
      */
     public function createCoupon($coupon)
     {
-        return $this->coupon->create([
-            'amount' => $coupon['amount'],
-            'interval' => $coupon['interval'],
-            'name' => $coupon['name'],
+        $couponConfig = [
+            'redeem_by' => Carbon::parse($coupon['end_date'])->timestamp,
+            'max_redemptions' => $coupon['limit'],
             'currency' => $coupon['currency'],
-            'statement_descriptor' => $coupon['descriptor'],
-            'trial_period_days' => $coupon['trial_days'],
+            'duration' => 'once',
             'id' => $coupon['stripe_id'],
-        ]);
+        ];
+
+        if ($coupon['discount_type'] == 'dollar') {
+            $couponConfig['amount_off'] = $coupon['amount'];
+        }
+
+        if ($coupon['discount_type'] == 'percentage') {
+            $couponConfig['percent_off'] = $coupon['amount'];
+        }
+
+        return $this->coupon->create($couponConfig);
     }
 
     /**
-     * Delete the plan.
+     * Delete the coupon.
      *
-     * @param string $planName
+     * @param string $couponName
      *
      * @return
      */

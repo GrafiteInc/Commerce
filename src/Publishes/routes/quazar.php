@@ -30,6 +30,8 @@
                     Route::group(['prefix' => 'account'], function () {
                         Route::get('settings', 'ProfileController@customerSettings')->name('.account.settings');
                         Route::get('profile', 'ProfileController@customerProfile')->name('.account.profile');
+                        Route::get('coupon', 'ProfileController@addCoupon')->name('.account.profile.coupon');
+                        Route::post('coupon', 'ProfileController@submitCoupon')->name('.account.profile.coupon');
                         Route::post('profile/update', 'ProfileController@customerProfileUpdate')->name('.account.profile.update');
 
                         Route::get('card', 'CardController@getCard')->name('.account.card');

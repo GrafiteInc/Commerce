@@ -36,4 +36,31 @@ class ProfileController extends Controller
 
         return back()->with('message', 'Successfully updated');
     }
+
+    /**
+     * Add a coupon
+     *
+     * @return Response
+     */
+    public function addCoupon(Request $request)
+    {
+        return view('quazar-frontend::profile.coupon');
+    }
+
+    /**
+     * Add coupon to profile.
+     *
+     * @return Response
+     */
+    public function submitCoupon(Request $request)
+    {
+        try {
+            auth()->user()->meta->applyCoupon($request->coupon);
+            $message = 'Successfully added coupon.';
+        } catch (Exception $e) {
+            $message = $e->getMessage();
+        }
+
+        return back()->with('message', $message);
+    }
 }
