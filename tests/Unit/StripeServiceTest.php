@@ -14,6 +14,7 @@ class StripeServiceTest extends TestCase
         $stripe = Mockery::mock(\Stripe\Stripe::class);
         $plan = Mockery::mock(\Stripe\Plan::class);
         $refund = Mockery::mock(\Stripe\Refund::class);
+        $coupon = Mockery::mock(\Stripe\Coupon::class);
 
         $planObject = Mockery::mock('StdClass');
         $planObject->shouldReceive('delete')->andReturn(true);
@@ -26,7 +27,7 @@ class StripeServiceTest extends TestCase
 
         $refund->shouldReceive('create')->with(['charge' => 999])->andReturn(true);
 
-        $this->service = new StripeService($stripe, $plan, $refund);
+        $this->service = new StripeService($stripe, $plan, $coupon, $refund);
     }
 
     public function testGetStripePlans()
