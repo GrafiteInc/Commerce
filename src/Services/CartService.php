@@ -342,10 +342,15 @@ class CartService
      *
      * @return integer
      */
-    public function getCurrentCouponValue()
+    public function getCurrentCouponValue($code = null)
     {
         $value = 0;
-        $coupon = app(CouponService::class)->findByStripeId(Session::get('coupon_code'));
+
+        if (is_null($code)) {
+            $code = Session::get('coupon_code');
+        }
+
+        $coupon = app(CouponService::class)->findByStripeId($code);
 
         if ($coupon) {
             if ($coupon->discount_type == 'dollar') {

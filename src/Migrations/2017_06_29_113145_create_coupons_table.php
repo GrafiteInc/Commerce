@@ -21,6 +21,7 @@ class CreateCouponsTable extends Migration
             $table->float('amount')->default(0);
             $table->integer('limit')->default(1);
             $table->string('stripe_id');
+            $table->boolean('for_subscriptions')->default(false);
             $table->timestamps();
         });
     }

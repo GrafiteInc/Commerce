@@ -51,7 +51,7 @@ class Coupon extends QuarxModel
 
     public function getDollarsAttribute()
     {
-        return round($this->amount / 100, 2);
+        return app(CartService::class)->getCurrentCouponValue($this->stripe_id);
     }
 
     // public function getFrequencyAttribute()

@@ -58,7 +58,7 @@ class CouponController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(PlanRequest $request)
+    public function store(CouponRequest $request)
     {
         $result = $this->service->create($request->except('_token'));
 
@@ -79,10 +79,8 @@ class CouponController extends Controller
     public function edit($id)
     {
         $coupon = $this->service->find($id);
-        $customers = $this->service->getSubscribers($coupon);
 
         return view('quazar::coupons.edit')
-            ->with('customers', $customers)
             ->with('coupon', $coupon);
     }
 
@@ -103,44 +101,6 @@ class CouponController extends Controller
         }
 
         return back()->with('message', 'Failed to update');
-    }
-
-    /**
-     * Disable a plan.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function stateChange(Request $request, $id)
-    {
-        $result = $this->service->stateChange($id, $request->state);
-
-        if ($result) {
-            return back()->with('message', 'Successfully updated');
-        }
-
-        return back()->with('message', 'Failed to update');
-    }
-
-    /**
-     * Cancel a subscription.
-     *
-     * @param int $plan
-     * @param int $userMeta
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function cancelSubscription($plan, $userMeta)
-    {
-        $result = $this->service->cancelSubscription($plan, $userMeta);
-
-        if ($result) {
-            return back()->with('message', 'Successfully cancelled');
-        }
-
-        return back()->with('message', 'Failed to cancel');
     }
 
     /**
