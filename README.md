@@ -9,7 +9,7 @@ You can control: products, subscriptions, transaction history, orders, and some 
 
 ## Requirements
 1. PHP 5.6+
-2. MySQL 5.6+
+2. MySQL 5.7+
 3. OpenSSL
 4. Laravel 5.4+
 5. Quarx 2.3+
@@ -153,13 +153,12 @@ For further documentation please checkout [Quarx Docs](https://docs.quarxcms.com
 
 ### RoadMap
 
-##### 1.1
-- [ ] Product Bundles
+#### 1.1
+- [ ] Related products
 
 #### 1.0
-- [ ] Coupons
-- [ ] Wish list
-- [ ] Related products
+- [x] Coupons
+- [x] Wish list (Favorites)
 
 ## License
 
