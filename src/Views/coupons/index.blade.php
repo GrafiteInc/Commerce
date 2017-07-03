@@ -23,6 +23,8 @@
                 <thead>
                     <th>Name</th>
                     <th>Expired</th>
+                    <th>For Subscription</th>
+                    <th>Value</th>
                     <th class="text-right" width="150px">Actions</th>
                 </thead>
 
@@ -31,6 +33,8 @@
                     <tr>
                         <td><a href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.coupons.edit', [$coupon->id]) !!}">{{ $coupon->code }}</a></td>
                         <td>@if ($coupon->expired()) <span class="fa fa-check"></span> @endif</td>
+                        <td>@if ($coupon->for_subscriptions) <span class="fa fa-check"></span> @endif</td>
+                        <td>{{ $coupon->value_string }}</td>
                         <td class="text-right">
                             <a class="btn btn-default btn-xs pull-right" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.coupons.edit', [$coupon->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>

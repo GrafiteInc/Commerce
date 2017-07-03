@@ -318,9 +318,9 @@ class CartService
      */
     public function addCoupon($couponCode)
     {
-        $coupon = app(Coupon::class)->where('code', $couponCode)->first();
+        $coupon = app(Coupon::class)->where('code', $couponCode)->where('for_subscriptions', false)->first();
 
-        if (app(TransactionRepository::class)->getByCustomer(auth()->id())->where('coupon->code', $couponCode)->count() < $coupon->limit) {
+        if ($coupon && app(TransactionRepository::class)->getByCustomer(auth()->id())->where('coupon->code', $couponCode)->count() < $coupon->limit) {
             Session::put('coupon_code', $couponCode);
         } else {
             Session::flash('message', 'Coupon is no longer valid');
@@ -354,9 +354,9 @@ class CartService
 
         if ($coupon) {
             if ($coupon->discount_type == 'dollar') {
-                $value = $coupon->dollars;
+                $value = ($coupon->amount / 100);
             } else {
-                $percentage = $coupon->dollars / 100;
+                $percentage = $coupon->amount / 100;
                 $value = $this->total() * $percentage;
             }
         }

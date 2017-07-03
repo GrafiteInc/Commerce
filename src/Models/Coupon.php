@@ -4,6 +4,7 @@ namespace Yab\Quazar\Models;
 
 use Carbon\Carbon;
 use Yab\Quarx\Models\QuarxModel;
+use Yab\Quazar\Services\CartService;
 
 class Coupon extends QuarxModel
 {
@@ -52,6 +53,24 @@ class Coupon extends QuarxModel
     public function getDollarsAttribute()
     {
         return app(CartService::class)->getCurrentCouponValue($this->stripe_id);
+    }
+
+    public function getValueAttribute()
+    {
+        if ($this->discount_type == 'dollars') {
+            return round($this->amount / 100, 2);
+        }
+
+        return round($this->amount / 100);
+    }
+
+    public function getValueStringAttribute()
+    {
+        if ($this->discount_type == 'dollar') {
+            return '$'.$this->value;
+        }
+
+        return $this->value.'%';
     }
 
     // public function getFrequencyAttribute()
