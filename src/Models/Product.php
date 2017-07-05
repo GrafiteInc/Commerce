@@ -96,7 +96,10 @@ class Product extends QuarxModel
 
     public function isFavorite()
     {
-        return (auth()->user()->favorites()->pluck('product_id')->contains($this->id));
+        if (auth()->user()) {
+           return (auth()->user()->favorites()->pluck('product_id')->contains($this->id)); 
+        }
+        return false;
     }
 
     public function details()
