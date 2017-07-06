@@ -37,6 +37,13 @@ Yab\Quazar\QuazarModuleProvider::class,
 Laravel\Cashier\CashierServiceProvider::class,
 ```
 
+Then publish the vendor assets etc:
+
+```php
+php artisan vendor:publish
+php artisan migrate
+```
+
 Add the following to your `app/Http/Kernel.php` to the `routeMiddleware` array:
 ```
 'isAjax' => \Yab\Quazar\Middleware\isAjax::class,
@@ -84,13 +91,6 @@ Finally add to your `.env`:
 ```
 STRIPE_SECRET={your secret key}
 STRIPE_KEY={your public key}
-```
-
-Then publish the vendor assets etc:
-
-```php
-php artisan vendor:publish
-php artisan migrate
 ```
 
 If you wish to maintain consistency with the store accross your login, user settings etc you can set the extends to `@extends('quazar-frontend::layouts.store')`
