@@ -33,7 +33,7 @@ class TestCase extends Orchestra\Testbench\TestCase
             require __DIR__.'/../src/Publishes/routes/quazar.php';
         });
 
-        $destinationDir = realpath(__DIR__.'/../vendor/orchestra/testbench/fixture/database/migrations');
+        $destinationDir = realpath(__DIR__.'/../vendor/orchestra/testbench-core/fixture/database/migrations');
 
         \File::copyDirectory(realpath(__DIR__.'/../fixture/migrations'), $destinationDir);
         \File::copyDirectory(realpath(__DIR__.'/../vendor/yab/quarx/src/PublishedAssets/Migrations'), $destinationDir);
