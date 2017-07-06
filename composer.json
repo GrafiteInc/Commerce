@@ -4,8 +4,7 @@
     "license": "MIT",
     "require": {
         "illuminate/support": "^5.4",
-        "laravel/cashier": "^7.0",
-        "mpociot/vat-calculator": "^2.2"
+        "laravel/cashier": "^7.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
