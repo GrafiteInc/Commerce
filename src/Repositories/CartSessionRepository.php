@@ -8,6 +8,8 @@ use Yab\Quazar\Models\Variant;
 
 class CartSessionRepository
 {
+    public $user;
+
     public function __construct()
     {
         if (is_null(Session::get('cart'))) {
@@ -16,6 +18,8 @@ class CartSessionRepository
                 'synced' => false,
             ]);
         }
+
+        $this->user = null;
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace Yab\Quazar\Services;
 
+use Illuminate\Support\Facades\Session;
+
 class CustomerProfileService
 {
     /**
@@ -23,8 +25,13 @@ class CustomerProfileService
      */
     public function shippingAddress($key = null)
     {
-        $profile = auth()->user()->meta;
-        $address = json_decode($profile->shipping_address);
+        if (auth()->user()) {
+            $profile = auth()->user()->meta;
+            $address = json_decode($profile->shipping_address);
+        } else {
+            $address = Session::get('shipping_address', (object) []);
+        }
+
         if (is_null($key)) {
             return $address;
         } elseif (isset($address->$key)) {
@@ -43,8 +50,13 @@ class CustomerProfileService
      */
     public function billingAddress($key = null)
     {
-        $profile = auth()->user()->meta;
-        $address = json_decode($profile->billing_address);
+        if (auth()->user()) {
+            $profile = auth()->user()->meta;
+            $address = json_decode($profile->billing_address);
+        } else {
+            $address = Session::get('billing_address', (object) []);
+        }
+
         if (is_null($key)) {
             return $address;
         } elseif (isset($address->$key)) {

@@ -122,6 +122,14 @@ class CouponService
             $payload['stripe_id'] = $payload['code'];
             $payload['currency'] = config('quazar.currency');
 
+            if (empty($payload['start_date'])) {
+                $payload['start_date'] = Carbon::now();
+            }
+
+            if (empty($payload['end_date'])) {
+                $payload['end_date'] = Carbon::now()->addDays(30);
+            }
+
             if (isset($payload['for_subscriptions'])) {
                 $payload['for_subscriptions'] = true;
             } else {

@@ -30,6 +30,19 @@ class CartController extends Controller
     |--------------------------------------------------------------------------
     */
 
+    public function cart()
+    {
+        return QuarxResponseService::apiResponse('success', [
+            'count' => $this->cart->itemCount(),
+            'contents' => $this->cart->contents(),
+            'shipping' => $this->cart->getCartShipping(),
+            'coupon' => $this->cart->getCurrentCouponValue(),
+            'tax' => $this->cart->getCartTax(),
+            'subtotal' => $this->cart->getCartSubTotal(),
+            'total' => $this->cart->getCartTotal(),
+        ]);
+    }
+
     public function cartCount()
     {
         $count = $this->cart->itemCount();

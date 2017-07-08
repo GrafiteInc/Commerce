@@ -408,6 +408,16 @@ class CartService
     }
 
     /**
+     * Get the cart shipping value
+     *
+     * @return float
+     */
+    public function getCartShipping()
+    {
+        return app(StoreLogistics::class)->shipping($this->cartRepo()->user);
+    }
+
+    /**
      * Get the cart total.
      *
      * @return float

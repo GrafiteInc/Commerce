@@ -14,6 +14,7 @@
             Route::get('cart/contents', 'CartController@getContents')->name('.cart.contents');
             Route::get('cart/empty', 'CartController@emptyCart')->name('.cart.empty');
             Route::group(['middleware' => ['isAjax']], function () {
+                Route::get('cart', 'CartController@cart')->name('.cart');
                 Route::get('cart/count', 'CartController@cartCount')->name('.cart.count');
                 Route::get('cart/change-count', 'CartController@changeCartCount')->name('.cart.change-count');
                 Route::get('cart/add', 'CartController@addToCart')->name('.cart.add');

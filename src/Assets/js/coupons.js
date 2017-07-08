@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('input').attr('disabled', 'disabled');
+    $('input[type!="hidden"]').attr('disabled', 'disabled');
 
     $('#deleteCouponForm').submit(function(e){
         e.preventDefault();
