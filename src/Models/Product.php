@@ -2,6 +2,8 @@
 
 namespace Yab\Quazar\Models;
 
+use Yab\Quarx\Models\Image;
+use Yab\Quarx\Models\ProductImage;
 use Yab\Quarx\Models\QuarxModel;
 use Yab\Quarx\Services\FileService;
 use Yab\Quazar\Services\CartService;
@@ -53,6 +55,11 @@ class Product extends QuarxModel
         'file_download_href',
         'hero_image_url',
     ];
+
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'entity_id')->where('entity_type', 'product');
+    }
 
     public function getPriceAttribute($value)
     {

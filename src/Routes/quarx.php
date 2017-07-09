@@ -22,6 +22,8 @@
         Route::post('products/download/{id}', 'ProductController@updateAlternativeData');
         Route::post('products/dimensions/{id}', 'ProductController@updateAlternativeData');
         Route::post('products/discounts/{id}', 'ProductController@updateAlternativeData');
+        Route::post('products/images', 'ProductController@setImages');
+        Route::delete('products/images/{id}', 'ProductController@deleteImage');
 
         Route::group(['middleware' => 'isAjax'], function () use ($routePrefix) {
             Route::post('products/variant/save', 'ProductVariantController@saveVariant');

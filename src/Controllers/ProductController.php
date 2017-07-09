@@ -2,18 +2,24 @@
 
 namespace Yab\Quazar\Controllers;
 
+use Quarx;
 use Illuminate\Http\Request;
 use Yab\Quarx\Controllers\QuarxController;
+use Yab\Quarx\Repositories\ImageRepository;
+use Yab\Quazar\Repositories\ProductVariantRepository;
 use Yab\Quazar\Requests\ProductRequest;
 use Yab\Quazar\Services\ProductService;
-use Yab\Quazar\Repositories\ProductVariantRepository;
 
 class ProductController extends QuarxController
 {
-    public function __construct(ProductService $productService, ProductVariantRepository $productVariantRepository)
-    {
+    public function __construct(
+        ProductService $productService,
+        ProductVariantRepository $productVariantRepository,
+        ImageRepository $imageRepository
+    ) {
         $this->service = $productService;
         $this->productVariantRepository = $productVariantRepository;
+        $this->imageRepository = $imageRepository;
     }
 
     /**
@@ -86,6 +92,7 @@ class ProductController extends QuarxController
         $product = $this->service->find($id);
 
         $productVariants = $this->productVariantRepository->getProductVariants($product->id)->get();
+        $images = $product->images;
 
         if (empty($request->all())) {
             $tabs['details'] = true;
@@ -94,6 +101,7 @@ class ProductController extends QuarxController
         $data = [
             'product' => $product,
             'productVariants' => $productVariants,
+            'images' => $images,
             'tabs' => $tabs,
         ];
 
@@ -117,6 +125,59 @@ class ProductController extends QuarxController
         }
 
         return back()->with('message', 'Failed to update');
+    }
+
+    /**
+     * Add images to a product
+     *
+     * @param \Illuminate\Http\ProductRequest $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function setImages(Request $request)
+    {
+        foreach ($request->location as $location) {
+            $result = $this->imageRepository->store([
+                'entity_id' => $request->product_id,
+                'location' => $location,
+                'is_published' => true,
+                'entity_type' => 'product',
+            ]);
+        }
+
+        if ($result) {
+            return back()->with('message', 'Successfully uploaded');
+        }
+
+        return back()->with('message', 'Failed to upload');
+    }
+
+    /**
+     * Delete the image
+     *
+     * @param  integer $id
+     *
+     * @return Illuminate\Http\Response
+     */
+    public function deleteImage($id)
+    {
+        $image = $this->imageRepository->findImagesById($id);
+
+        if (is_file(storage_path($image->location))) {
+            @Storage::delete($image->location);
+        }
+
+        if (empty($image)) {
+            Quarx::notification('Image not found', 'warning');
+
+            return back();
+        }
+
+        $image->delete();
+
+        Quarx::notification('Image deleted successfully.', 'success');
+
+        return back();
     }
 
     /**

@@ -18,6 +18,9 @@
         <li role="presentation" {!! (request('tab') == 'discount') ? 'class="active"': '' !!}>
             <a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/products/'.$product->id.'/edit?tab=discount') !!}" role="tab">Discounts</a>
         </li>
+        <li role="presentation" {!! (request('tab') == 'images') ? 'class="active"': '' !!}>
+            <a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/products/'.$product->id.'/edit?tab=images') !!}" role="tab">Images</a>
+        </li>
     </ul>
 </div>
 
@@ -39,4 +42,8 @@
 
 @if (request('tab') == 'dimensions')
     @include('quazar::products.tabs.dimensions')
+@endif
+
+@if (request('tab') == 'images')
+    @include('quazar::products.tabs.images')
 @endif
