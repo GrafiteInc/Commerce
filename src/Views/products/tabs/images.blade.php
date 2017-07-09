@@ -17,10 +17,9 @@
 </div>
 
 
-<div class="row">
-
+<div class="row raw-margin-bottom-48">
     @foreach($images as $image)
-        <div class="col-md-3 panel raw-margin-top-24">
+        <div class="col-md-3 image-panel raw-margin-top-24">
             <div class="thumbnail">
                 <a href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.images.edit', [$image->id]) !!}">
                     <div class="img" style="background-image: url('{!! $image->url !!}')"></div>
@@ -47,22 +46,23 @@
             </div>
         </div>
     @endforeach
-
 </div>
 
 
 <div class="row">
-    {!! Form::open(['url' => 'quarx/images/upload', 'files' => true, 'class' => 'dropzone', 'id' => 'fileDropzone']); !!}
-    {!! Form::close() !!}
+    <div class="col-md-12">
+        {!! Form::open(['url' => 'quarx/images/upload', 'files' => true, 'class' => 'dropzone', 'id' => 'fileDropzone']); !!}
+        {!! Form::close() !!}
 
-    {!! Form::open(['url' => config('quarx.backend-route-prefix', 'quarx').'/products/images', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']) !!}
+        {!! Form::open(['url' => config('quarx.backend-route-prefix', 'quarx').'/products/images', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']) !!}
 
-        <input type="hidden" name="product_id" value="{{ $product->id }}">
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
 
-        <div class="form-group text-right">
-            <a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/images') !!}" class="btn btn-default raw-left">Cancel</a>
-            {!! Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'saveImagesBtn']) !!}
-        </div>
+            <div class="form-group text-right">
+                <a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/images') !!}" class="btn btn-default raw-left">Cancel</a>
+                {!! Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'saveImagesBtn']) !!}
+            </div>
 
-    {!! Form::close() !!}
+        {!! Form::close() !!}
+    </div>
 </div>
