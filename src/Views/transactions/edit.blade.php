@@ -21,7 +21,7 @@
     </div>
 
     <div class="row">
-        <h1 class="page-header">Transactions: Edit</h1>
+        <h1 class="page-header">Transactions: Review</h1>
     </div>
 
     @include('quazar::transactions.breadcrumbs', ['location' => ['edit']])
@@ -47,13 +47,20 @@
         <div class="row">
             <div class="col-md-6">
                 <table class="table table-striped">
-                    @foreach(json_decode($transaction->cart) as $item)
-                    <tr>
-                        <td>{{ $item->price }}</td>
-                        <td>{{ $item->quantity }}</td>
-                        <td>{{ $item->name }}</td>
-                    </tr>
-                    @endforeach
+                    <thead>
+                        <td>Name</td>
+                        <td>Quantity</td>
+                        <td>Price</td>
+                    </thead>
+                    <tbody>
+                        @foreach(json_decode($transaction->cart) as $item)
+                        <tr>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->quantity }}</td>
+                            <td>{{ $item->price }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
             <div class="col-md-6">
@@ -70,9 +77,15 @@
                         <td>Shipping</td>
                         <td>{{ $transaction->shipping }}</td>
                     </tr>
+                    @if ($transaction->coupon)
                     <tr>
-                        <td>{{ $transaction->total }}</td>
-                        <td>Total</td>
+                        <td>Coupon</td>
+                        <td>{{ app(Yab\Quazar\Models\Coupon::class)->fill(json_decode($transaction->coupon, true))->dollars }}</td>
+                    </tr>
+                    @endif
+                    <tr>
+                        <td><b>Total</b></td>
+                        <td><b>{{ $transaction->total }}</b></td>
                     </tr>
                 </table>
             </div>
