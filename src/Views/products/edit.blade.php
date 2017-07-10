@@ -17,7 +17,7 @@
     @if ($product->hero_image)
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
-                <img class="thumbnail" style="display: inline-block;" src="{{ $product->hero_image_url }}" />
+                <img class="thumbnail hero-thumbnail" style="display: inline-block;" src="{{ $product->hero_image_url }}" />
             </div>
         </div>
     @endif
