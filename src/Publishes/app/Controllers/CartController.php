@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Quazar;
 
 use Redirect;
 use Illuminate\Http\Request;
+use Yab\Quazar\Helpers\StoreHelper;
 use App\Http\Controllers\Controller;
 use Yab\Quazar\Services\CartService;
 use Yab\Quarx\Services\QuarxResponseService;
@@ -35,11 +36,11 @@ class CartController extends Controller
         return QuarxResponseService::apiResponse('success', [
             'count' => $this->cart->itemCount(),
             'contents' => $this->cart->contents(),
-            'shipping' => $this->cart->getCartShipping(),
-            'coupon' => $this->cart->getCurrentCouponValue(),
-            'tax' => $this->cart->getCartTax(),
-            'subtotal' => $this->cart->getCartSubTotal(),
-            'total' => $this->cart->getCartTotal(),
+            'shipping' => StoreHelper::moneyFormat($this->cart->getCartShipping()),
+            'coupon' => StoreHelper::moneyFormat($this->cart->getCurrentCouponValue()),
+            'tax' => StoreHelper::moneyFormat($this->cart->getCartTax()),
+            'subtotal' => StoreHelper::moneyFormat($this->cart->getCartSubTotal()),
+            'total' => StoreHelper::moneyFormat($this->cart->getCartTotal()),
         ]);
     }
 

@@ -73,29 +73,33 @@ class StoreHelper
      * Checkout
      * --------------------------------------------------------------------------
     */
+   
+    public static function moneyFormat($amount) {
+        return number_format(round($amount, 2), 2);
+    }
 
     public static function checkoutTax()
     {
-        return app(CartService::class)->getCartTax();
+        return StoreHelper::moneyFormat(app(CartService::class)->getCartTax());
     }
 
     public static function checkoutTotal()
     {
-        return app(CartService::class)->getCartTotal();
+        return StoreHelper::moneyFormat(app(CartService::class)->getCartTotal());
     }
 
     public static function checkoutSubtotal()
     {
-        return app(CartService::class)->getCartSubtotal();
+        return StoreHelper::moneyFormat(app(CartService::class)->getCartSubtotal());
     }
 
     public static function couponValue()
     {
-        return app(CartService::class)->getCurrentCouponValue();
+        return StoreHelper::moneyFormat(app(CartService::class)->getCurrentCouponValue());
     }
 
     public static function checkoutShipping()
     {
-        return app(LogisticService::class)->shipping(auth()->user());
+        return StoreHelper::moneyFormat(app(LogisticService::class)->shipping(auth()->user()));
     }
 }
