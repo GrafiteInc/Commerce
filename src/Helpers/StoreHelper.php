@@ -73,6 +73,10 @@ class StoreHelper
      * Checkout
      * --------------------------------------------------------------------------
     */
+   
+    public static function moneyFormat($amount) {
+        return number_format(round($amount, 2), 2);
+    }
 
     public static function checkoutTax()
     {
