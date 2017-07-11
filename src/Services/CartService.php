@@ -2,11 +2,12 @@
 
 namespace Yab\Quazar\Services;
 
-use App\Services\StoreLogistics;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Yab\Quazar\Models\Coupon;
 use Yab\Quazar\Models\Variant;
+use App\Services\StoreLogistics;
+use Yab\Quazar\Helpers\StoreHelper;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Yab\Quazar\Repositories\CartRepository;
 use Yab\Quazar\Repositories\CartSessionRepository;
 use Yab\Quazar\Repositories\TransactionRepository;
@@ -361,7 +362,7 @@ class CartService
             }
         }
 
-        return round($value, 2);
+        return StoreHelper::moneyFormat($value);
     }
 
     /*
@@ -380,7 +381,7 @@ class CartService
         $taxRate = (app(LogisticService::class)->getTaxPercent(auth()->user()) / 100);
         $subtotal = $this->getCartSubTotal();
 
-        return round($subtotal * $taxRate, 2);
+        return StoreHelper::moneyFormat($subtotal * $taxRate);
     }
 
     /**
@@ -404,7 +405,7 @@ class CartService
             $total += app(StoreLogistics::class)->shipping($this->cartRepo()->user);
         }
 
-        return round($total, 2);
+        return StoreHelper::moneyFormat($total);
     }
 
     /**
@@ -414,7 +415,7 @@ class CartService
      */
     public function getCartShipping()
     {
-        return app(StoreLogistics::class)->shipping($this->cartRepo()->user);
+        return StoreHelper::moneyFormat(app(StoreLogistics::class)->shipping($this->cartRepo()->user));
     }
 
     /**
@@ -430,6 +431,6 @@ class CartService
         $total = $subtotal + app(LogisticService::class)->shipping(auth()->user()) + ($subtotal * $taxRate);
         $total = $total - $this->getCurrentCouponValue();
 
-        return round($total, 2);
+        return StoreHelper::moneyFormat($total);
     }
 }
