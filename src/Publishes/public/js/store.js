@@ -5,13 +5,42 @@
 */
 
 var store = {
+
+    cart: {
+        contents: [],
+        count: 0,
+        subtotal: 0,
+        shipping: 0,
+        total: 0,
+    },
+
+    init: function () {
+        this.updateCartCount();
+        this.updateCart();
+    },
+
+    updateCart: function () {
+        var _store = this;
+        $.ajax({
+            type: "GET",
+            url: _url+"/store/cart",
+            cache: false,
+            dataType: "html",
+            success: function(data){
+                _store.cart = JSON.parse(data).data;
+            }
+        });
+    },
+
     updateCartCount: function(_id) {
+        var _store = this;
         $.ajax({
             type: "GET",
             url: _url+"/store/cart/count",
             cache: false,
             dataType: "html",
             success: function(data){
+                _store.cart.count = JSON.parse(data).data;
                 $('.cart-count').html(JSON.parse(data).data);
             }
         });
@@ -40,6 +69,7 @@ var store = {
 
     addToCart: function(_id, _quantity, _type) {
         var _variants = [];
+        var _store = this;
 
         $('.product_variants').each(function(){
             _variants.push({
@@ -52,38 +82,45 @@ var store = {
             _variants = {};
         };
 
+        var _product = {
+            id: _id,
+            variants: JSON.stringify(_variants),
+            type: _type,
+            quantity: _quantity
+        };
+
         $.ajax({
             type: "GET",
             url: _url+"/store/cart/add",
-            data: {
-                id: _id,
-                variants: JSON.stringify(_variants),
-                type: _type,
-                quantity: _quantity
-            },
+            data: _product,
             cache: false,
             dataType: "html",
-            success: function(data) {
-                store.updateCartCount();
+            success: function (data) {
+                _store.updateCartCount();
+                _store.updateCart();
+                _store.cart.contents.push(_product);
             }
         });
     },
 
     removeFromCart: function(_id, _type) {
+        var _store = this;
         $.ajax({
             type: "GET",
             url: _url+"/store/cart/remove",
             data: { id: _id, type: _type },
             cache: false,
             dataType: "html",
-            success: function(data) {
+            success: function (data) {
                 $('tr[data-cart-row="'+_id+'"]').remove();
-                store.updateCartCount();
+                _store.updateCartCount();
+                _store.updateCart();
             }
         });
     },
 
     changeItemQuantity: function(_id, _count) {
+        var _store = this;
         $.ajax({
             type: "GET",
             url: _url+"/store/cart/change-count",
@@ -94,7 +131,8 @@ var store = {
             cache: false,
             dataType: "html",
             success: function(data){
-                store.updateCartCount();
+                _store.updateCartCount();
+                _store.updateCart();
             }
         });
     }
@@ -102,7 +140,7 @@ var store = {
 
 $(document).ready(function(){
 
-    store.updateCartCount();
+    store.init();
 
     $('.product-count').bind('change', function(){
         var _product = $(this).data('product');
