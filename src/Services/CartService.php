@@ -427,7 +427,7 @@ class CartService
         $taxRate = (app(LogisticService::class)->getTaxPercent(auth()->user()) / 100);
         $subtotal = $this->getCartSubTotal();
 
-        $total = $subtotal + app(LogisticService::class)->shipping(auth()->user()) + ($subtotal * $taxRate);
+        $total = $subtotal + ($subtotal * $taxRate);
         $total = $total - $this->getCurrentCouponValue();
 
         return round($total, 2);
