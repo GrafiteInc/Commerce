@@ -30,7 +30,7 @@ class Orders extends QuarxModel
     {
         $transaction = Transactions::find($this->transaction_id);
 
-        if (!is_null($key)) {
+        if (!is_null($transaction) && !is_null($key)) {
             return $transaction->$key;
         }
 
