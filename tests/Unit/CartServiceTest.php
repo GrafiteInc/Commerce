@@ -44,7 +44,7 @@ class CartServiceTest extends TestCase
     public function testRemoveBtn()
     {
         $response = $this->cartService->removeFromCartBtn(1, 'product', 'cool');
-        $this->assertEquals('<button class="cool" onclick="store.removeFromCart(1, \'product\')">product</button>', $response);
+        $this->assertEquals('<button type="button" class="cool" onclick="store.removeFromCart(1, \'product\')">product</button>', $response);
     }
 
     public function testItemCount()

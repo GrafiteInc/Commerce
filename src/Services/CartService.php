@@ -68,7 +68,7 @@ class CartService
      */
     public function removeFromCartBtn($cartId, $content, $class = '')
     {
-        return '<button class="'.$class.'" onclick="store.removeFromCart('.$cartId.', \'product\')">'.$content.'</button>';
+        return '<button type="button" class="'.$class.'" onclick="store.removeFromCart('.$cartId.', \'product\')">'.$content.'</button>';
     }
 
     /**
