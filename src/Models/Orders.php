@@ -3,6 +3,7 @@
 namespace Yab\Quazar\Models;
 
 use Yab\Quarx\Models\QuarxModel;
+use Yab\Quazar\Models\OrderItem;
 
 class Orders extends QuarxModel
 {
@@ -46,5 +47,15 @@ class Orders extends QuarxModel
         }
 
         return $address;
+    }
+
+    /**
+     * Get the corresponding OrderItems
+     *
+     * @return Relationship
+     */
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

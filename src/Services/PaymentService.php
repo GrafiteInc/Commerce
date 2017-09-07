@@ -109,7 +109,7 @@ class PaymentService
     {
         $customerService = app(CustomerProfileService::class);
 
-        $this->orderService->create([
+        $order = $this->orderService->create([
             'uuid' => Crypto::uuid(),
             'user_id' => $user->id,
             'transaction_id' => $transaction->id,
@@ -122,6 +122,18 @@ class PaymentService
                 'country' => $customerService->shippingAddress('country'),
              ]),
         ]);
+
+        foreach ($items as $product) {
+            OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $product->id,
+                'quantity' => $product->quantity,
+                'subtotal' => 0, //???
+                'shipping' => 0, //???
+                'tax' => 0, //???
+                'total' => 0, //???
+            ]);
+        }
 
         return $this->logistic->afterPlaceOrder($user, $transaction, $items);
     }

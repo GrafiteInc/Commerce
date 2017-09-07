@@ -42,11 +42,11 @@
         <div class="row">
             <div class="col-md-6">
                 <table class="table table-striped">
-                    @foreach(json_decode($order->details) as $item)
+                    @foreach($order->items as $item)
                     <tr>
-                        <td>{{ $item->price }}</td>
+                        <td>{{ $item->subtotal }}</td>
                         <td>{{ $item->quantity }}</td>
-                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->product->name }}</td>
                     </tr>
                     @endforeach
                 </table>
