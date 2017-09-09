@@ -37,10 +37,10 @@
             <td>Code</td>
         </thead>
         <tbody>
-            @foreach (json_decode($order->details) as $product)
+            @foreach ($order->items as $item)
                 <tr>
-                    <td><a href="{{ $product->href }}">{!! $product->name !!}</a></td>
-                    <td>{!! $product->code !!}</td>
+                    <td><a href="{{ $item->product->href }}">{!! $item->product->name !!}</a></td>
+                    <td>{!! $item->product->code !!}</td>
                 </tr>
             @endforeach
         </tbody>
