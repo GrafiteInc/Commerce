@@ -42,6 +42,18 @@ class LogisticService implements LogisticServiceInterface
     }
 
     /**
+     * Get single item shipping
+     *
+     * @param User $user
+     *
+     * @return float
+     */
+    public function singleItemShipping($item, $user)
+    {
+        return app(StoreLogistics::class)->singleItemShipping($user);
+    }
+
+    /**
      * Calculate the Tax.
      *
      * @return int

@@ -4,6 +4,7 @@ namespace Yab\Quazar\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Yab\Quazar\Services\OrderItemService;
 use Yab\Quazar\Services\OrderService;
 
 class OrderController extends Controller
@@ -54,6 +55,20 @@ class OrderController extends Controller
         $order = $this->service->findOrdersById($id);
 
         return view('quazar::orders.edit')->with('order', $order);
+    }
+
+    /**
+     * Show order item
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function item($id, Request $request)
+    {
+        $orderItem = app(OrderItemService::class)->find($id);
+
+        return view('quazar::orders.item')->with('orderItem', $orderItem);
     }
 
     /**

@@ -70,5 +70,6 @@
         */
         Route::resource('orders', 'OrderController', ['as' => $routePrefix, 'except' => ['create', 'store', 'show', 'destroy']]);
         Route::post('orders/search', 'OrderController@search');
+        Route::get('orders/item/{id}', 'OrderController@item');
         Route::post('orders/cancel', 'OrderController@cancel');
     });

@@ -10,7 +10,7 @@
                     <h4 class="modal-title" id="refundModalLabel">Cancel Order</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure want to cancel this order?</p>
+                    <p>Are you sure want to cancel this order? This will refund the customer's transaction.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -42,11 +42,20 @@
         <div class="row">
             <div class="col-md-6">
                 <table class="table table-striped">
+                    <tr>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th class="text-right">Actions</th>
+                    </tr>
                     @foreach($order->items as $item)
                     <tr>
-                        <td>{{ $item->subtotal }}</td>
+                        <td><a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/orders/item/'.$item->id) }}">{{ $item->product->name }}</a></td>
                         <td>{{ $item->quantity }}</td>
-                        <td>{{ $item->product->name }}</td>
+                        <td>{{ $item->total }}</td>
+                        <td class="text-right">
+                            <a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/orders/item/'.$item->id) }}" class="btn btn-xs btn-default">Review</a>
+                        </td>
                     </tr>
                     @endforeach
                 </table>

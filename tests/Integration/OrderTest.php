@@ -23,7 +23,7 @@ class OrderTest extends TestCase
         factory(\Yab\Quazar\Models\Cart::class)->create();
         factory(\Yab\Quazar\Models\Product::class)->create();
         factory(\Yab\Quazar\Models\Plan::class)->create();
-        factory(\Yab\Quazar\Models\Orders::class)->create();
+        factory(\Yab\Quazar\Models\Order::class)->create();
         factory(\Yab\Quazar\Models\Transactions::class)->create([
                 'id' => 999,
             ]);
@@ -45,7 +45,7 @@ class OrderTest extends TestCase
 
     public function testEdit()
     {
-        factory(\Yab\Quazar\Models\Orders::class)->create([
+        factory(\Yab\Quazar\Models\Order::class)->create([
             'id' => 2,
             'details' => json_encode([
                 [
@@ -78,7 +78,7 @@ class OrderTest extends TestCase
 
     public function testUpdate()
     {
-        factory(\Yab\Quazar\Models\Orders::class)->create([
+        factory(\Yab\Quazar\Models\Order::class)->create([
             'id' => 4,
             'details' => json_encode([
                 [

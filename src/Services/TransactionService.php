@@ -4,7 +4,7 @@ namespace Yab\Quazar\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
-use Yab\Quazar\Models\Orders;
+use Yab\Quazar\Models\Order;
 use Yab\Quazar\Repositories\TransactionRepository;
 
 class TransactionService
@@ -77,7 +77,7 @@ class TransactionService
      */
     public function getTransactionOrder($id)
     {
-        return app(Orders::class)->where('transaction_id', $id)->get();
+        return app(Order::class)->where('transaction_id', $id)->get();
     }
 
     /**

@@ -2,9 +2,10 @@
 
 namespace Yab\Quazar\Models;
 
-use Yab\Quazar\Models\Orders;
-use Yab\Quazar\Models\Product;
 use Yab\Quarx\Models\QuarxModel;
+use Yab\Quazar\Models\Order;
+use Yab\Quazar\Models\Product;
+use Yab\Quazar\Models\Variant;
 
 class OrderItem extends QuarxModel
 {
@@ -18,6 +19,8 @@ class OrderItem extends QuarxModel
         'order_id',
         'product_id',
         'quantity',
+        'variants',
+        'was_refunded',
         'subtotal',
         'shipping',
         'tax',
@@ -34,7 +37,7 @@ class OrderItem extends QuarxModel
      */
     public function order()
     {
-        return $this->belongsTo(Orders::class);
+        return $this->belongsTo(Order::class);
     }
 
     /**
@@ -47,5 +50,22 @@ class OrderItem extends QuarxModel
         return $this->belongsTo(Product::class);
     }
 
+    /**
+     * Get the variants of the product
+     *
+     * @return Attribute
+     */
+    public function getProductVariantsAttribute()
+    {
+        $itemVariants = [];
+        $variants = json_decode($this->variants);
+        $variantModel = app(Variant::class);
 
+        foreach ($variants as $variant) {
+            $variantData = $variantModel->find($variant->variant);
+            $itemVariants[$variantData->key] = $variantModel->rawValue($variant->value);
+        }
+
+        return $itemVariants;
+    }
 }

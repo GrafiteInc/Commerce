@@ -29,11 +29,14 @@
     {!! Form::model($transaction, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.transactions.update', $transaction->id], 'method' => 'patch']) !!}
 
         <div class="row">
-            <div class="col-md-12 raw-margin-bottom-24">
+            <div class="col-md-12 raw-margin-bottom-24 text-center">
                 <h2 class="text-center raw-margin-bottom-24">#{{ $transaction->uuid }}</h2>
                 @if (!empty($order))
                     @foreach($order as $shipment)
-                        <h4 class="text-center raw-margin-bottom-24"><a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/orders/'.$shipment->id.'/edit') }}">Order #:{{ $shipment->uuid }}</a></h4>
+                        <span class="alert alert-warning text-center">
+                            You must cancel this order if you wish to refund this transaction.
+                        </span>
+                        <h4 class="text-center raw-margin-bottom-24 raw-margin-top-24"><a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/orders/'.$shipment->id.'/edit') }}">Order #:{{ $shipment->uuid }}</a></h4>
                     @endforeach
                 @endif
                 @if (!is_null($transaction->refund_date))
@@ -48,9 +51,9 @@
             <div class="col-md-6">
                 <table class="table table-striped">
                     <thead>
-                        <td>Name</td>
-                        <td>Quantity</td>
-                        <td>Price</td>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
                     </thead>
                     <tbody>
                         @foreach(json_decode($transaction->cart) as $item)

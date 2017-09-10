@@ -33,6 +33,18 @@ class StoreLogistics implements LogisticServiceInterface
     }
 
     /**
+     * Calculate an items shipping cost.
+     *
+     * @param user $user
+     *
+     * @return int
+     */
+    public function singleItemShipping($item, $user)
+    {
+        return 0;
+    }
+
+    /**
      * Calculate the Tax.
      *
      * @return int

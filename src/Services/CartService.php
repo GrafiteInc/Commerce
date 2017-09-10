@@ -140,6 +140,7 @@ class CartService
             $product->cart_id = $item->id;
             $product->quantity = $item->quantity;
             $product->entity_type = $item->entity_type;
+            $product->product_variants = $item->product_variants;
             $product->weight = $this->weightVariants($item, $product);
             $product->price = $this->priceVariants($item, $product);
 
@@ -384,6 +385,56 @@ class CartService
     }
 
     /**
+     * Get an item shipping
+     *
+     * @param  Product $item
+     *
+     * @return int
+     */
+    public function getItemShipping($item)
+    {
+        return app(StoreLogistics::class)->singleItemShipping($item, auth()->user());
+    }
+
+    /**
+     * Get an item tax
+     *
+     * @param  Product $item
+     *
+     * @return int
+     */
+    public function getItemTax($item)
+    {
+        $taxRate = (app(LogisticService::class)->getTaxPercent(auth()->user()) / 100);
+        $subtotal = $this->getItemSubtotal($item);
+
+        return round($subtotal * $taxRate, 2);
+    }
+
+    /**
+     * Get an item subtotal
+     *
+     * @param  Product $item
+     *
+     * @return int
+     */
+    public function getItemSubtotal($item)
+    {
+        if (!is_null($item->entity_id)) {
+            $product = $this->service->find($item->entity_id);
+        } else {
+            $product = $this->service->find($item->id);
+        }
+
+        if (!$product) {
+            return 0;
+        }
+
+        $this->priceVariants($item, $product);
+        return ($product->price * $item->quantity);
+    }
+
+    /**
      * Get cart subtotal.
      *
      * @return float
@@ -394,10 +445,7 @@ class CartService
         $contents = $this->cartRepo()->cartContents();
 
         foreach ($contents as $item) {
-            $product = $this->service->find($item->entity_id);
-            $this->priceVariants($item, $product);
-
-            $total += $product->price * $item->quantity;
+            $total += $this->getItemSubtotal($item);
         }
 
         if (config('quazar.taxes_include_shipping')) {

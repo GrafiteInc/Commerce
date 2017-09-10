@@ -5,7 +5,7 @@ namespace Yab\Quazar\Models;
 use Yab\Quarx\Models\QuarxModel;
 use Yab\Quazar\Models\OrderItem;
 
-class Orders extends QuarxModel
+class Order extends QuarxModel
 {
     public $table = 'orders';
 

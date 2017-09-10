@@ -11,15 +11,7 @@ class QuazarEventServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $listen = [
-        'eloquent.saving: Yab\Quazar\Models\Order' => [
-            'Yab\Quazar\Services\OrderService@beforeSave',
-        ],
-
-        'eloquent.saved: Yab\Quazar\Models\Order' => [
-            'Yab\Quazar\Services\OrderService@afterSave',
-        ],
-    ];
+    protected $listen = [];
 
     /**
      * Register any other events for your application.
