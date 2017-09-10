@@ -29,7 +29,7 @@ class Order extends QuarxModel
 
     public function transaction($key = null)
     {
-        $transaction = Transactions::find($this->transaction_id);
+        $transaction = Transaction::find($this->transaction_id);
 
         if (!is_null($transaction) && !is_null($key)) {
             return $transaction->$key;

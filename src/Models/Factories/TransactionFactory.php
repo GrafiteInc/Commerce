@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quazar\Models\Transactions::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Quazar\Models\Transaction::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'uuid' => 'foo-bar-foo-bar',

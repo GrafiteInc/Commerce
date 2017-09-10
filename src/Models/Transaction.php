@@ -4,7 +4,7 @@ namespace Yab\Quazar\Models;
 
 use Yab\Quarx\Models\QuarxModel;
 
-class Transactions extends QuarxModel
+class Transaction extends QuarxModel
 {
     public $table = 'transactions';
 

@@ -6,20 +6,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Yab\Crypto\Services\Crypto;
 use Yab\Quazar\Models\Coupon;
-use Yab\Quazar\Models\Transactions;
+use Yab\Quazar\Models\Transaction;
 
 class PaymentService
 {
     public $user;
 
     public function __construct(
-        Transactions $transactions,
+        Transaction $transaction,
         OrderService $orderService,
         LogisticService $logisticService,
         OrderItemService $orderItemService
     ) {
         $this->user = auth()->user();
-        $this->transaction = $transactions;
+        $this->transaction = $transaction;
         $this->orderService = $orderService;
         $this->logistic = $logisticService;
         $this->orderItemService = $orderItemService;

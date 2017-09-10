@@ -4,12 +4,12 @@ namespace Yab\Quazar\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
-use Yab\Quazar\Models\Transactions;
+use Yab\Quazar\Models\Transaction;
 use Yab\Quazar\Services\LogisticService;
 
 class TransactionRepository
 {
-    public function __construct(Transactions $model)
+    public function __construct(Transaction $model)
     {
         $this->model = $model;
     }
