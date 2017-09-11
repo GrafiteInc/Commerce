@@ -77,7 +77,7 @@ class TransactionService
      */
     public function getTransactionOrder($id)
     {
-        return app(Order::class)->where('transaction_id', $id)->get();
+        return app(Order::class)->where('transaction_id', $id)->first();
     }
 
     /**

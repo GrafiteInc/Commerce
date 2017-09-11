@@ -3,6 +3,7 @@
 namespace Yab\Quazar\Models;
 
 use Yab\Quarx\Models\QuarxModel;
+use Yab\Quazar\Models\OrderItem;
 
 class Refund extends QuarxModel
 {
@@ -28,5 +29,10 @@ class Refund extends QuarxModel
     public function transaction()
     {
         return $this->belongsTo(Transaction::class);
+    }
+
+    public function orderItem()
+    {
+        return $this->belongsTo(OrderItem::class);
     }
 }
