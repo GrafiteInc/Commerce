@@ -16,4 +16,5 @@ interface LogisticServiceInterface
     public function orderCreated($order);
     public function shipOrder($order);
     public function cancelOrder($order);
+    public function afterItemCancelled($orderItem);
 }

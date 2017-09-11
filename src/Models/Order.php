@@ -38,6 +38,15 @@ class Order extends QuarxModel
         return $transaction;
     }
 
+    public function hasActiveOrderItems()
+    {
+        if ($this->items->where('was_refunded', false)->count() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function shippingAddress($key = null)
     {
         $address = json_decode($this->shipping_address);

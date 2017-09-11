@@ -41,6 +41,16 @@ class OrderItem extends QuarxModel
     }
 
     /**
+     * Get the corresponding Refund
+     *
+     * @return Relationship
+     */
+    public function refund()
+    {
+        return $this->hasOne(Refund::class);
+    }
+
+    /**
      * Get the corresponding Product
      *
      * @return Relationship
@@ -59,13 +69,21 @@ class OrderItem extends QuarxModel
     {
         $itemVariants = [];
         $variants = json_decode($this->variants);
-        $variantModel = app(Variant::class);
 
-        foreach ($variants as $variant) {
-            $variantData = $variantModel->find($variant->variant);
-            $itemVariants[$variantData->key] = $variantModel->rawValue($variant->value);
+        if ($variants) {
+            $variantModel = app(Variant::class);
+
+            foreach ($variants as $variant) {
+                $variantData = $variantModel->find($variant->variant);
+                $itemVariants[$variantData->key] = $variantModel->rawValue($variant->value);
+            }
         }
 
         return $itemVariants;
+    }
+
+    public function getAmountAttribute()
+    {
+        return $this->total * 100;
     }
 }

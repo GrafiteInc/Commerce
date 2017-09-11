@@ -65,11 +65,13 @@
 
         /*
         |--------------------------------------------------------------------------
-        | Transactions
+        | Orders
         |--------------------------------------------------------------------------
         */
         Route::resource('orders', 'OrderController', ['as' => $routePrefix, 'except' => ['create', 'store', 'show', 'destroy']]);
         Route::post('orders/search', 'OrderController@search');
-        Route::get('orders/item/{id}', 'OrderController@item');
         Route::post('orders/cancel', 'OrderController@cancel');
+
+        Route::get('orders/item/{id}', 'OrderItemController@show');
+        Route::post('orders/item/cancel', 'OrderItemController@cancel');
     });

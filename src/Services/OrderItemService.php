@@ -2,8 +2,14 @@
 
 namespace Yab\Quazar\Services;
 
+use Carbon\Carbon;
+use Stripe\Error\InvalidRequest;
+use Yab\Crypto\Services\Crypto;
+use Yab\Quazar\Models\Refund;
 use Yab\Quazar\Repositories\OrderItemRepository;
 use Yab\Quazar\Services\CartService;
+use Yab\Quazar\Services\LogisticService;
+use Yab\Quazar\Services\TransactionService;
 
 class OrderItemService
 {
@@ -93,6 +99,57 @@ class OrderItemService
         $order = $this->find($id);
 
         return $this->repo->update($order, $payload);
+    }
+
+    /**
+     * Cancel an order Item
+     *
+     * @param  int $id
+     *
+     * @return bool
+     */
+    public function cancel($id)
+    {
+        try {
+            $orderItem = $this->find($id);
+            $transaction = $orderItem->order->transaction();
+
+            $refund = app(TransactionService::class)->refund($transaction->uuid, $orderItem->amount);
+
+            if ($refund) {
+                $orderItem->update([
+                    'was_refunded' => true,
+                    'status' => 'cancelled',
+                ]);
+
+                app(Refund::class)->create([
+                    'transaction_id' => $transaction->id,
+                    'order_item_id' => $orderItem->id,
+                    'provider_id' => $refund->id,
+                    'uuid' => Crypto::uuid(),
+                    'amount' => ($refund->amount * 0.01),
+                    'provider' => 'Stripe',
+                    'charge' => $refund->charge,
+                    'currency' => $refund->currency,
+                ]);
+
+                app(LogisticService::class)->afterRefund($transaction);
+                app(LogisticService::class)->afterItemCancelled($orderItem);
+
+                if (!$orderItem->order->hasActiveOrderItems()) {
+                    $orderItem->order->update([
+                        'status' => 'cancelled',
+                    ]);
+                    $orderItem->order->transaction()->update([
+                        'refund_date' => Carbon::now(),
+                    ]);
+                }
+
+                return true;
+            }
+        } catch (InvalidRequest $e) {
+            return false;
+        }
     }
 
     /*

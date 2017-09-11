@@ -14,7 +14,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <a id="cancelItemBtn" type="button" class="btn btn-warning" href="#">Confirm Cancel Order Item</a>
+                    <a id="cancelItemBtn" type="button" class="btn btn-warning" href="#">Cancel Order Item</a>
                 </div>
             </div>
         </div>
@@ -53,8 +53,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <th></th>
-                        <td></td>
+                        <th>Status</th>
+                        <td class="text-right">{{ ucfirst($orderItem->status) }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -80,9 +80,32 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="text-right">
-                <a id="cancelItemForm" href="" class="btn btn-warning">Cancel Order Item</a>
-            </div>
+            @if (!$orderItem->was_refunded)
+                <div class="text-right">
+                    {!! Form::open(['id' => 'cancelItemForm', 'url' => config('quarx.backend-route-prefix', 'quarx').'/orders/item/cancel', 'method' => 'post', 'class' => 'inline-form pull-right']) !!}
+                        @input_maker_create('id', ['type' => 'hidden'], $orderItem)
+                        {!! Form::submit('Cancel Order Item', ['class' => 'btn btn-warning']) !!}
+                    {!! Form::close() !!}
+                </div>
+            @endif
+
+            @if ($orderItem->was_refunded)
+                <div class="well text-center">
+                    <span class="lead">
+                        Refunded
+                    </span>
+                </div>
+                <table class="table table-striped raw-margin-top-24">
+                    <tr>
+                        <th>Amount</th>
+                        <th class="text-right">Date</th>
+                    </tr>
+                    <tr>
+                        <td>${{ $orderItem->refund->amount }}</td>
+                        <td class="text-right">{{ $orderItem->refund->created_at }}</td>
+                    </tr>
+                </table>
+            @endif
         </div>
     </div>
 

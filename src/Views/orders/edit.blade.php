@@ -46,6 +46,7 @@
                         <th>Name</th>
                         <th>Quantity</th>
                         <th>Total</th>
+                        <th>Status</th>
                         <th class="text-right">Actions</th>
                     </tr>
                     @foreach($order->items as $item)
@@ -53,6 +54,7 @@
                         <td><a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/orders/item/'.$item->id) }}">{{ $item->product->name }}</a></td>
                         <td>{{ $item->quantity }}</td>
                         <td>{{ $item->total }}</td>
+                        <td>{{ ucfirst($item->status) }}</td>
                         <td class="text-right">
                             <a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/orders/item/'.$item->id) }}" class="btn btn-xs btn-default">Review</a>
                         </td>

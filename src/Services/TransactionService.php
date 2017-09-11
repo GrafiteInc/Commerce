@@ -102,17 +102,19 @@ class TransactionService
      *
      * @return bool
      */
-    public function refund($uuid)
+    public function refund($uuid, $amount = null)
     {
         $transaction = $this->repo->findByUUID($uuid);
+        $refund = app(StripeService::class)->refund($transaction->provider_id, $amount);
 
-        if (app(StripeService::class)->refund($transaction->provider_id)) {
+        if ($refund) {
             $transaction->update([
                 'refund_date' => Carbon::now(),
             ]);
+
             app(LogisticService::class)->afterRefund($transaction);
 
-            return true;
+            return $refund;
         }
 
         return false;

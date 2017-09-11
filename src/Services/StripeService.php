@@ -143,9 +143,9 @@ class StripeService
      */
     public function refund($transaction, $amount = null)
     {
-        // if (is_null($amount)) {
-        //     $amount = $transaction->amount
-        // }
+        if (is_null($amount)) {
+            $amount = $transaction->total;
+        }
 
         return $this->refund->create([
             'charge' => $transaction,

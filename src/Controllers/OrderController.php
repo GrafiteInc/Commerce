@@ -91,6 +91,24 @@ class OrderController extends Controller
     }
 
     /**
+     * Cancel an order item
+     *
+     * @param  Request $request
+     *
+     * @return Response
+     */
+    public function cancelItem(Request $request)
+    {
+        $result = app(OrderItemService::class)->cancel($request->id);
+
+        if ($result) {
+            return back()->with('message', 'Successfully cancelled');
+        }
+
+        return back()->with('message', 'Failed to cancel');
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param int $id

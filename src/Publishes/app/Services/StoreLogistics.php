@@ -144,4 +144,12 @@ class StoreLogistics implements LogisticServiceInterface
 
         return true;
     }
+
+    public function afterItemCancelled($orderItem)
+    {
+        // sets order to shipped - and does any needed logic
+        Log::info('Order item was cancelled');
+
+        return true;
+    }
 }
