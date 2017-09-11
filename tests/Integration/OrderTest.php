@@ -24,7 +24,7 @@ class OrderTest extends TestCase
         factory(\Yab\Quazar\Models\Product::class)->create();
         factory(\Yab\Quazar\Models\Plan::class)->create();
         factory(\Yab\Quazar\Models\Order::class)->create();
-        factory(\Yab\Quazar\Models\Transactions::class)->create([
+        factory(\Yab\Quazar\Models\Transaction::class)->create([
                 'id' => 999,
             ]);
     }
