@@ -47,6 +47,10 @@ class TransactionTest extends TestCase
 
     public function testEdit()
     {
+        factory(\Yab\Quazar\Models\Order::class)->create([
+            'transaction_id' => 2,
+        ]);
+
         factory(\Yab\Quazar\Models\Transaction::class)->create([
             'id' => 2,
             'notes' => 'Le notes!',
