@@ -21,8 +21,8 @@ class AnalyticsService
 
         foreach ($collected as $key => $value) {
             foreach ($value as $transaction) {
-                if (!is_null($transaction->refund_date)) {
-                    $balanceValues['refunds'] += $transaction->total;
+                if ($transaction->refunds->count() > 0) {
+                    $balanceValues['refunds'] += $transaction->refunds->sum('amount');
                 } else {
                     $balanceValues['income'] += $transaction->total;
                 }
