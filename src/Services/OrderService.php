@@ -123,15 +123,15 @@ class OrderService
         if ($order->status != 'complete') {
             $this->logistics->cancelOrder($order);
 
+            if ($order->hasActiveOrderItems()) {
+                $this->transactions->refund($order->transaction('uuid'), $order->remainingValue());
+            }
+
             foreach ($order->items as $item) {
                 $item->update([
                     'was_refunded' => true,
                     'status' => 'cancelled',
                 ]);
-            }
-
-            if ($order->hasActiveOrderItems()) {
-                $this->transactions->refund($order->transaction('uuid'));
             }
 
             return $this->update($order->id, [

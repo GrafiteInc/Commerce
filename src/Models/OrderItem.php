@@ -18,6 +18,7 @@ class OrderItem extends QuarxModel
     public $fillable = [
         'order_id',
         'product_id',
+        'transaction_id',
         'quantity',
         'variants',
         'was_refunded',
