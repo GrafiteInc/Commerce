@@ -27,8 +27,8 @@ class StripeServiceTest extends TestCase
         $plan->shouldReceive('create')->andReturn(true);
 
         $refund->shouldReceive('create')->with([
-            'charge' => $this->transaction,
-            'amount' => $this->transaction->total
+            'charge' => $this->transaction->provider_id,
+            'amount' => $this->transaction->amount
         ])->andReturn(true);
 
         $this->service = new StripeService($stripe, $plan, $coupon, $refund);
