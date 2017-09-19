@@ -95,7 +95,7 @@
         </div>
     {!! Form::close() !!}
 
-    @if ($order->status !== 'cancelled')
+    @if ($order->status !== 'cancelled' && !$order->hasRefundedOrderItems())
         {!! Form::open(['id' => 'cancelForm', 'url' => config('quarx.backend-route-prefix', 'quarx').'/orders/cancel', 'method' => 'post', 'class' => 'inline-form pull-left']) !!}
             @input_maker_create('id', ['type' => 'hidden'], $order)
             {!! Form::submit('Cancel this Order', ['class' => 'btn btn-warning']) !!}

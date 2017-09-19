@@ -112,7 +112,14 @@ class OrderItemService
     {
         try {
             $orderItem = $this->find($id);
-            $transaction = $orderItem->order->transaction();
+            $transaction = null;
+
+            if ($orderItem->transaction) {
+                $transaction = $orderItem->transaction;
+            }
+            else {
+                $transaction = $orderItem->order->transaction();
+            }
 
             $refund = app(TransactionService::class)->refund($transaction->uuid, $orderItem->amount);
 
@@ -147,7 +154,8 @@ class OrderItemService
 
                 return true;
             }
-        } catch (InvalidRequest $e) {
+        } 
+        catch (InvalidRequest $e) {
             return false;
         }
     }
