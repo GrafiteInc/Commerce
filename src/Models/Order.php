@@ -60,7 +60,7 @@ class Order extends QuarxModel
     {
         $remainingValue = 0;
 
-        foreach ($this->items->where('was_refunded', false)->get() as $item) {
+        foreach ($this->items->where('was_refunded', false) as $item) {
             $remainingValue += $item->total;
         }
 
