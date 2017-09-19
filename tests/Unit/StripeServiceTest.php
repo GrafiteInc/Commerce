@@ -63,7 +63,7 @@ class StripeServiceTest extends TestCase
 
     public function testRefund()
     {
-        $response = $this->service->refund($this->transaction);
+        $response = $this->service->refund($this->transaction->provider_id, $this->transaction->amount);
         $this->assertEquals($response, true);
     }
 }
