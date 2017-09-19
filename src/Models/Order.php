@@ -38,6 +38,15 @@ class Order extends QuarxModel
         return $transaction;
     }
 
+    public function hasRefundedOrderItems()
+    {
+        if ($this->items->where('was_refunded', true)->count() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function hasActiveOrderItems()
     {
         if ($this->items->where('was_refunded', false)->count() > 0) {

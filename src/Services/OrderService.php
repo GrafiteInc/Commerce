@@ -2,6 +2,8 @@
 
 namespace Yab\Quazar\Services;
 
+use Yab\Quazar\Models\Refund;
+use Yab\Crypto\Services\Crypto;
 use Illuminate\Support\Facades\Config;
 use Yab\Quazar\Services\TransactionService;
 use Yab\Quazar\Repositories\OrderRepository;
@@ -124,20 +126,32 @@ class OrderService
             $this->logistics->cancelOrder($order);
 
             if ($order->hasActiveOrderItems()) {
-                $this->transactions->refund($order->transaction('uuid'), $order->remainingValue());
-            }
+                $refund = $this->transactions->refund($order->transaction('uuid'), $order->remainingValue());
 
-            foreach ($order->items as $item) {
-                $item->update([
-                    'was_refunded' => true,
-                    'status' => 'cancelled',
-                ]);
-            }
+                if ($refund) {
+                    app(Refund::class)->create([
+                        'transaction_id' => $order->transaction('id'),
+                        'provider_id' => $refund->id,
+                        'uuid' => Crypto::uuid(),
+                        'amount' => ($refund->amount * 0.01),
+                        'provider' => 'Stripe',
+                        'charge' => $refund->charge,
+                        'currency' => $refund->currency,
+                    ]);
 
-            return $this->update($order->id, [
-                'status' => 'cancelled',
-                'is_shipped' => false,
-            ]);
+                    foreach ($order->items as $item) {
+                        $item->update([
+                            'was_refunded' => true,
+                            'status' => 'cancelled',
+                        ]);
+                    }
+
+                    return $this->update($order->id, [
+                        'status' => 'cancelled',
+                        'is_shipped' => false,
+                    ]);
+                }
+            }
         }
 
         return false;
