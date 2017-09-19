@@ -25,4 +25,12 @@ class Variant extends QuarxModel
     {
         return app(ProductService::class)->variantOptions($this);
     }
+
+    public function rawValue($value)
+    {
+        $valueWithoutParenthesis = preg_replace("/\([^)]+\)/","", $value);
+        $valueWithoutSquareParenthesis = preg_replace("/\[[^)]+\]/","", $valueWithoutParenthesis);
+
+        return ucfirst($valueWithoutSquareParenthesis);
+    }
 }

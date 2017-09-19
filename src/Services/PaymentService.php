@@ -6,21 +6,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Yab\Crypto\Services\Crypto;
 use Yab\Quazar\Models\Coupon;
-use Yab\Quazar\Models\Transactions;
+use Yab\Quazar\Models\Transaction;
 
 class PaymentService
 {
     public $user;
 
     public function __construct(
-        Transactions $transactions,
+        Transaction $transaction,
         OrderService $orderService,
-        LogisticService $logisticService
+        LogisticService $logisticService,
+        OrderItemService $orderItemService
     ) {
         $this->user = auth()->user();
-        $this->transaction = $transactions;
+        $this->transaction = $transaction;
         $this->orderService = $orderService;
         $this->logistic = $logisticService;
+        $this->orderItemService = $orderItemService;
     }
 
     /*
@@ -109,19 +111,36 @@ class PaymentService
     {
         $customerService = app(CustomerProfileService::class);
 
-        $this->orderService->create([
+        $shippingAddress = json_encode([
+            'street' => $customerService->shippingAddress('street'),
+            'postal' => $customerService->shippingAddress('postal'),
+            'city' => $customerService->shippingAddress('city'),
+            'state' => $customerService->shippingAddress('state'),
+            'country' => $customerService->shippingAddress('country'),
+        ]);
+
+        $order = $this->orderService->create([
             'uuid' => Crypto::uuid(),
             'user_id' => $user->id,
             'transaction_id' => $transaction->id,
             'details' => json_encode($items),
-            'shipping_address' => json_encode([
-                'street' => $customerService->shippingAddress('street'),
-                'postal' => $customerService->shippingAddress('postal'),
-                'city' => $customerService->shippingAddress('city'),
-                'state' => $customerService->shippingAddress('state'),
-                'country' => $customerService->shippingAddress('country'),
-             ]),
+            'shipping_address' => $shippingAddress,
         ]);
+
+        foreach ($items as $product) {
+            $productCost = $this->orderItemService->getCostDetails($product);
+
+            $this->orderItemService->create([
+                'order_id' => $order->id,
+                'product_id' => $product->id,
+                'quantity' => $product->quantity,
+                'variants' => $product->product_variants,
+                'subtotal' => $productCost['subtotal'],
+                'shipping' => $productCost['shipping'],
+                'tax' => $productCost['tax'],
+                'total' => $productCost['total'],
+            ]);
+        }
 
         return $this->logistic->afterPlaceOrder($user, $transaction, $items);
     }

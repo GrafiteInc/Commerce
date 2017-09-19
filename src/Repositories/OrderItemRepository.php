@@ -3,11 +3,13 @@
 namespace Yab\Quazar\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use Yab\Quazar\Models\Order;
+use Yab\Quazar\Models\OrderItem;
 
-class OrderRepository
+class OrderItemRepository
 {
-    public function __construct(Order $model)
+    public $model;
+
+    public function __construct(OrderItem $model)
     {
         $this->model = $model;
     }
@@ -41,7 +43,7 @@ class OrderRepository
     {
         $query = $this->model->orderBy('created_at', 'desc');
 
-        $columns = Schema::getColumnListing('orders');
+        $columns = Schema::getColumnListing('order_items');
         $query->where('id', '>', 0);
         $query->where('id', 'LIKE', '%'.$payload.'%');
 
@@ -71,45 +73,9 @@ class OrderRepository
      *
      * @return \Illuminate\Support\Collection|null|static|Orders
      */
-    public function findOrdersById($id)
+    public function findItemsByOrderId($id)
     {
-        return $this->model->find($id);
-    }
-
-    /**
-     * Find Orders by given id.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Support\Collection|null|static|Orders
-     */
-    public function getByCustomer($id)
-    {
-        return $this->model->where('user_id', '=', $id);
-    }
-
-    /**
-     * Find Orders by given id.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Support\Collection|null|static|Orders
-     */
-    public function getByCustomerAndId($customer, $id)
-    {
-        return $this->model->where('user_id', $customer)->where('id', $id)->first();
-    }
-
-    /**
-     * Find Orders by given id.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Support\Collection|null|static|Orders
-     */
-    public function getByCustomerAndUuid($customer, $id)
-    {
-        return $this->model->where('user_id', $customer)->where('uuid', $id)->first();
+        return $this->model->where('order_id', $id)->get();
     }
 
     /**
@@ -122,12 +88,6 @@ class OrderRepository
      */
     public function update($order, $payload)
     {
-        if (isset($payload['is_shipped'])) {
-            $payload['is_shipped'] = true;
-        } else {
-            $payload['is_shipped'] = false;
-        }
-
         return $order->update($payload);
     }
 }

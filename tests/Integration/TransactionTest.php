@@ -25,8 +25,8 @@ class TransactionTest extends TestCase
             'id' => 1,
         ]);
         factory(\Yab\Quazar\Models\Plan::class)->create();
-        factory(\Yab\Quazar\Models\Transactions::class)->create();
-        factory(\Yab\Quazar\Models\Transactions::class)->create([
+        factory(\Yab\Quazar\Models\Transaction::class)->create();
+        factory(\Yab\Quazar\Models\Transaction::class)->create([
             'id' => 999,
         ]);
     }
@@ -47,7 +47,11 @@ class TransactionTest extends TestCase
 
     public function testEdit()
     {
-        factory(\Yab\Quazar\Models\Transactions::class)->create([
+        factory(\Yab\Quazar\Models\Order::class)->create([
+            'transaction_id' => 2,
+        ]);
+
+        factory(\Yab\Quazar\Models\Transaction::class)->create([
             'id' => 2,
             'notes' => 'Le notes!',
         ]);
@@ -74,7 +78,7 @@ class TransactionTest extends TestCase
 
     public function testUpdate()
     {
-        factory(\Yab\Quazar\Models\Transactions::class)->create([
+        factory(\Yab\Quazar\Models\Transaction::class)->create([
             'id' => 4,
             'notes' => 'Star Wars !',
         ]);

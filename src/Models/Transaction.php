@@ -3,8 +3,10 @@
 namespace Yab\Quazar\Models;
 
 use Yab\Quarx\Models\QuarxModel;
+use Yab\Quazar\Models\Order;
+use Yab\Quazar\Models\Refund;
 
-class Transactions extends QuarxModel
+class Transaction extends QuarxModel
 {
     public $table = 'transactions';
 
@@ -33,4 +35,14 @@ class Transactions extends QuarxModel
     ];
 
     public static $rules = [];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function refunds()
+    {
+        return $this->hasMany(Refund::class);
+    }
 }

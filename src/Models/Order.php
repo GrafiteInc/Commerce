@@ -3,8 +3,9 @@
 namespace Yab\Quazar\Models;
 
 use Yab\Quarx\Models\QuarxModel;
+use Yab\Quazar\Models\OrderItem;
 
-class Orders extends QuarxModel
+class Order extends QuarxModel
 {
     public $table = 'orders';
 
@@ -28,13 +29,22 @@ class Orders extends QuarxModel
 
     public function transaction($key = null)
     {
-        $transaction = Transactions::find($this->transaction_id);
+        $transaction = Transaction::find($this->transaction_id);
 
         if (!is_null($transaction) && !is_null($key)) {
             return $transaction->$key;
         }
 
         return $transaction;
+    }
+
+    public function hasActiveOrderItems()
+    {
+        if ($this->items->where('was_refunded', false)->count() > 0) {
+            return true;
+        }
+
+        return false;
     }
 
     public function shippingAddress($key = null)
@@ -46,5 +56,15 @@ class Orders extends QuarxModel
         }
 
         return $address;
+    }
+
+    /**
+     * Get the corresponding OrderItems
+     *
+     * @return Relationship
+     */
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

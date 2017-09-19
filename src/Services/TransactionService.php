@@ -4,7 +4,7 @@ namespace Yab\Quazar\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
-use Yab\Quazar\Models\Orders;
+use Yab\Quazar\Models\Order;
 use Yab\Quazar\Repositories\TransactionRepository;
 
 class TransactionService
@@ -77,7 +77,7 @@ class TransactionService
      */
     public function getTransactionOrder($id)
     {
-        return app(Orders::class)->where('transaction_id', $id)->get();
+        return app(Order::class)->where('transaction_id', $id)->first();
     }
 
     /**
@@ -102,17 +102,19 @@ class TransactionService
      *
      * @return bool
      */
-    public function refund($uuid)
+    public function refund($uuid, $amount = null)
     {
         $transaction = $this->repo->findByUUID($uuid);
+        $refund = app(StripeService::class)->refund($transaction->provider_id, $amount);
 
-        if (app(StripeService::class)->refund($transaction->provider_id)) {
+        if ($refund) {
             $transaction->update([
                 'refund_date' => Carbon::now(),
             ]);
+
             app(LogisticService::class)->afterRefund($transaction);
 
-            return true;
+            return $refund;
         }
 
         return false;

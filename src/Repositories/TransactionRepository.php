@@ -4,12 +4,12 @@ namespace Yab\Quazar\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
-use Yab\Quazar\Models\Transactions;
+use Yab\Quazar\Models\Transaction;
 use Yab\Quazar\Services\LogisticService;
 
 class TransactionRepository
 {
-    public function __construct(Transactions $model)
+    public function __construct(Transaction $model)
     {
         $this->model = $model;
     }
@@ -31,8 +31,8 @@ class TransactionRepository
      */
     public function overMonths($months = 1)
     {
-        $threeMonthsAgo = Carbon::now()->subMonths($months)->format('Y-m-d');
-        $now = Carbon::now()->format('Y-m-d');
+        $threeMonthsAgo = Carbon::now()->subMonths($months)->format('Y-m-d 00:00:00');
+        $now = Carbon::now()->format('Y-m-d 23:59:59');
 
         return $this->model->orderBy('created_at', 'asc')->where('created_at', '>=', $threeMonthsAgo)->where('created_at', '<=', $now)->get();
     }

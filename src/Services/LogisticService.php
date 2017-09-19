@@ -42,6 +42,18 @@ class LogisticService implements LogisticServiceInterface
     }
 
     /**
+     * Get single item shipping
+     *
+     * @param User $user
+     *
+     * @return float
+     */
+    public function singleItemShipping($item, $user)
+    {
+        return app(StoreLogistics::class)->singleItemShipping($user);
+    }
+
+    /**
      * Calculate the Tax.
      *
      * @return int
@@ -167,5 +179,17 @@ class LogisticService implements LogisticServiceInterface
     public function cancelOrder($order)
     {
         return app(StoreLogistics::class)->cancelOrder($order);
+    }
+
+    /**
+     * After an Item has been cancelled
+     *
+     * @param Orders $order
+     *
+     * @return bool
+     */
+    public function afterItemCancelled($orderItem)
+    {
+        return app(StoreLogistics::class)->afterItemCancelled($orderItem);
     }
 }

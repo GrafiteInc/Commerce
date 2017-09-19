@@ -4,7 +4,7 @@ namespace Yab\Quazar\Services;
 
 use Carbon\Carbon;
 use Laravel\Cashier\Subscription;
-use Yab\Quazar\Models\Transactions;
+use Yab\Quazar\Models\Transaction;
 
 class AnalyticsService
 {
@@ -21,8 +21,8 @@ class AnalyticsService
 
         foreach ($collected as $key => $value) {
             foreach ($value as $transaction) {
-                if (!is_null($transaction->refund_date)) {
-                    $balanceValues['refunds'] += $transaction->total;
+                if ($transaction->refunds->count() > 0) {
+                    $balanceValues['refunds'] += $transaction->refunds->sum('amount');
                 } else {
                     $balanceValues['income'] += $transaction->total;
                 }
@@ -68,7 +68,7 @@ class AnalyticsService
         foreach (range(1, $monthsAgo->diffInDays($now)) as $day) {
             $date = Carbon::now()->subMonths($months)->addDays($day);
             $daysColleciton[] = $date->format('d-M-y');
-            $transactionsCollection[$date->format('d-M-y')] = Transactions::where('created_at', 'like', $date->format('Y-m-d').'%')->pluck('total')->sum();
+            $transactionsCollection[$date->format('d-M-y')] = Transaction::where('created_at', 'like', $date->format('Y-m-d').'%')->pluck('total')->sum();
             $subscriptionsSumByDay = $this->getSubscriptionSum($date);
             $subscriptionCollection[$date->format('d-M-y')] = $subscriptionsSumByDay;
         }

@@ -33,6 +33,18 @@ class StoreLogistics implements LogisticServiceInterface
     }
 
     /**
+     * Calculate an items shipping cost.
+     *
+     * @param user $user
+     *
+     * @return int
+     */
+    public function singleItemShipping($item, $user)
+    {
+        return 0;
+    }
+
+    /**
      * Calculate the Tax.
      *
      * @return int
@@ -129,6 +141,14 @@ class StoreLogistics implements LogisticServiceInterface
     {
         // sets order to shipped - and does any needed logic
         Log::info('Order was cancelled');
+
+        return true;
+    }
+
+    public function afterItemCancelled($orderItem)
+    {
+        // sets order to shipped - and does any needed logic
+        Log::info('Order item was cancelled');
 
         return true;
     }

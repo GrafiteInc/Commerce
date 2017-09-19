@@ -15,6 +15,7 @@ class StripeServiceTest extends TestCase
         $plan = Mockery::mock(\Stripe\Plan::class);
         $refund = Mockery::mock(\Stripe\Refund::class);
         $coupon = Mockery::mock(\Stripe\Coupon::class);
+        $this->transaction = factory(\Yab\Quazar\Models\Transaction::class)->create();
 
         $planObject = Mockery::mock('StdClass');
         $planObject->shouldReceive('delete')->andReturn(true);
@@ -25,7 +26,10 @@ class StripeServiceTest extends TestCase
         $plan->shouldReceive('retrieve')->andReturn($planObject);
         $plan->shouldReceive('create')->andReturn(true);
 
-        $refund->shouldReceive('create')->with(['charge' => 999])->andReturn(true);
+        $refund->shouldReceive('create')->with([
+            'charge' => $this->transaction,
+            'amount' => $this->transaction->total
+        ])->andReturn(true);
 
         $this->service = new StripeService($stripe, $plan, $coupon, $refund);
     }
@@ -59,7 +63,7 @@ class StripeServiceTest extends TestCase
 
     public function testRefund()
     {
-        $response = $this->service->refund(999);
+        $response = $this->service->refund($this->transaction);
         $this->assertEquals($response, true);
     }
 }

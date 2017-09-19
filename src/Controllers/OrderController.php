@@ -4,6 +4,7 @@ namespace Yab\Quazar\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Yab\Quazar\Services\OrderItemService;
 use Yab\Quazar\Services\OrderService;
 
 class OrderController extends Controller
@@ -57,6 +58,20 @@ class OrderController extends Controller
     }
 
     /**
+     * Show order item
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function item($id, Request $request)
+    {
+        $orderItem = app(OrderItemService::class)->find($id);
+
+        return view('quazar::orders.item')->with('orderItem', $orderItem);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\CreateProductRequest $request
@@ -73,6 +88,24 @@ class OrderController extends Controller
         }
 
         return back()->with('message', 'Failed to update');
+    }
+
+    /**
+     * Cancel an order item
+     *
+     * @param  Request $request
+     *
+     * @return Response
+     */
+    public function cancelItem(Request $request)
+    {
+        $result = app(OrderItemService::class)->cancel($request->id);
+
+        if ($result) {
+            return back()->with('message', 'Successfully cancelled');
+        }
+
+        return back()->with('message', 'Failed to cancel');
     }
 
     /**

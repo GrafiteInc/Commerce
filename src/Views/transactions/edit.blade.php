@@ -29,12 +29,13 @@
     {!! Form::model($transaction, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.transactions.update', $transaction->id], 'method' => 'patch']) !!}
 
         <div class="row">
-            <div class="col-md-12 raw-margin-bottom-24">
+            <div class="col-md-12 raw-margin-bottom-24 text-center">
                 <h2 class="text-center raw-margin-bottom-24">#{{ $transaction->uuid }}</h2>
-                @if (!empty($order))
-                    @foreach($order as $shipment)
-                        <h4 class="text-center raw-margin-bottom-24"><a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/orders/'.$shipment->id.'/edit') }}">Order #:{{ $shipment->uuid }}</a></h4>
-                    @endforeach
+                @if ($order->hasActiveOrderItems())
+                    <span class="alert alert-warning text-center">
+                        You must cancel this order if you wish to refund this transaction.
+                    </span>
+                    <h4 class="text-center raw-margin-bottom-24 raw-margin-top-24"><a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/orders/'.$order->id.'/edit') }}">Order #:{{ $order->uuid }}</a></h4>
                 @endif
                 @if (!is_null($transaction->refund_date))
                     <div class="alert alert-success text-center">
@@ -48,16 +49,16 @@
             <div class="col-md-6">
                 <table class="table table-striped">
                     <thead>
-                        <td>Name</td>
-                        <td>Quantity</td>
-                        <td>Price</td>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
                     </thead>
                     <tbody>
-                        @foreach(json_decode($transaction->cart) as $item)
+                        @foreach($order->items as $item)
                         <tr>
-                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->product->name }}</td>
                             <td>{{ $item->quantity }}</td>
-                            <td>{{ $item->price }}</td>
+                            <td>{{ $item->total }}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -66,26 +67,26 @@
             <div class="col-md-6">
                 <table class="table table-striped">
                     <tr>
-                        <td>Subtotal</td>
+                        <td><b>Subtotal</b></td>
                         <td>{{ $transaction->subtotal }}</td>
                     </tr>
                     <tr>
-                        <td>Tax</td>
+                        <td><b>Tax</b></td>
                         <td>{{ $transaction->tax }}</td>
                     </tr>
                     <tr>
-                        <td>Shipping</td>
+                        <td><b>Shipping</b></td>
                         <td>{{ $transaction->shipping }}</td>
                     </tr>
                     @if ($transaction->coupon)
                     <tr>
-                        <td>Coupon</td>
+                        <td><b>Coupon</b></td>
                         <td>{{ app(Yab\Quazar\Models\Coupon::class)->fill(json_decode($transaction->coupon, true))->dollars }}</td>
                     </tr>
                     @endif
                     <tr>
                         <td><b>Total</b></td>
-                        <td><b>{{ $transaction->total }}</b></td>
+                        <td>{{ $transaction->total }}</td>
                     </tr>
                 </table>
             </div>
@@ -108,6 +109,30 @@
             @input_maker_create('uuid', ['type' => 'hidden'], $transaction)
             {!! Form::submit('Refund', ['class' => 'btn btn-warning']) !!}
         {!! Form::close() !!}
+    @endif
+
+    @if ($transaction->refunds->count() > 0)
+        <div class="row raw-margin-top-24">
+            <div class="col-md-12">
+                <div class="well text-center">
+                    <span class="lead">Refunds</span>
+                </div>
+                <table class="table table-striped">
+                    <tr>
+                        <th>Item</th>
+                        <th>Amount</th>
+                        <th class="text-right">Date</th>
+                    </tr>
+                    @foreach($transaction->refunds as $refund)
+                    <tr>
+                        <td>{{ $refund->orderItem->product->name }}</td>
+                        <td>{{ $refund->amount }}</td>
+                        <td class="text-right">{{ $refund->created_at }}</td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
+        </div>
     @endif
 @endsection
 

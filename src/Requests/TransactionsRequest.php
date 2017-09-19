@@ -4,7 +4,7 @@ namespace Yab\Quazar\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Yab\Quazar\Models\Transactions;
+use Yab\Quazar\Models\Transaction;
 
 class TransactionsRequest extends FormRequest
 {
@@ -25,6 +25,6 @@ class TransactionsRequest extends FormRequest
      */
     public function rules()
     {
-        return Transactions::$rules;
+        return Transaction::$rules;
     }
 }
