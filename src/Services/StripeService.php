@@ -136,19 +136,15 @@ class StripeService
     /**
      * Refund a purchase.
      *
-     * @param obj $user
-     * @param obj $transaction
+     * @param string $transactionId
+     * @param int $amount
      *
      * @return obj
      */
-    public function refund($transaction, $amount = null)
+    public function refund($transactionId, $amount)
     {
-        if (is_null($amount)) {
-            $amount = $transaction->total;
-        }
-
         return $this->refund->create([
-            'charge' => $transaction,
+            'charge' => $transactionId,
             'amount' => $amount,
         ]);
     }

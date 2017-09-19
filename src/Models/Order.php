@@ -47,6 +47,17 @@ class Order extends QuarxModel
         return false;
     }
 
+    public function remainingValue()
+    {
+        $remainingValue = 0;
+
+        foreach ($this->items->where('was_refunded', false)->get() as $item) {
+            $remainingValue += $item->total;
+        }
+
+        return ($remainingValue * 100);
+    }
+
     public function shippingAddress($key = null)
     {
         $address = json_decode($this->shipping_address);
