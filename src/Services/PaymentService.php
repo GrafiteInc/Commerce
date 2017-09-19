@@ -133,6 +133,7 @@ class PaymentService
             $this->orderItemService->create([
                 'order_id' => $order->id,
                 'product_id' => $product->id,
+                'transaction_id' => $transaction->id,
                 'quantity' => $product->quantity,
                 'variants' => $product->product_variants,
                 'subtotal' => $productCost['subtotal'],

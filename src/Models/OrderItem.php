@@ -2,10 +2,11 @@
 
 namespace Yab\Quazar\Models;
 
-use Yab\Quarx\Models\QuarxModel;
 use Yab\Quazar\Models\Order;
 use Yab\Quazar\Models\Product;
 use Yab\Quazar\Models\Variant;
+use Yab\Quarx\Models\QuarxModel;
+use Yab\Quazar\Models\Transaction;
 
 class OrderItem extends QuarxModel
 {
@@ -18,6 +19,7 @@ class OrderItem extends QuarxModel
     public $fillable = [
         'order_id',
         'product_id',
+        'transaction_id',
         'quantity',
         'variants',
         'was_refunded',
@@ -58,6 +60,16 @@ class OrderItem extends QuarxModel
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * Get the corresponding transaction, if there is one
+     *
+     * @return Relationship
+     */
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
     }
 
     /**

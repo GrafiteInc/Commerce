@@ -125,31 +125,33 @@ class OrderService
         if ($order->status != 'complete') {
             $this->logistics->cancelOrder($order);
 
-            foreach ($order->items as $item) {
-                $item->update([
-                    'was_refunded' => true,
-                    'status' => 'cancelled',
-                ]);
+            if ($order->hasActiveOrderItems()) {
+                $refund = $this->transactions->refund($order->transaction('uuid'), $order->remainingValue());
+
+                if ($refund) {
+                    app(Refund::class)->create([
+                        'transaction_id' => $order->transaction('id'),
+                        'provider_id' => $refund->id,
+                        'uuid' => Crypto::uuid(),
+                        'amount' => ($refund->amount * 0.01),
+                        'provider' => 'Stripe',
+                        'charge' => $refund->charge,
+                        'currency' => $refund->currency,
+                    ]);
+
+                    foreach ($order->items as $item) {
+                        $item->update([
+                            'was_refunded' => true,
+                            'status' => 'cancelled',
+                        ]);
+                    }
+
+                    return $this->update($order->id, [
+                        'status' => 'cancelled',
+                        'is_shipped' => false,
+                    ]);
+                }
             }
-
-            if (!$order->hasActiveOrderItems()) {
-                $refund = $this->transactions->refund($order->transaction('uuid'));
-
-                app(Refund::class)->create([
-                    'transaction_id' => $order->transaction('id'),
-                    'provider_id' => $refund->id,
-                    'uuid' => Crypto::uuid(),
-                    'amount' => ($refund->amount * 0.01),
-                    'provider' => 'Stripe',
-                    'charge' => $refund->charge,
-                    'currency' => $refund->currency,
-                ]);
-            }
-
-            return $this->update($order->id, [
-                'status' => 'cancelled',
-                'is_shipped' => false,
-            ]);
         }
 
         return false;
