@@ -45,4 +45,13 @@ class Transaction extends QuarxModel
     {
         return $this->hasMany(Refund::class);
     }
+
+    /**
+     * Get the full transaction amount, in cents
+     * 
+     */
+    public function getAmountAttribute()
+    {
+        return $this->total * 100;
+    }
 }
