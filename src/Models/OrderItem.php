@@ -73,6 +73,16 @@ class OrderItem extends QuarxModel
     }
 
     /**
+     * Determine if this order item is the last non-refunded item in the order
+     *
+     * @return boolean
+     */
+    public function isLastNonRefundedItem()
+    {
+        return $this->was_refunded === 0 && $this->order->items->where('was_refunded', 0)->count() === 1;
+    }
+
+    /**
      * Get the variants of the product
      *
      * @return Attribute

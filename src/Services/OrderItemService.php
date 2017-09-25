@@ -112,16 +112,21 @@ class OrderItemService
     {
         try {
             $orderItem = $this->find($id);
+
             $transaction = null;
+            $amount = $orderItem->amount;
 
             if ($orderItem->transaction) {
                 $transaction = $orderItem->transaction;
             }
             else {
                 $transaction = $orderItem->order->transaction();
+                if ($orderItem->isLastNonRefundedItem()) {
+                    $amount = null;
+                }
             }
 
-            $refund = app(TransactionService::class)->refund($transaction->uuid, $orderItem->amount);
+            $refund = app(TransactionService::class)->refund($transaction->uuid, $amount);
 
             if ($refund) {
                 $orderItem->update([
@@ -139,6 +144,8 @@ class OrderItemService
                     'charge' => $refund->charge,
                     'currency' => $refund->currency,
                 ]);
+
+                $orderItem->load('order');
 
                 app(LogisticService::class)->afterRefund($transaction);
                 app(LogisticService::class)->afterItemCancelled($orderItem);
