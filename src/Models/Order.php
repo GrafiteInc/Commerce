@@ -58,13 +58,13 @@ class Order extends QuarxModel
 
     public function remainingValue()
     {
-        $remainingValue = 0;
+        $refundedValue = 0;
 
-        foreach ($this->items->where('was_refunded', false) as $item) {
-            $remainingValue += $item->total;
+        foreach ($this->items->where('was_refunded', true) as $item) {
+            $refundedValue += $item->total;
         }
 
-        return ($remainingValue * 100);
+        return (($this->transaction('total') - $refundedValue) * 100);
     }
 
     public function shippingAddress($key = null)
