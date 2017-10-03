@@ -106,10 +106,6 @@ class TransactionService
     {
         $transaction = $this->repo->findByUUID($uuid);
 
-        if (is_null($amount)) {
-            $amount = $transaction->amount;
-        }
-
         $refund = app(StripeService::class)->refund($transaction->provider_id, $amount);
 
         if ($refund) {

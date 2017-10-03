@@ -137,7 +137,7 @@ class StripeService
      * Refund a purchase.
      *
      * @param string $transactionId
-     * @param int $amount
+     * @param int|null $amount
      *
      * @return obj
      */
