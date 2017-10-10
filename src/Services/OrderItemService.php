@@ -147,9 +147,6 @@ class OrderItemService
 
                 $orderItem->load('order');
 
-                app(LogisticService::class)->afterRefund($transaction);
-                app(LogisticService::class)->afterItemCancelled($orderItem);
-
                 if (!$orderItem->order->hasActiveOrderItems()) {
                     $orderItem->order->update([
                         'status' => 'cancelled',
@@ -158,6 +155,9 @@ class OrderItemService
                         'refund_date' => Carbon::now(),
                     ]);
                 }
+
+                app(LogisticService::class)->afterRefund($transaction);
+                app(LogisticService::class)->afterItemCancelled($orderItem);
 
                 return true;
             }
