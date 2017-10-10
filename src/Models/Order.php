@@ -2,6 +2,7 @@
 
 namespace Yab\Quazar\Models;
 
+use App\Models\User;
 use Yab\Quarx\Models\QuarxModel;
 use Yab\Quazar\Models\OrderItem;
 
@@ -86,5 +87,15 @@ class Order extends QuarxModel
     public function items()
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    /**
+     * Determine the user that made this order
+     * 
+     * @return Relationship
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
