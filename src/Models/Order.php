@@ -87,4 +87,14 @@ class Order extends QuarxModel
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    /**
+     * Determine the user that made this order
+     * 
+     * @return Relationship
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
