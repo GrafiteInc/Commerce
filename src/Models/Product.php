@@ -109,11 +109,6 @@ class Product extends QuarxModel
         return false;
     }
 
-    public function details()
-    {
-        return app(ProductService::class)->productDetails($this);
-    }
-
     public function detailsBtn($class = '')
     {
         return app(ProductService::class)->productDetailsBtn($this, $class);
