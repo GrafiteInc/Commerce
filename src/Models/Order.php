@@ -2,6 +2,7 @@
 
 namespace Yab\Quazar\Models;
 
+use App\Models\User;
 use Yab\Quarx\Models\QuarxModel;
 use Yab\Quazar\Models\OrderItem;
 
