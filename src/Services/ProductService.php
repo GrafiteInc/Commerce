@@ -66,7 +66,7 @@ class ProductService
         }
 
         if (isset($payload['hero_image'])) {
-            $heroFile = FileService::saveFile($payload['hero_image'], 'heroes');
+            $heroFile = FileService::saveFile($payload['hero_image'], 'heroes', [], true);
             $payload['hero_image'] = $heroFile['name'];
         } else {
             $payload['hero_image'] = '';
@@ -108,7 +108,7 @@ class ProductService
         $payload['url'] = Quarx::convertToURL($payload['url']);
 
         if (isset($payload['hero_image'])) {
-            $heroFile = FileService::saveFile($payload['hero_image'], 'heroes');
+            $heroFile = FileService::saveFile($payload['hero_image'], 'heroes', [], true);
             $payload['hero_image'] = $heroFile['name'];
         } else {
             $payload['hero_image'] = $product->hero_image;
