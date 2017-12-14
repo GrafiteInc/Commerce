@@ -66,7 +66,7 @@ class PlanController extends Controller
             return redirect(config('quarx.backend-route-prefix', 'quarx').'/plans/'.$result->id.'/edit')->with('message', 'Successfully created');
         }
 
-        return redirect('quazar::plans')->with('message', 'Failed to create');
+        return redirect('quazar::plans')->with('error', 'Failed to create');
     }
 
     /**
@@ -102,7 +102,7 @@ class PlanController extends Controller
             return back()->with('message', 'Successfully updated');
         }
 
-        return back()->with('message', 'Failed to update');
+        return back()->with('error', 'Failed to update');
     }
 
     /**
@@ -121,7 +121,7 @@ class PlanController extends Controller
             return back()->with('message', 'Successfully updated');
         }
 
-        return back()->with('message', 'Failed to update');
+        return back()->with('error', 'Failed to update');
     }
 
     /**
@@ -140,7 +140,7 @@ class PlanController extends Controller
             return back()->with('message', 'Successfully cancelled');
         }
 
-        return back()->with('message', 'Failed to cancel');
+        return back()->with('error', 'Failed to cancel');
     }
 
     /**
@@ -158,6 +158,6 @@ class PlanController extends Controller
             return redirect(config('quarx.backend-route-prefix', 'quarx').'/plans')->with('message', 'Successfully deleted');
         }
 
-        return redirect(config('quarx.backend-route-prefix', 'quarx').'/plans')->with('message', 'Failed to delete');
+        return redirect(config('quarx.backend-route-prefix', 'quarx').'/plans')->with('error', 'Failed to delete');
     }
 }

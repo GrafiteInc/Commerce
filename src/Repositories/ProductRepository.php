@@ -27,9 +27,15 @@ class ProductRepository
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function paginated($paginate)
+    public function paginated()
     {
-        return $this->model->orderBy('created_at', 'desc')->paginate($paginate);
+        if (isset(request()->dir) && isset(request()->field)) {
+            $model = $this->model->orderBy(request()->field, request()->dir);
+        } else {
+            $model = $this->model->orderBy('created_at', 'desc');
+        }
+
+        return $model->paginate(config('quarx.pagination', 25));
     }
 
     /**

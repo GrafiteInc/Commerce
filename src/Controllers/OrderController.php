@@ -87,7 +87,7 @@ class OrderController extends Controller
             return back()->with('message', 'Successfully updated');
         }
 
-        return back()->with('message', 'Failed to update');
+        return back()->with('error', 'Failed to update');
     }
 
     /**
@@ -105,7 +105,7 @@ class OrderController extends Controller
             return back()->with('message', 'Successfully cancelled');
         }
 
-        return back()->with('message', 'Failed to cancel');
+        return back()->with('error', 'Failed to cancel');
     }
 
     /**
@@ -124,6 +124,6 @@ class OrderController extends Controller
             return redirect(config('quarx.backend-route-prefix', 'quarx').'/orders')->with('message', 'Successfully cancelled');
         }
 
-        return redirect(config('quarx.backend-route-prefix', 'quarx').'/orders')->with('message', 'Failed to cancel');
+        return redirect(config('quarx.backend-route-prefix', 'quarx').'/orders')->with('error', 'Failed to cancel');
     }
 }

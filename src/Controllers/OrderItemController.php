@@ -43,6 +43,6 @@ class OrderItemController extends Controller
             return back()->with('message', 'Successfully cancelled');
         }
 
-        return back()->with('message', 'Failed to cancel');
+        return back()->with('error', 'Failed to cancel');
     }
 }

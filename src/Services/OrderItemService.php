@@ -118,9 +118,9 @@ class OrderItemService
 
             if ($orderItem->transaction) {
                 $transaction = $orderItem->transaction;
-            }
-            else {
+            } else {
                 $transaction = $orderItem->order->transaction();
+
                 if ($orderItem->isLastNonRefundedItem()) {
                     $amount = null;
                 }
@@ -161,8 +161,7 @@ class OrderItemService
 
                 return true;
             }
-        } 
-        catch (InvalidRequest $e) {
+        } catch (InvalidRequest $e) {
             return false;
         }
     }

@@ -23,9 +23,9 @@
         @else
             <table class="table table-striped">
                 <thead>
-                    <th>Name</th>
-                    <th class="raw-m-hide">Code</th>
-                    <th class="raw-m-hide">Price</th>
+                    <th>{!! sortable('Name', 'name') !!}</th>
+                    <th class="raw-m-hide">{!! sortable('Code', 'code') !!}</th>
+                    <th class="raw-m-hide">{!! sortable('Price', 'price') !!}</th>
                     <th class="raw-m-hide">Stock</th>
                     <th class="raw-m-hide">Available</th>
                     <th class="raw-m-hide">Is Published</th>

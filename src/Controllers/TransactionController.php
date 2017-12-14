@@ -75,7 +75,7 @@ class TransactionController extends Controller
             return back()->with('message', 'Successfully updated');
         }
 
-        return back()->with('message', 'Failed to update');
+        return back()->with('error', 'Failed to update');
     }
 
     /**
@@ -93,6 +93,6 @@ class TransactionController extends Controller
             return back()->with('message', 'Successfully refunded');
         }
 
-        return back()->with('message', 'Failed to refund');
+        return back()->with('error', 'Failed to refund');
     }
 }

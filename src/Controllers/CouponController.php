@@ -67,7 +67,7 @@ class CouponController extends Controller
             return redirect(config('quarx.backend-route-prefix', 'quarx').'/coupons/'.$result->id)->with('message', 'Successfully created');
         }
 
-        return redirect('quazar::coupons')->with('message', 'Failed to create');
+        return redirect('quazar::coupons')->with('error', 'Failed to create');
     }
 
     /**
@@ -100,6 +100,6 @@ class CouponController extends Controller
             return redirect(config('quarx.backend-route-prefix', 'quarx').'/coupons')->with('message', 'Successfully deleted');
         }
 
-        return redirect(config('quarx.backend-route-prefix', 'quarx').'/coupons')->with('message', 'Failed to delete');
+        return redirect(config('quarx.backend-route-prefix', 'quarx').'/coupons')->with('error', 'Failed to delete');
     }
 }

@@ -18,7 +18,7 @@ class CreateCouponsTable extends Migration
             $table->string('code');
             $table->string('currency');
             $table->string('discount_type')->default('dollar');
-            $table->float('amount')->default(0);
+            $table->decimal('amount')->default(0);
             $table->integer('limit')->default(1);
             $table->string('stripe_id');
             $table->boolean('for_subscriptions')->default(false);
