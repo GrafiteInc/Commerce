@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Quazar\Services;
+namespace Grafite\Commerce\Services;
 
-use Yab\Quarx\Facades\QuarxServiceFacade as Quarx;
+use Grafite\Cms\Facades\CmsServiceFacade as Cms;
 use Illuminate\Support\Facades\Config;
-use Yab\Quarx\Services\FileService;
-use Yab\Quazar\Repositories\ProductRepository;
-use Yab\Quazar\Repositories\ProductVariantRepository;
+use Grafite\Cms\Services\FileService;
+use Grafite\Commerce\Repositories\ProductRepository;
+use Grafite\Commerce\Repositories\ProductVariantRepository;
 
 class ProductService
 {
@@ -32,7 +32,7 @@ class ProductService
      */
     public function paginated()
     {
-        return $this->repo->paginated(config('quarx.pagination', 25));
+        return $this->repo->paginated(config('cms.pagination', 25));
     }
 
     /**
@@ -44,7 +44,7 @@ class ProductService
      */
     public function search($payload)
     {
-        return $this->repo->search($payload, config('quarx.pagination', 25));
+        return $this->repo->search($payload, config('cms.pagination', 25));
     }
 
     /**
@@ -56,17 +56,17 @@ class ProductService
      */
     public function create($payload)
     {
-        $payload['url'] = Quarx::convertToURL($payload['url']);
+        $payload['url'] = Cms::convertToURL($payload['url']);
 
         if (isset($payload['file'])) {
-            $downloadFile = FileService::saveFile($payload['file'], 'downloads');
+            $downloadFile = app(FileService::class)->saveFile($payload['file'], 'downloads');
             $payload['file'] = $downloadFile['name'];
         } else {
             $payload['file'] = '';
         }
 
         if (isset($payload['hero_image'])) {
-            $heroFile = FileService::saveFile($payload['hero_image'], 'heroes', [], true);
+            $heroFile = app(FileService::class)->saveFile($payload['hero_image'], 'heroes', [], true);
             $payload['hero_image'] = $heroFile['name'];
         } else {
             $payload['hero_image'] = '';
@@ -105,10 +105,10 @@ class ProductService
     {
         $product = $this->repo->find($id);
 
-        $payload['url'] = Quarx::convertToURL($payload['url']);
+        $payload['url'] = Cms::convertToURL($payload['url']);
 
         if (isset($payload['hero_image'])) {
-            $heroFile = FileService::saveFile($payload['hero_image'], 'heroes', [], true);
+            $heroFile = app(FileService::class)->saveFile($payload['hero_image'], 'heroes', [], true);
             $payload['hero_image'] = $heroFile['name'];
         } else {
             $payload['hero_image'] = $product->hero_image;
@@ -136,7 +136,7 @@ class ProductService
         $product = $this->repo->find($id);
 
         if (isset($payload['file'])) {
-            $savedFile = FileService::saveFile($payload['file'], 'downloads');
+            $savedFile = app(FileService::class)->saveFile($payload['file'], 'downloads');
             $payload['file'] = $savedFile['name'];
         } else {
             $payload['file'] = $product->file;
@@ -176,7 +176,7 @@ class ProductService
      */
     public static function productDetails($product)
     {
-        return view('quazar-frontend::products.details', ['product' => $product])->render();
+        return view('commerce-frontend::products.details', ['product' => $product])->render();
     }
 
     /**
@@ -208,9 +208,9 @@ class ProductService
 
         foreach ($variants as $variant) {
             if (self::isArrayVariant($variant->value)) {
-                $variantHtml .= view('quazar-frontend::products.variants.select', ['variant' => $variant])->render();
+                $variantHtml .= view('commerce-frontend::products.variants.select', ['variant' => $variant])->render();
             } else {
-                $variantHtml .= view('quazar-frontend::products.variants.other', ['variant' => $variant])->render();
+                $variantHtml .= view('commerce-frontend::products.variants.other', ['variant' => $variant])->render();
             }
         }
 

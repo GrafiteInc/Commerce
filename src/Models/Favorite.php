@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Quazar\Models;
+namespace Grafite\Commerce\Models;
 
-use Yab\Quarx\Models\QuarxModel;
-use Yab\Quazar\Models\Product;
+use Grafite\Cms\Models\CmsModel;
+use Grafite\Commerce\Models\Product;
 
-class Favorite extends QuarxModel
+class Favorite extends CmsModel
 {
     public $table = 'favorites';
 

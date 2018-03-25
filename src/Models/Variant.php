@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Quazar\Models;
+namespace Grafite\Commerce\Models;
 
-use Yab\Quarx\Models\QuarxModel;
-use Yab\Quazar\Services\ProductService;
+use Grafite\Cms\Models\CmsModel;
+use Grafite\Commerce\Services\ProductService;
 
-class Variant extends QuarxModel
+class Variant extends CmsModel
 {
     public $table = 'product_variants';
 

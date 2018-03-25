@@ -1,6 +1,6 @@
-{!! Form::model($product, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.products.update', $product->id], 'method' => 'patch', 'files' => true]) !!}
+{!! Form::model($product, ['route' => [config('cms.backend-route-prefix', 'cms').'.products.update', $product->id], 'method' => 'patch', 'files' => true]) !!}
 
-    {!! FormMaker::fromObject($product, config('quazar.forms.details')) !!}
+    {!! FormMaker::fromObject($product, config('commerce.forms.details')) !!}
 
     <div class="form-group text-right">
         <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>

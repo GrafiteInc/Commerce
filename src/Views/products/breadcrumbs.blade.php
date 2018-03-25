@@ -1,8 +1,8 @@
 <div class="row">
     <ol class="breadcrumb">
-        <li><a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/products') !!}">Products</a></li>
+        <li><a href="{!! url(config('cms.backend-route-prefix', 'cms').'/products') !!}">Products</a></li>
 
-            {!! Quarx::breadcrumbs($location) !!}
+            {!! Cms::breadcrumbs($location) !!}
 
         <li class="active"></li>
     </ol>

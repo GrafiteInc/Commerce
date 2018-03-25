@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Quazar\Models;
+namespace Grafite\Commerce\Models;
 
 use App\Models\User;
-use Yab\Quarx\Models\QuarxModel;
-use Yab\Quazar\Models\OrderItem;
+use Grafite\Cms\Models\CmsModel;
+use Grafite\Commerce\Models\OrderItem;
 
-class Order extends QuarxModel
+class Order extends CmsModel
 {
     public $table = 'orders';
 
@@ -41,8 +41,10 @@ class Order extends QuarxModel
 
     public function hasRefundedOrderItems()
     {
-        if ($this->items->where('was_refunded', true)->count() > 0) {
-            return true;
+        if ($this->items->isNotEmpty()) {
+            if ($this->items->where('was_refunded', true)->count() > 0) {
+                return true;
+            }
         }
 
         return false;
@@ -50,8 +52,10 @@ class Order extends QuarxModel
 
     public function hasActiveOrderItems()
     {
-        if ($this->items->where('was_refunded', false)->count() > 0) {
-            return true;
+        if ($this->items->isNotEmpty()) {
+            if ($this->items->where('was_refunded', false)->count() > 0) {
+                return true;
+            }
         }
 
         return false;
@@ -65,7 +69,7 @@ class Order extends QuarxModel
             $refundedValue += $item->total;
         }
 
-        return (($this->transaction('total') - $refundedValue) * 100);
+        return ($this->transaction('total') - $refundedValue);
     }
 
     public function shippingAddress($key = null)
@@ -91,7 +95,7 @@ class Order extends QuarxModel
 
     /**
      * Determine the user that made this order
-     * 
+     *
      * @return Relationship
      */
     public function user()

@@ -11,10 +11,9 @@ class CreateRefundsTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('quarx.db-prefix', '').'refunds', function (Blueprint $table) {
+        Schema::create(config('cms.db-prefix', '').'refunds', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('transaction_id')->default(0);
-            $table->integer('order_item_id')->default(0);
             $table->string('provider_id');
             $table->string('uuid');
             $table->string('provider')->default('stripe');
@@ -30,6 +29,6 @@ class CreateRefundsTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('quarx.db-prefix', '').'refunds');
+        Schema::drop(config('cms.db-prefix', '').'refunds');
     }
 }

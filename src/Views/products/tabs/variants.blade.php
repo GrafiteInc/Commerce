@@ -1,4 +1,4 @@
-{!! Form::model($product, ['url' => config('quarx.backend-route-prefix', 'quarx').'/products/variants/'.$product->id, 'method' => 'post']) !!}
+{!! Form::model($product, ['url' => config('cms.backend-route-prefix', 'cms').'/products/variants/'.$product->id, 'method' => 'post']) !!}
 
     <div class="row">
         <div class="col-lg-6">

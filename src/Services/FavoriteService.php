@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Quazar\Services;
+namespace Grafite\Commerce\Services;
 
-use Yab\Quazar\Repositories\FavoriteRepository;
+use Grafite\Commerce\Repositories\FavoriteRepository;
 
 class FavoriteService
 {

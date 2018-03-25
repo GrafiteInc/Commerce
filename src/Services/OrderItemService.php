@@ -1,15 +1,15 @@
 <?php
 
-namespace Yab\Quazar\Services;
+namespace Grafite\Commerce\Services;
 
 use Carbon\Carbon;
 use Stripe\Error\InvalidRequest;
-use Yab\Crypto\Services\Crypto;
-use Yab\Quazar\Models\Refund;
-use Yab\Quazar\Repositories\OrderItemRepository;
-use Yab\Quazar\Services\CartService;
-use Yab\Quazar\Services\LogisticService;
-use Yab\Quazar\Services\TransactionService;
+use Grafite\Crypto\Services\Crypto;
+use Grafite\Commerce\Models\Refund;
+use Grafite\Commerce\Repositories\OrderItemRepository;
+use Grafite\Commerce\Services\CartService;
+use Grafite\Commerce\Services\LogisticService;
+use Grafite\Commerce\Services\TransactionService;
 
 class OrderItemService
 {
@@ -35,7 +35,7 @@ class OrderItemService
      */
     public function paginated()
     {
-        return $this->repo->paginated(config('quarx.pagination', 25));
+        return $this->repo->paginated(config('cms.pagination', 25));
     }
 
     /**
@@ -59,7 +59,7 @@ class OrderItemService
      */
     public function search($payload)
     {
-        return $this->repo->search($payload, config('quarx.pagination', 25));
+        return $this->repo->search($payload, config('cms.pagination', 25));
     }
 
     /**
@@ -71,6 +71,11 @@ class OrderItemService
      */
     public function create($payload)
     {
+        $payload['tax'] = $payload['tax'] * 100;
+        $payload['shipping'] = $payload['shipping'] * 100;
+        $payload['subtotal'] = $payload['subtotal'] * 100;
+        $payload['total'] = $payload['total'] * 100;
+
         return $this->repo->store($payload);
     }
 

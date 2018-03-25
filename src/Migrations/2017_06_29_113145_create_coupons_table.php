@@ -11,7 +11,7 @@ class CreateCouponsTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('quarx.db-prefix', '').'coupons', function (Blueprint $table) {
+        Schema::create(config('cms.db-prefix', '').'coupons', function (Blueprint $table) {
             $table->increments('id');
             $table->date('start_date');
             $table->date('end_date')->nullable();
@@ -31,6 +31,6 @@ class CreateCouponsTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('quarx.db-prefix', '').'coupons');
+        Schema::drop(config('cms.db-prefix', '').'coupons');
     }
 }

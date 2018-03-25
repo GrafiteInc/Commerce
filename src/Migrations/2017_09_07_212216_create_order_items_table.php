@@ -10,18 +10,19 @@ class CreateOrderItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('quarx.db-prefix', '').'order_items', function (Blueprint $table) {
+        Schema::create(config('cms.db-prefix', '').'order_items', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id');
             $table->integer('product_id');
             $table->integer('transaction_id');
+            $table->integer('refund_id');
             $table->float('quantity');
             $table->json('variants')->nullable();
-            $table->decimal('subtotal');
+            $table->integer('subtotal');
             $table->boolean('was_refunded')->default(false);
-            $table->decimal('tax');
-            $table->decimal('total');
-            $table->decimal('shipping');
+            $table->integer('tax');
+            $table->integer('total');
+            $table->integer('shipping');
             $table->string('status')->default('pending');
             $table->timestamps();
         });
@@ -32,6 +33,6 @@ class CreateOrderItemsTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('quarx.db-prefix', '').'order_items');
+        Schema::drop(config('cms.db-prefix', '').'order_items');
     }
 }

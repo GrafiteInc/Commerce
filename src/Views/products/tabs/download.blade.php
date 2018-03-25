@@ -1,8 +1,8 @@
-{!! Form::model($product, ['url' => config('quarx.backend-route-prefix', 'quarx').'/products/download/'.$product->id, 'method' => 'post', 'files' => true]) !!}
+{!! Form::model($product, ['url' => config('cms.backend-route-prefix', 'cms').'/products/download/'.$product->id, 'method' => 'post', 'files' => true]) !!}
 
     <div class="row">
         <div class="col-lg-6">
-            <a class="btn btn-default raw-margin-top-24" href="{!! url(FileService::fileAsDownload($product->file, $product->file)) !!}">Download File</a>
+            <a class="btn btn-default raw-margin-top-24" href="{!! url(app(FileService::class)->fileAsDownload($product->file, $product->file)) !!}">Download File</a>
         </div>
         <div class="col-lg-6">
             <div class="form-group">

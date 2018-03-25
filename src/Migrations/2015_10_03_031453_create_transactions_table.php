@@ -10,7 +10,7 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('quarx.db-prefix', '').'transactions', function (Blueprint $table) {
+        Schema::create(config('cms.db-prefix', '').'transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('uuid');
             $table->integer('user_id');
@@ -19,11 +19,11 @@ class CreateTransactionsTable extends Migration
             $table->string('provider_date');
             $table->text('provider_dispute')->nullable();
             $table->string('state');
-            $table->decimal('subtotal');
             $table->text('coupon')->nullable();
-            $table->decimal('tax');
-            $table->decimal('total');
-            $table->decimal('shipping');
+            $table->integer('subtotal');
+            $table->integer('tax');
+            $table->integer('total');
+            $table->integer('shipping');
             $table->datetime('refund_date')->nullable();
             $table->boolean('refund_requested')->default(0);
             $table->text('cart');
@@ -38,6 +38,6 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('quarx.db-prefix', '').'transactions');
+        Schema::drop(config('cms.db-prefix', '').'transactions');
     }
 }

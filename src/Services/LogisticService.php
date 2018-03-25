@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quazar\Services;
+namespace Grafite\Commerce\Services;
 
 use App\Services\StoreLogistics;
-use Yab\Quazar\Interfaces\LogisticServiceInterface;
+use Grafite\Commerce\Interfaces\LogisticServiceInterface;
 
 class LogisticService implements LogisticServiceInterface
 {

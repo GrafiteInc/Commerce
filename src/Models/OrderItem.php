@@ -1,14 +1,14 @@
 <?php
 
-namespace Yab\Quazar\Models;
+namespace Grafite\Commerce\Models;
 
-use Yab\Quazar\Models\Order;
-use Yab\Quazar\Models\Product;
-use Yab\Quazar\Models\Variant;
-use Yab\Quarx\Models\QuarxModel;
-use Yab\Quazar\Models\Transaction;
+use Grafite\Commerce\Models\Order;
+use Grafite\Commerce\Models\Product;
+use Grafite\Commerce\Models\Variant;
+use Grafite\Cms\Models\CmsModel;
+use Grafite\Commerce\Models\Transaction;
 
-class OrderItem extends QuarxModel
+class OrderItem extends CmsModel
 {
     public $table = 'order_items';
 
@@ -23,6 +23,7 @@ class OrderItem extends QuarxModel
         'quantity',
         'variants',
         'was_refunded',
+        'refund_id',
         'subtotal',
         'shipping',
         'tax',
@@ -49,7 +50,7 @@ class OrderItem extends QuarxModel
      */
     public function refund()
     {
-        return $this->hasOne(Refund::class);
+        return $this->belongsTo(Refund::class);
     }
 
     /**
@@ -106,6 +107,6 @@ class OrderItem extends QuarxModel
 
     public function getAmountAttribute()
     {
-        return $this->total * 100;
+        return $this->total / 100;
     }
 }

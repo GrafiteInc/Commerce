@@ -20,11 +20,11 @@ class OrderTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actingAs($this->user);
 
-        factory(\Yab\Quazar\Models\Cart::class)->create();
-        factory(\Yab\Quazar\Models\Product::class)->create();
-        factory(\Yab\Quazar\Models\Plan::class)->create();
-        factory(\Yab\Quazar\Models\Order::class)->create();
-        factory(\Yab\Quazar\Models\Transaction::class)->create([
+        factory(\Grafite\Commerce\Models\Cart::class)->create();
+        factory(\Grafite\Commerce\Models\Product::class)->create();
+        factory(\Grafite\Commerce\Models\Plan::class)->create();
+        factory(\Grafite\Commerce\Models\Order::class)->create();
+        factory(\Grafite\Commerce\Models\Transaction::class)->create([
                 'id' => 999,
             ]);
     }
@@ -45,7 +45,7 @@ class OrderTest extends TestCase
 
     public function testEdit()
     {
-        factory(\Yab\Quazar\Models\Order::class)->create([
+        factory(\Grafite\Commerce\Models\Order::class)->create([
             'id' => 2,
             'details' => json_encode([
                 [
@@ -78,7 +78,7 @@ class OrderTest extends TestCase
 
     public function testUpdate()
     {
-        factory(\Yab\Quazar\Models\Order::class)->create([
+        factory(\Grafite\Commerce\Models\Order::class)->create([
             'id' => 4,
             'details' => json_encode([
                 [

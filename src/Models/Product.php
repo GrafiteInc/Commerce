@@ -1,15 +1,15 @@
 <?php
 
-namespace Yab\Quazar\Models;
+namespace Grafite\Commerce\Models;
 
-use Yab\Quarx\Models\Image;
-use Yab\Quarx\Models\ProductImage;
-use Yab\Quarx\Models\QuarxModel;
-use Yab\Quarx\Services\FileService;
-use Yab\Quazar\Services\CartService;
-use Yab\Quazar\Services\ProductService;
+use Grafite\Cms\Models\Image;
+use Grafite\Cms\Models\ProductImage;
+use Grafite\Cms\Models\CmsModel;
+use Grafite\Cms\Services\FileService;
+use Grafite\Commerce\Services\CartService;
+use Grafite\Commerce\Services\ProductService;
 
-class Product extends QuarxModel
+class Product extends CmsModel
 {
     public $table = 'products';
 
@@ -68,17 +68,17 @@ class Product extends QuarxModel
 
     public function getHeroImageUrlAttribute()
     {
-        return FileService::fileAsPublicAsset($this->hero_image);
+        return app(FileService::class)->fileAsPublicAsset($this->hero_image);
     }
 
     public function getHrefAttribute()
     {
-        return route('quazar.product', [$this->url]);
+        return route('commerce.product', [$this->url]);
     }
 
     public function getFileDownloadHrefAttribute()
     {
-        return url(FileService::fileAsDownload($this->file, $this->file));
+        return url(app(FileService::class)->fileAsDownload($this->file, $this->file));
     }
 
     public function getVariantsAttribute()
@@ -106,6 +106,7 @@ class Product extends QuarxModel
         if (auth()->user()) {
            return (auth()->user()->favorites()->pluck('product_id')->contains($this->id));
         }
+
         return false;
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quazar\Facades;
+namespace Grafite\Commerce\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

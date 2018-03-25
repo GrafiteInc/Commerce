@@ -1,10 +1,10 @@
-@extends('quarx::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
     <div class="row">
         <div class="raw-m-hide pull-right">
-            {!! Form::open(['url' => config('quarx.backend-route-prefix', 'quarx').'/orders/search']) !!}
+            {!! Form::open(['url' => config('cms.backend-route-prefix', 'cms').'/orders/search']) !!}
             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
             {!! Form::close() !!}
         </div>
@@ -32,8 +32,8 @@
 
                 @foreach($orders as $order)
                     <tr>
-                        <td><a href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.orders.edit', [$order->id]) !!}">{!! $order->uuid !!}</a></td>
-                        <td class="raw-m-hide"><a href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.transactions.edit', [$order->transaction('id')]) !!}">{!! $order->transaction('uuid') !!}</a></td>
+                        <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.orders.edit', [$order->id]) !!}">{!! $order->uuid !!}</a></td>
+                        <td class="raw-m-hide"><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.transactions.edit', [$order->transaction('id')]) !!}">{!! $order->transaction('uuid') !!}</a></td>
                         <td class="raw-m-hide">{!! auth()->user()->find($order->user_id)->name !!}</td>
                         <td class="raw-m-hide">{!! ucfirst($order->status) !!}</td>
                         <td class="raw-m-hide text-center">
@@ -45,7 +45,7 @@
                         </td>
                         <td class="raw-m-hide">{!! $order->tracking_number !!}</td>
                         <td class="text-right">
-                            <a class="btn btn-xs btn-default pull-right" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.orders.edit', [$order->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.orders.edit', [$order->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

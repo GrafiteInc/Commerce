@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Quazar\Models;
+namespace Grafite\Commerce\Models;
 
 use Carbon\Carbon;
-use Yab\Quarx\Models\QuarxModel;
-use Yab\Quazar\Services\CartService;
+use Grafite\Cms\Models\CmsModel;
+use Grafite\Commerce\Services\CartService;
 
-class Coupon extends QuarxModel
+class Coupon extends CmsModel
 {
     public $table = 'coupons';
 
@@ -94,11 +94,11 @@ class Coupon extends QuarxModel
 
     // public function getHrefAttribute()
     // {
-    //     return route('quazar.plan', [$this->uuid]);
+    //     return route('commerce.plan', [$this->uuid]);
     // }
 
     // public function subscribeBtn($content = '', $class = '')
     // {
-    //     return '<form method="post" action="'.route('quazar.subscribe', [crypto_encrypt($this->id)]).'">'.csrf_field().'<button class="'.$class.'">'.$content.'</button></form>';
+    //     return '<form method="post" action="'.route('commerce.subscribe', [crypto_encrypt($this->id)]).'">'.csrf_field().'<button class="'.$class.'">'.$content.'</button></form>';
     // }
 }

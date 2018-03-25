@@ -1,13 +1,13 @@
 <?php
 
-namespace Yab\Quazar\Helpers;
+namespace Grafite\Commerce\Helpers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Yab\Quazar\Models\Plan;
-use Yab\Quazar\Services\CartService;
-use Yab\Quazar\Services\CustomerProfileService;
-use Yab\Quazar\Services\LogisticService;
+use Grafite\Commerce\Models\Plan;
+use Grafite\Commerce\Services\CartService;
+use Grafite\Commerce\Services\CustomerProfileService;
+use Grafite\Commerce\Services\LogisticService;
 
 class StoreHelper
 {
@@ -73,7 +73,7 @@ class StoreHelper
      * Checkout
      * --------------------------------------------------------------------------
     */
-   
+
     public static function moneyFormat($amount) {
         return number_format(round($amount, 2), 2);
     }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Quazar\Repositories;
+namespace Grafite\Commerce\Repositories;
 
-use Yab\Quazar\Models\Product;
+use Grafite\Commerce\Models\Product;
 use Illuminate\Support\Facades\Schema;
 
 class ProductRepository
@@ -35,7 +35,7 @@ class ProductRepository
             $model = $this->model->orderBy('created_at', 'desc');
         }
 
-        return $model->paginate(config('quarx.pagination', 25));
+        return $model->paginate(config('cms.pagination', 25));
     }
 
     /**

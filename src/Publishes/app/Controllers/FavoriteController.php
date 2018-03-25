@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Quazar;
+namespace App\Http\Controllers\Commerce;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Quazar\Services\FavoriteService;
-use Yab\Quarx\Services\QuarxResponseService;
+use Grafite\Commerce\Services\FavoriteService;
+use Grafite\Cms\Services\CmsResponseService;
 
 class FavoriteController extends Controller
 {
     protected $favoriteService;
 
-    public function __construct(FavoriteService $favoriteService)
+    public function __construct(FavoriteService $favoriteService, CmsResponseService $cmsResponseService)
     {
         $this->service = $favoriteService;
+        $this->responseService = $cmsResponseService;
     }
 
     public function all()
@@ -21,10 +22,10 @@ class FavoriteController extends Controller
         $items = $this->service->all();
 
         if (!is_null($items) && $items->count() > 0) {
-            return QuarxResponseService::apiResponse('success', $items->pluck('product_id'));
+            return $this->responseService->apiResponse('success', $items->pluck('product_id'));
         }
 
-        return QuarxResponseService::apiResponse('success', []);
+        return $this->responseService->apiResponse('success', []);
     }
 
     public function add(Request $request)
@@ -32,16 +33,16 @@ class FavoriteController extends Controller
         $result = $this->service->add($request->productId);
 
         if ($result) {
-            return QuarxResponseService::apiResponse('success', 1);
+            return $this->responseService->apiResponse('success', 1);
         }
 
-        return QuarxResponseService::apiResponse('error', 'Could not be added to Favorites');
+        return $this->responseService->apiResponse('error', 'Could not be added to Favorites');
     }
 
     public function remove(Request $request)
     {
         $this->service->remove($request->productId);
 
-        return QuarxResponseService::apiResponse('success', 0);
+        return $this->responseService->apiResponse('success', 0);
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Quazar;
+namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Yab\Quazar\Services\LogisticService;
-use Yab\Quazar\Services\PlanService;
-use Yab\Crypto\Services\Crypto;
+use Grafite\Commerce\Services\LogisticService;
+use Grafite\Commerce\Services\PlanService;
+use Grafite\Crypto\Services\Crypto;
 
 class SubscriptionController extends Controller
 {
@@ -14,7 +14,7 @@ class SubscriptionController extends Controller
 
     public function __construct(PlanService $service)
     {
-        if (!config('quazar.subscriptions')) {
+        if (!config('commerce.subscriptions')) {
             return back()->send();
         }
         $this->service = $service;
@@ -31,21 +31,21 @@ class SubscriptionController extends Controller
 
         app(LogisticService::class)->afterSubscription(auth()->user(), $plan);
 
-        return view('quazar-frontend::subscriptions.success')->with('plan', $plan);
+        return view('commerce-frontend::subscriptions.success')->with('plan', $plan);
     }
 
     public function allSubscriptions()
     {
-        $subscriptions = auth()->user()->meta->subscriptions()->orderBy('created_at', 'DESC')->paginate(config('quarx.pagination'));
+        $subscriptions = auth()->user()->meta->subscriptions()->orderBy('created_at', 'DESC')->paginate(config('cms.pagination'));
 
-        return view('quazar-frontend::subscriptions.all')->with('subscriptions', $subscriptions);
+        return view('commerce-frontend::subscriptions.all')->with('subscriptions', $subscriptions);
     }
 
     public function getSubscription($name)
     {
         $subscription = auth()->user()->meta->subscription(Crypto::decrypt($name));
 
-        return view('quazar-frontend::subscriptions.subscription')->with('subscription', $subscription);
+        return view('commerce-frontend::subscriptions.subscription')->with('subscription', $subscription);
     }
 
     public function cancelSubscription(Request $request, $name)

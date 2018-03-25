@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quazar\Interfaces;
+namespace Grafite\Commerce\Interfaces;
 
 interface LogisticServiceInterface
 {

@@ -1,18 +1,22 @@
 <?php
 
-namespace Yab\Quazar\Services;
+namespace Grafite\Commerce\Services;
 
 use App\Services\StoreLogistics;
+use Grafite\Commerce\Models\Coupon;
+use Grafite\Commerce\Models\Currency;
+use Grafite\Commerce\Models\Variant;
+use Grafite\Commerce\Repositories\CartRepository;
+use Grafite\Commerce\Repositories\CartSessionRepository;
+use Grafite\Commerce\Repositories\TransactionRepository;
+use Grafite\Commerce\Services\Concerns\CartHtmlGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Yab\Quazar\Models\Coupon;
-use Yab\Quazar\Models\Variant;
-use Yab\Quazar\Repositories\CartRepository;
-use Yab\Quazar\Repositories\CartSessionRepository;
-use Yab\Quazar\Repositories\TransactionRepository;
 
 class CartService
 {
+    use CartHtmlGenerator;
+
     public function __construct(ProductService $service)
     {
         $this->service = $service;
@@ -35,70 +39,6 @@ class CartService
         }
 
         return $repo;
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | UI
-    |--------------------------------------------------------------------------
-    */
-
-    /**
-     * Add to cart button.
-     *
-     * @param int    $id
-     * @param string $content
-     * @param string $class
-     *
-     * @return string
-     */
-    public function addToCartBtn($product, $content, $class = '')
-    {
-        return '<button class="'.$class.'" onclick="store.addToCart('.$product->id.', 1, \'product\')">'.$content.'</button>';
-    }
-
-    /**
-     * Remove from cart button.
-     *
-     * @param int    $id
-     * @param string $content
-     * @param string $class
-     *
-     * @return string
-     */
-    public function removeFromCartBtn($cartId, $content, $class = '')
-    {
-        return '<button type="button" class="'.$class.'" onclick="store.removeFromCart('.$cartId.', \'product\')">'.$content.'</button>';
-    }
-
-    /**
-     *  Favorites toggle button.
-     *
-     * @param int    $id
-     * @param string $content
-     * @param string $notFavorite
-     * @param string $isFavorite
-     * @param string $class
-     *
-     * @return string
-     */
-    public function favoriteToggleBtn($product, $content, $notFavorite, $isFavorite, $class = '')
-    {
-        $button = '';
-
-        if (auth()->user()) {
-            if (auth()->user()->favorites()->pluck('product_id')->contains($product->id)) {
-                $buttonContent = $content.' '.$isFavorite;
-                $requestUrl = url("/store/favorites/remove/".$product->id);
-            } else {
-                $buttonContent = $content.' '.$notFavorite;
-                $requestUrl = url("/store/favorites/add/".$product->id);
-            }
-
-            $button = '<button class="'.$class.'" onclick="store.favoriteToggle('.$product->id.', this, \''.$content.'\', \''.e($isFavorite).'\', \''.e($notFavorite).'\')" data-url="'.$requestUrl.'">'.$buttonContent.'</button>';
-        }
-
-        return $button;
     }
 
     /*
@@ -239,13 +179,13 @@ class CartService
     /**
      * Check if product has variants.
      *
-     * @param int $id
+     * @param int $productId
      *
      * @return bool
      */
-    public function productHasVariants($id)
+    public function productHasVariants($productId)
     {
-        return (bool) Variant::where('product_id', $id)->get();
+        return (bool) Variant::where('product_id', $productId)->get();
     }
 
     /**
@@ -326,6 +266,8 @@ class CartService
         } else {
             Session::flash('message', 'Coupon is no longer valid');
         }
+
+        return true;
     }
 
     /**
@@ -336,6 +278,8 @@ class CartService
     public function removeCoupon()
     {
         Session::forget('coupon_code');
+
+        return true;
     }
 
     /**
@@ -393,7 +337,7 @@ class CartService
      */
     public function getItemShipping($item)
     {
-        return app(StoreLogistics::class)->singleItemShipping($item, auth()->user());
+        return round(app(StoreLogistics::class)->singleItemShipping($item, auth()->user()), 2);
     }
 
     /**
@@ -431,7 +375,8 @@ class CartService
         }
 
         $this->priceVariants($item, $product);
-        return ($product->price * $item->quantity);
+
+        return round($product->price * $item->quantity, 2);
     }
 
     /**
@@ -448,7 +393,7 @@ class CartService
             $total += $this->getItemSubtotal($item);
         }
 
-        if (config('quazar.taxes_include_shipping')) {
+        if (config('commerce.taxes_include_shipping')) {
             $total += app(StoreLogistics::class)->shipping($this->cartRepo()->user);
         }
 
@@ -462,7 +407,7 @@ class CartService
      */
     public function getCartShipping()
     {
-        return app(StoreLogistics::class)->shipping($this->cartRepo()->user);
+        return round(app(StoreLogistics::class)->shipping($this->cartRepo()->user), 2);
     }
 
     /**

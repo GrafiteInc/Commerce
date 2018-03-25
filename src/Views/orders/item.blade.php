@@ -1,4 +1,4 @@
-@extends('quarx::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -24,7 +24,7 @@
         <h1 class="page-header">Order Items: Edit</h1>
     </div>
 
-    @include('quazar::orders.breadcrumbs', ['location' => [['Order' => url(config('quarx.backend-route-prefix', 'quarx').'/orders/'.$orderItem->order_id.'/edit')], 'item']])
+    @include('commerce::orders.breadcrumbs', ['location' => [['Order' => url(config('cms.backend-route-prefix', 'cms').'/orders/'.$orderItem->order_id.'/edit')], 'item']])
 
     <div class="row">
         <div class="col-md-12 raw-margin-bottom-24">
@@ -38,7 +38,7 @@
                 <tbody>
                     <tr>
                         <th>Product</th>
-                        <td class="text-right"><a href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.products.edit', [$orderItem->product_id]) !!}">{{ ucfirst($orderItem->product->name) }}</a></td>
+                        <td class="text-right"><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.products.edit', [$orderItem->product_id]) !!}">{{ ucfirst($orderItem->product->name) }}</a></td>
                     </tr>
                     <tr>
                         <th>Quantity</th>
@@ -82,7 +82,7 @@
             </table>
             @if (!$orderItem->was_refunded)
                 <div class="text-right">
-                    {!! Form::open(['id' => 'cancelItemForm', 'url' => config('quarx.backend-route-prefix', 'quarx').'/orders/item/cancel', 'method' => 'post', 'class' => 'inline-form pull-right']) !!}
+                    {!! Form::open(['id' => 'cancelItemForm', 'url' => config('cms.backend-route-prefix', 'cms').'/orders/item/cancel', 'method' => 'post', 'class' => 'inline-form pull-right']) !!}
                         @input_maker_create('id', ['type' => 'hidden'], $orderItem)
                         {!! Form::submit('Cancel Order Item', ['class' => 'btn btn-warning']) !!}
                     {!! Form::close() !!}

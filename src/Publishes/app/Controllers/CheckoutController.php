@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Quazar;
+namespace App\Http\Controllers\Commerce;
 
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Quazar\Services\CartService;
-use Yab\Quazar\Services\PaymentService;
-use Yab\Quazar\Services\CustomerProfileService;
+use Grafite\Commerce\Services\CartService;
+use Grafite\Commerce\Services\PaymentService;
+use Grafite\Commerce\Services\CustomerProfileService;
 
 class CheckoutController extends Controller
 {
@@ -22,14 +22,14 @@ class CheckoutController extends Controller
     {
         $products = $this->cart->contents();
 
-        return view('quazar-frontend::checkout.confirm')->with('products', $products);
+        return view('commerce-frontend::checkout.confirm')->with('products', $products);
     }
 
     public function payment()
     {
         $products = $this->cart->contents();
 
-        return view('quazar-frontend::checkout.payment')->with('products', $products);
+        return view('commerce-frontend::checkout.payment')->with('products', $products);
     }
 
     public function addCoupon(Request $request)
@@ -72,12 +72,12 @@ class CheckoutController extends Controller
     {
         $products = $this->cart->contents();
 
-        return view('quazar-frontend::checkout.complete')->with('products', $products);
+        return view('commerce-frontend::checkout.complete')->with('products', $products);
     }
 
     public function failed()
     {
-        return view('quazar-frontend::checkout.failed');
+        return view('commerce-frontend::checkout.failed');
     }
 
     public function reCalculateShipping(Request $request)

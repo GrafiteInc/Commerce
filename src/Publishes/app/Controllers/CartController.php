@@ -1,28 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Quazar;
+namespace App\Http\Controllers\Commerce;
 
 use Redirect;
 use Illuminate\Http\Request;
-use Yab\Quazar\Helpers\StoreHelper;
+use Grafite\Commerce\Helpers\StoreHelper;
 use App\Http\Controllers\Controller;
-use Yab\Quazar\Services\CartService;
-use Yab\Quarx\Services\QuarxResponseService;
+use Grafite\Commerce\Services\CartService;
+use Grafite\Cms\Services\CmsResponseService;
 
 class CartController extends Controller
 {
     protected $cartService;
 
-    public function __construct(CartService $cartService)
+    public function __construct(CartService $cartService, CmsResponseService $cmsResponseService)
     {
         $this->cart = $cartService;
+        $this->responseService = $cmsResponseService;
     }
 
     public function getContents()
     {
         $products = $this->cart->contents();
 
-        return view('quazar-frontend::cart.all')->with('products', $products);
+        return view('commerce-frontend::cart.all')->with('products', $products);
     }
 
     /*
@@ -33,7 +34,7 @@ class CartController extends Controller
 
     public function cart()
     {
-        return QuarxResponseService::apiResponse('success', [
+        return $this->responseService->apiResponse('success', [
             'count' => $this->cart->itemCount(),
             'contents' => $this->cart->contents(),
             'shipping' => StoreHelper::moneyFormat($this->cart->getCartShipping()),
@@ -48,14 +49,14 @@ class CartController extends Controller
     {
         $count = $this->cart->itemCount();
 
-        return QuarxResponseService::apiResponse('success', $count);
+        return $this->responseService->apiResponse('success', $count);
     }
 
     public function changeCartCount(Request $request)
     {
         $count = $this->cart->changeItemQuantity($request->id, $request->count);
 
-        return QuarxResponseService::apiResponse('success', $count);
+        return $this->responseService->apiResponse('success', $count);
     }
 
     public function addToCart(Request $request)
@@ -63,17 +64,17 @@ class CartController extends Controller
         $result = $this->cart->addToCart($request->id, $request->type, $request->quantity, $request->variants);
 
         if ($result) {
-            return QuarxResponseService::apiResponse('success', 'Added to Cart');
+            return $this->responseService->apiResponse('success', 'Added to Cart');
         }
 
-        return QuarxResponseService::apiResponse('error', 'Could not be added to Cart');
+        return $this->responseService->apiResponse('error', 'Could not be added to Cart');
     }
 
     public function removeFromCart(Request $request)
     {
         $this->cart->removeFromCart($request->id, $request->type);
 
-        return QuarxResponseService::apiResponse('success', 'Removed from Cart');
+        return $this->responseService->apiResponse('success', 'Removed from Cart');
     }
 
     public function emptyCart()

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Quazar;
+namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
 use Auth;
-use Yab\Quazar\Repositories\TransactionRepository;
+use Grafite\Commerce\Repositories\TransactionRepository;
 
 class PurchaseController extends Controller
 {
@@ -15,9 +15,9 @@ class PurchaseController extends Controller
 
     public function allPurchases()
     {
-        $purchases = $this->transactions->getByCustomer(auth()->id())->orderBy('created_at', 'DESC')->paginate(config('quarx.pagination'));
+        $purchases = $this->transactions->getByCustomer(auth()->id())->orderBy('created_at', 'DESC')->paginate(config('cms.pagination'));
 
-        return view('quazar-frontend::purchases.all')
+        return view('commerce-frontend::purchases.all')
             ->with('purchases', $purchases);
     }
 
@@ -25,7 +25,7 @@ class PurchaseController extends Controller
     {
         $purchase = $this->transactions->getByCustomerAndUuid(auth()->id(), $id);
 
-        return view('quazar-frontend::purchases.purchase')
+        return view('commerce-frontend::purchases.purchase')
             ->with('purchase', $purchase);
     }
 
@@ -33,6 +33,6 @@ class PurchaseController extends Controller
     {
         $purchase = $this->transactions->requestRefund(auth()->id(), $id);
 
-        return view('quazar-frontend::purchases.refund');
+        return view('commerce-frontend::purchases.refund');
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Quazar\Repositories;
+namespace Grafite\Commerce\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
-use Yab\Quazar\Models\Transaction;
-use Yab\Quazar\Services\LogisticService;
+use Grafite\Commerce\Models\Transaction;
+use Grafite\Commerce\Services\LogisticService;
 
 class TransactionRepository
 {
@@ -50,7 +50,7 @@ class TransactionRepository
             $model = $this->model->orderBy('created_at', 'desc');
         }
 
-        return $model->paginate(config('quarx.pagination', 25));
+        return $model->paginate(config('cms.pagination', 25));
     }
 
     /**
@@ -78,13 +78,13 @@ class TransactionRepository
     /**
      * Stores Transactions into database.
      *
-     * @param array $input
+     * @param array $payload
      *
      * @return Transactions
      */
-    public function store($input)
+    public function store($payload)
     {
-        return $this->model->create($input);
+        return $this->model->create($payload);
     }
 
     /**

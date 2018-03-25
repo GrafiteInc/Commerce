@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Quazar\Services;
+namespace Grafite\Commerce\Services;
 
-use Yab\Quazar\Models\Refund;
-use Yab\Crypto\Services\Crypto;
+use Grafite\Commerce\Models\Refund;
+use Grafite\Crypto\Services\Crypto;
 use Illuminate\Support\Facades\Config;
-use Yab\Quazar\Services\TransactionService;
-use Yab\Quazar\Repositories\OrderRepository;
+use Grafite\Commerce\Services\TransactionService;
+use Grafite\Commerce\Repositories\OrderRepository;
 
 class OrderService
 {
@@ -37,7 +37,7 @@ class OrderService
      */
     public function paginated()
     {
-        return $this->repo->paginated(config('quarx.pagination', 25));
+        return $this->repo->paginated(config('cms.pagination', 25));
     }
 
     /**
@@ -47,9 +47,9 @@ class OrderService
      *
      * @return Orders
      */
-    public function findOrdersById($id)
+    public function find($id)
     {
-        return $this->repo->findOrdersById($id);
+        return $this->repo->find($id);
     }
 
     /**
@@ -61,7 +61,7 @@ class OrderService
      */
     public function search($payload)
     {
-        return $this->repo->search($payload, config('quarx.pagination', 25));
+        return $this->repo->search($payload, config('cms.pagination', 25));
     }
 
     /**
@@ -78,18 +78,6 @@ class OrderService
         $this->logistics->orderCreated($order);
 
         return $order;
-    }
-
-    /**
-     * Find an order.
-     *
-     * @param int $id
-     *
-     * @return Orders
-     */
-    public function find($id)
-    {
-        return $this->repo->findOrdersById($id);
     }
 
     /**
@@ -118,9 +106,9 @@ class OrderService
      *
      * @return Orders
      */
-    public function cancelOrder($customerId, $uuid)
+    public function cancel($orderId)
     {
-        $order = $this->repo->getByCustomerAndUuid($customerId, $uuid);
+        $order = $this->repo->find($orderId);
 
         if ($order->status != 'complete') {
             $this->logistics->cancelOrder($order);
@@ -129,11 +117,11 @@ class OrderService
                 $refund = $this->transactions->refund($order->transaction('uuid'), $order->remainingValue());
 
                 if ($refund) {
-                    app(Refund::class)->create([
+                    $refundRecord = app(Refund::class)->create([
                         'transaction_id' => $order->transaction('id'),
                         'provider_id' => $refund->id,
                         'uuid' => Crypto::uuid(),
-                        'amount' => ($refund->amount * 0.01),
+                        'amount' => $refund->amount,
                         'provider' => 'Stripe',
                         'charge' => $refund->charge,
                         'currency' => $refund->currency,
@@ -143,6 +131,7 @@ class OrderService
                         $item->update([
                             'was_refunded' => true,
                             'status' => 'cancelled',
+                            'refund_id' => $refundRecord->id,
                         ]);
                     }
 

@@ -1,4 +1,4 @@
-@extends('quarx::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -27,7 +27,7 @@
         @if ($transactions->count() === 0)
             <div class="well text-center">No Transactions found.</div>
         @else
-            @include('quazar::analytics.transaction-table')
+            @include('commerce::analytics.transaction-table')
         @endif
     </div>
 
@@ -36,7 +36,7 @@
         @if ($subscriptions->count() === 0)
             <div class="well text-center">No Subscriptions found.</div>
         @else
-            @include('quazar::analytics.subscription-table')
+            @include('commerce::analytics.subscription-table')
         @endif
     </div>
 
@@ -53,5 +53,5 @@
             _balanceValues : {!! json_encode($balanceValues) !!}
         };
     </script>
-    <script type="text/javascript" src="{{ Quarx::moduleAsset('quazar', 'js/analytics.js', 'application/javascript') }}"></script>
+    <script type="text/javascript" src="{{ Cms::moduleAsset('commerce', 'js/analytics.js', 'application/javascript') }}"></script>
 @endsection

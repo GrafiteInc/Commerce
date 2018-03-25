@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Quazar\Services;
+namespace Grafite\Commerce\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
-use Yab\Quazar\Models\Order;
-use Yab\Quazar\Repositories\TransactionRepository;
+use Grafite\Commerce\Models\Order;
+use Grafite\Commerce\Repositories\TransactionRepository;
 
 class TransactionService
 {
@@ -41,7 +41,7 @@ class TransactionService
      */
     public function paginated()
     {
-        return $this->repo->paginated(config('quarx.pagination', 25));
+        return $this->repo->paginated(config('cms.pagination', 25));
     }
 
     /**
@@ -53,7 +53,7 @@ class TransactionService
      */
     public function search($payload)
     {
-        return $this->repo->search($payload, config('quarx.pagination', 25));
+        return $this->repo->search($payload, config('cms.pagination', 25));
     }
 
     /**
@@ -79,6 +79,24 @@ class TransactionService
     {
         return app(Order::class)->where('transaction_id', $id)->first();
     }
+
+    /**
+     * Create an transaction.
+     *
+     * @param array $payload
+     *
+     * @return Transaction
+     */
+    public function create($payload)
+    {
+        $payload['tax'] = $payload['tax'] * 100;
+        $payload['shipping'] = $payload['shipping'] * 100;
+        $payload['subtotal'] = $payload['subtotal'] * 100;
+        $payload['total'] = $payload['total'] * 100;
+
+        return $this->repo->store($payload);
+    }
+
 
     /**
      * Update an transaction.

@@ -1,14 +1,14 @@
 <?php
 
-namespace Yab\Quazar\Services;
+namespace Grafite\Commerce\Services;
 
 use App\Models\UserMeta;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Cashier\Subscription;
-use Yab\Quazar\Models\Plan;
-use Yab\Quarx\Services\QuarxService;
+use Grafite\Commerce\Models\Plan;
+use Grafite\Cms\Services\CmsService;
 
 class PlanService
 {
@@ -74,7 +74,7 @@ class PlanService
      */
     public function paginated()
     {
-        return $this->model->paginate(config('quarx.pagination', 25));
+        return $this->model->paginate(config('cms.pagination', 25));
     }
 
     /**
@@ -94,7 +94,7 @@ class PlanService
             $query->orWhere($attribute, 'LIKE', '%'.$payload.'%');
         }
 
-        return $query->paginate(config('quarx.pagination', 25));
+        return $query->paginate(config('cms.pagination', 25));
     }
 
     /**
@@ -107,7 +107,7 @@ class PlanService
     public function create($payload)
     {
         try {
-            $name = app(QuarxService::class)->convertToURL($payload['name']);
+            $name = app(CmsService::class)->convertToURL($payload['name']);
 
             $payload['stripe_id'] = $name;
             $payload['uuid'] = crypto_uuid();
@@ -209,7 +209,7 @@ class PlanService
     /**
      * Get subscribers.
      *
-     * @param Yab\Quazar\Models\Plan $plan
+     * @param Grafite\Commerce\Models\Plan $plan
      *
      * @return Illuminate\Support\Collection
      */

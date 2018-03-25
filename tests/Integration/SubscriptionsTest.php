@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Yab\Quazar\Services\StripeService;
+use Grafite\Commerce\Services\StripeService;
 
 class SubscriptionsTest extends TestCase
 {
@@ -21,12 +21,12 @@ class SubscriptionsTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actingAs($this->user);
 
-        factory(\Yab\Quazar\Models\Cart::class)->create();
-        factory(\Yab\Quazar\Models\Product::class)->create();
-        factory(\Yab\Quazar\Models\Plan::class)->create(['id' => 1]);
-        factory(\Yab\Quazar\Models\Plan::class)->create(['id' => 2]);
-        factory(\Yab\Quazar\Models\Plan::class)->create(['id' => 3]);
-        factory(\Yab\Quazar\Models\Plan::class)->create(['id' => 4]);
+        factory(\Grafite\Commerce\Models\Cart::class)->create();
+        factory(\Grafite\Commerce\Models\Product::class)->create();
+        factory(\Grafite\Commerce\Models\Plan::class)->create(['id' => 1]);
+        factory(\Grafite\Commerce\Models\Plan::class)->create(['id' => 2]);
+        factory(\Grafite\Commerce\Models\Plan::class)->create(['id' => 3]);
+        factory(\Grafite\Commerce\Models\Plan::class)->create(['id' => 4]);
 
         $stripe = Mockery::mock(\Stripe\Stripe::class);
         $plan = Mockery::mock(\Stripe\Plan::class);

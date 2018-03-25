@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Quazar\Models;
+namespace Grafite\Commerce\Models;
 
-use Yab\Quarx\Models\QuarxModel;
-use Yab\Quazar\Models\Order;
-use Yab\Quazar\Models\Refund;
+use Grafite\Cms\Models\CmsModel;
+use Grafite\Commerce\Models\Order;
+use Grafite\Commerce\Models\Refund;
 
-class Transaction extends QuarxModel
+class Transaction extends CmsModel
 {
     public $table = 'transactions';
 
@@ -46,12 +46,8 @@ class Transaction extends QuarxModel
         return $this->hasMany(Refund::class);
     }
 
-    /**
-     * Get the full transaction amount, in cents
-     * 
-     */
     public function getAmountAttribute()
     {
-        return $this->total * 100;
+        return $this->total;
     }
 }

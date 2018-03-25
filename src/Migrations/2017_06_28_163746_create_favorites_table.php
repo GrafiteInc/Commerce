@@ -11,7 +11,7 @@ class CreateFavoritesTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('quarx.db-prefix', '').'favorites', function (Blueprint $table) {
+        Schema::create(config('cms.db-prefix', '').'favorites', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id');
             $table->integer('user_id');
@@ -24,6 +24,6 @@ class CreateFavoritesTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('quarx.db-prefix', '').'favorites');
+        Schema::drop(config('cms.db-prefix', '').'favorites');
     }
 }

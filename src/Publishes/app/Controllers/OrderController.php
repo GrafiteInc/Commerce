@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Quazar;
+namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
-use Yab\Quazar\Repositories\OrderRepository;
-use Yab\Quazar\Services\OrderService;
+use Grafite\Commerce\Repositories\OrderRepository;
+use Grafite\Commerce\Services\OrderService;
 
 class OrderController extends Controller
 {
@@ -15,16 +15,16 @@ class OrderController extends Controller
 
     public function allOrders()
     {
-        $orders = $this->orders->getByCustomer(auth()->id())->orderBy('created_at', 'DESC')->paginate(config('quarx.pagination'));
+        $orders = $this->orders->getByCustomer(auth()->id())->orderBy('created_at', 'DESC')->paginate(config('cms.pagination'));
 
-        return view('quazar-frontend::orders.all')->with('orders', $orders);
+        return view('commerce-frontend::orders.all')->with('orders', $orders);
     }
 
     public function getOrder($id)
     {
         $order = $this->orders->getByCustomerAndUuid(auth()->id(), $id);
 
-        return view('quazar-frontend::orders.order')->with('order', $order);
+        return view('commerce-frontend::orders.order')->with('order', $order);
     }
 
     public function cancelOrder($id)

@@ -1,12 +1,13 @@
 <?php
 
-namespace Yab\Quazar\Services;
+namespace Grafite\Commerce\Services;
 
+use Grafite\Commerce\Models\Coupon;
+use Grafite\Commerce\Models\Transaction;
+use Grafite\Commerce\Services\TransactionService;
+use Grafite\Crypto\Services\Crypto;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use Yab\Crypto\Services\Crypto;
-use Yab\Quazar\Models\Coupon;
-use Yab\Quazar\Models\Transaction;
 
 class PaymentService
 {
@@ -16,13 +17,15 @@ class PaymentService
         Transaction $transaction,
         OrderService $orderService,
         LogisticService $logisticService,
-        OrderItemService $orderItemService
+        OrderItemService $orderItemService,
+        TransactionService $transactionService
     ) {
         $this->user = auth()->user();
         $this->transaction = $transaction;
         $this->orderService = $orderService;
         $this->logistic = $logisticService;
         $this->orderItemService = $orderItemService;
+        $this->transactionService = $transactionService;
     }
 
     /*
@@ -45,7 +48,7 @@ class PaymentService
 
         if (is_null($user->meta->stripe_id) && $stripeToken) {
             $user->meta->createAsStripeCustomer($stripeToken);
-        } elseif ($stripeToken) {
+        } else if ($stripeToken) {
             $user->meta->updateCard($stripeToken);
         }
 
@@ -58,16 +61,16 @@ class PaymentService
         }
 
         $result = $user->meta->charge(($cart->getCartTotal() * 100), [
-            'currency' => config('quazar.currency', 'usd'),
+            'currency' => config('commerce.currency', 'usd'),
         ]);
 
         if ($result) {
-            $transaction = $this->transaction->create([
+            $transaction = $this->transactionService->create([
                 'uuid' => Crypto::uuid(),
                 'provider' => 'stripe',
                 'state' => 'success',
-                'subtotal' => $cart->getCartSubTotal(),
                 'coupon' => $coupon,
+                'subtotal' => $cart->getCartSubTotal(),
                 'tax' => $cart->getCartTax(),
                 'total' => $cart->getCartTotal(),
                 'shipping' => $this->logistic->shipping($user),
@@ -82,15 +85,12 @@ class PaymentService
             $cart->removeCoupon();
 
             $orderedItems = [];
+
             foreach ($cart->contents() as $item) {
-                if (!$item->is_download) {
-                    $orderedItems[] = $item;
-                }
+                $orderedItems[] = $item;
             }
 
-            if (!empty($orderedItems)) {
-                $this->createOrder($user, $transaction, $orderedItems);
-            }
+            $this->createOrder($user, $transaction, $orderedItems);
         }
 
         DB::commit();

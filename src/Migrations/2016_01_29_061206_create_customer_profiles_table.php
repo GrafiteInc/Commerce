@@ -9,7 +9,7 @@ class CreateCustomerProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::table(config('quarx.db-prefix', '').'user_meta', function ($table) {
+        Schema::table(config('cms.db-prefix', '').'user_meta', function ($table) {
             $table->string('stripe_id')->nullable();
             $table->string('card_brand')->nullable();
             $table->string('card_last_four')->nullable();
@@ -23,7 +23,7 @@ class CreateCustomerProfilesTable extends Migration
      */
     public function down()
     {
-        // Schema::table(config('quarx.db-prefix', '').'user_meta', function ($table) {
+        // Schema::table(config('cms.db-prefix', '').'user_meta', function ($table) {
         //     $table->dropColumn('stripe_id');
         //     $table->dropColumn('card_brand');
         //     $table->dropColumn('card_last_four');

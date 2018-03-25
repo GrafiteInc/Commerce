@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Quazar;
+namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
-use Yab\Quazar\Services\PlanService;
+use Grafite\Commerce\Services\PlanService;
 
 class PlanController extends Controller
 {
@@ -11,7 +11,7 @@ class PlanController extends Controller
 
     public function __construct(PlanService $service)
     {
-        if (!config('quazar.subscriptions')) {
+        if (!config('commerce.subscriptions')) {
             return back()->send();
         }
         $this->service = $service;
@@ -32,7 +32,7 @@ class PlanController extends Controller
             abort(404);
         }
 
-        return view('quazar-frontend::plans.all')->with('plans', $plans);
+        return view('commerce-frontend::plans.all')->with('plans', $plans);
     }
 
     /**
@@ -50,6 +50,6 @@ class PlanController extends Controller
             abort(404);
         }
 
-        return view('quazar-frontend::plans.show')->with('plan', $plan);
+        return view('commerce-frontend::plans.show')->with('plan', $plan);
     }
 }

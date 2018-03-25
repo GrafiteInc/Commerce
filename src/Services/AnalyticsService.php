@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quazar\Services;
+namespace Grafite\Commerce\Services;
 
 use Carbon\Carbon;
 use Laravel\Cashier\Subscription;
-use Yab\Quazar\Models\Transaction;
+use Grafite\Commerce\Models\Transaction;
 
 class AnalyticsService
 {

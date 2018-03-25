@@ -1,6 +1,6 @@
 <?php
 
-use Orchestra\Testbench\Traits\WithLoadMigrationsFrom;
+use Orchestra\Testbench\Concerns\WithLoadMigrationsFrom;
 
 class TestCase extends Orchestra\Testbench\TestCase
 {
@@ -15,7 +15,7 @@ class TestCase extends Orchestra\Testbench\TestCase
     {
         $app['config']->set('database.default', 'testing');
         $app['config']->set('app.debug', true);
-        $app['config']->set('quarx.load-modules', false);
+        $app['config']->set('cms.load-modules', false);
         $app['config']->set('database.connections.testing', [
             'driver' => 'sqlite',
             'database' => ':memory:',
@@ -25,19 +25,19 @@ class TestCase extends Orchestra\Testbench\TestCase
         $app['config']->set('minify.config.ignore_environments', ['local', 'testing']);
         $app->make('Illuminate\Contracts\Http\Kernel')->pushMiddleware('Illuminate\Session\Middleware\StartSession');
 
-        $app['Illuminate\Contracts\Auth\Access\Gate']->define('quarx', function ($user) {
+        $app['Illuminate\Contracts\Auth\Access\Gate']->define('cms', function ($user) {
             return true;
         });
 
         $app['Illuminate\Routing\Router']->group(['namespace' => 'App\Http\Controllers'], function ($router) {
-            require __DIR__.'/../src/Publishes/routes/quazar.php';
+            require __DIR__.'/../src/Publishes/routes/commerce.php';
         });
 
-        $destinationDir = realpath(__DIR__.'/../vendor/orchestra/testbench-core/fixture/database/migrations');
+        $destinationDir = realpath(__DIR__.'/../vendor/orchestra/testbench-core/laravel/database/migrations');
 
-        \File::copyDirectory(realpath(__DIR__.'/../fixture/migrations'), $destinationDir);
-        \File::copyDirectory(realpath(__DIR__.'/../vendor/yab/quarx/src/PublishedAssets/Migrations'), $destinationDir);
-        \File::copyDirectory(realpath(__DIR__.'/../vendor/yab/quarx/src/Migrations'), $destinationDir);
+        \File::copyDirectory(realpath(__DIR__.'/../vendor/orchestra/testbench-core/laravel/migrations'), $destinationDir);
+        \File::copyDirectory(realpath(__DIR__.'/../vendor/grafite/builder/src/Packages/Starter/database/migrations'), $destinationDir);
+        \File::copyDirectory(realpath(__DIR__.'/../vendor/grafite/cms/src/Migrations'), $destinationDir);
         \File::copyDirectory(realpath(__DIR__.'/../src/Migrations'), $destinationDir);
     }
 
@@ -51,9 +51,9 @@ class TestCase extends Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Yab\Quazar\QuazarModuleProvider::class,
-            \Yab\Laracogs\LaracogsProvider::class,
-            \Yab\Quarx\QuarxProvider::class,
+            \Grafite\Commerce\GrafiteCommerceModuleProvider::class,
+            \Grafite\Builder\GrafiteBuilderProvider::class,
+            \Grafite\Cms\GrafiteCmsProvider::class,
         ];
     }
 
@@ -64,18 +64,18 @@ class TestCase extends Orchestra\Testbench\TestCase
     {
         parent::setUp();
 
-        $this->withFactories(__DIR__.'/../src/Models/Factories');
+        $this->withFactories(__DIR__.'/../tests/Factories');
 
         $this->artisan('vendor:publish', [
-            '--provider' => 'Yab\Laracogs\LaracogsProvider',
+            '--provider' => 'Grafite\Builder\GrafiteBuilderProvider',
             '--force' => true,
         ]);
         $this->artisan('vendor:publish', [
-            '--provider' => 'Yab\Quarx\QuarxProvider',
+            '--provider' => 'Grafite\Cms\GrafiteCmsProvider',
             '--force' => true,
         ]);
         $this->artisan('vendor:publish', [
-            '--provider' => 'Yab\Quazar\QuazarModuleProvider',
+            '--provider' => 'Grafite\Commerce\GrafiteCommerceModuleProvider',
             '--force' => true,
         ]);
 

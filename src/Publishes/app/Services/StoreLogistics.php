@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Log;
-use Yab\Quazar\Interfaces\LogisticServiceInterface;
-use Yab\Quazar\Services\CustomerProfileService;
-use Yab\Quazar\Services\LogisticService;
+use Grafite\Commerce\Interfaces\LogisticServiceInterface;
+use Grafite\Commerce\Services\CustomerProfileService;
+use Grafite\Commerce\Services\LogisticService;
 
 class StoreLogistics implements LogisticServiceInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quazar\Services;
+namespace Grafite\Commerce\Services;
 
 use Carbon\Carbon;
 use Stripe\Coupon;

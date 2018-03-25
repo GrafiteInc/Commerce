@@ -1,4 +1,4 @@
-@extends('quarx::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -24,18 +24,18 @@
         <h1 class="page-header">Transactions: Review</h1>
     </div>
 
-    @include('quazar::transactions.breadcrumbs', ['location' => ['edit']])
+    @include('commerce::transactions.breadcrumbs', ['location' => ['edit']])
 
-    {!! Form::model($transaction, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.transactions.update', $transaction->id], 'method' => 'patch']) !!}
+    {!! Form::model($transaction, ['route' => [config('cms.backend-route-prefix', 'cms').'.transactions.update', $transaction->id], 'method' => 'patch']) !!}
 
         <div class="row">
             <div class="col-md-12 raw-margin-bottom-24 text-center">
                 <h2 class="text-center raw-margin-bottom-24">#{{ $transaction->uuid }}</h2>
-                @if ($order->hasActiveOrderItems())
+                @if ($order && $order->hasActiveOrderItems())
                     <span class="alert alert-warning text-center">
                         You must cancel this order if you wish to refund this transaction.
                     </span>
-                    <h4 class="text-center raw-margin-bottom-24 raw-margin-top-24"><a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/orders/'.$order->id.'/edit') }}">Order #:{{ $order->uuid }}</a></h4>
+                    <h4 class="text-center raw-margin-bottom-24 raw-margin-top-24"><a href="{{ url(config('cms.backend-route-prefix', 'cms').'/orders/'.$order->id.'/edit') }}">Order #:{{ $order->uuid }}</a></h4>
                 @endif
                 @if (!is_null($transaction->refund_date))
                     <div class="alert alert-success text-center">
@@ -46,24 +46,26 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
-                <table class="table table-striped">
-                    <thead>
-                        <th>Name</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                    </thead>
-                    <tbody>
-                        @foreach($order->items as $item)
-                        <tr>
-                            <td>{{ $item->product->name }}</td>
-                            <td>{{ $item->quantity }}</td>
-                            <td>{{ $item->total }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+            @if ($order && $order->items->isNotEmpty())
+                <div class="col-md-6">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </thead>
+                        <tbody>
+                            @foreach($order->items as $item)
+                            <tr>
+                                <td>{{ $item->product->name }}</td>
+                                <td>{{ $item->quantity }}</td>
+                                <td>{{ $item->total }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
             <div class="col-md-6">
                 <table class="table table-striped">
                     <tr>
@@ -81,7 +83,7 @@
                     @if ($transaction->coupon)
                     <tr>
                         <td><b>Coupon</b></td>
-                        <td>{{ app(Yab\Quazar\Models\Coupon::class)->fill(json_decode($transaction->coupon, true))->dollars }}</td>
+                        <td>{{ app(Grafite\Commerce\Models\Coupon::class)->fill(json_decode($transaction->coupon, true))->dollars }}</td>
                     </tr>
                     @endif
                     <tr>
@@ -104,8 +106,8 @@
         </div>
     {!! Form::close() !!}
 
-    @if (is_null($transaction->refund_date) && $order->count() == 0)
-        {!! Form::open(['id' => 'refundForm', 'url' => config('quarx.backend-route-prefix', 'quarx').'/transactions/refund', 'method' => 'post', 'class' => 'inline-form pull-left']) !!}
+    @if ($order && is_null($transaction->refund_date))
+        {!! Form::open(['id' => 'refundForm', 'url' => config('cms.backend-route-prefix', 'cms').'/transactions/refund', 'method' => 'post', 'class' => 'inline-form pull-left']) !!}
             @input_maker_create('uuid', ['type' => 'hidden'], $transaction)
             {!! Form::submit('Refund', ['class' => 'btn btn-warning']) !!}
         {!! Form::close() !!}

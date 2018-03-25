@@ -36,7 +36,7 @@
                     @endif
                 </td>
                 <td class="text-right">
-                    <a class="btn btn-xs btn-default pull-right" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.transactions.edit', [Crypto::encrypt($transaction->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                    <a class="btn btn-xs btn-default pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.transactions.edit', [Crypto::encrypt($transaction->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                 </td>
             </tr>
         @endforeach

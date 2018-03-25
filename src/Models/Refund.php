@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Quazar\Models;
+namespace Grafite\Commerce\Models;
 
-use Yab\Quarx\Models\QuarxModel;
-use Yab\Quazar\Models\OrderItem;
+use Grafite\Cms\Models\CmsModel;
+use Grafite\Commerce\Models\OrderItem;
 
-class Refund extends QuarxModel
+class Refund extends CmsModel
 {
     public $table = 'refunds';
 
@@ -15,7 +15,6 @@ class Refund extends QuarxModel
 
     public $fillable = [
         'transaction_id',
-        'order_item_id',
         'provider_id',
         'provider',
         'uuid',
@@ -33,6 +32,6 @@ class Refund extends QuarxModel
 
     public function orderItem()
     {
-        return $this->belongsTo(OrderItem::class);
+        return $this->hasOne(OrderItem::class);
     }
 }

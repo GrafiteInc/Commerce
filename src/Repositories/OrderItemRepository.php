@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quazar\Repositories;
+namespace Grafite\Commerce\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use Yab\Quazar\Models\OrderItem;
+use Grafite\Commerce\Models\OrderItem;
 
 class OrderItemRepository
 {

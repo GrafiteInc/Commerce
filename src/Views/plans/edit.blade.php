@@ -1,13 +1,13 @@
-@extends('quarx::layouts.dashboard', ['pageTitle' => 'Subscription &raquo; Plans'])
+@extends('cms::layouts.dashboard', ['pageTitle' => 'Subscription &raquo; Plans'])
 
 @section('stylesheets')
     @parent
-    <link rel="stylesheet" type="text/css" href="{{ Quarx::moduleAsset('quazar', 'css/store.css', 'text/css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ Cms::moduleAsset('commerce', 'css/store.css', 'text/css') }}">
 @stop
 
 @section('content')
 
-    @include('quazar::modals')
+    @include('commerce::modals')
 
     <div class="row">
         <h1>Plans: Edit</h1>
@@ -29,21 +29,21 @@
             </div>
         </div>
         <div class="col-md-6">
-            {!! Form::model($plan, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.plans.update', $plan->id], 'method' => 'patch']) !!}
+            {!! Form::model($plan, ['route' => [config('cms.backend-route-prefix', 'cms').'.plans.update', $plan->id], 'method' => 'patch']) !!}
 
-            {!! FormMaker::fromObject($plan, config('quazar.forms.plans-edit')) !!}
+            {!! FormMaker::fromObject($plan, config('commerce.forms.plans-edit')) !!}
 
             {!! Form::submit('Update', ['class' => 'btn btn-primary pull-right']) !!}
 
             {!! Form::close() !!}
 
             @if ($plan->enabled)
-                <a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/plans/'.$plan->id.'/state-change/disable') }}" class="btn btn-warning pull-right raw-margin-right-16">Disable</a>
+                <a href="{{ url(config('cms.backend-route-prefix', 'cms').'/plans/'.$plan->id.'/state-change/disable') }}" class="btn btn-warning pull-right raw-margin-right-16">Disable</a>
             @else
-                <a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/plans/'.$plan->id.'/state-change/enable') }}" class="btn btn-default pull-right raw-margin-right-16">Enable</a>
+                <a href="{{ url(config('cms.backend-route-prefix', 'cms').'/plans/'.$plan->id.'/state-change/enable') }}" class="btn btn-default pull-right raw-margin-right-16">Enable</a>
             @endif
 
-            <form id="deletePlanForm" method="post" action="{!! url(config('quarx.backend-route-prefix', 'quarx').'/plans/'.$plan->id) !!}">
+            <form id="deletePlanForm" method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/plans/'.$plan->id) !!}">
                 {!! csrf_field() !!}
                 {!! method_field('DELETE') !!}
                 <button class="btn delete-plan-btn btn-danger pull-left" type="submit"><i class="fa fa-trash"></i> Delete</button>
@@ -74,7 +74,7 @@
                             <td>{{ $customer->subscription($plan->stripe_name)->ends_at or 'N/A' }}</td>
                             <td>
                                 @if (is_null($customer->subscription($plan->stripe_name)->ends_at))
-                                    <form class="cancel-form" method="post" action="{!! url('quarx/plans/'.$plan->id.'/cancel-subscription/'.$customer->id) !!}">
+                                    <form class="cancel-form" method="post" action="{!! url('cms/plans/'.$plan->id.'/cancel-subscription/'.$customer->id) !!}">
                                         {!! csrf_field() !!}
                                         {!! method_field('DELETE') !!}
                                         <button class="btn btn-danger btn-xs pull-right" type="submit"><i class="fa fa-close"></i> Cancel Subscription</button>
@@ -92,7 +92,7 @@
 
 @section('javascript')
     @parent
-    <script type="text/javascript" src="{{ Quarx::moduleAsset('quazar', 'js/plans.js', 'application/javascript') }}"></script>
+    <script type="text/javascript" src="{{ Cms::moduleAsset('commerce', 'js/plans.js', 'application/javascript') }}"></script>
     <script type="text/javascript">
         _visualizeThePlan();
     </script>

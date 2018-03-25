@@ -17,14 +17,14 @@ class CartServiceTest extends TestCase
 
         $user->shouldReceive('favorites')->andReturn(collect([]));
 
-        factory(\Yab\Quazar\Models\Cart::class)->create();
-        factory(\Yab\Quazar\Models\Product::class)->create();
-        factory(\Yab\Quazar\Models\Plan::class)->create();
-        factory(\Yab\Quazar\Models\Variant::class)->create();
+        factory(\Grafite\Commerce\Models\Cart::class)->create();
+        factory(\Grafite\Commerce\Models\Product::class)->create();
+        factory(\Grafite\Commerce\Models\Plan::class)->create();
+        factory(\Grafite\Commerce\Models\Variant::class)->create();
 
-        $this->cartService = app(\Yab\Quazar\Services\CartService::class);
-        $this->cartRepo = app(\Yab\Quazar\Repositories\CartRepository::class);
-        $this->productRepo = app(\Yab\Quazar\Repositories\ProductRepository::class);
+        $this->cartService = app(\Grafite\Commerce\Services\CartService::class);
+        $this->cartRepo = app(\Grafite\Commerce\Repositories\CartRepository::class);
+        $this->productRepo = app(\Grafite\Commerce\Repositories\ProductRepository::class);
     }
 
     public function testAddBtn()
@@ -161,7 +161,7 @@ class CartServiceTest extends TestCase
 
     public function testGetDefaultValue()
     {
-        $variant = factory(\Yab\Quazar\Models\Variant::class)->make([
+        $variant = factory(\Grafite\Commerce\Models\Variant::class)->make([
             'id' => 4,
         ]);
         $response = $this->cartService->getDefaultValue($variant);
@@ -170,7 +170,7 @@ class CartServiceTest extends TestCase
 
     public function testGetVariantId()
     {
-        $variant = factory(\Yab\Quazar\Models\Variant::class)->make([
+        $variant = factory(\Grafite\Commerce\Models\Variant::class)->make([
             'id' => 4,
         ]);
 

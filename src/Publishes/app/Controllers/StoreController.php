@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Quazar;
+namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
-use Yab\Quazar\Repositories\ProductRepository;
-use Yab\Quazar\Services\PlanService;
+use Grafite\Commerce\Repositories\ProductRepository;
+use Grafite\Commerce\Services\PlanService;
 
 class StoreController extends Controller
 {
@@ -32,7 +32,7 @@ class StoreController extends Controller
             abort(404);
         }
 
-        return view('quazar-frontend::storefront')
+        return view('commerce-frontend::storefront')
             ->with('plans', $plans)
             ->with('products', $products);
     }

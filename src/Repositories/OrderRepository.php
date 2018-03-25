@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quazar\Repositories;
+namespace Grafite\Commerce\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use Yab\Quazar\Models\Order;
+use Grafite\Commerce\Models\Order;
 
 class OrderRepository
 {
@@ -35,7 +35,7 @@ class OrderRepository
             $model = $this->model->orderBy('created_at', 'desc');
         }
 
-        return $model->paginate(config('quarx.pagination', 25));
+        return $model->paginate(config('cms.pagination', 25));
     }
 
     /**
@@ -77,7 +77,7 @@ class OrderRepository
      *
      * @return \Illuminate\Support\Collection|null|static|Orders
      */
-    public function findOrdersById($id)
+    public function find($id)
     {
         return $this->model->find($id);
     }

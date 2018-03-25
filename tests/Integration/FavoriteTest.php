@@ -20,9 +20,9 @@ class FavoriteTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actor = $this->actingAs($this->user);
 
-        factory(\Yab\Quazar\Models\Cart::class)->create();
-        factory(\Yab\Quazar\Models\Product::class)->create();
-        factory(\Yab\Quazar\Models\Plan::class)->create();
+        factory(\Grafite\Commerce\Models\Cart::class)->create();
+        factory(\Grafite\Commerce\Models\Product::class)->create();
+        factory(\Grafite\Commerce\Models\Plan::class)->create();
     }
 
     public function testGetFavorites()

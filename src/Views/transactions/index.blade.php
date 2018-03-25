@@ -1,10 +1,10 @@
-@extends('quarx::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
     <div class="row">
         <div class="raw-m-hide pull-right">
-            {!! Form::open(['url' => config('quarx.backend-route-prefix', 'quarx').'/transactions/search']) !!}
+            {!! Form::open(['url' => config('cms.backend-route-prefix', 'cms').'/transactions/search']) !!}
             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
             {!! Form::close() !!}
         </div>
@@ -35,7 +35,7 @@
 
                 @foreach($transactions as $transaction)
                     <tr>
-                        <td><a href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.transactions.edit', [$transaction->id]) !!}">{!! $transaction->uuid !!}</a></td>
+                        <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.transactions.edit', [$transaction->id]) !!}">{!! $transaction->uuid !!}</a></td>
                         <td class="raw-m-hide">{!! $transaction->state !!}</td>
                         <td class="raw-m-hide">{!! $transaction->subtotal !!}</td>
                         <td class="raw-m-hide">{!! $transaction->tax !!}</td>
@@ -57,7 +57,7 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            <a class="btn btn-xs btn-default pull-right" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.transactions.edit', [$transaction->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.transactions.edit', [$transaction->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

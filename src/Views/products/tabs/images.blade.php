@@ -21,7 +21,7 @@
     @foreach($images as $image)
         <div class="col-md-3 image-panel raw-margin-top-24">
             <div class="thumbnail">
-                <a href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.images.edit', [$image->id]) !!}">
+                <a href="{!! route(config('cms.backend-route-prefix', 'cms').'.images.edit', [$image->id]) !!}">
                     <div class="img" style="background-image: url('{!! $image->url !!}')"></div>
                 </a>
             </div>
@@ -35,12 +35,12 @@
                         @endif
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12">
-                        <form method="post" action="{!! url(config('quarx.backend-route-prefix', 'quarx').'/products/images/'.$image->id) !!}">
+                        <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/products/images/'.$image->id) !!}">
                             {!! csrf_field() !!}
                             {!! method_field('DELETE') !!}
                             <button class="delete-btn btn btn-xs img-alter-btn btn-danger pull-right" type="submit"><i class="fa fa-trash"></i></button>
                         </form>
-                        <a class="btn btn-xs btn-default pull-right img-alter-btn raw-margin-right-8" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-xs btn-default pull-right img-alter-btn raw-margin-right-8" href="{!! route(config('cms.backend-route-prefix', 'cms').'.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
                     </div>
                 </div>
             </div>
@@ -51,15 +51,15 @@
 
 <div class="row">
     <div class="col-md-12">
-        {!! Form::open(['url' => 'quarx/images/upload', 'files' => true, 'class' => 'dropzone', 'id' => 'fileDropzone']); !!}
+        {!! Form::open(['url' => 'cms/images/upload', 'files' => true, 'class' => 'dropzone', 'id' => 'fileDropzone']); !!}
         {!! Form::close() !!}
 
-        {!! Form::open(['url' => config('quarx.backend-route-prefix', 'quarx').'/products/images', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']) !!}
+        {!! Form::open(['url' => config('cms.backend-route-prefix', 'cms').'/products/images', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']) !!}
 
             <input type="hidden" name="product_id" value="{{ $product->id }}">
 
             <div class="form-group text-right">
-                <a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/images') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/images') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'saveImagesBtn']) !!}
             </div>
 

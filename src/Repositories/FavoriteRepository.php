@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quazar\Repositories;
+namespace Grafite\Commerce\Repositories;
 
 use Carbon\Carbon;
-use Yab\Quazar\Models\Favorite;
+use Grafite\Commerce\Models\Favorite;
 
 class FavoriteRepository
 {

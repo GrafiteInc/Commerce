@@ -1,4 +1,4 @@
-@extends('quarx::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -24,9 +24,9 @@
         <h1 class="page-header">Orders: Edit</h1>
     </div>
 
-    @include('quazar::orders.breadcrumbs', ['location' => ['edit']])
+    @include('commerce::orders.breadcrumbs', ['location' => ['edit']])
 
-    {!! Form::model($order, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.orders.update', $order->id], 'method' => 'patch']) !!}
+    {!! Form::model($order, ['route' => [config('cms.backend-route-prefix', 'cms').'.orders.update', $order->id], 'method' => 'patch']) !!}
 
         <div class="row">
             <div class="col-md-12 raw-margin-bottom-24">
@@ -51,12 +51,12 @@
                     </tr>
                     @foreach($order->items as $item)
                     <tr>
-                        <td><a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/orders/item/'.$item->id) }}">{{ $item->product->name }}</a></td>
+                        <td><a href="{{ url(config('cms.backend-route-prefix', 'cms').'/orders/item/'.$item->id) }}">{{ $item->product->name }}</a></td>
                         <td>{{ $item->quantity }}</td>
                         <td>{{ $item->total }}</td>
                         <td>{{ ucfirst($item->status) }}</td>
                         <td class="text-right">
-                            <a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/orders/item/'.$item->id) }}" class="btn btn-xs btn-default">Review</a>
+                            <a href="{{ url(config('cms.backend-route-prefix', 'cms').'/orders/item/'.$item->id) }}" class="btn btn-xs btn-default">Review</a>
                         </td>
                     </tr>
                     @endforeach
@@ -96,7 +96,7 @@
     {!! Form::close() !!}
 
     @if ($order->status !== 'cancelled' && !$order->hasRefundedOrderItems())
-        {!! Form::open(['id' => 'cancelForm', 'url' => config('quarx.backend-route-prefix', 'quarx').'/orders/cancel', 'method' => 'post', 'class' => 'inline-form pull-left']) !!}
+        {!! Form::open(['id' => 'cancelForm', 'url' => config('cms.backend-route-prefix', 'cms').'/orders/cancel', 'method' => 'post', 'class' => 'inline-form pull-left']) !!}
             @input_maker_create('id', ['type' => 'hidden'], $order)
             {!! Form::submit('Cancel this Order', ['class' => 'btn btn-warning']) !!}
         {!! Form::close() !!}

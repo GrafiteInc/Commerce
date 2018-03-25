@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quazar\Repositories;
+namespace Grafite\Commerce\Repositories;
 
-use Yab\Quazar\Models\Variant;
-use Yab\Quazar\Models\Product;
+use Grafite\Commerce\Models\Variant;
+use Grafite\Commerce\Models\Product;
 
 class ProductVariantRepository
 {
@@ -15,7 +15,7 @@ class ProductVariantRepository
     /**
      * Get all published products.
      *
-     * @return Yab\Quazar\Models\Variant
+     * @return Grafite\Commerce\Models\Variant
      */
     public function getProductVariants($id)
     {
@@ -25,10 +25,10 @@ class ProductVariantRepository
     /**
      * Adds variants to the product.
      *
-     * @param Yab\Quazar\Models\Product $products
+     * @param Grafite\Commerce\Models\Product $products
      * @param array                     $payload
      *
-     * @return Yab\Quazar\Models\Variant
+     * @return Grafite\Commerce\Models\Variant
      */
     public function addVariant($product, $payload)
     {
@@ -42,7 +42,7 @@ class ProductVariantRepository
      *
      * @param array $payload
      *
-     * @return Yab\Quazar\Models\Variant
+     * @return Grafite\Commerce\Models\Variant
      */
     public function saveVariant($payload)
     {

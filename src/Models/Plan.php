@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quazar\Models;
+namespace Grafite\Commerce\Models;
 
-use Yab\Quarx\Models\QuarxModel;
+use Grafite\Cms\Models\CmsModel;
 
-class Plan extends QuarxModel
+class Plan extends CmsModel
 {
     public $table = 'plans';
 
@@ -16,7 +16,7 @@ class Plan extends QuarxModel
         'name',
         'title',
         'uuid',
-        'amount',
+        'price',
         'interval',
         'currency',
         'enabled',
@@ -30,7 +30,7 @@ class Plan extends QuarxModel
 
     public static $rules = [
         'name' => 'required',
-        'amount' => 'required',
+        'price' => 'required',
         'interval' => 'required',
         'currency' => 'required',
         'descriptor' => 'required',
@@ -58,16 +58,16 @@ class Plan extends QuarxModel
 
     public function getPriceAttribute()
     {
-        return round($this->amount / 100, 2);
+        return round($this->price / 100, 2);
     }
 
     public function getHrefAttribute()
     {
-        return route('quazar.plan', [$this->uuid]);
+        return route('commerce.plan', [$this->uuid]);
     }
 
     public function subscribeBtn($content = '', $class = '')
     {
-        return '<form method="post" action="'.route('quazar.subscribe', [crypto_encrypt($this->id)]).'">'.csrf_field().'<button class="'.$class.'">'.$content.'</button></form>';
+        return '<form method="post" action="'.route('commerce.subscribe', [crypto_encrypt($this->id)]).'">'.csrf_field().'<button class="'.$class.'">'.$content.'</button></form>';
     }
 }

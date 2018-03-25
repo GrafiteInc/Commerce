@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Quazar;
+namespace App\Http\Controllers\Commerce;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Yab\Quazar\Services\CustomerProfileService;
+use Grafite\Commerce\Services\CustomerProfileService;
 
 class CardController extends Controller
 {
@@ -23,10 +23,10 @@ class CardController extends Controller
     public function getCard()
     {
         if (is_null(auth()->user()->meta->stripe_id)) {
-            return view('quazar-frontend::profile.card.set');
+            return view('commerce-frontend::profile.card.set');
         }
 
-        return view('quazar-frontend::profile.card.get');
+        return view('commerce-frontend::profile.card.get');
     }
 
     /**
@@ -36,7 +36,7 @@ class CardController extends Controller
      */
     public function changeCard()
     {
-        return view('quazar-frontend::profile.card.change');
+        return view('commerce-frontend::profile.card.change');
     }
 
     /**

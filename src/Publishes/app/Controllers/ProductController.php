@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Quazar;
+namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
-use Yab\Quazar\Repositories\ProductRepository;
+use Grafite\Commerce\Repositories\ProductRepository;
 
 class ProductController extends Controller
 {
@@ -29,7 +29,7 @@ class ProductController extends Controller
             abort(404);
         }
 
-        return view('quazar-frontend::products.all')->with('products', $products);
+        return view('commerce-frontend::products.all')->with('products', $products);
     }
 
     /**
@@ -47,6 +47,6 @@ class ProductController extends Controller
             abort(404);
         }
 
-        return view('quazar-frontend::products.show')->with('product', $product);
+        return view('commerce-frontend::products.show')->with('product', $product);
     }
 }

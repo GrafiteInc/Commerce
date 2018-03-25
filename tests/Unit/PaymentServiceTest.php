@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Yab\Quazar\Services\PaymentService;
+use Grafite\Commerce\Services\PaymentService;
 
 class PaymentServiceTest extends TestCase
 {
@@ -28,15 +28,15 @@ class PaymentServiceTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actingAs($this->user);
 
-        factory(\Yab\Quazar\Models\Cart::class)->create();
-        factory(\Yab\Quazar\Models\Product::class)->create();
-        factory(\Yab\Quazar\Models\Plan::class)->create();
-        factory(\Yab\Quazar\Models\Cart::class)->create([
+        factory(\Grafite\Commerce\Models\Cart::class)->create();
+        factory(\Grafite\Commerce\Models\Product::class)->create();
+        factory(\Grafite\Commerce\Models\Plan::class)->create();
+        factory(\Grafite\Commerce\Models\Cart::class)->create([
             'id' => 3,
             'user_id' => 1,
         ]);
 
-        $this->cart = app(\Yab\Quazar\Services\CartService::class);
+        $this->cart = app(\Grafite\Commerce\Services\CartService::class);
         $this->cart->addToCart(1, 'product', 1, '{}');
 
         $this->user->meta = Mockery::mock(App\Models\UserMeta::class);
@@ -67,7 +67,7 @@ class PaymentServiceTest extends TestCase
         $this->assertDatabaseHas('transactions', [
             'user_id' => 1007,
             'provider_id' => 666,
-            'total' => '99.99',
+            'total' => 9999,
         ]);
     }
 
@@ -79,7 +79,7 @@ class PaymentServiceTest extends TestCase
         $this->assertDatabaseHas('transactions', [
             'user_id' => 1007,
             'provider_id' => 666,
-            'total' => '99.99',
+            'total' => 99.99,
         ]);
     }
 
@@ -92,7 +92,7 @@ class PaymentServiceTest extends TestCase
         $this->assertDatabaseHas('transactions', [
             'user_id' => 1007,
             'provider_id' => 666,
-            'total' => '99.99',
+            'total' => 9999,
         ]);
     }
 

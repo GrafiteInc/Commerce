@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Yab\Quazar\Services\LogisticService;
+use Grafite\Commerce\Services\LogisticService;
 
 class LogisticServiceTest extends TestCase
 {

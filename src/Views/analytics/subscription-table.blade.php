@@ -18,7 +18,7 @@
                     <td>${{ StoreHelper::subscriptionPlan($subscription)->price }} / {{ StoreHelper::subscriptionPlan($subscription)->frequency }}</td>
                     <td class="text-right">
                         @if (is_null($subscription->ends_at)) {!! StoreHelper::cancelSubscriptionBtn($subscription, 'btn btn-xs btn-danger pull-right raw-margin-left-8') !!} @endif
-                        <a class="btn btn-xs btn-default pull-right" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.plans.edit', [StoreHelper::subscriptionPlan($subscription)->id]) !!}"><i class="fa fa-pencil"></i> Review Plan</a>
+                        <a class="btn btn-xs btn-default pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.plans.edit', [StoreHelper::subscriptionPlan($subscription)->id]) !!}"><i class="fa fa-pencil"></i> Review Plan</a>
                     </td>
                 </tr>
             @endif

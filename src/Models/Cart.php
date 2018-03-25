@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quazar\Models;
+namespace Grafite\Commerce\Models;
 
-use Yab\Quarx\Models\QuarxModel;
+use Grafite\Cms\Models\CmsModel;
 
-class Cart extends QuarxModel
+class Cart extends CmsModel
 {
     public $table = 'cart';
 

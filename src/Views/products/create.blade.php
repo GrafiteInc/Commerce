@@ -1,15 +1,15 @@
-@extends('quarx::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
     <div class="row">
         <h1 class="page-header">Products</h1>
     </div>
 
-    @include('quazar::products.breadcrumbs', ['location' => ['create']])
+    @include('commerce::products.breadcrumbs', ['location' => ['create']])
 
-    {!! Form::open(['route' => config('quarx.backend-route-prefix', 'quarx').'.products.store', 'files' => true]) !!}
+    {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'.products.store', 'files' => true]) !!}
 
-        {!! FormMaker::fromTable('products', config('quazar.forms.details')) !!}
+        {!! FormMaker::fromTable('products', config('commerce.forms.details')) !!}
 
         <div class="form-group text-right">
             <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>

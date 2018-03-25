@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quazar\Repositories;
+namespace Grafite\Commerce\Repositories;
 
 use Illuminate\Support\Facades\Session;
-use Yab\Quazar\Models\Cart;
-use Yab\Quazar\Models\Variant;
+use Grafite\Commerce\Models\Cart;
+use Grafite\Commerce\Models\Variant;
 
 class CartRepository
 {
@@ -13,7 +13,7 @@ class CartRepository
 
     public function __construct()
     {
-        $this->session = new Session();
+        $this->session = app(Session::class);
         $this->user = auth()->user();
     }
 

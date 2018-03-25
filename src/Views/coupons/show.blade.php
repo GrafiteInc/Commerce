@@ -1,8 +1,8 @@
-@extends('quarx::layouts.dashboard', ['pageTitle' => 'Coupons'])
+@extends('cms::layouts.dashboard', ['pageTitle' => 'Coupons'])
 
 @section('content')
 
-    @include('quazar::modals')
+    @include('commerce::modals')
 
     <div class="row">
         <h1>Coupon: Details</h1>
@@ -10,9 +10,9 @@
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            {!! FormMaker::fromObject($coupon, config('quazar.forms.coupons')) !!}
+            {!! FormMaker::fromObject($coupon, config('commerce.forms.coupons')) !!}
 
-            <form id="deleteCouponForm" method="post" action="{!! url(config('quarx.backend-route-prefix', 'quarx').'/coupons/'.$coupon->id) !!}">
+            <form id="deleteCouponForm" method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/coupons/'.$coupon->id) !!}">
                 {!! csrf_field() !!}
                 {!! method_field('DELETE') !!}
                 <button class="btn delete-coupon-btn btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
@@ -24,5 +24,5 @@
 
 @section('javascript')
     @parent
-    <script type="text/javascript" src="{{ Quarx::moduleAsset('quazar', 'js/coupons.js', 'application/javascript') }}"></script>
+    <script type="text/javascript" src="{{ Cms::moduleAsset('commerce', 'js/coupons.js', 'application/javascript') }}"></script>
 @endsection
