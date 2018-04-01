@@ -11,6 +11,7 @@ return [
     'name' => 'Grafite Commerce',
     'currency' => env('CURRENCY', 'usd'),
     'taxes_include_shipping' => false,
+    'store_url_prefix' => 'store',
     'currencies' => [
         'AUD' => 'aud',
         'CAD' => 'cad',

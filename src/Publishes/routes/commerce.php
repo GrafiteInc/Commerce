@@ -10,7 +10,7 @@
 
         Route::get('', 'StoreController@index')->name('commerce.home');
 
-        Route::group(['prefix' => 'store', 'as' => 'commerce'], function () {
+        Route::group(['prefix' => config('commerce.store_url_prefix'), 'as' => 'commerce'], function () {
             Route::get('cart/contents', 'CartController@getContents')->name('.cart.contents');
             Route::get('cart/empty', 'CartController@emptyCart')->name('.cart.empty');
             Route::group(['middleware' => ['isAjax']], function () {
@@ -22,6 +22,7 @@
             });
 
             Route::group(['middleware' => ['cms-analytics']], function () {
+                Route::get('', 'StoreController@index')->name('.index');
                 Route::get('products', 'ProductController@all')->name('.products');
                 Route::get('product/{url}', 'ProductController@show')->name('.product');
                 Route::get('plans', 'PlanController@all')->name('.plans');

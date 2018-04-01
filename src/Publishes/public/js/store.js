@@ -6,6 +6,8 @@
 
 var store = {
 
+    url: 'store',
+
     cart: {
         contents: [],
         count: 0,
@@ -23,7 +25,7 @@ var store = {
         var _store = this;
         $.ajax({
             type: "GET",
-            url: _url+"/store/cart",
+            url: _url+"/"+_store.url+"/cart",
             cache: false,
             dataType: "html",
             success: function(data){
@@ -36,7 +38,7 @@ var store = {
         var _store = this;
         $.ajax({
             type: "GET",
-            url: _url+"/store/cart/count",
+            url: _url+"/"+_store.url+"/cart/count",
             cache: false,
             dataType: "html",
             success: function(data){
@@ -47,6 +49,7 @@ var store = {
     },
 
     favoriteToggle: function(_id, _button, _content, _isFavorite, _isNotFavorite) {
+        var _store = this;
         $.ajax({
             type: "GET",
             url: $(_button).attr('data-url'),
@@ -55,10 +58,10 @@ var store = {
             success: function(data) {
                 var _response = JSON.parse(data);
                 if (_response.data == 1) {
-                    var _requestUrl = _url+"/store/favorites/remove/"+_id;
+                    var _requestUrl = _url+"/"+_store.url+"/favorites/remove/"+_id;
                     $(_button).html(_content + ' ' + _isFavorite)
                 } else {
-                    var _requestUrl = _url+"/store/favorites/add/"+_id;
+                    var _requestUrl = _url+"/"+_store.url+"/favorites/add/"+_id;
                     $(_button).html(_content + ' ' + _isNotFavorite)
                 }
 
@@ -91,7 +94,7 @@ var store = {
 
         $.ajax({
             type: "GET",
-            url: _url+"/store/cart/add",
+            url: _url+"/"+_store.url+"/cart/add",
             data: _product,
             cache: false,
             dataType: "html",
@@ -107,7 +110,7 @@ var store = {
         var _store = this;
         $.ajax({
             type: "GET",
-            url: _url+"/store/cart/remove",
+            url: _url+"/"+_store.url+"/cart/remove",
             data: { id: _id, type: _type },
             cache: false,
             dataType: "html",
@@ -123,7 +126,7 @@ var store = {
         var _store = this;
         $.ajax({
             type: "GET",
-            url: _url+"/store/cart/change-count",
+            url: _url+"/"+_store.url+"/cart/change-count",
             data: {
                 id: _id,
                 count: _count
