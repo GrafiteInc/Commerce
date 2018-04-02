@@ -17,7 +17,7 @@
                     <td><a href="{{ $product->href }}">{!! $product->name !!}</a></td>
                     <td>{!! $product->code !!}</td>
                     <td>${!! $product->price !!}</td>
-                    <td class="text-right">{!! $product->addToCartBtn('Add To Cart <span class="fa fa-shopping-cart"></span>', 'btn btn-primary btn-xs') !!}</td>
+                    <td class="text-right">{!! $product->addToCartBtn('Add To Cart <span class="fa fa-shopping-cart"></span>', 'btn btn-outline-primary btn-sm') !!}</td>
                 </tr>
             @endforeach
         </tbody>

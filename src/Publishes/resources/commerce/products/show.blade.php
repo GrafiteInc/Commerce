@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <img class="thumbnail img-responsive" alt="" src="{{ $product->hero_image_url }}" />
+            <img class="img-thumbnail img-responsive" alt="" src="{{ $product->hero_image_url }}" />
 
             <table class="table table-stripped">
                 <tr>
@@ -17,7 +17,7 @@
                 </tr>
                 <tr>
                     <td>Price</td>
-                    <td class="text-right">{{ $product->price }}</td>
+                    <td class="text-right">${{ $product->price }}</td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -26,15 +26,15 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="text-right">
-                        {!! $product->addToCartBtn('Add To Cart <span class="fa fa-shopping-cart"></span>', 'btn btn-primary') !!}
-                        {!! $product->favoriteToggleBtn('Favorite', '<span class="fa fa-heart-o"></span>', '<span class="fa fa-heart"></span>', 'btn btn-default') !!}
+                        {!! $product->addToCartBtn('Add To Cart <span class="fa fa-shopping-cart"></span>', 'btn btn-primary float-right') !!}
+                        {!! $product->favoriteToggleBtn('Favorite', '<span class="fa fa-heart-o"></span>', '<span class="fa fa-heart"></span>', 'btn btn-outline-secondary float-left') !!}
                     </td>
                 </tr>
             </table>
         </div>
         <div class="col-md-4">
             @foreach($product->images as $image)
-                <img class="thumbnail img-responsive" alt="" src="{{ $image->url }}" />
+                <img class="img-thumbnail img-responsive mb-4" alt="" src="{{ $image->url }}" />
             @endforeach
         </div>
     </div>
