@@ -61,6 +61,11 @@ class Plan extends CmsModel
         return round($this->price / 100, 2);
     }
 
+    public function getAmountAttribute($value)
+    {
+        return number_format($value * 0.01, 2, '.', '');
+    }
+
     public function getHrefAttribute()
     {
         return route('commerce.plan', [$this->uuid]);

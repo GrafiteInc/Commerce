@@ -2,7 +2,7 @@
 
 @section('store-content')
 
-    <h1>Subscription</h1>
+    <h3 class="mb-4">Subscriptions</h3>
 
     <table class="table table-stripped">
         <tr>
@@ -33,7 +33,7 @@
     </table>
 
     @if (is_null($subscription->ends_at))
-        {!! StoreHelper::cancelSubscriptionBtn($subscription, 'btn btn-danger pull-right') !!}
+        {!! StoreHelper::cancelSubscriptionBtn($subscription, 'btn btn-danger fload-right') !!}
     @endif
 
 @endsection

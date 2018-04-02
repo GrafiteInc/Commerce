@@ -2,7 +2,7 @@
 
 @section('store-content')
 
-    <h1>Subscriptions</h1>
+    <h3 class="mb-4">Subscriptions</h3>
 
     <table class="table table-stripped">
         <thead>
@@ -16,7 +16,7 @@
                     <tr>
                         <td><a href="{{ StoreHelper::customerSubscriptionUrl($subscription) }}">{!! $subscription->name !!}</a></td>
                         <td>${{ StoreHelper::subscriptionPlan($subscription)->price }}</td>
-                        <td class="text-right">@if (is_null($subscription->ends_at)) {!! StoreHelper::cancelSubscriptionBtn($subscription, 'btn btn-xs btn-danger') !!} @endif</td>
+                        <td class="text-right">@if (is_null($subscription->ends_at)) {!! StoreHelper::cancelSubscriptionBtn($subscription, 'btn btn-sm btn-danger') !!} @endif</td>
                     </tr>
                 @endif
             @endforeach

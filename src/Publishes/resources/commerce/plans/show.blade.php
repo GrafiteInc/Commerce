@@ -3,11 +3,24 @@
 @section('store-content')
 
     <div class="row">
-        <h1>{{ $plan->name }}</h1>
-        <label>Price</label>
-        <p>${{ $plan->price }} / {{ $plan->frequency }}</p>
-        <span>{!! $plan->subscribeBtn('Subscribe <span class="fa fa-shopping-cart"></span>', 'btn btn-primary') !!}</span>
-        {!! $plan->details !!}
+        <h3 class="mb-4">{{ $plan->name }}</h3>
+
+        <table class="table table-stripped">
+            <tr>
+                <td>
+                    Price
+                </td>
+                <td class="text-right">
+                    ${{ $plan->amount }} / {{ $plan->frequency }}
+                </td>
+            </tr>
+        </table>
+        <div class="row">
+            <div class="col-md-12">
+                {!! $plan->details !!}
+            </div>
+        </div>
+        {!! $plan->subscribeBtn('Subscribe <span class="fa fa-shopping-cart"></span>', 'btn btn-primary') !!}</span>
     </div>
 
 @endsection

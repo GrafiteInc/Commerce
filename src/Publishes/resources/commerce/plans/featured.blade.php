@@ -2,16 +2,16 @@
     @foreach ($plans as $plan)
         @if ($plan->is_featured)
             <div class="col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading text-center">
+                <div class="card card-default mb-4">
+                    <div class="card-header text-center">
                         <span class="plan-title"><a href="{{ $plan->href }}">{{ $plan->name }}</a></span>
                     </div>
-                    <div class="panel-body text-center plan-details">
-                        <span class="lead">$ {{ $plan->amount/100 }} {{ strtoupper($plan->currency) }}/ {{ strtoupper($plan->interval) }}</span><br>
+                    <div class="card-body text-center plan-details">
+                        <span class="lead">$ {{ $plan->amount }} {{ strtoupper($plan->currency) }}/ {{ strtoupper($plan->interval) }}</span><br>
                         <span class="plan-slogan">{{ $plan->slogan }}</span><br>
                         <span class="plan-description">{{ $plan->description }}</span>
                     </div>
-                    <div class="panel-footer">
+                    <div class="card-footer">
                         <a href="{{ $plan->href }}">Subscribe</a>
                     </div>
                 </div>
