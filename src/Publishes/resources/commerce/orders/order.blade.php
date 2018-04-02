@@ -2,7 +2,7 @@
 
 @section('store-content')
 
-    <h1>Order</h1>
+    <h3 class="mb-4">Order</h3>
 
     <table class="table table-stripped">
         <tr>
@@ -11,7 +11,7 @@
         </tr>
         <tr>
             <td>Transaction</td>
-            <td class="text-right"><a href="{!! route('commerce.account.purchase', [$order->transaction('uuid')]) !!}">{!! $order->transaction('uuid') !!}</a></td>
+            <td class="text-right"><a href="{!! route('commerce.account.purchase', [$order->transaction->uuid]) !!}">{!! $order->transaction->uuid !!}</a></td>
         </tr>
         <tr>
             <td>Status</td>

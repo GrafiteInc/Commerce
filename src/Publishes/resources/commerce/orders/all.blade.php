@@ -2,12 +2,12 @@
 
 @section('store-content')
 
-    <h1>Orders</h1>
+    <h3 class="mb-4">Orders</h3>
 
     <table class="table table-stripped">
         <thead>
             <td>Date</td>
-            <td>Transaction</td>
+            <td>Transaction ID</td>
             <td>Status</td>
             <td class="text-right">Action</td>
         </thead>
@@ -15,7 +15,7 @@
             @foreach ($orders as $order)
                 <tr>
                     <td><a href="{{ route('commerce.account.order', [$order->uuid]) }}">{!! $order->created_at->format('Y-m-d') !!}</a></td>
-                    <td>{!! $order->transaction('uuid') !!}</td>
+                    <td>{!! $order->transaction->uuid !!}</td>
                     <td>{!! ucfirst($order->status) !!}</td>
                     <td class="text-right">
                         @if ($order->status !== 'cancelled')

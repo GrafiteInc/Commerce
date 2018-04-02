@@ -2,11 +2,11 @@
 
 @section('store-content')
 
-    <h1>Checkout: Confirmation</h1>
+    <h1 class="mb-4">Checkout: Confirmation</h1>
 
     <div class="row">
         <div class="col-md-4">
-            <h2>Shipping Info</h2>
+            <h4 class="mb-4">Shipping Info</h4>
             <form method="post" action="{!! route('commerce.calculate.shipping') !!}">
                 {!! csrf_field() !!}
                 <div class="form-group">
@@ -24,11 +24,11 @@
                 <div class="form-group">
                     <input class="form-control" required name="address[country]" placeholder="Country" value="{!! StoreHelper::customer()->shippingAddress('country') !!}">
                 </div>
-                <input class="btn btn-info pull-right" type="submit" value="Re-calculate Shipping">
+                <input class="btn btn-outline-secondary pull-right" type="submit" value="Re-calculate Shipping">
             </form>
         </div>
         <div class="col-md-8">
-            <h2>Shopping Cart</h2>
+            <h4 class="mb-4">Shopping Cart</h4>
             @include('commerce-frontend::checkout.coupon')
             @include('commerce-frontend::checkout.products')
             <a class="pull-right btn btn-primary" href="{!! route('commerce.payment') !!}">Purchase</a>

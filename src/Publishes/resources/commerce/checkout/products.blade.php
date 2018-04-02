@@ -1,4 +1,4 @@
-<table class="table table-stripped">
+<table class="table table-stripped mb-4">
     <thead>
         <td>Name</td>
         <td>Code</td>
@@ -13,28 +13,28 @@
                     {!! $product->detailsBtn() !!}
                 </td>
                 <td>{!! $product->code !!}</td>
-                <td>{!! $product->price !!}</td>
+                <td>${!! $product->price !!}</td>
                 <td class="text-right">{!! $product->quantity !!}</td>
             </tr>
         @endforeach
     </tbody>
 </table>
 
-<table class="table table-stripped">
-    <tr class="text-right">
-        <td>Shipping <span class="shipping-choice"></span></td>
-        <td>{!! StoreHelper::checkoutShipping() !!}</td>
+<table class="table table-stripped mt-4">
+    <tr>
+        <td><b>Shipping</b> <span class="shipping-choice"></span></td>
+        <td class="text-right">${!! StoreHelper::checkoutShipping() !!}</td>
     </tr>
-    <tr class="text-right">
-        <td>Tax</td>
-        <td>{!! StoreHelper::checkoutTax() !!}</td>
+    <tr>
+        <td><b>Tax</b></td>
+        <td class="text-right">${!! StoreHelper::checkoutTax() !!}</td>
     </tr>
-    <tr class="text-right">
-        <td>Subtotal</td>
-        <td>{!! StoreHelper::checkoutSubtotal() !!}</td>
+    <tr>
+        <td><b>Subtotal</b></td>
+        <td class="text-right">${!! StoreHelper::checkoutSubtotal() !!}</td>
     </tr>
-    <tr class="text-right">
-        <td>Total</td>
-        <td>{!! StoreHelper::checkoutTotal() !!}</td>
+    <tr>
+        <td><b>Total</b></td>
+        <td class="text-right">${!! StoreHelper::checkoutTotal() !!}</td>
     </tr>
 </table>

@@ -2,7 +2,7 @@
 
 @section('store-content')
 
-    <h1>Purchases</h1>
+    <h3 class="mb-4">Purchases</h3>
 
     <table class="table table-stripped">
         <thead>

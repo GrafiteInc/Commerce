@@ -155,7 +155,7 @@ $(document).ready(function(){
     $('.details').popover({ html : true });
 
     $('.cart-subtract').bind('click', function(){
-        var _productCount = $(this).siblings('.product-count');
+        var _productCount = $(this).parent().siblings('.product-count');
         var _product = _productCount.data('product');
         var _count = _productCount.val();
         _count--;
@@ -167,7 +167,7 @@ $(document).ready(function(){
     });
 
     $('.cart-add').bind('click', function(){
-        var _productCount = $(this).siblings('.product-count');
+        var _productCount = $(this).parent().siblings('.product-count');
         var _product = _productCount.data('product');
         var _count = _productCount.val();
         _count++;

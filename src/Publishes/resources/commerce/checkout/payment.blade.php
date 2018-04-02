@@ -7,12 +7,13 @@
 
 @section('store-content')
 
-    <h1>Checkout: Payment</h1>
+    <h1 class="mb-4">Checkout: Payment</h1>
 
-    <div class="col-md-8">
-        @include('commerce-frontend::checkout.products')
-    </div>
-    <div class="col-md-4">
+    <div class="row">
+        <div class="col-md-8">
+            @include('commerce-frontend::checkout.products')
+        </div>
+        <div class="col-md-4">
             <div class="form-group">
                 <div class="card-wrapper"></div>
             </div>
@@ -43,7 +44,6 @@
                         <input id="expiry" required type="text" name="expiry" class="form-control" placeholder="MM/YY">
                     </div>
                 </div>
-
                 <div>
                     <input id="pay" type="submit" class="btn btn-primary pull-right" value="Pay">
                 </div>
@@ -52,7 +52,7 @@
             @if (StoreHelper::customer()->hasProfile() && ! is_null(StoreHelper::customer()->lastCard('card_last_four')))
                 <form method="post" action="{{ route('commerce.process.last-card') }}">
                     {!! csrf_field() !!}
-                    <button class="btn btn-default" id="lastCardBtn" type="submit">Pay with last card used (ending with {!! StoreHelper::customer()->lastCard('card_last_four') !!})</button>
+                    <button class="btn btn-outline-primary" id="lastCardBtn" type="submit">Pay with card (ending in {!! StoreHelper::customer()->lastCard('card_last_four') !!})</button>
                 </form>
             @endif
         </div>

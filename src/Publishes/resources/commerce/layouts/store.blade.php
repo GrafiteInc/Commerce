@@ -10,7 +10,7 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="container">
             @yield("store-header")
         </div>

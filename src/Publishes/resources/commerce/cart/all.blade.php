@@ -2,7 +2,7 @@
 
 @section('store-content')
 
-    <h1>Shopping Cart</h1>
+    <h3 class="mb-4">Shopping Cart</h3>
 
     @if (count($products) > 0)
         <table class="table table-stripped">
@@ -23,25 +23,27 @@
                         <td>${!! $product->price !!}</td>
                         <td>
                             <div class="form-group">
-                                <div class="input-group store-input-group pull-left">
-                                    <div class="input-group-addon cart-subtract"><span class="fa fa-minus"></span></div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-sm btn-outline-secondary cart-subtract" type="button"><span class="fa fa-minus"></span></button>
+                                    </div>
                                     <input class="store-form product-count text-center" data-product="{!! $product->cart_id !!}" value="{!! $product->quantity !!}">
-                                    <div class="input-group-addon cart-add"><span class="fa fa-plus"></span></div>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-sm btn-outline-secondary cart-add" type="button"><span class="fa fa-plus"></span></button>
+                                    </div>
                                 </div>
                             </div>
                         </td>
-                        <td class="text-right">{!! $product->removeFromCartBtn($product->cart_id, 'Remove From Cart <span class="fa fa-shopping-cart"></span>', 'btn btn-link btn-warning') !!}</td>
+                        <td class="text-right">{!! $product->removeFromCartBtn($product->cart_id, 'Remove From Cart <span class="fa fa-shopping-cart"></span>', 'btn btn-sm btn-outline-warning') !!}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-        <a href="{!! route('commerce.cart.empty') !!}">
-            <span class="pull-left">
-                <span class="fa fa-shopping-cart"></span>
-                Empty Cart
-            </span>
+        <a class="btn btn-outline-warning" href="{!! route('commerce.cart.empty') !!}">
+            <span class="fa fa-shopping-cart"></span>
+            Empty Cart
         </a>
-        <a class="pull-right" href="{!! route('commerce.checkout') !!}">Checkout</a>
+        <a class="float-right btn btn-primary" href="{!! route('commerce.checkout') !!}">Checkout</a>
     @else
         <div class="well text-center">
             Hmm, nothing to see here.

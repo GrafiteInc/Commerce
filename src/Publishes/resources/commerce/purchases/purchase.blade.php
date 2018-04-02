@@ -2,7 +2,7 @@
 
 @section('store-content')
 
-    <h1>Purchase</h1>
+    <h3 class="mb-4">Purchase</h3>
 
     @if ($purchase->refund_requested && is_null($purchase->refund_date))
         <div class="alert alert-warning">
@@ -47,7 +47,6 @@
             <td>Total</td>
             <td class="text-right">{!! $purchase->total !!}</td>
         </tr>
-
     </table>
 
     <table class="table table-stripped">
@@ -61,14 +60,12 @@
                 <tr>
                     <td><a href="{{ $product->href }}">{!! $product->name !!}</a></td>
                     <td>{!! $product->code !!}</td>
-                    <td class="text-right">
-                        @if (! empty($product->file))
-                            <a class="btn btn-default raw-margin-top-24" href="{!! $product->file_download_href !!}">
-                            <span class="fa fa-download"></span> Download</a>
-                        @else
-                        <td class="text-right">{!! $product->details !!}</td>
-                        @endif
-                    </td>
+                    @if (! empty($product->file))
+                        <a class="btn btn-secondary btn-sm raw-margin-top-24" href="{!! $product->file_download_href !!}">
+                        <span class="fa fa-download"></span> Download</a>
+                    @else
+                    <td class="text-right">{!! $product->details !!}</td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>
