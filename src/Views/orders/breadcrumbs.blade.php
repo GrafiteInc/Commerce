@@ -1,9 +1,7 @@
-<div class="row">
+<nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li><a href="{!! url('cms/orders') !!}">Orders</a></li>
-
+        <li class="breadcrumb-item"><a href="{!! cms()->url('orders') !!}">Orders</a></li>
             {!! Cms::breadcrumbs($location) !!}
-
         <li class="active"></li>
     </ol>
-</div>
+</nav>

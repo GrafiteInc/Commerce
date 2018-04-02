@@ -1,34 +1,34 @@
 <table class="table table-striped">
     <thead>
-        <th>Uuid</th>
-        <th class="raw-m-hide">State</th>
-        <th class="raw-m-hide">Subtotal</th>
-        <th class="raw-m-hide">Tax</th>
-        <th class="raw-m-hide">Total</th>
-        <th class="raw-m-hide">Shipping</th>
-        <th class="raw-m-hide">Customer</th>
-        <th class="raw-m-hide">Refund Date</th>
-        <th class="raw-m-hide">Refund Requested</th>
+        <th>Transaction ID</th>
+        <th class="m-hidden">State</th>
+        <th class="m-hidden">Subtotal</th>
+        <th class="m-hidden">Tax</th>
+        <th class="m-hidden">Shipping</th>
+        <th class="m-hidden">Total</th>
+        <th class="m-hidden">Customer</th>
+        <th class="m-hidden">Refund Date</th>
+        <th class="m-hidden text-center">Refund Requested</th>
         <th width="100px" class="text-right">Action</th>
     </thead>
     <tbody>
         @foreach($transactions as $transaction)
             <tr>
-                <td>{!! $transaction->uuid !!}</td>
-                <td class="raw-m-hide">{!! $transaction->state !!}</td>
-                <td class="raw-m-hide">{!! $transaction->subtotal !!}</td>
-                <td class="raw-m-hide">{!! $transaction->tax !!}</td>
-                <td class="raw-m-hide">{!! $transaction->total !!}</td>
-                <td class="raw-m-hide">{!! $transaction->shipping !!}</td>
-                <td class="raw-m-hide">{!! auth()->user()->find($transaction->user_id)->name !!}</td>
-                <td class="raw-m-hide text-center">
+                <td>Transaction #{!! $transaction->id !!}</td>
+                <td class="m-hidden">{!! $transaction->state !!}</td>
+                <td class="m-hidden">${!! $transaction->subtotal !!}</td>
+                <td class="m-hidden">${!! $transaction->tax !!}</td>
+                <td class="m-hidden">${!! $transaction->shipping !!}</td>
+                <td class="m-hidden">${!! $transaction->total !!}</td>
+                <td class="m-hidden">{!! auth()->user()->find($transaction->user_id)->name !!}</td>
+                <td class="m-hidden">
                     @if (!is_null($transaction->refund_date))
                         {!! $transaction->refund_date !!}
                     @else
                         N/A
                     @endif
                 </td>
-                <td class="raw-m-hide text-center">
+                <td class="m-hidden text-center">
                     @if ($transaction->refund_requested)
                         <span class="fa fa-check"></span>
                     @else
@@ -36,7 +36,7 @@
                     @endif
                 </td>
                 <td class="text-right">
-                    <a class="btn btn-xs btn-default pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.transactions.edit', [Crypto::encrypt($transaction->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                    <a class="btn btn-sm btn-secondary float-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.transactions.edit', [$transaction->id]) !!}"><i class="fa fa-eye"></i> View</a>
                 </td>
             </tr>
         @endforeach

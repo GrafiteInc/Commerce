@@ -1,4 +1,4 @@
-@extends('cms::layouts.dashboard', ['pageTitle' => 'Subscription &raquo; Plans'])
+@extends('cms::layouts.dashboard')
 
 @section('stylesheets')
     @parent

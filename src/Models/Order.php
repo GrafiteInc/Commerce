@@ -5,6 +5,7 @@ namespace Grafite\Commerce\Models;
 use App\Models\User;
 use Grafite\Cms\Models\CmsModel;
 use Grafite\Commerce\Models\OrderItem;
+use Grafite\Commerce\Models\Transaction;
 
 class Order extends CmsModel
 {
@@ -28,15 +29,13 @@ class Order extends CmsModel
 
     public static $rules = [];
 
-    public function transaction($key = null)
+    public $with = [
+        'transaction'
+    ];
+
+    public function transaction()
     {
-        $transaction = Transaction::find($this->transaction_id);
-
-        if (!is_null($transaction) && !is_null($key)) {
-            return $transaction->$key;
-        }
-
-        return $transaction;
+        return $this->belongsTo(Transaction::class);
     }
 
     public function hasRefundedOrderItems()

@@ -109,4 +109,24 @@ class OrderItem extends CmsModel
     {
         return $this->total / 100;
     }
+
+    public function getTotalAttribute($value)
+    {
+        return number_format($value * 0.01, 2, '.', '');
+    }
+
+    public function getSubtotalAttribute($value)
+    {
+        return number_format($value * 0.01, 2, '.', '');
+    }
+
+    public function getShippingAttribute($value)
+    {
+        return number_format($value * 0.01, 2, '.', '');
+    }
+
+    public function getTaxAttribute($value)
+    {
+        return number_format($value * 0.01, 2, '.', '');
+    }
 }

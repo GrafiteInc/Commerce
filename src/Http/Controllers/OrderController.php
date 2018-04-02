@@ -84,7 +84,7 @@ class OrderController extends GrafiteCmsController
         $result = $this->service->update($id, $request->except(['_token', '_method']));
 
         if ($result) {
-            return back()->with('message', 'Successfully updated');
+            return back()->with('success', 'Successfully updated');
         }
 
         return back()->with('error', 'Failed to update');
@@ -102,7 +102,7 @@ class OrderController extends GrafiteCmsController
         $result = app(OrderItemService::class)->cancel($request->id);
 
         if ($result) {
-            return back()->with('message', 'Successfully cancelled');
+            return back()->with('success', 'Successfully cancelled');
         }
 
         return back()->with('error', 'Failed to cancel');
@@ -120,7 +120,7 @@ class OrderController extends GrafiteCmsController
         $result = $this->service->cancel($request->id);
 
         if ($result) {
-            return redirect(config('cms.backend-route-prefix', 'cms').'/orders')->with('message', 'Successfully cancelled');
+            return redirect(config('cms.backend-route-prefix', 'cms').'/orders')->with('success', 'Successfully cancelled');
         }
 
         return redirect(config('cms.backend-route-prefix', 'cms').'/orders')->with('error', 'Failed to cancel');

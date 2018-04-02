@@ -63,7 +63,7 @@ class PlanController extends Controller
         $result = $this->service->create($request->except('_token'));
 
         if ($result) {
-            return redirect(config('cms.backend-route-prefix', 'cms').'/plans/'.$result->id.'/edit')->with('message', 'Successfully created');
+            return redirect(config('cms.backend-route-prefix', 'cms').'/plans/'.$result->id.'/edit')->with('success', 'Successfully created');
         }
 
         return redirect('commerce::plans')->with('error', 'Failed to create');
@@ -99,7 +99,7 @@ class PlanController extends Controller
         $result = $this->service->update($id, $request->except('_token', '_method'));
 
         if ($result) {
-            return back()->with('message', 'Successfully updated');
+            return back()->with('success', 'Successfully updated');
         }
 
         return back()->with('error', 'Failed to update');
@@ -118,7 +118,7 @@ class PlanController extends Controller
         $result = $this->service->stateChange($id, $request->state);
 
         if ($result) {
-            return back()->with('message', 'Successfully updated');
+            return back()->with('success', 'Successfully updated');
         }
 
         return back()->with('error', 'Failed to update');
@@ -137,7 +137,7 @@ class PlanController extends Controller
         $result = $this->service->cancelSubscription($plan, $userMeta);
 
         if ($result) {
-            return back()->with('message', 'Successfully cancelled');
+            return back()->with('success', 'Successfully cancelled');
         }
 
         return back()->with('error', 'Failed to cancel');
@@ -155,7 +155,7 @@ class PlanController extends Controller
         $result = $this->service->destroy($id);
 
         if ($result) {
-            return redirect(config('cms.backend-route-prefix', 'cms').'/plans')->with('message', 'Successfully deleted');
+            return redirect(config('cms.backend-route-prefix', 'cms').'/plans')->with('success', 'Successfully deleted');
         }
 
         return redirect(config('cms.backend-route-prefix', 'cms').'/plans')->with('error', 'Failed to delete');

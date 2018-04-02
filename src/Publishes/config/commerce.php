@@ -65,52 +65,63 @@ return [
         ],
 
         'details' => [
-            'name' => [
-                'type' => 'string',
-            ],
-            'url' => [
-                'type' => 'string',
-            ],
-            'seo_keywords' => [
-                'type' => 'string',
-                'alt_name' => 'SEO Keywords',
-            ],
-            'seo_description' => [
-                'type' => 'text',
-                'alt_name' => 'SEO Description',
-            ],
-            'code' => [
-                'type' => 'string',
-                'alt_name' => 'SKU',
+            'identity' => [
+                'name' => [
+                    'type' => 'string',
+                ],
+                'url' => [
+                    'type' => 'string',
+                ],
             ],
             'price' => [
-                'type' => 'float',
-                'custom' => 'min="0"',
-                'alt_name' => 'Price (&dollar;)',
+                'code' => [
+                    'type' => 'string',
+                    'alt_name' => 'SKU',
+                ],
+                'price' => [
+                    'type' => 'float',
+                    'custom' => 'min="0"',
+                    'alt_name' => 'Price (&dollar;)',
+                ],
             ],
-            'hero_image' => [
-                'type' => 'file',
-                'alt_name' => 'Hero Image',
+            'content' => [
+                'details' => [
+                    'type' => 'text',
+                    'class' => 'redactor',
+                ],
+                'hero_image' => [
+                    'type' => 'file',
+                    'alt_name' => 'Hero Image',
+                ],
             ],
-            'details' => [
-                'type' => 'text',
-                'class' => 'redactor',
+            'seo' => [
+                'seo_keywords' => [
+                    'type' => 'string',
+                    'class' => 'tags',
+                    'alt_name' => 'SEO Keywords',
+                ],
+                'seo_description' => [
+                    'type' => 'text',
+                    'alt_name' => 'SEO Description',
+                ],
             ],
-            'is_published' => [
-                'type' => 'checkbox',
-                'alt_name' => 'Published',
-            ],
-            'is_available' => [
-                'type' => 'checkbox',
-                'alt_name' => 'Available',
-            ],
-            'is_download' => [
-                'type' => 'checkbox',
-                'alt_name' => 'Is Downloaded',
-            ],
-            'is_featured' => [
-                'type' => 'checkbox',
-                'alt_name' => 'Is Featured',
+            'options' => [
+                'is_published' => [
+                    'type' => 'checkbox',
+                    'alt_name' => 'Published',
+                ],
+                'is_available' => [
+                    'type' => 'checkbox',
+                    'alt_name' => 'Available',
+                ],
+                'is_download' => [
+                    'type' => 'checkbox',
+                    'alt_name' => 'Is Downloaded',
+                ],
+                'is_featured' => [
+                    'type' => 'checkbox',
+                    'alt_name' => 'Is Featured',
+                ],
             ],
         ],
 

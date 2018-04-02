@@ -4,17 +4,6 @@
 |--------------------------------------------------------------------------
 */
 
-.dropdown-menu {
-    top: 126px !important;
-    left: auto !important;
-    margin-left: 124px;
-}
-
-.store-header {
-    margin-bottom: 24px;
-    height: 48px;
-}
-
 .store-header h2 {
     float: left;
     margin-top: 0px;
@@ -31,12 +20,6 @@
 
 .store-menu a:hover {
     text-decoration: none;
-}
-
-.store-account {
-    float: right;
-    margin-left: 16px;
-    line-height: 56px;
 }
 
 .store-form {

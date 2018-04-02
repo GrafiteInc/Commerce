@@ -1,44 +1,57 @@
 @extends('cms::layouts.dashboard')
 
+@section('pageTitle') Analytics: Last {{ request()->months }} @if (request()->months > 1) Months @else Month @endif @stop
+
 @section('content')
 
+<div class="col-md-12">
     <div class="row">
-        <div class="raw-m-hide pull-right">
-            {!! Form::open(['method' => 'get']) !!}
-            <input type="number" class="form-control header-input pull-right raw-margin-right-24" name="months" placeholder="Months In History" value="{{ request()->months }}">
-            {!! Form::close() !!}
+        <div class="col-md-12 mt-4">
+            <div class="m-hidden float-right">
+                {!! Form::open(['method' => 'get']) !!}
+                <input type="number" class="form-control header-input float-right raw-margin-right-24" name="months" placeholder="Months In History" value="{{ request()->months }}">
+                {!! Form::close() !!}
+            </div>
         </div>
-        <h1 class="page-header">Analytics: Last {{ request()->months }} @if (request()->months > 1) Months @else Month @endif</h1>
     </div>
 
     <div class="row">
         <div class="col-md-4">
-            <h2>Transaction Balance</h2>
+            <h4 class="raw-margin-bottom-24">Transaction Balance</h4>
             <canvas id="pieGraph"></canvas>
         </div>
         <div class="col-md-8">
-            <h2>Transactions &amp; Subscriptions</h2>
+            <h4 class="raw-margin-bottom-24">Transactions &amp; Subscriptions</h4>
             <canvas id="lineGraph"></canvas>
         </div>
     </div>
 
-    <div class="row">
-        <h2 class="text-center raw-margin-bottom-24">Transaction History</h2>
-        @if ($transactions->count() === 0)
-            <div class="well text-center">No Transactions found.</div>
-        @else
-            @include('commerce::analytics.transaction-table')
-        @endif
+    <div class="row raw-margin-bottom-24">
+        <div class="col-md-12">
+            <h4 class="raw-margin-bottom-24">Transaction History</h4>
+            @if ($transactions->count() === 0)
+                <div class="card">
+                    <div class="card-body text-center">No Transactions found.</div>
+                </div>
+            @else
+                @include('commerce::analytics.transaction-table')
+            @endif
+        </div>
     </div>
 
     <div class="row">
-        <h2 class="text-center raw-margin-bottom-24">Subscription History</h2>
-        @if ($subscriptions->count() === 0)
-            <div class="well text-center">No Subscriptions found.</div>
-        @else
-            @include('commerce::analytics.subscription-table')
-        @endif
+        <div class="col-md-12">
+            <h4 class="raw-margin-bottom-24">Subscription History</h4>
+            @if ($subscriptions->count() === 0)
+                <div class="card">
+                    <div class="card-body text-center">No Subscriptions found.</div>
+                </div>
+            @else
+                @include('commerce::analytics.subscription-table')
+            @endif
+        </div>
     </div>
+</div>
 
 @endsection
 

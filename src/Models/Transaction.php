@@ -46,8 +46,33 @@ class Transaction extends CmsModel
         return $this->hasMany(Refund::class);
     }
 
+    public function getStateAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
     public function getAmountAttribute()
     {
         return $this->total;
+    }
+
+    public function getTotalAttribute($value)
+    {
+        return number_format($value * 0.01, 2, '.', '');
+    }
+
+    public function getTaxAttribute($value)
+    {
+        return number_format($value * 0.01, 2, '.', '');
+    }
+
+    public function getShippingAttribute($value)
+    {
+        return number_format($value * 0.01, 2, '.', '');
+    }
+
+    public function getSubtotalAttribute($value)
+    {
+        return number_format($value * 0.01, 2, '.', '');
     }
 }

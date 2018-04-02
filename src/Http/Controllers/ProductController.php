@@ -73,7 +73,7 @@ class ProductController extends GrafiteCmsController
         $result = $this->service->create($request->except('_token'));
 
         if ($result) {
-            return redirect(config('cms.backend-route-prefix', 'cms').'/products/'.$result->id.'/edit')->with('message', 'Successfully created');
+            return redirect(config('cms.backend-route-prefix', 'cms').'/products/'.$result->id.'/edit')->with('success', 'Successfully created');
         }
 
         return redirect(config('cms.backend-route-prefix', 'cms').'/products')->with('error', 'Failed to create');
@@ -121,7 +121,7 @@ class ProductController extends GrafiteCmsController
         $result = $this->service->update($id, $request->except(['_token', '_method']));
 
         if ($result) {
-            return back()->with('message', 'Successfully updated');
+            return back()->with('success', 'Successfully updated');
         }
 
         return back()->with('error', 'Failed to update');
@@ -146,7 +146,7 @@ class ProductController extends GrafiteCmsController
         }
 
         if ($result) {
-            return back()->with('message', 'Successfully uploaded');
+            return back()->with('success', 'Successfully uploaded');
         }
 
         return back()->with('error', 'Failed to upload');
@@ -193,7 +193,7 @@ class ProductController extends GrafiteCmsController
         $result = $this->service->updateAlternativeData($id, $request->except(['_token', '_method']));
 
         if ($result) {
-            return back()->with('message', 'Successfully updated');
+            return back()->with('success', 'Successfully updated');
         }
 
         return back()->with('error', 'Failed to update');
@@ -211,7 +211,7 @@ class ProductController extends GrafiteCmsController
         $result = $this->service->destroy($id);
 
         if ($result) {
-            return redirect(config('cms.backend-route-prefix', 'cms').'/products')->with('message', 'Successfully deleted');
+            return redirect(config('cms.backend-route-prefix', 'cms').'/products')->with('success', 'Successfully deleted');
         }
 
         return redirect(config('cms.backend-route-prefix', 'cms').'/products')->with('error', 'Failed to delete');

@@ -1,47 +1,42 @@
-@extends('cms::layouts.dashboard', ['pageTitle' => 'Subscription &raquo; Plans'])
+@extends('cms::layouts.dashboard')
+
+@section('pageTitle') Subscription Plans @stop
 
 @section('content')
 
-    <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.plans.create') !!}">Add New</a>
-        <div class="pull-right">
-            {!! Form::open(['url' => config('cms.backend-route-prefix', 'cms').'/plans/search']) !!}
-             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
-            {!! Form::close() !!}
-        </div>
-        <h1 class="page-header">Subscription Plans</h1>
-    </div>
+    @include('cms::layouts.module-header', [ 'module' => 'plans' ])
 
-    <div class="row">
-        @if (isset($term))
-        <div class="well text-center">Searched for "{!! $term !!}".</div>
-        @endif
-        @if ($plans->isEmpty())
-            <div class="well text-center">No plans found.</div>
-        @else
-            <table class="table table-striped">
-                <thead>
-                    <th>Name</th>
-                    <th>Enabled</th>
-                    <th class="text-right" width="150px">Actions</th>
-                </thead>
-                <tbody>
-                @foreach($plans as $plan)
-                    <tr>
-                        <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.plans.edit', [$plan->id]) !!}">{{ $plan->name }}</a></td>
-                        <td>@if ($plan->enabled) <span class="fa fa-check"></span> @endif</td>
-                        <td class="text-right">
-                            <a class="btn btn-default btn-xs pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.plans.edit', [$plan->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                @if ($plans->isEmpty())
+                    @include('cms::layouts.module-search', [ 'module' => 'plans' ])
+                @else
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Name</th>
+                            <th>Enabled</th>
+                            <th class="text-right" width="150px">Actions</th>
+                        </thead>
+                        <tbody>
+                        @foreach($plans as $plan)
+                            <tr>
+                                <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.plans.edit', [$plan->id]) !!}">{{ $plan->name }}</a></td>
+                                <td>@if ($plan->enabled) <span class="fa fa-check"></span> @endif</td>
+                                <td class="text-right">
+                                    <a class="btn btn-outline-primary btn-sm pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.plans.edit', [$plan->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
 
-            <div class="row">
-                {!! $plans; !!}
+                    <div class="row">
+                        {!! $plans !!}
+                    </div>
+                @endif
             </div>
-        @endif
+        </div>
     </div>
 
 @stop
