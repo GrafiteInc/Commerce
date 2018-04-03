@@ -6,7 +6,7 @@ function _visualizeThePlan() {
     }
 
     $('.plan-price').text(parseFloat($('#Amount').val() / 100));
-    if ($('#Currency').lenth == 1) {
+    if ($('#Currency').length == 1) {
         $('.plan-currency').text($('#Currency').val().toUpperCase());
         $('.plan-interval').text($('#Interval').val().toUpperCase());
     }
@@ -20,7 +20,7 @@ function _visualizeThePlan() {
     $('.plan-description').text($('#Description').val());
 }
 
-$('input, textarea').bind('change keyup', function(){
+$('input, textarea, select').bind('change keyup', function(){
     _visualizeThePlan();
 });
 

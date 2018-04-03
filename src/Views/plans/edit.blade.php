@@ -19,7 +19,7 @@
                         <h3 class="plan-title">{{ $plan->name }}</h3>
                     </div>
                     <div class="card-body text-center plan-details">
-                        <h2>$ {{ $plan->amount/100 }} {{ strtoupper($plan->currency) }}/ {{ strtoupper($plan->interval) }}</h2>
+                        <h2>$ {{ $plan->amount }} {{ strtoupper($plan->currency) }}/ {{ strtoupper($plan->interval) }}</h2>
                         <p><span class="plan-description">{{ $plan->description }}</span></p>
                     </div>
                     <div class="card-footer">
@@ -30,7 +30,7 @@
             <div class="col-md-6">
                 {!! Form::model($plan, ['route' => [config('cms.backend-route-prefix', 'cms').'.plans.update', $plan->id], 'method' => 'patch']) !!}
 
-                {!! FormMaker::fromObject($plan, config('commerce.forms.plans-edit')) !!}
+                {!! FormMaker::setColumns(2)->fromObject($plan, config('commerce.forms.plans-edit')) !!}
 
                 {!! Form::submit('Update', ['class' => 'btn btn-primary pull-right']) !!}
 

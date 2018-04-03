@@ -12,7 +12,7 @@ class CreateAdminPlansTable extends Migration
     {
         Schema::create(config('cms.db-prefix', '').'plans', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('price');
+            $table->integer('amount');
             $table->string('interval');
             $table->string('name');
             $table->string('uuid');

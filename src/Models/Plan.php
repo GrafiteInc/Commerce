@@ -16,7 +16,7 @@ class Plan extends CmsModel
         'name',
         'title',
         'uuid',
-        'price',
+        'amount',
         'interval',
         'currency',
         'enabled',
@@ -30,7 +30,7 @@ class Plan extends CmsModel
 
     public static $rules = [
         'name' => 'required',
-        'price' => 'required',
+        'amount' => 'required',
         'interval' => 'required',
         'currency' => 'required',
         'descriptor' => 'required',
@@ -54,11 +54,6 @@ class Plan extends CmsModel
             default:
                 return $this->interval;
         }
-    }
-
-    public function getPriceAttribute()
-    {
-        return round($this->price / 100, 2);
     }
 
     public function getAmountAttribute($value)

@@ -55,7 +55,7 @@ class PlanService
                 $this->model->create([
                     'uuid' => crypto_uuid(),
                     'name' => $plan->id,
-                    'amount' => $plan->amount,
+                    'price' => $plan->amount,
                     'interval' => $plan->interval,
                     'currency' => $plan->currency,
                     'stripe_name' => $plan->id,
@@ -118,6 +118,7 @@ class PlanService
 
             return $this->model->create($payload);
         } catch (Exception $e) {
+            dd($e->getMessage());
             throw new Exception('Could not generate new plan', 1);
         }
 
