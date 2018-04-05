@@ -40,7 +40,7 @@ class OrderItemController extends Controller
         $result = $this->service->cancel($request->id);
 
         if ($result) {
-            return back()->with('message', 'Successfully cancelled');
+            return back()->with('success', 'Successfully cancelled');
         }
 
         return back()->with('error', 'Failed to cancel');

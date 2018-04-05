@@ -72,7 +72,7 @@ class TransactionController extends Controller
         $result = $this->service->update($id, $request->except(['_token', '_method']));
 
         if ($result) {
-            return back()->with('message', 'Successfully updated');
+            return back()->with('success', 'Successfully updated');
         }
 
         return back()->with('error', 'Failed to update');
@@ -90,7 +90,7 @@ class TransactionController extends Controller
         $result = $this->service->refund($request->uuid);
 
         if ($result) {
-            return back()->with('message', 'Successfully refunded');
+            return back()->with('success', 'Successfully refunded');
         }
 
         return back()->with('error', 'Failed to refund');
