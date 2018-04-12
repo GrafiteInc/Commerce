@@ -22,7 +22,7 @@
             });
 
             Route::group(['middleware' => ['cms-analytics']], function () {
-                Route::get('', 'StoreController@index')->name('.index');
+                Route::get('', 'StoreController@index')->name('.home');
                 Route::get('products', 'ProductController@all')->name('.products');
                 Route::get('product/{url}', 'ProductController@show')->name('.product');
                 Route::get('plans', 'PlanController@all')->name('.plans');

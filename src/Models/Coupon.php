@@ -20,18 +20,16 @@ class Coupon extends CmsModel
         'code',
         'currency',
         'discount_type',
+        'for_subscriptions',
         'amount',
         'limit',
         'stripe_id',
     ];
 
     public static $rules = [
-        // 'name' => 'required',
-        // 'amount' => 'required',
-        // 'interval' => 'required',
-        // 'currency' => 'required',
-        // 'descriptor' => 'required',
-        // 'description' => 'required',
+        'amount' => 'required',
+        'limit' => 'required',
+        'discount_type' => 'required',
     ];
 
     public function getCouponsByStripeId($id)
@@ -57,11 +55,11 @@ class Coupon extends CmsModel
 
     public function getValueAttribute()
     {
-        if ($this->discount_type == 'dollars') {
+        if ($this->discount_type == 'dollar') {
             return round($this->amount / 100, 2);
         }
 
-        return round($this->amount / 100);
+        return $this->amount;
     }
 
     public function getValueStringAttribute()
@@ -72,33 +70,4 @@ class Coupon extends CmsModel
 
         return $this->value.'%';
     }
-
-    // public function getFrequencyAttribute()
-    // {
-    //     switch ($this->interval) {
-    //         case 'week':
-    //             return 'weekly';
-    //         case 'month':
-    //             return 'monthly';
-    //         case 'year':
-    //             return 'yearly';
-    //         default:
-    //             return $this->interval;
-    //     }
-    // }
-
-    // public function getPriceAttribute()
-    // {
-    //     return round($this->amount / 100, 2);
-    // }
-
-    // public function getHrefAttribute()
-    // {
-    //     return route('commerce.plan', [$this->uuid]);
-    // }
-
-    // public function subscribeBtn($content = '', $class = '')
-    // {
-    //     return '<form method="post" action="'.route('commerce.subscribe', [crypto_encrypt($this->id)]).'">'.csrf_field().'<button class="'.$class.'">'.$content.'</button></form>';
-    // }
 }

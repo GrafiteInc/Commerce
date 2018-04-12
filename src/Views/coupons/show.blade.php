@@ -1,22 +1,22 @@
-@extends('cms::layouts.dashboard', ['pageTitle' => 'Coupons'])
+@extends('cms::layouts.dashboard')
+
+@section('pageTitle') Coupons: Details @stop
 
 @section('content')
 
     @include('commerce::modals')
 
-    <div class="row">
-        <h1>Coupon: Details</h1>
-    </div>
+    <div class="col-md-12 raw-margin-top-24">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                {!! FormMaker::fromObject($coupon, config('commerce.forms.coupons')) !!}
 
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            {!! FormMaker::fromObject($coupon, config('commerce.forms.coupons')) !!}
-
-            <form id="deleteCouponForm" method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/coupons/'.$coupon->id) !!}">
-                {!! csrf_field() !!}
-                {!! method_field('DELETE') !!}
-                <button class="btn delete-coupon-btn btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
-            </form>
+                <form id="deleteCouponForm" method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/coupons/'.$coupon->id) !!}">
+                    {!! csrf_field() !!}
+                    {!! method_field('DELETE') !!}
+                    <button class="btn delete-coupon-btn btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                </form>
+            </div>
         </div>
     </div>
 

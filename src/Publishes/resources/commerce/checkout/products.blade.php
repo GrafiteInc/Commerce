@@ -33,6 +33,14 @@
         <td><b>Subtotal</b></td>
         <td class="text-right">${!! StoreHelper::checkoutSubtotal() !!}</td>
     </tr>
+
+    @if (Session::has('coupon_code'))
+    <tr>
+        <td><b>Coupon <a href="{{ url(config('commerce.store_url_prefix').'/coupon/remove') }}"><span class="fa fa-close"></span></a></b></td>
+        <td class="text-right">-${!! StoreHelper::couponValue() !!}</td>
+    </tr>
+    @endif
+
     <tr>
         <td><b>Total</b></td>
         <td class="text-right">${!! StoreHelper::checkoutTotal() !!}</td>

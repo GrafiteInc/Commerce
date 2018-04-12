@@ -13,7 +13,7 @@ class StoreHelper
 {
     public static function storeUrl($url)
     {
-        return url('store/'.$url);
+        return url(config('commerce.store_url_prefix').'/'.$url);
     }
 
     public static function customer()
@@ -29,7 +29,7 @@ class StoreHelper
 
     public static function customerSubscriptionUrl($subscription)
     {
-        return url('store/account/subscription/'.crypto_encrypt($subscription->name));
+        return url(config('commerce.store_url_prefix').'/account/subscription/'.crypto_encrypt($subscription->name));
     }
 
     public static function subscriptionPlan($subscription)
@@ -57,12 +57,12 @@ class StoreHelper
 
     public static function subscriptionUrl($subscription)
     {
-        return url('store/plan/'.crypto_encrypt($subscription->id));
+        return url(config('commerce.store_url_prefix').'/plan/'.crypto_encrypt($subscription->id));
     }
 
     public static function cancelSubscriptionBtn($subscription, $class = 'btn btn-danger')
     {
-        return '<form method="post" action="'.url('store/account/subscriptions/'.crypto_encrypt($subscription->name)).'/cancel">'
+        return '<form method="post" action="'.url(config('commerce.store_url_prefix').'/account/subscription/'.crypto_encrypt($subscription->name)).'/cancel">'
         .csrf_field()
         .'<input type="hidden" name="stripe_id" value="'.crypto_encrypt($subscription->stripe_id).'">'
         .'<button class="'.$class.'">Cancel Subscription</button></form>';
@@ -74,7 +74,8 @@ class StoreHelper
      * --------------------------------------------------------------------------
     */
 
-    public static function moneyFormat($amount) {
+    public static function moneyFormat($amount)
+    {
         return number_format(round($amount, 2), 2);
     }
 

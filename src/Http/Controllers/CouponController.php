@@ -64,7 +64,8 @@ class CouponController extends GrafiteCmsController
         $result = $this->service->create($request->except('_token'));
 
         if ($result) {
-            return redirect(config('cms.backend-route-prefix', 'cms').'/coupons/'.$result->id)->with('success', 'Successfully created');
+            return redirect(config('cms.backend-route-prefix', 'cms').'/coupons/'.$result->id)
+                ->with('success', 'Successfully created');
         }
 
         return redirect('commerce::coupons')->with('error', 'Failed to create');
@@ -97,9 +98,11 @@ class CouponController extends GrafiteCmsController
         $result = $this->service->destroy($id);
 
         if ($result) {
-            return redirect(config('cms.backend-route-prefix', 'cms').'/coupons')->with('success', 'Successfully deleted');
+            return redirect(config('cms.backend-route-prefix', 'cms').'/coupons')
+                ->with('success', 'Successfully deleted');
         }
 
-        return redirect(config('cms.backend-route-prefix', 'cms').'/coupons')->with('error', 'Failed to delete');
+        return redirect(config('cms.backend-route-prefix', 'cms').'/coupons')
+            ->with('error', 'Failed to delete');
     }
 }

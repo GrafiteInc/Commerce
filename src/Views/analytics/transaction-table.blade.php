@@ -12,7 +12,7 @@
         <th width="100px" class="text-right">Action</th>
     </thead>
     <tbody>
-        @foreach($transactions as $transaction)
+        @foreach($transactions->reverse() as $transaction)
             <tr>
                 <td>Transaction #{!! $transaction->id !!}</td>
                 <td class="m-hidden">{!! $transaction->state !!}</td>

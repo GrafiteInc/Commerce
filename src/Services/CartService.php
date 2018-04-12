@@ -261,7 +261,12 @@ class CartService
     {
         $coupon = app(Coupon::class)->where('code', $couponCode)->where('for_subscriptions', false)->first();
 
-        if ($coupon && app(TransactionRepository::class)->getByCustomer(auth()->id())->where('coupon->code', $couponCode)->count() < $coupon->limit) {
+        $couponCount = app(TransactionRepository::class)
+            ->getByCustomer(auth()->id())
+            ->where('coupon->code', $couponCode)
+            ->count();
+
+        if ($coupon && $couponCount < $coupon->limit) {
             Session::put('coupon_code', $couponCode);
         } else {
             Session::flash('message', 'Coupon is no longer valid');

@@ -1,52 +1,46 @@
-@extends('cms::layouts.dashboard', ['pageTitle' => 'Plans'])
+@extends('cms::layouts.dashboard')
+
+@section('pageTitle') Coupons @stop
 
 @section('content')
 
-    <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.coupons.create') !!}">Add New</a>
-        <div class="pull-right">
-            {!! Form::open(['url' => config('cms.backend-route-prefix', 'cms').'/coupons/search']) !!}
-             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
-            {!! Form::close() !!}
-        </div>
-        <h1 class="page-header">Coupons</h1>
-    </div>
+    @include('cms::layouts.module-header', [ 'module' => 'coupons' ])
 
-    <div class="row">
-        @if (isset($term))
-        <div class="well text-center">Searched for "{!! $term !!}".</div>
-        @endif
-        @if ($coupons->isEmpty())
-            <div class="well text-center">No coupons found.</div>
-        @else
-            <table class="table table-striped">
-                <thead>
-                    <th>Name</th>
-                    <th>Expired</th>
-                    <th>For Subscription</th>
-                    <th>Value</th>
-                    <th class="text-right" width="150px">Actions</th>
-                </thead>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                @if ($coupons->isEmpty())
+                    @include('cms::layouts.module-search', [ 'module' => 'coupons' ])
+                @else
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Name</th>
+                            <th>Expired</th>
+                            <th>For Subscription</th>
+                            <th>Value</th>
+                            <th class="text-right" width="150px">Actions</th>
+                        </thead>
+                        <tbody>
+                        @foreach($coupons as $coupon)
+                            <tr>
+                                <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.coupons.show', [$coupon->id]) !!}">{{ $coupon->code }}</a></td>
+                                <td>@if ($coupon->expired()) <span class="fa fa-check"></span> @endif</td>
+                                <td>@if ($coupon->for_subscriptions) <span class="fa fa-check"></span> @endif</td>
+                                <td>{{ $coupon->value_string }}</td>
+                                <td class="text-right">
+                                    <a class="btn btn-default btn-sm pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.coupons.show', [$coupon->id]) !!}"><i class="fa fa-eye"></i> View</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
 
-                <tbody>
-                @foreach($coupons as $coupon)
-                    <tr>
-                        <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.coupons.show', [$coupon->id]) !!}">{{ $coupon->code }}</a></td>
-                        <td>@if ($coupon->expired()) <span class="fa fa-check"></span> @endif</td>
-                        <td>@if ($coupon->for_subscriptions) <span class="fa fa-check"></span> @endif</td>
-                        <td>{{ $coupon->value_string }}</td>
-                        <td class="text-right">
-                            <a class="btn btn-default btn-xs pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.coupons.show', [$coupon->id]) !!}"><i class="fa fa-eye"></i> View</a>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-
-            <div class="row">
-                {!! $coupons !!}
+                    <div class="row">
+                        {!! $coupons !!}
+                    </div>
+                @endif
             </div>
-        @endif
+        </div>
     </div>
 
 @stop

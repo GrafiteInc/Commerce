@@ -1,22 +1,21 @@
-@extends('cms::layouts.dashboard', ['pageTitle' => 'Coupons'])
+@extends('cms::layouts.dashboard')
+
+@section('pageTitle') Coupons: Create @stop
 
 @section('content')
 
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Coupons: Create</h1>
+    <div class="col-md-12 raw-margin-top-24">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'.coupons.store']) !!}
+
+                {!! FormMaker::fromTable("coupons", config('commerce.forms.coupons')) !!}
+
+                {!! Form::submit('Save', ['class' => 'btn btn-primary pull-right']) !!}
+
+                {!! Form::close() !!}
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'.coupons.store']) !!}
-
-            {!! FormMaker::fromTable("coupons", config('commerce.forms.coupons')) !!}
-
-            {!! Form::submit('Save', ['class' => 'btn btn-primary pull-right']) !!}
-
-            {!! Form::close() !!}
-        </div>
-    </div>
 @stop
