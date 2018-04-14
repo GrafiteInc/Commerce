@@ -10,7 +10,7 @@ return [
 
     'name' => 'Grafite Commerce',
     'currency' => env('CURRENCY', 'usd'),
-    'taxes_include_shipping' => false,
+    'taxes_include_shipping' => true,
     'store_url_prefix' => 'store',
     'currencies' => [
         'AUD' => 'aud',

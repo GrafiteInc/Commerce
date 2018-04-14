@@ -43,5 +43,12 @@
         "post-create-project-cmd": []
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Grafite\\Commerce\\GrafiteCommerceModuleProvider"
+            ]
+        }
+    }
 }
