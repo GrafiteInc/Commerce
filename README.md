@@ -21,6 +21,8 @@ Please consult the documentation here: [https://docs.grafite.ca/commerce](https:
 ## General Requirements
 1. PHP 7.1.3+
 2. MySQL 5.7+
+
+## More Specific Requirements
 3. OpenSSL
 4. Laravel 5.6+
 5. Grafite CMS 3.0+
