@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.0.0] - 2018-04-14
+
+### Added
+- Favorites view
+- Coupon adding and removing in the checkout view
+
+### Changed
+- Full rebranding
+- Store all values as integers rather than decimals
+- Store helper improvements
+- Bootstrap 4 upgrades
+
 ## [v1.0.1] - 2017-10-27
 
 ### Changed
