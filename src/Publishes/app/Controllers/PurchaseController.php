@@ -13,6 +13,11 @@ class PurchaseController extends Controller
         $this->transactions = $transactionRepo;
     }
 
+    /**
+     * List all customer purchases
+     *
+     * @return Illuminate\Http\Response
+     */
     public function allPurchases()
     {
         $purchases = $this->transactions->getByCustomer(auth()->id())->orderBy('created_at', 'DESC')->paginate(config('cms.pagination'));
@@ -21,6 +26,11 @@ class PurchaseController extends Controller
             ->with('purchases', $purchases);
     }
 
+    /**
+     * View a customer purchase
+     *
+     * @return Illuminate\Http\Response
+     */
     public function getPurchase($id)
     {
         $purchase = $this->transactions->getByCustomerAndUuid(auth()->id(), $id);
@@ -29,6 +39,11 @@ class PurchaseController extends Controller
             ->with('purchase', $purchase);
     }
 
+    /**
+     * Request a refund for a purchase
+     *
+     * @return Illuminate\Http\Response
+     */
     public function requestRefund($id)
     {
         $purchase = $this->transactions->requestRefund(auth()->id(), $id);

@@ -19,6 +19,11 @@ class CartController extends Controller
         $this->responseService = $cmsResponseService;
     }
 
+    /**
+     * Show the cart contents
+     *
+     * @return Illuminate\Http\Response
+     */
     public function getContents()
     {
         $products = $this->cart->contents();
@@ -26,12 +31,11 @@ class CartController extends Controller
         return view('commerce-frontend::cart.all')->with('products', $products);
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | AJAX calls
-    |--------------------------------------------------------------------------
-    */
-
+    /**
+     * Get cart contents
+     *
+     * @return Illuminate\Http\Response
+     */
     public function cart()
     {
         return $this->responseService->apiResponse('success', [
@@ -45,6 +49,11 @@ class CartController extends Controller
         ]);
     }
 
+    /**
+     * Get cart item count
+     *
+     * @return Illuminate\Http\Response
+     */
     public function cartCount()
     {
         $count = $this->cart->itemCount();
@@ -52,6 +61,13 @@ class CartController extends Controller
         return $this->responseService->apiResponse('success', $count);
     }
 
+    /**
+     * Change the amount of a cart item
+     *
+     * @param Request $request
+     *
+     * @return Illuminate\Http\Response
+     */
     public function changeCartCount(Request $request)
     {
         $count = $this->cart->changeItemQuantity($request->id, $request->count);
@@ -59,6 +75,13 @@ class CartController extends Controller
         return $this->responseService->apiResponse('success', $count);
     }
 
+    /**
+     * Add an item to the cart
+     *
+     * @param Request $request
+     *
+     * @return Illuminate\Http\Response
+     */
     public function addToCart(Request $request)
     {
         $result = $this->cart->addToCart($request->id, $request->type, $request->quantity, $request->variants);
@@ -70,6 +93,13 @@ class CartController extends Controller
         return $this->responseService->apiResponse('error', 'Could not be added to Cart');
     }
 
+    /**
+     * Remove an item from the cart
+     *
+     * @param Request $request
+     *
+     * @return Illuminate\Http\Response
+     */
     public function removeFromCart(Request $request)
     {
         $this->cart->removeFromCart($request->id, $request->type);
@@ -77,6 +107,11 @@ class CartController extends Controller
         return $this->responseService->apiResponse('success', 'Removed from Cart');
     }
 
+    /**
+     * Empty the contents of the cart
+     *
+     * @return Illuminate\Http\Response
+     */
     public function emptyCart()
     {
         $this->cart->emptyCart();

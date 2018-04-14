@@ -17,6 +17,11 @@ class FavoriteController extends Controller
         $this->responseService = $cmsResponseService;
     }
 
+    /**
+     * List all customer favorites
+     *
+     * @return Illuminate\Http\Response
+     */
     public function all()
     {
         $items = $this->service->all();
@@ -28,6 +33,13 @@ class FavoriteController extends Controller
         return $this->responseService->apiResponse('success', []);
     }
 
+    /**
+     * Add a product to customer favorites
+     *
+     * @param Request $request
+     *
+     * @return Illuminate\Http\Response
+     */
     public function add(Request $request)
     {
         $result = $this->service->add($request->productId);
@@ -39,6 +51,13 @@ class FavoriteController extends Controller
         return $this->responseService->apiResponse('error', 'Could not be added to Favorites');
     }
 
+    /**
+     * Remove a product from customer favories
+     *
+     * @param  Request $request
+     *
+     * @return Illuminate\Http\Response
+     */
     public function remove(Request $request)
     {
         $this->service->remove($request->productId);

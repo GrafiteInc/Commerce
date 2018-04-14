@@ -3,6 +3,7 @@
 namespace Grafite\Commerce\Repositories;
 
 use Grafite\Commerce\Models\Product;
+use Grafite\Commerce\Repositories\FavoriteRepository;
 use Illuminate\Support\Facades\Schema;
 
 class ProductRepository
@@ -20,6 +21,18 @@ class ProductRepository
     public function all()
     {
         return $this->model->orderBy('created_at', 'desc')->get();
+    }
+
+    /**
+     * Get cusomter favorites
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function favorites()
+    {
+        $favorites = app(FavoriteRepository::class)->all()->pluck('product_id');
+
+        return $this->model->whereIn('id', $favorites)->get();
     }
 
     /**

@@ -13,6 +13,11 @@ class OrderController extends Controller
         $this->orders = $orderRepo;
     }
 
+    /**
+     * List all customer orders
+     *
+     * @return Illuminate\Http\Response
+     */
     public function allOrders()
     {
         $orders = $this->orders->getByCustomer(auth()->id())->orderBy('created_at', 'DESC')->paginate(config('cms.pagination'));
@@ -20,6 +25,13 @@ class OrderController extends Controller
         return view('commerce-frontend::orders.all')->with('orders', $orders);
     }
 
+    /**
+     * Get a customer order
+     *
+     * @param  int $id
+     *
+     * @return Illuminate\Http\Response
+     */
     public function getOrder($id)
     {
         $order = $this->orders->getByCustomerAndUuid(auth()->id(), $id);
@@ -27,6 +39,13 @@ class OrderController extends Controller
         return view('commerce-frontend::orders.order')->with('order', $order);
     }
 
+    /**
+     * Cancel a customer order
+     *
+     * @param  int $id
+     *
+     * @return Illuminate\Http\Response
+     */
     public function cancelOrder($id)
     {
         if (app(OrderService::class)->cancelOrder(auth()->id(), $id)) {

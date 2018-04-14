@@ -18,7 +18,7 @@ class ProfileController extends Controller
      *
      * @param int $id
      *
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function customerProfile()
     {
@@ -26,9 +26,9 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update Customer Profile.
+     * Update Customer profile.
      *
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function customerProfileUpdate(Request $request)
     {
@@ -38,9 +38,9 @@ class ProfileController extends Controller
     }
 
     /**
-     * Add a coupon
+     * Add a coupon form
      *
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function addCoupon(Request $request)
     {
@@ -50,7 +50,7 @@ class ProfileController extends Controller
     /**
      * Add coupon to profile.
      *
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function submitCoupon(Request $request)
     {

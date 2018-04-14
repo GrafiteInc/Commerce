@@ -18,11 +18,11 @@ class PlanController extends Controller
     }
 
     /**
-     * Display all Blog entries.
+     * Display all plan entries.
      *
      * @param int $id
      *
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function all()
     {
@@ -36,11 +36,11 @@ class PlanController extends Controller
     }
 
     /**
-     * Display the specified Blog.
+     * Display the specified plan.
      *
      * @param int $id
      *
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function show($id)
     {

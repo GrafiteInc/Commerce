@@ -18,7 +18,7 @@ class CardController extends Controller
      *
      * @param int $id
      *
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function getCard()
     {
@@ -32,7 +32,7 @@ class CardController extends Controller
     /**
      * Display the change card.
      *
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function changeCard()
     {
@@ -43,6 +43,8 @@ class CardController extends Controller
      * Set a credit card.
      *
      * @param Request $request
+     *
+     * @return Illuminate\Http\Response
      */
     public function setCard(Request $request)
     {

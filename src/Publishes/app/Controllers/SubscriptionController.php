@@ -20,6 +20,13 @@ class SubscriptionController extends Controller
         $this->service = $service;
     }
 
+    /**
+     * Subscribe to a plan
+     *
+     * @param  int $id
+     *
+     * @return Illuminate\Http\Response
+     */
     public function subscribe($id)
     {
         if (is_null(auth()->user()->meta->stripe_id)) {
@@ -34,6 +41,11 @@ class SubscriptionController extends Controller
         return view('commerce-frontend::subscriptions.success')->with('plan', $plan);
     }
 
+    /**
+     * View all customer subscriptions
+     *
+     * @return Illuminate\Http\Response
+     */
     public function allSubscriptions()
     {
         $subscriptions = auth()->user()->meta->subscriptions()->orderBy('created_at', 'DESC')->paginate(config('cms.pagination'));
@@ -41,6 +53,13 @@ class SubscriptionController extends Controller
         return view('commerce-frontend::subscriptions.all')->with('subscriptions', $subscriptions);
     }
 
+    /**
+     * Get a subscription by name
+     *
+     * @param  string $name
+     *
+     * @return Illuminate\Http\Response
+     */
     public function getSubscription($name)
     {
         $subscription = auth()->user()->meta->subscription(Crypto::decrypt($name));
@@ -48,6 +67,14 @@ class SubscriptionController extends Controller
         return view('commerce-frontend::subscriptions.subscription')->with('subscription', $subscription);
     }
 
+    /**
+     * Cancel a subscription
+     *
+     * @param  Request $request
+     * @param  string $name
+     *
+     * @return Illuminate\Http\Response
+     */
     public function cancelSubscription(Request $request, $name)
     {
         auth()->user()->meta->subscriptions()

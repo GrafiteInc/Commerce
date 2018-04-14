@@ -15,11 +15,11 @@ class ProductController extends Controller
     }
 
     /**
-     * Display all Blog entries.
+     * Display all product entries.
      *
      * @param int $id
      *
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function all()
     {
@@ -33,11 +33,11 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified Blog.
+     * Display the specified product.
      *
      * @param int $id
      *
-     * @return Response
+     * @return Illuminate\Http\Response
      */
     public function show($url)
     {
@@ -48,5 +48,19 @@ class ProductController extends Controller
         }
 
         return view('commerce-frontend::products.show')->with('product', $product);
+    }
+
+    /**
+     * Display the customer favorite products.
+     *
+     * @param int $id
+     *
+     * @return Illuminate\Http\Response
+     */
+    public function favorites()
+    {
+        $products = $this->repository->favorites();
+
+        return view('commerce-frontend::products.favorites')->with('products', $products);
     }
 }
