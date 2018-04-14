@@ -41,6 +41,7 @@
                         Route::get('card-change', 'CardController@changeCard')->name('.account.card-change');
                         Route::post('card-change', 'CardController@setCard')->name('.account.card-change');
 
+                        Route::get('favorites', 'ProductController@favorites')->name('.account.favorites');
                         Route::get('purchases', 'PurchaseController@allPurchases')->name('.account.purchases');
                         Route::get('purchase/{id}', 'PurchaseController@getPurchase')->name('.account.purchase');
                         Route::get('purchase/{id}/refund-request', 'PurchaseController@requestRefund')->name('.account.purchase.refund-request');

@@ -79,7 +79,7 @@ class PaymentServiceTest extends TestCase
         $this->assertDatabaseHas('transactions', [
             'user_id' => 1007,
             'provider_id' => 666,
-            'total' => 99.99,
+            'total' => 9999,
         ]);
     }
 

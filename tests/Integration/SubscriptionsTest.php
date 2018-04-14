@@ -57,7 +57,7 @@ class SubscriptionsTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->call('GET', 'quarx/plans');
+        $response = $this->call('GET', 'cms/plans');
 
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('plans');
@@ -66,7 +66,7 @@ class SubscriptionsTest extends TestCase
 
     public function testCreate()
     {
-        $response = $this->call('GET', 'quarx/plans/create');
+        $response = $this->call('GET', 'cms/plans/create');
 
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertSee('Name');
@@ -74,7 +74,7 @@ class SubscriptionsTest extends TestCase
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/plans/2/edit');
+        $response = $this->call('GET', 'cms/plans/2/edit');
 
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('plan');
@@ -89,7 +89,7 @@ class SubscriptionsTest extends TestCase
 
     public function testSearch()
     {
-        $response = $this->call('POST', 'quarx/plans/search', ['term' => 'wtf']);
+        $response = $this->call('POST', 'cms/plans/search', ['term' => 'wtf']);
 
         $response->assertViewHas('plans');
         $this->assertEquals(200, $response->getStatusCode());
@@ -97,7 +97,7 @@ class SubscriptionsTest extends TestCase
 
     public function testUpdate()
     {
-        $response = $this->call('PATCH', 'quarx/plans/4', [
+        $response = $this->call('PATCH', 'cms/plans/4', [
             'name' => 'Batman Plan',
         ]);
 
@@ -107,7 +107,7 @@ class SubscriptionsTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'quarx/plans/1');
+        $response = $this->call('DELETE', 'cms/plans/1');
         $this->assertEquals(302, $response->getStatusCode());
     }
 }

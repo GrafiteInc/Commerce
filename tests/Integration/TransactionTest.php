@@ -39,7 +39,7 @@ class TransactionTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->call('GET', 'quarx/transactions');
+        $response = $this->call('GET', 'cms/transactions');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('transactions');
         $response->assertSee('Transactions');
@@ -55,7 +55,7 @@ class TransactionTest extends TestCase
             'id' => 2,
             'notes' => 'Le notes!',
         ]);
-        $response = $this->call('GET', 'quarx/transactions/2/edit');
+        $response = $this->call('GET', 'cms/transactions/2/edit');
 
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('transaction');
@@ -70,7 +70,7 @@ class TransactionTest extends TestCase
 
     public function testSearch()
     {
-        $response = $this->call('POST', 'quarx/transactions/search', ['term' => 'wtf']);
+        $response = $this->call('POST', 'cms/transactions/search', ['term' => 'wtf']);
 
         $response->assertViewHas('transactions');
         $this->assertEquals(200, $response->getStatusCode());
@@ -83,7 +83,7 @@ class TransactionTest extends TestCase
             'notes' => 'Star Wars !',
         ]);
 
-        $response = $this->call('PATCH', 'quarx/transactions/4', [
+        $response = $this->call('PATCH', 'cms/transactions/4', [
             'notes' => 'nada',
         ]);
 
@@ -93,13 +93,13 @@ class TransactionTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'quarx/transactions/1');
+        $response = $this->call('DELETE', 'cms/transactions/1');
         $this->assertEquals(405, $response->getStatusCode());
     }
 
     public function testCreate()
     {
-        $response = $this->call('get', 'quarx/transactions/create');
+        $response = $this->call('get', 'cms/transactions/create');
         $this->assertEquals(405, $response->getStatusCode());
     }
 }

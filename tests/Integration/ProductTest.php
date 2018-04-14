@@ -31,14 +31,14 @@ class ProductTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->call('GET', 'quarx/products');
+        $response = $this->call('GET', 'cms/products');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('products');
     }
 
     public function testCreate()
     {
-        $response = $this->call('GET', 'quarx/products/create');
+        $response = $this->call('GET', 'cms/products/create');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertSee('Name');
     }
@@ -46,7 +46,7 @@ class ProductTest extends TestCase
     public function testEdit()
     {
         factory(\Grafite\Commerce\Models\Product::class)->create(['id' => 4]);
-        $response = $this->call('GET', 'quarx/products/4/edit');
+        $response = $this->call('GET', 'cms/products/4/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('product');
         $response->assertSee('Name');
@@ -61,7 +61,7 @@ class ProductTest extends TestCase
     public function testStore()
     {
         $product = ['name' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie', 'price' => 9.99];
-        $response = $this->call('POST', 'quarx/products', $product);
+        $response = $this->call('POST', 'cms/products', $product);
 
         $this->assertDatabaseHas('products', ['id' => 2]);
         $this->assertEquals(302, $response->getStatusCode());
@@ -69,7 +69,7 @@ class ProductTest extends TestCase
 
     public function testSearch()
     {
-        $response = $this->call('POST', 'quarx/products/search', ['term' => 'wtf']);
+        $response = $this->call('POST', 'cms/products/search', ['term' => 'wtf']);
 
         $response->assertViewHas('products');
         $this->assertEquals(200, $response->getStatusCode());
@@ -78,9 +78,9 @@ class ProductTest extends TestCase
     public function testUpdate()
     {
         $product = ['name' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie', 'price' => 19.99];
-        $this->call('POST', 'quarx/product', $product);
+        $this->call('POST', 'cms/product', $product);
 
-        $response = $this->call('PATCH', 'quarx/products/1', [
+        $response = $this->call('PATCH', 'cms/products/1', [
             'name' => 'dumber and dumber',
             'url' => 'dumber-and-dumber',
             'price' => 99.99,
@@ -92,8 +92,8 @@ class ProductTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'quarx/products/1');
+        $response = $this->call('DELETE', 'cms/products/1');
         $this->assertEquals(302, $response->getStatusCode());
-        $response->assertRedirect('quarx/products');
+        $response->assertRedirect('cms/products');
     }
 }

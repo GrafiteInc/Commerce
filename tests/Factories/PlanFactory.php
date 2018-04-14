@@ -12,7 +12,7 @@ $factory->define(\Grafite\Commerce\Models\Plan::class, function (Faker\Generator
         'id' => 1,
         'name' => 'cheap hosting',
         'uuid' => str_random(20),
-        'price' => 9999,
+        'amount' => 9999,
         'interval' => 'monthly',
         'currency' => 'usd',
         'enabled' => true,

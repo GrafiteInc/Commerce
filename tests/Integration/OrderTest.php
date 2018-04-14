@@ -25,8 +25,8 @@ class OrderTest extends TestCase
         factory(\Grafite\Commerce\Models\Plan::class)->create();
         factory(\Grafite\Commerce\Models\Order::class)->create();
         factory(\Grafite\Commerce\Models\Transaction::class)->create([
-                'id' => 999,
-            ]);
+            'id' => 999,
+        ]);
     }
 
     /*
@@ -37,7 +37,7 @@ class OrderTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->call('GET', 'quarx/orders');
+        $response = $this->call('GET', 'cms/orders');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('orders');
         $response->assertSee('Orders');
@@ -55,7 +55,7 @@ class OrderTest extends TestCase
                 ],
             ]),
         ]);
-        $response = $this->call('GET', 'quarx/orders/2/edit');
+        $response = $this->call('GET', 'cms/orders/2/edit');
 
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('order');
@@ -70,7 +70,7 @@ class OrderTest extends TestCase
 
     public function testSearch()
     {
-        $response = $this->call('POST', 'quarx/orders/search', ['term' => 'wtf']);
+        $response = $this->call('POST', 'cms/orders/search', ['term' => 'wtf']);
 
         $response->assertViewHas('orders');
         $this->assertEquals(200, $response->getStatusCode());
@@ -89,7 +89,7 @@ class OrderTest extends TestCase
             ]),
         ]);
 
-        $response = $this->call('PATCH', 'quarx/orders/4', [
+        $response = $this->call('PATCH', 'cms/orders/4', [
             'details' => json_encode([
                 [
                     'price' => 10900,
@@ -105,13 +105,13 @@ class OrderTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'quarx/orders/1');
+        $response = $this->call('DELETE', 'cms/orders/1');
         $this->assertEquals(405, $response->getStatusCode());
     }
 
     public function testCreate()
     {
-        $response = $this->call('get', 'quarx/orders/create');
+        $response = $this->call('get', 'cms/orders/create');
         $this->assertEquals(405, $response->getStatusCode());
     }
 }

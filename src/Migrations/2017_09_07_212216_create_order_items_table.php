@@ -15,7 +15,7 @@ class CreateOrderItemsTable extends Migration
             $table->integer('order_id');
             $table->integer('product_id');
             $table->integer('transaction_id');
-            $table->integer('refund_id');
+            $table->integer('refund_id')->nullable();
             $table->float('quantity');
             $table->json('variants')->nullable();
             $table->integer('subtotal');
