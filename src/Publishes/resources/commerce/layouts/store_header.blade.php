@@ -13,6 +13,7 @@
                     @if (auth()->user())
                         <a class="dropdown-item" href="{{ url('user/settings') }}"><span class="fa fa-user"></span> Settings</a>
                         <a class="dropdown-item" href="{{ route('commerce.account.profile') }}"><span class="fa fa-id-card"></span> Profile</a>
+                        <a class="dropdown-item" href="{{ route('commerce.account.favorites') }}"><span class="fa fa-heart"></span> Favorites</a>
                         <a class="dropdown-item" href="{{ route('commerce.account.purchases') }}"><span class="fa fa-dollar"></span> Purchases</a>
                         <a class="dropdown-item" href="{{ route('commerce.account.orders') }}"><span class="fa fa-truck"></span> Orders</a>
                         <a class="dropdown-item" href="{{ route('commerce.account.subscriptions') }}"><span class="fa fa-ticket"></span> Subscriptions</a>
