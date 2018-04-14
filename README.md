@@ -1,4 +1,6 @@
-# Grafite Commerce - An e-commerce package for Laravel apps using Grafite CMS
+# Grafite Commerce
+
+**Commerce** - An e-commerce package for Laravel apps using Grafite CMS
 
 [![Build Status](https://travis-ci.org/GrafiteInc/Commerce.svg?branch=master)](https://travis-ci.org/GrafiteInc/Commerce)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f28b73ebf600f2db7f48/maintainability)](https://codeclimate.com/github/GrafiteInc/Commerce/maintainability)
