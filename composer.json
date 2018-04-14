@@ -21,7 +21,7 @@
             "Grafite\\Commerce\\": "src/"
         },
         "files": [
-          "src/Helpers/StoreHelper.php"
+          "src/Helpers/commerce_helpers.php"
         ]
     },
     "autoload-dev": {

@@ -19,21 +19,21 @@
         </tr>
         <tr>
             <td>Details</td>
-            <td class="text-right">{{ StoreHelper::subscriptionPlan($subscription)->description }}</td>
+            <td class="text-right">{{ commerce()->subscriptionPlan($subscription)->description }}</td>
         </tr>
         @if (is_null($subscription->ends_at))
             <tr>
                 <td>Upcoming</td>
                 <td class="text-right">
-                    {{ StoreHelper::subscriptionUpcoming($subscription)['total'] }}<br>
-                    {{ StoreHelper::subscriptionUpcoming($subscription)['date'] }}
+                    {{ commerce()->subscriptionUpcoming($subscription)['total'] }}<br>
+                    {{ commerce()->subscriptionUpcoming($subscription)['date'] }}
                 </td>
             </tr>
         @endif
     </table>
 
     @if (is_null($subscription->ends_at))
-        {!! StoreHelper::cancelSubscriptionBtn($subscription, 'btn btn-danger fload-right') !!}
+        {!! commerce()->cancelSubscriptionBtn($subscription, 'btn btn-danger fload-right') !!}
     @endif
 
 @endsection

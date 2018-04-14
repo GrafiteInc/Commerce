@@ -47,21 +47,21 @@
                 <tr>
                     <td>Shipping Address</td>
                     <td>
-                        {!! StoreHelper::customer()->shippingAddress('street') !!}
-                        {!! StoreHelper::customer()->shippingAddress('postal') !!}
-                        {!! StoreHelper::customer()->shippingAddress('city') !!}
-                        {!! StoreHelper::customer()->shippingAddress('state') !!}
-                        {!! StoreHelper::customer()->shippingAddress('country') !!}
+                        {!! commerce()->customer()->shippingAddress('street') !!}
+                        {!! commerce()->customer()->shippingAddress('postal') !!}
+                        {!! commerce()->customer()->shippingAddress('city') !!}
+                        {!! commerce()->customer()->shippingAddress('state') !!}
+                        {!! commerce()->customer()->shippingAddress('country') !!}
                     </td>
                 </tr>
                 <tr>
                     <td>Billing Address</td>
                     <td>
-                        {!! StoreHelper::customer()->billingAddress('street') !!}
-                        {!! StoreHelper::customer()->billingAddress('postal') !!}
-                        {!! StoreHelper::customer()->billingAddress('city') !!}
-                        {!! StoreHelper::customer()->billingAddress('state') !!}
-                        {!! StoreHelper::customer()->billingAddress('country') !!}
+                        {!! commerce()->customer()->billingAddress('street') !!}
+                        {!! commerce()->customer()->billingAddress('postal') !!}
+                        {!! commerce()->customer()->billingAddress('city') !!}
+                        {!! commerce()->customer()->billingAddress('state') !!}
+                        {!! commerce()->customer()->billingAddress('country') !!}
                     </td>
                 </tr>
             </table>

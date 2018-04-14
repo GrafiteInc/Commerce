@@ -12,11 +12,11 @@
         </thead>
         <tbody>
             @foreach ($subscriptions as $subscription)
-                @if (StoreHelper::subscriptionPlan($subscription))
+                @if (commerce()->subscriptionPlan($subscription))
                     <tr>
-                        <td><a href="{{ StoreHelper::customerSubscriptionUrl($subscription) }}">{!! $subscription->name !!}</a></td>
-                        <td>${{ StoreHelper::subscriptionPlan($subscription)->amount }}</td>
-                        <td class="text-right">@if (is_null($subscription->ends_at)) {!! StoreHelper::cancelSubscriptionBtn($subscription, 'btn btn-sm btn-danger') !!} @endif</td>
+                        <td><a href="{{ commerce()->customerSubscriptionUrl($subscription) }}">{!! $subscription->name !!}</a></td>
+                        <td>${{ commerce()->subscriptionPlan($subscription)->amount }}</td>
+                        <td class="text-right">@if (is_null($subscription->ends_at)) {!! commerce()->cancelSubscriptionBtn($subscription, 'btn btn-sm btn-danger') !!} @endif</td>
                     </tr>
                 @endif
             @endforeach

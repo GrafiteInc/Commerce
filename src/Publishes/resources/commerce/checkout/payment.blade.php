@@ -49,10 +49,10 @@
                 </div>
             </form>
 
-            @if (StoreHelper::customer()->hasProfile() && ! is_null(StoreHelper::customer()->lastCard('card_last_four')))
+            @if (commerce()->customer()->hasProfile() && ! is_null(commerce()->customer()->lastCard('card_last_four')))
                 <form method="post" action="{{ route('commerce.process.last-card') }}">
                     {!! csrf_field() !!}
-                    <button class="btn btn-outline-primary" id="lastCardBtn" type="submit">Pay with card (ending in {!! StoreHelper::customer()->lastCard('card_last_four') !!})</button>
+                    <button class="btn btn-outline-primary" id="lastCardBtn" type="submit">Pay with card (ending in {!! commerce()->customer()->lastCard('card_last_four') !!})</button>
                 </form>
             @endif
         </div>
