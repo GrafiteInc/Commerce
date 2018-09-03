@@ -85,7 +85,7 @@
                 @if ($order && $order->hasActiveOrderItems())
                     <div class="card bg-light border-dark">
                         <div class="card-header">
-                           <a href="{{ url(config('cms.backend-route-prefix', 'cms').'/orders/'.$order->id.'/edit') }}">Order #:{{ $order->id }}</a>
+                           <a href="{{ url(config('cms.backend-route-prefix', 'cms').'/orders/'.$order->id.'/edit') }}">Order: #{{ $order->id }}</a>
                         </div>
                         <div class="card-body">
                             You must cancel this order if you wish to refund this transaction.
