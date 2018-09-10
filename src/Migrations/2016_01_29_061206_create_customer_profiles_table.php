@@ -9,7 +9,7 @@ class CreateCustomerProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::table(config('cms.db-prefix', '').'user_meta', function ($table) {
+        Schema::table('user_meta', function ($table) {
             $table->string('stripe_id')->nullable();
             $table->string('card_brand')->nullable();
             $table->string('card_last_four')->nullable();
