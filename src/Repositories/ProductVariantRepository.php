@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitec\Commerce\Repositories;
+namespace SierraTecnologia\Commerce\Repositories;
 
-use Sitec\Commerce\Models\Variant;
-use Sitec\Commerce\Models\Product;
+use SierraTecnologia\Commerce\Models\Variant;
+use SierraTecnologia\Commerce\Models\Product;
 
 class ProductVariantRepository
 {
@@ -15,7 +15,7 @@ class ProductVariantRepository
     /**
      * Get all published products.
      *
-     * @return Sitec\Commerce\Models\Variant
+     * @return SierraTecnologia\Commerce\Models\Variant
      */
     public function getProductVariants($id)
     {
@@ -25,10 +25,10 @@ class ProductVariantRepository
     /**
      * Adds variants to the product.
      *
-     * @param Sitec\Commerce\Models\Product $products
+     * @param SierraTecnologia\Commerce\Models\Product $products
      * @param array                     $payload
      *
-     * @return Sitec\Commerce\Models\Variant
+     * @return SierraTecnologia\Commerce\Models\Variant
      */
     public function addVariant($product, $payload)
     {
@@ -42,7 +42,7 @@ class ProductVariantRepository
      *
      * @param array $payload
      *
-     * @return Sitec\Commerce\Models\Variant
+     * @return SierraTecnologia\Commerce\Models\Variant
      */
     public function saveVariant($payload)
     {

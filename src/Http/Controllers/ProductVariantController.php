@@ -1,28 +1,28 @@
 <?php
 
-namespace Sitec\Commerce\Http\Controllers;
+namespace SierraTecnologia\Commerce\Http\Controllers;
 
 use Cms;
 use Response;
 use Illuminate\Http\Request;
-use Sitec\Commerce\Models\Products;
-use Sitec\Cms\Controllers\SitecCmsController;
-use Sitec\Commerce\Repositories\ProductRepository;
-use Sitec\Commerce\Repositories\ProductVariantRepository;
+use SierraTecnologia\Commerce\Models\Products;
+use SierraTecnologia\Cms\Controllers\SierraTecnologiaCmsController;
+use SierraTecnologia\Commerce\Repositories\ProductRepository;
+use SierraTecnologia\Commerce\Repositories\ProductVariantRepository;
 
-class ProductVariantController extends SitecCmsController
+class ProductVariantController extends SierraTecnologiaCmsController
 {
     /**
      * Product Repository.
      *
-     * @var Sitec\Commerce\Repositories\ProductRepository
+     * @var SierraTecnologia\Commerce\Repositories\ProductRepository
      */
     public $productRepository;
 
     /**
      * Product Variant Repository.
      *
-     * @var Sitec\Commerce\Repositories\ProductVariantRepository
+     * @var SierraTecnologia\Commerce\Repositories\ProductVariantRepository
      */
     public $productVariantRepository;
 

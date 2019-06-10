@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitec\Commerce\Models;
+namespace SierraTecnologia\Commerce\Models;
 
-use Sitec\Cms\Models\CmsModel;
-use Sitec\Commerce\Models\Order;
-use Sitec\Commerce\Models\Refund;
+use SierraTecnologia\Cms\Models\CmsModel;
+use SierraTecnologia\Commerce\Models\Order;
+use SierraTecnologia\Commerce\Models\Refund;
 
 class Transaction extends CmsModel
 {

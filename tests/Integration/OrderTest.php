@@ -20,11 +20,11 @@ class OrderTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actingAs($this->user);
 
-        factory(\Sitec\Commerce\Models\Cart::class)->create();
-        factory(\Sitec\Commerce\Models\Product::class)->create();
-        factory(\Sitec\Commerce\Models\Plan::class)->create();
-        factory(\Sitec\Commerce\Models\Order::class)->create();
-        factory(\Sitec\Commerce\Models\Transaction::class)->create([
+        factory(\SierraTecnologia\Commerce\Models\Cart::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Product::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Plan::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Order::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Transaction::class)->create([
             'id' => 999,
         ]);
     }
@@ -45,7 +45,7 @@ class OrderTest extends TestCase
 
     public function testEdit()
     {
-        factory(\Sitec\Commerce\Models\Order::class)->create([
+        factory(\SierraTecnologia\Commerce\Models\Order::class)->create([
             'id' => 2,
             'details' => json_encode([
                 [
@@ -78,7 +78,7 @@ class OrderTest extends TestCase
 
     public function testUpdate()
     {
-        factory(\Sitec\Commerce\Models\Order::class)->create([
+        factory(\SierraTecnologia\Commerce\Models\Order::class)->create([
             'id' => 4,
             'details' => json_encode([
                 [

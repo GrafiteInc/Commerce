@@ -1,12 +1,12 @@
 <?php
 
-namespace Sitec\Commerce\Services;
+namespace SierraTecnologia\Commerce\Services;
 
-use Sitec\Commerce\Models\Refund;
-use Sitec\Crypto\Services\Crypto;
+use SierraTecnologia\Commerce\Models\Refund;
+use SierraTecnologia\Crypto\Services\Crypto;
 use Illuminate\Support\Facades\Config;
-use Sitec\Commerce\Services\TransactionService;
-use Sitec\Commerce\Repositories\OrderRepository;
+use SierraTecnologia\Commerce\Services\TransactionService;
+use SierraTecnologia\Commerce\Repositories\OrderRepository;
 
 class OrderService
 {

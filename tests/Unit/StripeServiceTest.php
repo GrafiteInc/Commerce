@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Sitec\Commerce\Services\StripeService;
+use SierraTecnologia\Commerce\Services\StripeService;
 
 class StripeServiceTest extends TestCase
 {
@@ -15,7 +15,7 @@ class StripeServiceTest extends TestCase
         $plan = Mockery::mock(\Stripe\Plan::class);
         $refund = Mockery::mock(\Stripe\Refund::class);
         $coupon = Mockery::mock(\Stripe\Coupon::class);
-        $this->transaction = factory(\Sitec\Commerce\Models\Transaction::class)->create();
+        $this->transaction = factory(\SierraTecnologia\Commerce\Models\Transaction::class)->create();
 
         $planObject = Mockery::mock('StdClass');
         $planObject->shouldReceive('delete')->andReturn(true);

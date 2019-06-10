@@ -1,13 +1,13 @@
 <?php
 
-namespace Sitec\Commerce\Http\Controllers;
+namespace SierraTecnologia\Commerce\Http\Controllers;
 
-use Sitec\Cms\Controllers\SitecCmsController;
-use Sitec\Commerce\Services\OrderItemService;
-use Sitec\Commerce\Services\OrderService;
+use SierraTecnologia\Cms\Controllers\SierraTecnologiaCmsController;
+use SierraTecnologia\Commerce\Services\OrderItemService;
+use SierraTecnologia\Commerce\Services\OrderService;
 use Illuminate\Http\Request;
 
-class OrderController extends SitecCmsController
+class OrderController extends SierraTecnologiaCmsController
 {
     public function __construct(OrderService $orderService)
     {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Sitec\Commerce\Repositories;
+namespace SierraTecnologia\Commerce\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
-use Sitec\Commerce\Models\Transaction;
-use Sitec\Commerce\Services\LogisticService;
+use SierraTecnologia\Commerce\Models\Transaction;
+use SierraTecnologia\Commerce\Services\LogisticService;
 
 class TransactionRepository
 {

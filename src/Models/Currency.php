@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitec\Commerce\Models;
+namespace SierraTecnologia\Commerce\Models;
 
 class Currency
 {

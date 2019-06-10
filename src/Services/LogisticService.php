@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitec\Commerce\Services;
+namespace SierraTecnologia\Commerce\Services;
 
 use App\Services\StoreLogistics;
-use Sitec\Commerce\Interfaces\LogisticServiceInterface;
+use SierraTecnologia\Commerce\Interfaces\LogisticServiceInterface;
 
 class LogisticService implements LogisticServiceInterface
 {

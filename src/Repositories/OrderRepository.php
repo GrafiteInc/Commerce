@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitec\Commerce\Repositories;
+namespace SierraTecnologia\Commerce\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use Sitec\Commerce\Models\Order;
+use SierraTecnologia\Commerce\Models\Order;
 
 class OrderRepository
 {

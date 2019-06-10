@@ -1,11 +1,11 @@
 <?php
 
-namespace Sitec\Commerce\Http\Controllers;
+namespace SierraTecnologia\Commerce\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Sitec\Commerce\Services\OrderItemService;
-use Sitec\Commerce\Services\OrderService;
+use SierraTecnologia\Commerce\Services\OrderItemService;
+use SierraTecnologia\Commerce\Services\OrderService;
 
 class OrderItemController extends Controller
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Sitec\Commerce\Models;
+namespace SierraTecnologia\Commerce\Models;
 
-use Sitec\Cms\Models\Image;
-use Sitec\Cms\Models\ProductImage;
-use Sitec\Cms\Models\CmsModel;
-use Sitec\Cms\Services\FileService;
-use Sitec\Commerce\Services\CartService;
-use Sitec\Commerce\Services\ProductService;
+use SierraTecnologia\Cms\Models\Image;
+use SierraTecnologia\Cms\Models\ProductImage;
+use SierraTecnologia\Cms\Models\CmsModel;
+use SierraTecnologia\Cms\Services\FileService;
+use SierraTecnologia\Commerce\Services\CartService;
+use SierraTecnologia\Commerce\Services\ProductService;
 
 class Product extends CmsModel
 {

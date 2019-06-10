@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitec\Commerce\Providers;
+namespace SierraTecnologia\Commerce\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
-use Sitec\Commerce\Middleware\isAjax;
+use SierraTecnologia\Commerce\Middleware\isAjax;
 
 class CommerceRouteProvider extends ServiceProvider
 {
@@ -15,7 +15,7 @@ class CommerceRouteProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Sitec\Commerce\Http\Controllers';
+    protected $namespace = 'SierraTecnologia\Commerce\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

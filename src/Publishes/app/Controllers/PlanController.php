@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
-use Sitec\Commerce\Services\PlanService;
+use SierraTecnologia\Commerce\Services\PlanService;
 
 class PlanController extends Controller
 {

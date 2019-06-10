@@ -1,8 +1,8 @@
 <?php
 
-namespace Sitec\Commerce\Services;
+namespace SierraTecnologia\Commerce\Services;
 
-use Sitec\Commerce\Repositories\FavoriteRepository;
+use SierraTecnologia\Commerce\Repositories\FavoriteRepository;
 
 class FavoriteService
 {

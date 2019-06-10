@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitec\Commerce\Interfaces;
+namespace SierraTecnologia\Commerce\Interfaces;
 
 interface LogisticServiceInterface
 {

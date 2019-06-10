@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitec\Commerce\Repositories;
+namespace SierraTecnologia\Commerce\Repositories;
 
 use Illuminate\Support\Facades\Session;
-use Sitec\Commerce\Models\Cart;
-use Sitec\Commerce\Models\Variant;
+use SierraTecnologia\Commerce\Models\Cart;
+use SierraTecnologia\Commerce\Models\Variant;
 
 class CartSessionRepository
 {

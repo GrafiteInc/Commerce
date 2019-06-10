@@ -122,6 +122,6 @@ class User extends Authenticatable
 
     public function favorites()
     {
-        return $this->hasMany(\Sitec\Commerce\Models\Favorite::class);
+        return $this->hasMany(\SierraTecnologia\Commerce\Models\Favorite::class);
     }
 }

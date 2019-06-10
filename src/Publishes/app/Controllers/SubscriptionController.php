@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Sitec\Commerce\Services\LogisticService;
-use Sitec\Commerce\Services\PlanService;
-use Sitec\Crypto\Services\Crypto;
+use SierraTecnologia\Commerce\Services\LogisticService;
+use SierraTecnologia\Commerce\Services\PlanService;
+use SierraTecnologia\Crypto\Services\Crypto;
 
 class SubscriptionController extends Controller
 {

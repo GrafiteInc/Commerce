@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Commerce;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Sitec\Commerce\Services\CustomerProfileService;
+use SierraTecnologia\Commerce\Services\CustomerProfileService;
 
 class ProfileController extends Controller
 {

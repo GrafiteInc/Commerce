@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitec\Commerce\Facades;
+namespace SierraTecnologia\Commerce\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

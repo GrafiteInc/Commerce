@@ -1,6 +1,6 @@
 {
     "name": "sierratecnologia/commerce",
-    "description": "An E-Commerce platform for Laravel Apps using Sitec CMS",
+    "description": "An E-Commerce platform for Laravel Apps using SierraTecnologia CMS",
     "license": "MIT",
     "require": {
         "illuminate/support": "^5.6",
@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Sitec\\Commerce\\": "src/"
+            "SierraTecnologia\\Commerce\\": "src/"
         },
         "files": [
           "src/Helpers/commerce_helpers.php"
@@ -47,7 +47,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Sitec\\Commerce\\SitecCommerceModuleProvider"
+                "SierraTecnologia\\Commerce\\SierraTecnologiaCommerceModuleProvider"
             ]
         }
     }
