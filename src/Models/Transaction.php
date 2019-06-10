@@ -1,10 +1,10 @@
 <?php
 
-namespace Grafite\Commerce\Models;
+namespace Sitec\Commerce\Models;
 
-use Grafite\Cms\Models\CmsModel;
-use Grafite\Commerce\Models\Order;
-use Grafite\Commerce\Models\Refund;
+use Sitec\Cms\Models\CmsModel;
+use Sitec\Commerce\Models\Order;
+use Sitec\Commerce\Models\Refund;
 
 class Transaction extends CmsModel
 {

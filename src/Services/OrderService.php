@@ -1,12 +1,12 @@
 <?php
 
-namespace Grafite\Commerce\Services;
+namespace Sitec\Commerce\Services;
 
-use Grafite\Commerce\Models\Refund;
-use Grafite\Crypto\Services\Crypto;
+use Sitec\Commerce\Models\Refund;
+use Sitec\Crypto\Services\Crypto;
 use Illuminate\Support\Facades\Config;
-use Grafite\Commerce\Services\TransactionService;
-use Grafite\Commerce\Repositories\OrderRepository;
+use Sitec\Commerce\Services\TransactionService;
+use Sitec\Commerce\Repositories\OrderRepository;
 
 class OrderService
 {

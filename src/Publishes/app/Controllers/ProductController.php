@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
-use Grafite\Commerce\Repositories\ProductRepository;
+use Sitec\Commerce\Repositories\ProductRepository;
 
 class ProductController extends Controller
 {

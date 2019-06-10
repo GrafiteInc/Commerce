@@ -1,28 +1,28 @@
 <?php
 
-namespace Grafite\Commerce\Http\Controllers;
+namespace Sitec\Commerce\Http\Controllers;
 
 use Cms;
 use Response;
 use Illuminate\Http\Request;
-use Grafite\Commerce\Models\Products;
-use Grafite\Cms\Controllers\GrafiteCmsController;
-use Grafite\Commerce\Repositories\ProductRepository;
-use Grafite\Commerce\Repositories\ProductVariantRepository;
+use Sitec\Commerce\Models\Products;
+use Sitec\Cms\Controllers\SitecCmsController;
+use Sitec\Commerce\Repositories\ProductRepository;
+use Sitec\Commerce\Repositories\ProductVariantRepository;
 
-class ProductVariantController extends GrafiteCmsController
+class ProductVariantController extends SitecCmsController
 {
     /**
      * Product Repository.
      *
-     * @var Grafite\Commerce\Repositories\ProductRepository
+     * @var Sitec\Commerce\Repositories\ProductRepository
      */
     public $productRepository;
 
     /**
      * Product Variant Repository.
      *
-     * @var Grafite\Commerce\Repositories\ProductVariantRepository
+     * @var Sitec\Commerce\Repositories\ProductVariantRepository
      */
     public $productVariantRepository;
 

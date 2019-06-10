@@ -1,11 +1,11 @@
 <?php
 
-namespace Grafite\Commerce\Repositories;
+namespace Sitec\Commerce\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
-use Grafite\Commerce\Models\Transaction;
-use Grafite\Commerce\Services\LogisticService;
+use Sitec\Commerce\Models\Transaction;
+use Sitec\Commerce\Services\LogisticService;
 
 class TransactionRepository
 {

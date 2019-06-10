@@ -1,15 +1,15 @@
 <?php
 
-namespace Grafite\Commerce\Services;
+namespace Sitec\Commerce\Services;
 
 use App\Services\StoreLogistics;
-use Grafite\Commerce\Models\Coupon;
-use Grafite\Commerce\Models\Currency;
-use Grafite\Commerce\Models\Variant;
-use Grafite\Commerce\Repositories\CartRepository;
-use Grafite\Commerce\Repositories\CartSessionRepository;
-use Grafite\Commerce\Repositories\TransactionRepository;
-use Grafite\Commerce\Services\Concerns\CartHtmlGenerator;
+use Sitec\Commerce\Models\Coupon;
+use Sitec\Commerce\Models\Currency;
+use Sitec\Commerce\Models\Variant;
+use Sitec\Commerce\Repositories\CartRepository;
+use Sitec\Commerce\Repositories\CartSessionRepository;
+use Sitec\Commerce\Repositories\TransactionRepository;
+use Sitec\Commerce\Services\Concerns\CartHtmlGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 

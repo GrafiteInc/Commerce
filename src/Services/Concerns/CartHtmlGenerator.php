@@ -1,6 +1,6 @@
 <?php
 
-namespace Grafite\Commerce\Services\Concerns;
+namespace Sitec\Commerce\Services\Concerns;
 
 trait CartHtmlGenerator
 {

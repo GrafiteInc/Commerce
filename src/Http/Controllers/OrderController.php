@@ -1,13 +1,13 @@
 <?php
 
-namespace Grafite\Commerce\Http\Controllers;
+namespace Sitec\Commerce\Http\Controllers;
 
-use Grafite\Cms\Controllers\GrafiteCmsController;
-use Grafite\Commerce\Services\OrderItemService;
-use Grafite\Commerce\Services\OrderService;
+use Sitec\Cms\Controllers\SitecCmsController;
+use Sitec\Commerce\Services\OrderItemService;
+use Sitec\Commerce\Services\OrderService;
 use Illuminate\Http\Request;
 
-class OrderController extends GrafiteCmsController
+class OrderController extends SitecCmsController
 {
     public function __construct(OrderService $orderService)
     {

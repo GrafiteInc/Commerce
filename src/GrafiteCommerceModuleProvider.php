@@ -1,12 +1,12 @@
 <?php
 
-namespace Grafite\Commerce;
+namespace Sitec\Commerce;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class GrafiteCommerceModuleProvider extends ServiceProvider
+class SitecCommerceModuleProvider extends ServiceProvider
 {
     /**
      * Alias the services in the boot.
@@ -26,7 +26,7 @@ class GrafiteCommerceModuleProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/Views' => base_path('resources/views/vendor/commerce'),
-        ], 'Grafite Commerce');
+        ], 'Sitec Commerce');
     }
 
     /**
@@ -34,9 +34,9 @@ class GrafiteCommerceModuleProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(\Grafite\Commerce\Providers\CommerceEventServiceProvider::class);
-        $this->app->register(\Grafite\Commerce\Providers\CommerceServiceProvider::class);
-        $this->app->register(\Grafite\Commerce\Providers\CommerceRouteProvider::class);
+        $this->app->register(\Sitec\Commerce\Providers\CommerceEventServiceProvider::class);
+        $this->app->register(\Sitec\Commerce\Providers\CommerceServiceProvider::class);
+        $this->app->register(\Sitec\Commerce\Providers\CommerceRouteProvider::class);
 
         // View namespace
         $this->loadViewsFrom(__DIR__.'/Views', 'commerce');

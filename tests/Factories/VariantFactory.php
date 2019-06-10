@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Grafite\Commerce\Models\Variant::class, function (Faker\Generator $faker) {
+$factory->define(\Sitec\Commerce\Models\Variant::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'product_id' => 1,

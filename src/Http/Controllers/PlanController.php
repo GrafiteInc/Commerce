@@ -1,11 +1,11 @@
 <?php
 
-namespace Grafite\Commerce\Http\Controllers;
+namespace Sitec\Commerce\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Grafite\Commerce\Services\PlanService;
-use Grafite\Commerce\Http\Requests\PlanRequest;
+use Sitec\Commerce\Services\PlanService;
+use Sitec\Commerce\Http\Requests\PlanRequest;
 
 class PlanController extends Controller
 {

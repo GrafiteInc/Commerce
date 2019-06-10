@@ -1,11 +1,11 @@
 <?php
 
-namespace Grafite\Commerce\Http\Controllers;
+namespace Sitec\Commerce\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Grafite\Commerce\Services\OrderItemService;
-use Grafite\Commerce\Services\OrderService;
+use Sitec\Commerce\Services\OrderItemService;
+use Sitec\Commerce\Services\OrderService;
 
 class OrderItemController extends Controller
 {

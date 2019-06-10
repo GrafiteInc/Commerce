@@ -1,9 +1,9 @@
 <?php
 
-namespace Grafite\Commerce\Services;
+namespace Sitec\Commerce\Services;
 
 use App\Services\StoreLogistics;
-use Grafite\Commerce\Interfaces\LogisticServiceInterface;
+use Sitec\Commerce\Interfaces\LogisticServiceInterface;
 
 class LogisticService implements LogisticServiceInterface
 {

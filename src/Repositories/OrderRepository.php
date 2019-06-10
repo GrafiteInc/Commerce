@@ -1,9 +1,9 @@
 <?php
 
-namespace Grafite\Commerce\Repositories;
+namespace Sitec\Commerce\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use Grafite\Commerce\Models\Order;
+use Sitec\Commerce\Models\Order;
 
 class OrderRepository
 {

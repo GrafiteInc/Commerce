@@ -1,6 +1,6 @@
 <?php
 
-namespace Grafite\Commerce\Http\Middleware;
+namespace Sitec\Commerce\Http\Middleware;
 
 use Closure;
 

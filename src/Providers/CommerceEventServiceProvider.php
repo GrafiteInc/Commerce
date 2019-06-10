@@ -1,6 +1,6 @@
 <?php
 
-namespace Grafite\Commerce\Providers;
+namespace Sitec\Commerce\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 

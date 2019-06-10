@@ -1,9 +1,9 @@
 <?php
 
-namespace Grafite\Commerce\Models;
+namespace Sitec\Commerce\Models;
 
-use Grafite\Cms\Models\CmsModel;
-use Grafite\Commerce\Models\OrderItem;
+use Sitec\Cms\Models\CmsModel;
+use Sitec\Commerce\Models\OrderItem;
 
 class Refund extends CmsModel
 {

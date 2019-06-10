@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Commerce;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Grafite\Commerce\Services\CartService;
-use Grafite\Commerce\Services\PaymentService;
-use Grafite\Commerce\Services\CustomerProfileService;
+use Sitec\Commerce\Services\CartService;
+use Sitec\Commerce\Services\PaymentService;
+use Sitec\Commerce\Services\CustomerProfileService;
 
 class CheckoutController extends Controller
 {

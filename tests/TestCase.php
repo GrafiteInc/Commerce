@@ -36,8 +36,8 @@ class TestCase extends Orchestra\Testbench\TestCase
         $destinationDir = realpath(__DIR__.'/../vendor/orchestra/testbench-core/laravel/database/migrations');
 
         \File::copyDirectory(realpath(__DIR__.'/../vendor/orchestra/testbench-core/laravel/migrations'), $destinationDir);
-        \File::copyDirectory(realpath(__DIR__.'/../vendor/grafite/builder/src/Packages/Starter/database/migrations'), $destinationDir);
-        \File::copyDirectory(realpath(__DIR__.'/../vendor/grafite/cms/src/Migrations'), $destinationDir);
+        \File::copyDirectory(realpath(__DIR__.'/../vendor/sierratecnologia/builder/src/Packages/Starter/database/migrations'), $destinationDir);
+        \File::copyDirectory(realpath(__DIR__.'/../vendor/sierratecnologia/cms/src/Migrations'), $destinationDir);
         \File::copyDirectory(realpath(__DIR__.'/../src/Migrations'), $destinationDir);
     }
 
@@ -51,9 +51,9 @@ class TestCase extends Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Grafite\Commerce\GrafiteCommerceModuleProvider::class,
-            \Grafite\Builder\GrafiteBuilderProvider::class,
-            \Grafite\Cms\GrafiteCmsProvider::class,
+            \Sitec\Commerce\SitecCommerceModuleProvider::class,
+            \Sitec\Builder\SitecBuilderProvider::class,
+            \Sitec\Cms\SitecCmsProvider::class,
         ];
     }
 
@@ -67,15 +67,15 @@ class TestCase extends Orchestra\Testbench\TestCase
         $this->withFactories(__DIR__.'/../tests/Factories');
 
         $this->artisan('vendor:publish', [
-            '--provider' => 'Grafite\Builder\GrafiteBuilderProvider',
+            '--provider' => 'Sitec\Builder\SitecBuilderProvider',
             '--force' => true,
         ]);
         $this->artisan('vendor:publish', [
-            '--provider' => 'Grafite\Cms\GrafiteCmsProvider',
+            '--provider' => 'Sitec\Cms\SitecCmsProvider',
             '--force' => true,
         ]);
         $this->artisan('vendor:publish', [
-            '--provider' => 'Grafite\Commerce\GrafiteCommerceModuleProvider',
+            '--provider' => 'Sitec\Commerce\SitecCommerceModuleProvider',
             '--force' => true,
         ]);
 

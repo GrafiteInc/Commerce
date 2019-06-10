@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Commerce;
 
 use Redirect;
 use Illuminate\Http\Request;
-use Grafite\Commerce\Helpers\StoreHelper;
+use Sitec\Commerce\Helpers\StoreHelper;
 use App\Http\Controllers\Controller;
-use Grafite\Commerce\Services\CartService;
-use Grafite\Cms\Services\CmsResponseService;
+use Sitec\Commerce\Services\CartService;
+use Sitec\Cms\Services\CmsResponseService;
 
 class CartController extends Controller
 {

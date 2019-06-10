@@ -1,9 +1,9 @@
 <?php
 
-namespace Grafite\Commerce\Repositories;
+namespace Sitec\Commerce\Repositories;
 
 use Carbon\Carbon;
-use Grafite\Commerce\Models\Favorite;
+use Sitec\Commerce\Models\Favorite;
 
 class FavoriteRepository
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Grafite\Commerce\Http\Controllers;
+namespace Sitec\Commerce\Http\Controllers;
 
 use App\Services\UserService;
 use Illuminate\Http\Request;
-use Grafite\Cms\Controllers\GrafiteCmsController;
-use Grafite\Commerce\Services\AnalyticsService;
-use Grafite\Commerce\Services\TransactionService;
+use Sitec\Cms\Controllers\SitecCmsController;
+use Sitec\Commerce\Services\AnalyticsService;
+use Sitec\Commerce\Services\TransactionService;
 
-class AnalyticsController extends GrafiteCmsController
+class AnalyticsController extends SitecCmsController
 {
     public function __construct(
         TransactionService $transactionService,

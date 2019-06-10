@@ -20,13 +20,13 @@ class TransactionTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actingAs($this->user);
 
-        factory(\Grafite\Commerce\Models\Cart::class)->create();
-        factory(\Grafite\Commerce\Models\Product::class)->create([
+        factory(\Sitec\Commerce\Models\Cart::class)->create();
+        factory(\Sitec\Commerce\Models\Product::class)->create([
             'id' => 1,
         ]);
-        factory(\Grafite\Commerce\Models\Plan::class)->create();
-        factory(\Grafite\Commerce\Models\Transaction::class)->create();
-        factory(\Grafite\Commerce\Models\Transaction::class)->create([
+        factory(\Sitec\Commerce\Models\Plan::class)->create();
+        factory(\Sitec\Commerce\Models\Transaction::class)->create();
+        factory(\Sitec\Commerce\Models\Transaction::class)->create([
             'id' => 999,
         ]);
     }
@@ -47,11 +47,11 @@ class TransactionTest extends TestCase
 
     public function testEdit()
     {
-        factory(\Grafite\Commerce\Models\Order::class)->create([
+        factory(\Sitec\Commerce\Models\Order::class)->create([
             'transaction_id' => 2,
         ]);
 
-        factory(\Grafite\Commerce\Models\Transaction::class)->create([
+        factory(\Sitec\Commerce\Models\Transaction::class)->create([
             'id' => 2,
             'notes' => 'Le notes!',
         ]);
@@ -78,7 +78,7 @@ class TransactionTest extends TestCase
 
     public function testUpdate()
     {
-        factory(\Grafite\Commerce\Models\Transaction::class)->create([
+        factory(\Sitec\Commerce\Models\Transaction::class)->create([
             'id' => 4,
             'notes' => 'Star Wars !',
         ]);

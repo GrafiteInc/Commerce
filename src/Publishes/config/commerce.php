@@ -8,7 +8,7 @@
 
 return [
 
-    'name' => 'Grafite Commerce',
+    'name' => 'Sitec Commerce',
     'currency' => env('CURRENCY', 'usd'),
     'taxes_include_shipping' => true,
     'store_url_prefix' => 'store',

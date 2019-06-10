@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Commerce;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Grafite\Commerce\Services\FavoriteService;
-use Grafite\Cms\Services\CmsResponseService;
+use Sitec\Commerce\Services\FavoriteService;
+use Sitec\Cms\Services\CmsResponseService;
 
 class FavoriteController extends Controller
 {

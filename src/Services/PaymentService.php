@@ -1,11 +1,11 @@
 <?php
 
-namespace Grafite\Commerce\Services;
+namespace Sitec\Commerce\Services;
 
-use Grafite\Commerce\Models\Coupon;
-use Grafite\Commerce\Models\Transaction;
-use Grafite\Commerce\Services\TransactionService;
-use Grafite\Crypto\Services\Crypto;
+use Sitec\Commerce\Models\Coupon;
+use Sitec\Commerce\Models\Transaction;
+use Sitec\Commerce\Services\TransactionService;
+use Sitec\Crypto\Services\Crypto;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 

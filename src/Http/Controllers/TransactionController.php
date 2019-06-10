@@ -1,10 +1,10 @@
 <?php
 
-namespace Grafite\Commerce\Http\Controllers;
+namespace Sitec\Commerce\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Grafite\Commerce\Services\TransactionService;
+use Sitec\Commerce\Services\TransactionService;
 
 class TransactionController extends Controller
 {

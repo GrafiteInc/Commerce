@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
-use Grafite\Commerce\Repositories\OrderRepository;
-use Grafite\Commerce\Services\OrderService;
+use Sitec\Commerce\Repositories\OrderRepository;
+use Sitec\Commerce\Services\OrderService;
 
 class OrderController extends Controller
 {

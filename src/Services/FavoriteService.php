@@ -1,8 +1,8 @@
 <?php
 
-namespace Grafite\Commerce\Services;
+namespace Sitec\Commerce\Services;
 
-use Grafite\Commerce\Repositories\FavoriteRepository;
+use Sitec\Commerce\Repositories\FavoriteRepository;
 
 class FavoriteService
 {

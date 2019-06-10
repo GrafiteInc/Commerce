@@ -1,10 +1,10 @@
 <?php
 
-namespace Grafite\Commerce\Repositories;
+namespace Sitec\Commerce\Repositories;
 
 use Illuminate\Support\Facades\Session;
-use Grafite\Commerce\Models\Cart;
-use Grafite\Commerce\Models\Variant;
+use Sitec\Commerce\Models\Cart;
+use Sitec\Commerce\Models\Variant;
 
 class CartSessionRepository
 {

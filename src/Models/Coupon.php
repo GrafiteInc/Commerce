@@ -1,10 +1,10 @@
 <?php
 
-namespace Grafite\Commerce\Models;
+namespace Sitec\Commerce\Models;
 
 use Carbon\Carbon;
-use Grafite\Cms\Models\CmsModel;
-use Grafite\Commerce\Services\CartService;
+use Sitec\Cms\Models\CmsModel;
+use Sitec\Commerce\Services\CartService;
 
 class Coupon extends CmsModel
 {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Commerce;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Grafite\Commerce\Services\CustomerProfileService;
+use Sitec\Commerce\Services\CustomerProfileService;
 
 class ProfileController extends Controller
 {

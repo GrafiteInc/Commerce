@@ -1,9 +1,9 @@
 <?php
 
-namespace Grafite\Commerce\Models;
+namespace Sitec\Commerce\Models;
 
-use Grafite\Cms\Models\CmsModel;
-use Grafite\Commerce\Services\ProductService;
+use Sitec\Cms\Models\CmsModel;
+use Sitec\Commerce\Services\ProductService;
 
 class Variant extends CmsModel
 {

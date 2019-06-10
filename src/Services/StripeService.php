@@ -1,6 +1,6 @@
 <?php
 
-namespace Grafite\Commerce\Services;
+namespace Sitec\Commerce\Services;
 
 use Carbon\Carbon;
 use Stripe\Coupon;

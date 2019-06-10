@@ -1,10 +1,10 @@
 <?php
 
-namespace Grafite\Commerce\Providers;
+namespace Sitec\Commerce\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
-use Grafite\Commerce\Middleware\isAjax;
+use Sitec\Commerce\Middleware\isAjax;
 
 class CommerceRouteProvider extends ServiceProvider
 {
@@ -15,7 +15,7 @@ class CommerceRouteProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Grafite\Commerce\Http\Controllers';
+    protected $namespace = 'Sitec\Commerce\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

@@ -1,9 +1,9 @@
 <?php
 
-namespace Grafite\Commerce\Services\Concerns;
+namespace Sitec\Commerce\Services\Concerns;
 
-use Grafite\Commerce\Models\Favorite;
-use Grafite\Commerce\Models\Product;
+use Sitec\Commerce\Models\Favorite;
+use Sitec\Commerce\Models\Product;
 
 trait hasFavorites
 {

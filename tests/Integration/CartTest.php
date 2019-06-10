@@ -23,9 +23,9 @@ class CartTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actor = $this->actingAs($this->user);
 
-        factory(\Grafite\Commerce\Models\Cart::class)->create();
-        factory(\Grafite\Commerce\Models\Product::class)->create();
-        factory(\Grafite\Commerce\Models\Plan::class)->create();
+        factory(\Sitec\Commerce\Models\Cart::class)->create();
+        factory(\Sitec\Commerce\Models\Product::class)->create();
+        factory(\Sitec\Commerce\Models\Plan::class)->create();
     }
 
     public function testContents()

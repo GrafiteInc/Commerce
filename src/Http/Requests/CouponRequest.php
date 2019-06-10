@@ -1,10 +1,10 @@
 <?php
 
-namespace Grafite\Commerce\Http\Requests;
+namespace Sitec\Commerce\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Grafite\Commerce\Models\Coupon;
+use Sitec\Commerce\Models\Coupon;
 
 class CouponRequest extends FormRequest
 {

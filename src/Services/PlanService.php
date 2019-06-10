@@ -1,14 +1,14 @@
 <?php
 
-namespace Grafite\Commerce\Services;
+namespace Sitec\Commerce\Services;
 
 use App\Models\UserMeta;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Cashier\Subscription;
-use Grafite\Commerce\Models\Plan;
-use Grafite\Cms\Services\CmsService;
+use Sitec\Commerce\Models\Plan;
+use Sitec\Cms\Services\CmsService;
 
 class PlanService
 {
@@ -210,7 +210,7 @@ class PlanService
     /**
      * Get subscribers.
      *
-     * @param Grafite\Commerce\Models\Plan $plan
+     * @param Sitec\Commerce\Models\Plan $plan
      *
      * @return Illuminate\Support\Collection
      */

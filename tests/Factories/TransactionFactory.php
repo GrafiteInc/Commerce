@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Grafite\Commerce\Models\Transaction::class, function (Faker\Generator $faker) {
+$factory->define(\Sitec\Commerce\Models\Transaction::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'uuid' => 'foo-bar-foo-bar',

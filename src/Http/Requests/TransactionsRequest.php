@@ -1,10 +1,10 @@
 <?php
 
-namespace Grafite\Commerce\Http\Requests;
+namespace Sitec\Commerce\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Grafite\Commerce\Models\Transaction;
+use Sitec\Commerce\Models\Transaction;
 
 class TransactionsRequest extends FormRequest
 {

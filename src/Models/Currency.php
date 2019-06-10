@@ -1,6 +1,6 @@
 <?php
 
-namespace Grafite\Commerce\Models;
+namespace Sitec\Commerce\Models;
 
 class Currency
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Grafite\Commerce\Services;
+namespace Sitec\Commerce\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Grafite\Commerce\Models\Plan;
-use Grafite\Commerce\Services\CartService;
-use Grafite\Commerce\Services\CustomerProfileService;
-use Grafite\Commerce\Services\LogisticService;
+use Sitec\Commerce\Models\Plan;
+use Sitec\Commerce\Services\CartService;
+use Sitec\Commerce\Services\CustomerProfileService;
+use Sitec\Commerce\Services\LogisticService;
 
 class StoreHelperService
 {

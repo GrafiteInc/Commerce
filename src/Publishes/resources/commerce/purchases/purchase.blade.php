@@ -31,7 +31,7 @@
         @if ($purchase->coupon)
         <tr>
             <td>Coupon</td>
-            <td class="text-right">${!! app(\Grafite\Commerce\Models\Coupon::class)->fill(json_decode($purchase->coupon, true))->dollars !!}</td>
+            <td class="text-right">${!! app(\Sitec\Commerce\Models\Coupon::class)->fill(json_decode($purchase->coupon, true))->dollars !!}</td>
         </tr>
         @endif
 

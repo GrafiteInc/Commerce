@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Grafite\Commerce\Services\PaymentService;
+use Sitec\Commerce\Services\PaymentService;
 
 class PaymentServiceTest extends TestCase
 {
@@ -28,15 +28,15 @@ class PaymentServiceTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actingAs($this->user);
 
-        factory(\Grafite\Commerce\Models\Cart::class)->create();
-        factory(\Grafite\Commerce\Models\Product::class)->create();
-        factory(\Grafite\Commerce\Models\Plan::class)->create();
-        factory(\Grafite\Commerce\Models\Cart::class)->create([
+        factory(\Sitec\Commerce\Models\Cart::class)->create();
+        factory(\Sitec\Commerce\Models\Product::class)->create();
+        factory(\Sitec\Commerce\Models\Plan::class)->create();
+        factory(\Sitec\Commerce\Models\Cart::class)->create([
             'id' => 3,
             'user_id' => 1,
         ]);
 
-        $this->cart = app(\Grafite\Commerce\Services\CartService::class);
+        $this->cart = app(\Sitec\Commerce\Services\CartService::class);
         $this->cart->addToCart(1, 'product', 1, '{}');
 
         $this->user->meta = Mockery::mock(App\Models\UserMeta::class);

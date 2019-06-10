@@ -1,14 +1,14 @@
 <?php
 
-namespace Grafite\Commerce\Http\Controllers;
+namespace Sitec\Commerce\Http\Controllers;
 
-use Grafite\Cms\Controllers\GrafiteCmsController;
-use Grafite\Commerce\Http\Requests\CouponRequest;
-use Grafite\Commerce\Http\Requests\PlanRequest;
-use Grafite\Commerce\Services\CouponService;
+use Sitec\Cms\Controllers\SitecCmsController;
+use Sitec\Commerce\Http\Requests\CouponRequest;
+use Sitec\Commerce\Http\Requests\PlanRequest;
+use Sitec\Commerce\Services\CouponService;
 use Illuminate\Http\Request;
 
-class CouponController extends GrafiteCmsController
+class CouponController extends SitecCmsController
 {
     public function __construct(CouponService $couponService)
     {

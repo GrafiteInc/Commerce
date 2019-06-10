@@ -1,13 +1,13 @@
 <?php
 
-namespace Grafite\Commerce\Models;
+namespace Sitec\Commerce\Models;
 
-use Grafite\Cms\Models\Image;
-use Grafite\Cms\Models\ProductImage;
-use Grafite\Cms\Models\CmsModel;
-use Grafite\Cms\Services\FileService;
-use Grafite\Commerce\Services\CartService;
-use Grafite\Commerce\Services\ProductService;
+use Sitec\Cms\Models\Image;
+use Sitec\Cms\Models\ProductImage;
+use Sitec\Cms\Models\CmsModel;
+use Sitec\Cms\Services\FileService;
+use Sitec\Commerce\Services\CartService;
+use Sitec\Commerce\Services\ProductService;
 
 class Product extends CmsModel
 {

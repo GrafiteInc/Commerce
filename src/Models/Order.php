@@ -1,11 +1,11 @@
 <?php
 
-namespace Grafite\Commerce\Models;
+namespace Sitec\Commerce\Models;
 
 use App\Models\User;
-use Grafite\Cms\Models\CmsModel;
-use Grafite\Commerce\Models\OrderItem;
-use Grafite\Commerce\Models\Transaction;
+use Sitec\Cms\Models\CmsModel;
+use Sitec\Commerce\Models\OrderItem;
+use Sitec\Commerce\Models\Transaction;
 
 class Order extends CmsModel
 {

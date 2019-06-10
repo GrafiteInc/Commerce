@@ -1,9 +1,9 @@
 <?php
 
-namespace Grafite\Commerce\Repositories;
+namespace Sitec\Commerce\Repositories;
 
-use Grafite\Commerce\Models\Product;
-use Grafite\Commerce\Repositories\FavoriteRepository;
+use Sitec\Commerce\Models\Product;
+use Sitec\Commerce\Repositories\FavoriteRepository;
 use Illuminate\Support\Facades\Schema;
 
 class ProductRepository

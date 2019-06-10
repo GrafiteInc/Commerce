@@ -1,10 +1,10 @@
 <?php
 
-namespace Grafite\Commerce\Services;
+namespace Sitec\Commerce\Services;
 
 use Carbon\Carbon;
 use Laravel\Cashier\Subscription;
-use Grafite\Commerce\Models\Transaction;
+use Sitec\Commerce\Models\Transaction;
 
 class AnalyticsService
 {

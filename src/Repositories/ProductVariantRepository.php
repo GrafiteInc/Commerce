@@ -1,9 +1,9 @@
 <?php
 
-namespace Grafite\Commerce\Repositories;
+namespace Sitec\Commerce\Repositories;
 
-use Grafite\Commerce\Models\Variant;
-use Grafite\Commerce\Models\Product;
+use Sitec\Commerce\Models\Variant;
+use Sitec\Commerce\Models\Product;
 
 class ProductVariantRepository
 {
@@ -15,7 +15,7 @@ class ProductVariantRepository
     /**
      * Get all published products.
      *
-     * @return Grafite\Commerce\Models\Variant
+     * @return Sitec\Commerce\Models\Variant
      */
     public function getProductVariants($id)
     {
@@ -25,10 +25,10 @@ class ProductVariantRepository
     /**
      * Adds variants to the product.
      *
-     * @param Grafite\Commerce\Models\Product $products
+     * @param Sitec\Commerce\Models\Product $products
      * @param array                     $payload
      *
-     * @return Grafite\Commerce\Models\Variant
+     * @return Sitec\Commerce\Models\Variant
      */
     public function addVariant($product, $payload)
     {
@@ -42,7 +42,7 @@ class ProductVariantRepository
      *
      * @param array $payload
      *
-     * @return Grafite\Commerce\Models\Variant
+     * @return Sitec\Commerce\Models\Variant
      */
     public function saveVariant($payload)
     {

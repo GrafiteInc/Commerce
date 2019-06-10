@@ -1,12 +1,12 @@
 <?php
 
-namespace Grafite\Commerce\Services;
+namespace Sitec\Commerce\Services;
 
-use Grafite\Cms\Facades\CmsServiceFacade as Cms;
+use Sitec\Cms\Facades\CmsServiceFacade as Cms;
 use Illuminate\Support\Facades\Config;
-use Grafite\Cms\Services\FileService;
-use Grafite\Commerce\Repositories\ProductRepository;
-use Grafite\Commerce\Repositories\ProductVariantRepository;
+use Sitec\Cms\Services\FileService;
+use Sitec\Commerce\Repositories\ProductRepository;
+use Sitec\Commerce\Repositories\ProductVariantRepository;
 
 class ProductService
 {

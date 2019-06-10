@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Grafite\Commerce\Models\Plan::class, function (Faker\Generator $faker) {
+$factory->define(\Sitec\Commerce\Models\Plan::class, function (Faker\Generator $faker) {
     return [
 
         'id' => 1,

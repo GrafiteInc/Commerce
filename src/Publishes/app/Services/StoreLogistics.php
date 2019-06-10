@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Log;
-use Grafite\Commerce\Interfaces\LogisticServiceInterface;
-use Grafite\Commerce\Services\CustomerProfileService;
-use Grafite\Commerce\Services\LogisticService;
+use Sitec\Commerce\Interfaces\LogisticServiceInterface;
+use Sitec\Commerce\Services\CustomerProfileService;
+use Sitec\Commerce\Services\LogisticService;
 
 class StoreLogistics implements LogisticServiceInterface
 {

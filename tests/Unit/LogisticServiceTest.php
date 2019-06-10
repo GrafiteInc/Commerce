@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Grafite\Commerce\Services\LogisticService;
+use Sitec\Commerce\Services\LogisticService;
 
 class LogisticServiceTest extends TestCase
 {

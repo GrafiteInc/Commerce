@@ -1,24 +1,24 @@
-# Grafite Commerce
+# Sitec Commerce
 
-**Commerce** - An e-commerce package for Laravel apps using Grafite CMS
+**Commerce** - An e-commerce package for Laravel apps using Sitec CMS
 
-[![Build Status](https://travis-ci.org/GrafiteInc/Commerce.svg?branch=master)](https://travis-ci.org/GrafiteInc/Commerce)
-[![Maintainability](https://api.codeclimate.com/v1/badges/f28b73ebf600f2db7f48/maintainability)](https://codeclimate.com/github/GrafiteInc/Commerce/maintainability)
-[![Packagist](https://img.shields.io/packagist/dt/grafite/commerce.svg?maxAge=2592000)](https://packagist.org/packages/grafite/commerce)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://packagist.org/packages/grafite/commerce)
-[![Join the chat at https://gitter.im/GrafiteInc/CMS](https://badges.gitter.im/GrafiteInc/CMS.svg)](https://gitter.im/GrafiteInc/CMS?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/SitecInc/Commerce.svg?branch=master)](https://travis-ci.org/SitecInc/Commerce)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f28b73ebf600f2db7f48/maintainability)](https://codeclimate.com/github/SitecInc/Commerce/maintainability)
+[![Packagist](https://img.shields.io/packagist/dt/sierratecnologia/commerce.svg?maxAge=2592000)](https://packagist.org/packages/sierratecnologia/commerce)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://packagist.org/packages/sierratecnologia/commerce)
+[![Join the chat at https://gitter.im/SitecInc/CMS](https://badges.gitter.im/SitecInc/CMS.svg)](https://gitter.im/SitecInc/CMS?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Commerce is a e-commerce package for Grafite CMS. It is an elegant solution for adding an e-commerce platform to your Grafite CMS instance. This means it can be added to existing apps, or fresh installs and setups of the Grafite CMS.
+Commerce is a e-commerce package for Sitec CMS. It is an elegant solution for adding an e-commerce platform to your Sitec CMS instance. This means it can be added to existing apps, or fresh installs and setups of the Sitec CMS.
 You can control: products, subscriptions, transaction history, orders, and some year by year analytics. Utilizing the power of Stripe, you can spin up a store, where you can offer subscriptions, digital products for download, or even physical products for order shipments. Integrate any external services to handle shipping rates, and tracking number updates. Take control of the many things you make, and build the store you've always wanted.
 
 ##### Author(s):
 * [Matt Lantz](https://github.com/mlantz) ([@mattylantz](http://twitter.com/mattylantz), mattlantz at gmail dot com)
 
 ## Website
-[https://commerce.grafite.ca](https://commerce.grafite.ca)
+[https://commerce.sierratecnologia.ca](https://commerce.sierratecnologia.ca)
 
 ## Detailed Documentation
-Please consult the documentation here: [https://docs.grafite.ca/commerce](https://docs.grafite.ca/commerce)
+Please consult the documentation here: [https://docs.sierratecnologia.ca/commerce](https://docs.sierratecnologia.ca/commerce)
 
 ## General Requirements
 1. PHP 7.1.3+
@@ -27,7 +27,7 @@ Please consult the documentation here: [https://docs.grafite.ca/commerce](https:
 ## More Specific Requirements
 3. OpenSSL
 4. Laravel 5.6+
-5. Grafite CMS 3.0+
+5. Sitec CMS 3.0+
 6. Stripe Account
 
 ## Compatibility and Support
@@ -37,7 +37,7 @@ Please consult the documentation here: [https://docs.grafite.ca/commerce](https:
 | 5.4.x - 5.5.x | 1.0.x | no |
 
 ## License
-Grafite Commerce is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Sitec Commerce is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
 
 ### Bug Reporting and Feature Requests
 Please add as many details as possible regarding submission of issues and feature requests

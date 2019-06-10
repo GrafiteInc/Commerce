@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
-use Grafite\Commerce\Services\PlanService;
+use Sitec\Commerce\Services\PlanService;
 
 class PlanController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Grafite\Commerce\Facades;
+namespace Sitec\Commerce\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

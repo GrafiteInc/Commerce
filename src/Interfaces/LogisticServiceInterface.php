@@ -1,6 +1,6 @@
 <?php
 
-namespace Grafite\Commerce\Interfaces;
+namespace Sitec\Commerce\Interfaces;
 
 interface LogisticServiceInterface
 {

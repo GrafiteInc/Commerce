@@ -1,16 +1,16 @@
 <?php
 
-namespace Grafite\Commerce\Http\Controllers;
+namespace Sitec\Commerce\Http\Controllers;
 
 use Cms;
 use Illuminate\Http\Request;
-use Grafite\Cms\Controllers\GrafiteCmsController;
-use Grafite\Cms\Repositories\ImageRepository;
-use Grafite\Commerce\Repositories\ProductVariantRepository;
-use Grafite\Commerce\Http\Requests\ProductRequest;
-use Grafite\Commerce\Services\ProductService;
+use Sitec\Cms\Controllers\SitecCmsController;
+use Sitec\Cms\Repositories\ImageRepository;
+use Sitec\Commerce\Repositories\ProductVariantRepository;
+use Sitec\Commerce\Http\Requests\ProductRequest;
+use Sitec\Commerce\Services\ProductService;
 
-class ProductController extends GrafiteCmsController
+class ProductController extends SitecCmsController
 {
     public function __construct(
         ProductService $productService,

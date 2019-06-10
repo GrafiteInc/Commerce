@@ -1,14 +1,14 @@
 <?php
 
-namespace Grafite\Commerce\Providers;
+namespace Sitec\Commerce\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Grafite\Commerce\Helpers\StoreHelper;
-use Grafite\Commerce\Services\CartService;
-use Grafite\Commerce\Services\CustomerProfileService;
-use Grafite\Commerce\Services\LogisticService;
-use Grafite\Commerce\Services\ProductService;
+use Sitec\Commerce\Helpers\StoreHelper;
+use Sitec\Commerce\Services\CartService;
+use Sitec\Commerce\Services\CustomerProfileService;
+use Sitec\Commerce\Services\LogisticService;
+use Sitec\Commerce\Services\ProductService;
 
 class CommerceServiceProvider extends ServiceProvider
 {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
 use Auth;
-use Grafite\Commerce\Repositories\TransactionRepository;
+use Sitec\Commerce\Repositories\TransactionRepository;
 
 class PurchaseController extends Controller
 {

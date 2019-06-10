@@ -1,6 +1,6 @@
 <?php
 
-namespace Grafite\Commerce\Services;
+namespace Sitec\Commerce\Services;
 
 use App\Models\UserMeta;
 use App\Services\UserService;
@@ -8,8 +8,8 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Cashier\Subscription;
-use Grafite\Cms\Services\CmsService;
-use Grafite\Commerce\Models\Coupon;
+use Sitec\Cms\Services\CmsService;
+use Sitec\Commerce\Models\Coupon;
 
 class CouponService
 {
