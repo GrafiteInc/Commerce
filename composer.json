@@ -48,6 +48,9 @@
         "laravel": {
             "providers": [
                 "Sitec\\Commerce\\SitecCommerceModuleProvider"
+            ],
+            "dont-discover": [
+                "laravel/cashier"
             ]
         }
     }
