@@ -3,7 +3,7 @@
 namespace Sitec\Commerce\Services;
 
 use Carbon\Carbon;
-use Laravel\Cashier\Subscription;
+use SierraTecnologia\Cashier\Subscription;
 use Sitec\Commerce\Models\Transaction;
 
 class AnalyticsService

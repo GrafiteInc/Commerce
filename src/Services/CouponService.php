@@ -7,7 +7,7 @@ use App\Services\UserService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Schema;
-use Laravel\Cashier\Subscription;
+use SierraTecnologia\Cashier\Subscription;
 use Sitec\Cms\Services\CmsService;
 use Sitec\Commerce\Models\Coupon;
 

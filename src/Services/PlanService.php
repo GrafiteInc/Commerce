@@ -6,7 +6,7 @@ use App\Models\UserMeta;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Support\Facades\Schema;
-use Laravel\Cashier\Subscription;
+use SierraTecnologia\Cashier\Subscription;
 use Sitec\Commerce\Models\Plan;
 use Sitec\Cms\Services\CmsService;
 
