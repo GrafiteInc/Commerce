@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Commerce;
 
 use Redirect;
 use Illuminate\Http\Request;
-use Sitec\Commerce\Helpers\StoreHelper;
+use SierraTecnologia\Commerce\Helpers\StoreHelper;
 use App\Http\Controllers\Controller;
-use Sitec\Commerce\Services\CartService;
-use Sitec\Cms\Services\CmsResponseService;
+use SierraTecnologia\Commerce\Services\CartService;
+use SierraTecnologia\Cms\Services\CmsResponseService;
 
 class CartController extends Controller
 {

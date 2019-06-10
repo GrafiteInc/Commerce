@@ -1,8 +1,8 @@
 <?php
 
-namespace Sitec\Commerce\Models;
+namespace SierraTecnologia\Commerce\Models;
 
-use Sitec\Cms\Models\CmsModel;
+use SierraTecnologia\Cms\Models\CmsModel;
 
 class Cart extends CmsModel
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitec\Commerce\Http\Middleware;
+namespace SierraTecnologia\Commerce\Http\Middleware;
 
 use Closure;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitec\Commerce\Http\Controllers;
+namespace SierraTecnologia\Commerce\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Sitec\Commerce\Services\TransactionService;
+use SierraTecnologia\Commerce\Services\TransactionService;
 
 class TransactionController extends Controller
 {

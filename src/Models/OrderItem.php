@@ -1,12 +1,12 @@
 <?php
 
-namespace Sitec\Commerce\Models;
+namespace SierraTecnologia\Commerce\Models;
 
-use Sitec\Commerce\Models\Order;
-use Sitec\Commerce\Models\Product;
-use Sitec\Commerce\Models\Variant;
-use Sitec\Cms\Models\CmsModel;
-use Sitec\Commerce\Models\Transaction;
+use SierraTecnologia\Commerce\Models\Order;
+use SierraTecnologia\Commerce\Models\Product;
+use SierraTecnologia\Commerce\Models\Variant;
+use SierraTecnologia\Cms\Models\CmsModel;
+use SierraTecnologia\Commerce\Models\Transaction;
 
 class OrderItem extends CmsModel
 {

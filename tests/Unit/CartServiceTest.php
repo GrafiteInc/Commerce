@@ -17,14 +17,14 @@ class CartServiceTest extends TestCase
 
         $user->shouldReceive('favorites')->andReturn(collect([]));
 
-        factory(\Sitec\Commerce\Models\Cart::class)->create();
-        factory(\Sitec\Commerce\Models\Product::class)->create();
-        factory(\Sitec\Commerce\Models\Plan::class)->create();
-        factory(\Sitec\Commerce\Models\Variant::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Cart::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Product::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Plan::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Variant::class)->create();
 
-        $this->cartService = app(\Sitec\Commerce\Services\CartService::class);
-        $this->cartRepo = app(\Sitec\Commerce\Repositories\CartRepository::class);
-        $this->productRepo = app(\Sitec\Commerce\Repositories\ProductRepository::class);
+        $this->cartService = app(\SierraTecnologia\Commerce\Services\CartService::class);
+        $this->cartRepo = app(\SierraTecnologia\Commerce\Repositories\CartRepository::class);
+        $this->productRepo = app(\SierraTecnologia\Commerce\Repositories\ProductRepository::class);
     }
 
     public function testAddBtn()
@@ -161,7 +161,7 @@ class CartServiceTest extends TestCase
 
     public function testGetDefaultValue()
     {
-        $variant = factory(\Sitec\Commerce\Models\Variant::class)->make([
+        $variant = factory(\SierraTecnologia\Commerce\Models\Variant::class)->make([
             'id' => 4,
         ]);
         $response = $this->cartService->getDefaultValue($variant);
@@ -170,7 +170,7 @@ class CartServiceTest extends TestCase
 
     public function testGetVariantId()
     {
-        $variant = factory(\Sitec\Commerce\Models\Variant::class)->make([
+        $variant = factory(\SierraTecnologia\Commerce\Models\Variant::class)->make([
             'id' => 4,
         ]);
 

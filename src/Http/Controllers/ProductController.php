@@ -1,16 +1,16 @@
 <?php
 
-namespace Sitec\Commerce\Http\Controllers;
+namespace SierraTecnologia\Commerce\Http\Controllers;
 
 use Cms;
 use Illuminate\Http\Request;
-use Sitec\Cms\Controllers\SitecCmsController;
-use Sitec\Cms\Repositories\ImageRepository;
-use Sitec\Commerce\Repositories\ProductVariantRepository;
-use Sitec\Commerce\Http\Requests\ProductRequest;
-use Sitec\Commerce\Services\ProductService;
+use SierraTecnologia\Cms\Controllers\SierraTecnologiaCmsController;
+use SierraTecnologia\Cms\Repositories\ImageRepository;
+use SierraTecnologia\Commerce\Repositories\ProductVariantRepository;
+use SierraTecnologia\Commerce\Http\Requests\ProductRequest;
+use SierraTecnologia\Commerce\Services\ProductService;
 
-class ProductController extends SitecCmsController
+class ProductController extends SierraTecnologiaCmsController
 {
     public function __construct(
         ProductService $productService,

@@ -1,15 +1,15 @@
 <?php
 
-namespace Sitec\Commerce\Services;
+namespace SierraTecnologia\Commerce\Services;
 
 use App\Services\StoreLogistics;
-use Sitec\Commerce\Models\Coupon;
-use Sitec\Commerce\Models\Currency;
-use Sitec\Commerce\Models\Variant;
-use Sitec\Commerce\Repositories\CartRepository;
-use Sitec\Commerce\Repositories\CartSessionRepository;
-use Sitec\Commerce\Repositories\TransactionRepository;
-use Sitec\Commerce\Services\Concerns\CartHtmlGenerator;
+use SierraTecnologia\Commerce\Models\Coupon;
+use SierraTecnologia\Commerce\Models\Currency;
+use SierraTecnologia\Commerce\Models\Variant;
+use SierraTecnologia\Commerce\Repositories\CartRepository;
+use SierraTecnologia\Commerce\Repositories\CartSessionRepository;
+use SierraTecnologia\Commerce\Repositories\TransactionRepository;
+use SierraTecnologia\Commerce\Services\Concerns\CartHtmlGenerator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 

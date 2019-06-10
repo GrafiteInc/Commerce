@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Sitec\Commerce\Models\Coupon::class, function (Faker\Generator $faker) {
+$factory->define(\SierraTecnologia\Commerce\Models\Coupon::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'updated_at' => $faker->datetime(),

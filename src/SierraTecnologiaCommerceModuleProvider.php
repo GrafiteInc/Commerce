@@ -1,12 +1,12 @@
 <?php
 
-namespace Sitec\Commerce;
+namespace SierraTecnologia\Commerce;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class SitecCommerceModuleProvider extends ServiceProvider
+class SierraTecnologiaCommerceModuleProvider extends ServiceProvider
 {
     /**
      * Alias the services in the boot.
@@ -26,7 +26,7 @@ class SitecCommerceModuleProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/Views' => base_path('resources/views/vendor/commerce'),
-        ], 'Sitec Commerce');
+        ], 'SierraTecnologia Commerce');
     }
 
     /**
@@ -34,9 +34,9 @@ class SitecCommerceModuleProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(\Sitec\Commerce\Providers\CommerceEventServiceProvider::class);
-        $this->app->register(\Sitec\Commerce\Providers\CommerceServiceProvider::class);
-        $this->app->register(\Sitec\Commerce\Providers\CommerceRouteProvider::class);
+        $this->app->register(\SierraTecnologia\Commerce\Providers\CommerceEventServiceProvider::class);
+        $this->app->register(\SierraTecnologia\Commerce\Providers\CommerceServiceProvider::class);
+        $this->app->register(\SierraTecnologia\Commerce\Providers\CommerceRouteProvider::class);
 
         // View namespace
         $this->loadViewsFrom(__DIR__.'/Views', 'commerce');

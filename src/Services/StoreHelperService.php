@@ -1,13 +1,13 @@
 <?php
 
-namespace Sitec\Commerce\Services;
+namespace SierraTecnologia\Commerce\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Sitec\Commerce\Models\Plan;
-use Sitec\Commerce\Services\CartService;
-use Sitec\Commerce\Services\CustomerProfileService;
-use Sitec\Commerce\Services\LogisticService;
+use SierraTecnologia\Commerce\Models\Plan;
+use SierraTecnologia\Commerce\Services\CartService;
+use SierraTecnologia\Commerce\Services\CustomerProfileService;
+use SierraTecnologia\Commerce\Services\LogisticService;
 
 class StoreHelperService
 {

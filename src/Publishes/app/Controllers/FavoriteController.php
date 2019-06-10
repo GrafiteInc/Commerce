@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Commerce;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Sitec\Commerce\Services\FavoriteService;
-use Sitec\Cms\Services\CmsResponseService;
+use SierraTecnologia\Commerce\Services\FavoriteService;
+use SierraTecnologia\Cms\Services\CmsResponseService;
 
 class FavoriteController extends Controller
 {

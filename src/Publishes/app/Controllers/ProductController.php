@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
-use Sitec\Commerce\Repositories\ProductRepository;
+use SierraTecnologia\Commerce\Repositories\ProductRepository;
 
 class ProductController extends Controller
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Sitec\Commerce\Http\Controllers;
+namespace SierraTecnologia\Commerce\Http\Controllers;
 
-use Sitec\Cms\Controllers\SitecCmsController;
-use Sitec\Commerce\Http\Requests\CouponRequest;
-use Sitec\Commerce\Http\Requests\PlanRequest;
-use Sitec\Commerce\Services\CouponService;
+use SierraTecnologia\Cms\Controllers\SierraTecnologiaCmsController;
+use SierraTecnologia\Commerce\Http\Requests\CouponRequest;
+use SierraTecnologia\Commerce\Http\Requests\PlanRequest;
+use SierraTecnologia\Commerce\Services\CouponService;
 use Illuminate\Http\Request;
 
-class CouponController extends SitecCmsController
+class CouponController extends SierraTecnologiaCmsController
 {
     public function __construct(CouponService $couponService)
     {

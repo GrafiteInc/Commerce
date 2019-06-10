@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitec\Commerce\Models;
+namespace SierraTecnologia\Commerce\Models;
 
 use Carbon\Carbon;
-use Sitec\Cms\Models\CmsModel;
-use Sitec\Commerce\Services\CartService;
+use SierraTecnologia\Cms\Models\CmsModel;
+use SierraTecnologia\Commerce\Services\CartService;
 
 class Coupon extends CmsModel
 {

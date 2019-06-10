@@ -1,14 +1,14 @@
 <?php
 
-namespace Sitec\Commerce\Http\Controllers;
+namespace SierraTecnologia\Commerce\Http\Controllers;
 
 use App\Services\UserService;
 use Illuminate\Http\Request;
-use Sitec\Cms\Controllers\SitecCmsController;
-use Sitec\Commerce\Services\AnalyticsService;
-use Sitec\Commerce\Services\TransactionService;
+use SierraTecnologia\Cms\Controllers\SierraTecnologiaCmsController;
+use SierraTecnologia\Commerce\Services\AnalyticsService;
+use SierraTecnologia\Commerce\Services\TransactionService;
 
-class AnalyticsController extends SitecCmsController
+class AnalyticsController extends SierraTecnologiaCmsController
 {
     public function __construct(
         TransactionService $transactionService,

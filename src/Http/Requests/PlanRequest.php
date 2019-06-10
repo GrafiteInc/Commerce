@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitec\Commerce\Http\Requests;
+namespace SierraTecnologia\Commerce\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Sitec\Commerce\Models\Plan;
+use SierraTecnologia\Commerce\Models\Plan;
 
 class PlanRequest extends FormRequest
 {

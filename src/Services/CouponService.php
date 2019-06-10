@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitec\Commerce\Services;
+namespace SierraTecnologia\Commerce\Services;
 
 use App\Models\UserMeta;
 use App\Services\UserService;
@@ -8,8 +8,8 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Schema;
 use SierraTecnologia\Cashier\Subscription;
-use Sitec\Cms\Services\CmsService;
-use Sitec\Commerce\Models\Coupon;
+use SierraTecnologia\Cms\Services\CmsService;
+use SierraTecnologia\Commerce\Models\Coupon;
 
 class CouponService
 {

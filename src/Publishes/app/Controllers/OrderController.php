@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Commerce;
 
 use App\Http\Controllers\Controller;
-use Sitec\Commerce\Repositories\OrderRepository;
-use Sitec\Commerce\Services\OrderService;
+use SierraTecnologia\Commerce\Repositories\OrderRepository;
+use SierraTecnologia\Commerce\Services\OrderService;
 
 class OrderController extends Controller
 {

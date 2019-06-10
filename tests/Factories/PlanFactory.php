@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Sitec\Commerce\Models\Plan::class, function (Faker\Generator $faker) {
+$factory->define(\SierraTecnologia\Commerce\Models\Plan::class, function (Faker\Generator $faker) {
     return [
 
         'id' => 1,

@@ -20,9 +20,9 @@ class FavoriteTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actor = $this->actingAs($this->user);
 
-        factory(\Sitec\Commerce\Models\Cart::class)->create();
-        factory(\Sitec\Commerce\Models\Product::class)->create();
-        factory(\Sitec\Commerce\Models\Plan::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Cart::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Product::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Plan::class)->create();
     }
 
     public function testGetFavorites()

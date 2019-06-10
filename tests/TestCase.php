@@ -51,9 +51,9 @@ class TestCase extends Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Sitec\Commerce\SitecCommerceModuleProvider::class,
-            \Sitec\Builder\SitecBuilderProvider::class,
-            \Sitec\Cms\SitecCmsProvider::class,
+            \SierraTecnologia\Commerce\SierraTecnologiaCommerceModuleProvider::class,
+            \SierraTecnologia\Builder\SierraTecnologiaBuilderProvider::class,
+            \SierraTecnologia\Cms\SierraTecnologiaCmsProvider::class,
         ];
     }
 
@@ -67,15 +67,15 @@ class TestCase extends Orchestra\Testbench\TestCase
         $this->withFactories(__DIR__.'/../tests/Factories');
 
         $this->artisan('vendor:publish', [
-            '--provider' => 'Sitec\Builder\SitecBuilderProvider',
+            '--provider' => 'SierraTecnologia\Builder\SierraTecnologiaBuilderProvider',
             '--force' => true,
         ]);
         $this->artisan('vendor:publish', [
-            '--provider' => 'Sitec\Cms\SitecCmsProvider',
+            '--provider' => 'SierraTecnologia\Cms\SierraTecnologiaCmsProvider',
             '--force' => true,
         ]);
         $this->artisan('vendor:publish', [
-            '--provider' => 'Sitec\Commerce\SitecCommerceModuleProvider',
+            '--provider' => 'SierraTecnologia\Commerce\SierraTecnologiaCommerceModuleProvider',
             '--force' => true,
         ]);
 

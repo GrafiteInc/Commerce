@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitec\Commerce\Repositories;
+namespace SierraTecnologia\Commerce\Repositories;
 
-use Sitec\Commerce\Models\Product;
-use Sitec\Commerce\Repositories\FavoriteRepository;
+use SierraTecnologia\Commerce\Models\Product;
+use SierraTecnologia\Commerce\Repositories\FavoriteRepository;
 use Illuminate\Support\Facades\Schema;
 
 class ProductRepository

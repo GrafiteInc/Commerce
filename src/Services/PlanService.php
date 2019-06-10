@@ -1,14 +1,14 @@
 <?php
 
-namespace Sitec\Commerce\Services;
+namespace SierraTecnologia\Commerce\Services;
 
 use App\Models\UserMeta;
 use App\Services\UserService;
 use Exception;
 use Illuminate\Support\Facades\Schema;
 use SierraTecnologia\Cashier\Subscription;
-use Sitec\Commerce\Models\Plan;
-use Sitec\Cms\Services\CmsService;
+use SierraTecnologia\Commerce\Models\Plan;
+use SierraTecnologia\Cms\Services\CmsService;
 
 class PlanService
 {
@@ -210,7 +210,7 @@ class PlanService
     /**
      * Get subscribers.
      *
-     * @param Sitec\Commerce\Models\Plan $plan
+     * @param SierraTecnologia\Commerce\Models\Plan $plan
      *
      * @return Illuminate\Support\Collection
      */

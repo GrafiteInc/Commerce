@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitec\Commerce\Models;
+namespace SierraTecnologia\Commerce\Models;
 
-use Sitec\Cms\Models\CmsModel;
-use Sitec\Commerce\Models\Product;
+use SierraTecnologia\Cms\Models\CmsModel;
+use SierraTecnologia\Commerce\Models\Product;
 
 class Favorite extends CmsModel
 {

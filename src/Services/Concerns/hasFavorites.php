@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitec\Commerce\Services\Concerns;
+namespace SierraTecnologia\Commerce\Services\Concerns;
 
-use Sitec\Commerce\Models\Favorite;
-use Sitec\Commerce\Models\Product;
+use SierraTecnologia\Commerce\Models\Favorite;
+use SierraTecnologia\Commerce\Models\Product;
 
 trait hasFavorites
 {

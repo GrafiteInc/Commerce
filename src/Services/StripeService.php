@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitec\Commerce\Services;
+namespace SierraTecnologia\Commerce\Services;
 
 use Carbon\Carbon;
 use Stripe\Coupon;

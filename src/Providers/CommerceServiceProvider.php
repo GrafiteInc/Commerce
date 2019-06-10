@@ -1,14 +1,14 @@
 <?php
 
-namespace Sitec\Commerce\Providers;
+namespace SierraTecnologia\Commerce\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Sitec\Commerce\Helpers\StoreHelper;
-use Sitec\Commerce\Services\CartService;
-use Sitec\Commerce\Services\CustomerProfileService;
-use Sitec\Commerce\Services\LogisticService;
-use Sitec\Commerce\Services\ProductService;
+use SierraTecnologia\Commerce\Helpers\StoreHelper;
+use SierraTecnologia\Commerce\Services\CartService;
+use SierraTecnologia\Commerce\Services\CustomerProfileService;
+use SierraTecnologia\Commerce\Services\LogisticService;
+use SierraTecnologia\Commerce\Services\ProductService;
 
 class CommerceServiceProvider extends ServiceProvider
 {

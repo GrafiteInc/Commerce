@@ -8,7 +8,7 @@
 
 return [
 
-    'name' => 'Sitec Commerce',
+    'name' => 'SierraTecnologia Commerce',
     'currency' => env('CURRENCY', 'usd'),
     'taxes_include_shipping' => true,
     'store_url_prefix' => 'store',

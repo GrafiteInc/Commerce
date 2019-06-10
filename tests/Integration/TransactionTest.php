@@ -20,13 +20,13 @@ class TransactionTest extends TestCase
         $this->user->roles()->attach($this->role);
         $this->actingAs($this->user);
 
-        factory(\Sitec\Commerce\Models\Cart::class)->create();
-        factory(\Sitec\Commerce\Models\Product::class)->create([
+        factory(\SierraTecnologia\Commerce\Models\Cart::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Product::class)->create([
             'id' => 1,
         ]);
-        factory(\Sitec\Commerce\Models\Plan::class)->create();
-        factory(\Sitec\Commerce\Models\Transaction::class)->create();
-        factory(\Sitec\Commerce\Models\Transaction::class)->create([
+        factory(\SierraTecnologia\Commerce\Models\Plan::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Transaction::class)->create();
+        factory(\SierraTecnologia\Commerce\Models\Transaction::class)->create([
             'id' => 999,
         ]);
     }
@@ -47,11 +47,11 @@ class TransactionTest extends TestCase
 
     public function testEdit()
     {
-        factory(\Sitec\Commerce\Models\Order::class)->create([
+        factory(\SierraTecnologia\Commerce\Models\Order::class)->create([
             'transaction_id' => 2,
         ]);
 
-        factory(\Sitec\Commerce\Models\Transaction::class)->create([
+        factory(\SierraTecnologia\Commerce\Models\Transaction::class)->create([
             'id' => 2,
             'notes' => 'Le notes!',
         ]);
@@ -78,7 +78,7 @@ class TransactionTest extends TestCase
 
     public function testUpdate()
     {
-        factory(\Sitec\Commerce\Models\Transaction::class)->create([
+        factory(\SierraTecnologia\Commerce\Models\Transaction::class)->create([
             'id' => 4,
             'notes' => 'Star Wars !',
         ]);

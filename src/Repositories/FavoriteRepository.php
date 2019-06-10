@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitec\Commerce\Repositories;
+namespace SierraTecnologia\Commerce\Repositories;
 
 use Carbon\Carbon;
-use Sitec\Commerce\Models\Favorite;
+use SierraTecnologia\Commerce\Models\Favorite;
 
 class FavoriteRepository
 {

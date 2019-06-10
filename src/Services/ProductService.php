@@ -1,12 +1,12 @@
 <?php
 
-namespace Sitec\Commerce\Services;
+namespace SierraTecnologia\Commerce\Services;
 
-use Sitec\Cms\Facades\CmsServiceFacade as Cms;
+use SierraTecnologia\Cms\Facades\CmsServiceFacade as Cms;
 use Illuminate\Support\Facades\Config;
-use Sitec\Cms\Services\FileService;
-use Sitec\Commerce\Repositories\ProductRepository;
-use Sitec\Commerce\Repositories\ProductVariantRepository;
+use SierraTecnologia\Cms\Services\FileService;
+use SierraTecnologia\Commerce\Repositories\ProductRepository;
+use SierraTecnologia\Commerce\Repositories\ProductVariantRepository;
 
 class ProductService
 {

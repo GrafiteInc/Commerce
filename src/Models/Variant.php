@@ -1,9 +1,9 @@
 <?php
 
-namespace Sitec\Commerce\Models;
+namespace SierraTecnologia\Commerce\Models;
 
-use Sitec\Cms\Models\CmsModel;
-use Sitec\Commerce\Services\ProductService;
+use SierraTecnologia\Cms\Models\CmsModel;
+use SierraTecnologia\Commerce\Services\ProductService;
 
 class Variant extends CmsModel
 {

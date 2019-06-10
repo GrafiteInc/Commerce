@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitec\Commerce\Services;
+namespace SierraTecnologia\Commerce\Services;
 
 use Carbon\Carbon;
 use SierraTecnologia\Cashier\Subscription;
-use Sitec\Commerce\Models\Transaction;
+use SierraTecnologia\Commerce\Models\Transaction;
 
 class AnalyticsService
 {
